@@ -98,7 +98,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                       Text(
                         'LetTutor',
                         style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Open Sans',
+                              fontFamily: 'Avenir Next',
                               color: Color(0xFF2F65E3),
                               fontSize: 40.0,
                               fontWeight: FontWeight.bold,

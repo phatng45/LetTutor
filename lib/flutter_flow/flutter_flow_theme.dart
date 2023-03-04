@@ -85,7 +85,7 @@ DeviceSize getDeviceSize(BuildContext context) {
 }
 
 class LightModeTheme extends FlutterFlowTheme {
-  late Color primaryColor = const Color(0xFF6392FF);
+  late Color primaryColor = const Color(0xFF2767FF);
   late Color secondaryColor = const Color(0xFFF594B7);
   late Color tertiaryColor = const Color(0xFFAD7FFB);
   late Color alternate = const Color(0xFFCCD0F6);
@@ -120,51 +120,51 @@ class MobileTypography extends Typography {
 
   final FlutterFlowTheme theme;
 
-  String get title1Family => 'Avenir Next';
-  TextStyle get title1 => TextStyle(
-        fontFamily: 'Avenir Next',
+  String get title1Family => 'Outfit';
+  TextStyle get title1 => GoogleFonts.getFont(
+        'Outfit',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 24.0,
       );
-  String get title2Family => 'Avenir Next';
-  TextStyle get title2 => TextStyle(
-        fontFamily: 'Avenir Next',
+  String get title2Family => 'Outfit';
+  TextStyle get title2 => GoogleFonts.getFont(
+        'Outfit',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 22.0,
       );
-  String get title3Family => 'Avenir Next';
-  TextStyle get title3 => TextStyle(
-        fontFamily: 'Avenir Next',
+  String get title3Family => 'Outfit';
+  TextStyle get title3 => GoogleFonts.getFont(
+        'Outfit',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 20.0,
       );
-  String get subtitle1Family => 'Avenir Next';
-  TextStyle get subtitle1 => TextStyle(
-        fontFamily: 'Avenir Next',
+  String get subtitle1Family => 'Outfit';
+  TextStyle get subtitle1 => GoogleFonts.getFont(
+        'Outfit',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 18.0,
       );
-  String get subtitle2Family => 'Avenir Next';
-  TextStyle get subtitle2 => TextStyle(
-        fontFamily: 'Avenir Next',
+  String get subtitle2Family => 'Outfit';
+  TextStyle get subtitle2 => GoogleFonts.getFont(
+        'Outfit',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get bodyText1Family => 'Avenir Next';
-  TextStyle get bodyText1 => TextStyle(
-        fontFamily: 'Avenir Next',
+  String get bodyText1Family => 'Outfit';
+  TextStyle get bodyText1 => GoogleFonts.getFont(
+        'Outfit',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
-  String get bodyText2Family => 'Avenir Next';
-  TextStyle get bodyText2 => TextStyle(
-        fontFamily: 'Avenir Next',
+  String get bodyText2Family => 'Outfit';
+  TextStyle get bodyText2 => GoogleFonts.getFont(
+        'Outfit',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
@@ -176,51 +176,51 @@ class TabletTypography extends Typography {
 
   final FlutterFlowTheme theme;
 
-  String get title1Family => 'Avenir Next';
-  TextStyle get title1 => TextStyle(
-        fontFamily: 'Avenir Next',
+  String get title1Family => 'Outfit';
+  TextStyle get title1 => GoogleFonts.getFont(
+        'Outfit',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 24.0,
       );
-  String get title2Family => 'Avenir Next';
-  TextStyle get title2 => TextStyle(
-        fontFamily: 'Avenir Next',
+  String get title2Family => 'Outfit';
+  TextStyle get title2 => GoogleFonts.getFont(
+        'Outfit',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 22.0,
       );
-  String get title3Family => 'Avenir Next';
-  TextStyle get title3 => TextStyle(
-        fontFamily: 'Avenir Next',
+  String get title3Family => 'Outfit';
+  TextStyle get title3 => GoogleFonts.getFont(
+        'Outfit',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 20.0,
       );
-  String get subtitle1Family => 'Avenir Next';
-  TextStyle get subtitle1 => TextStyle(
-        fontFamily: 'Avenir Next',
+  String get subtitle1Family => 'Outfit';
+  TextStyle get subtitle1 => GoogleFonts.getFont(
+        'Outfit',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 18.0,
       );
-  String get subtitle2Family => 'Avenir Next';
-  TextStyle get subtitle2 => TextStyle(
-        fontFamily: 'Avenir Next',
+  String get subtitle2Family => 'Outfit';
+  TextStyle get subtitle2 => GoogleFonts.getFont(
+        'Outfit',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get bodyText1Family => 'Avenir Next';
-  TextStyle get bodyText1 => TextStyle(
-        fontFamily: 'Avenir Next',
+  String get bodyText1Family => 'Outfit';
+  TextStyle get bodyText1 => GoogleFonts.getFont(
+        'Outfit',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
-  String get bodyText2Family => 'Avenir Next';
-  TextStyle get bodyText2 => TextStyle(
-        fontFamily: 'Avenir Next',
+  String get bodyText2Family => 'Outfit';
+  TextStyle get bodyText2 => GoogleFonts.getFont(
+        'Outfit',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
@@ -232,51 +232,51 @@ class DesktopTypography extends Typography {
 
   final FlutterFlowTheme theme;
 
-  String get title1Family => 'Avenir Next';
-  TextStyle get title1 => TextStyle(
-        fontFamily: 'Avenir Next',
+  String get title1Family => 'Outfit';
+  TextStyle get title1 => GoogleFonts.getFont(
+        'Outfit',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 24.0,
       );
-  String get title2Family => 'Avenir Next';
-  TextStyle get title2 => TextStyle(
-        fontFamily: 'Avenir Next',
+  String get title2Family => 'Outfit';
+  TextStyle get title2 => GoogleFonts.getFont(
+        'Outfit',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 22.0,
       );
-  String get title3Family => 'Avenir Next';
-  TextStyle get title3 => TextStyle(
-        fontFamily: 'Avenir Next',
+  String get title3Family => 'Outfit';
+  TextStyle get title3 => GoogleFonts.getFont(
+        'Outfit',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 20.0,
       );
-  String get subtitle1Family => 'Avenir Next';
-  TextStyle get subtitle1 => TextStyle(
-        fontFamily: 'Avenir Next',
+  String get subtitle1Family => 'Outfit';
+  TextStyle get subtitle1 => GoogleFonts.getFont(
+        'Outfit',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 18.0,
       );
-  String get subtitle2Family => 'Avenir Next';
-  TextStyle get subtitle2 => TextStyle(
-        fontFamily: 'Avenir Next',
+  String get subtitle2Family => 'Outfit';
+  TextStyle get subtitle2 => GoogleFonts.getFont(
+        'Outfit',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
-  String get bodyText1Family => 'Avenir Next';
-  TextStyle get bodyText1 => TextStyle(
-        fontFamily: 'Avenir Next',
+  String get bodyText1Family => 'Outfit';
+  TextStyle get bodyText1 => GoogleFonts.getFont(
+        'Outfit',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,
       );
-  String get bodyText2Family => 'Avenir Next';
-  TextStyle get bodyText2 => TextStyle(
-        fontFamily: 'Avenir Next',
+  String get bodyText2Family => 'Outfit';
+  TextStyle get bodyText2 => GoogleFonts.getFont(
+        'Outfit',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14.0,

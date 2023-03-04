@@ -98,7 +98,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                       Text(
                         'LetTutor',
                         style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Open Sans',
+                              fontFamily: 'Outfit',
                               color: Color(0xFF2F65E3),
                               fontSize: 40.0,
                               fontWeight: FontWeight.bold,
@@ -340,7 +340,15 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                             children: [
                               Text(
                                 'Not a member yet?',
-                                style: FlutterFlowTheme.of(context).bodyText1,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Outfit',
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyText1Family),
+                                    ),
                               ),
                               FFButtonWidget(
                                 onPressed: () {
@@ -358,8 +366,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                   textStyle: FlutterFlowTheme.of(context)
                                       .subtitle2
                                       .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .subtitle2Family,
+                                        fontFamily: 'Outfit',
                                         color: FlutterFlowTheme.of(context)
                                             .secondaryColor,
                                         fontSize: 20.0,
