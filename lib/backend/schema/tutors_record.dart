@@ -31,6 +31,8 @@ abstract class TutorsRecord
   @BuiltValueField(wireName: 'is_favorited')
   bool? get isFavorited;
 
+  BuiltList<String>? get specialties;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -42,7 +44,8 @@ abstract class TutorsRecord
     ..uid = ''
     ..bio = ''
     ..userName = ''
-    ..isFavorited = false;
+    ..isFavorited = false
+    ..specialties = ListBuilder();
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('tutors');
@@ -86,7 +89,8 @@ Map<String, dynamic> createTutorsRecordData({
         ..createdTime = createdTime
         ..bio = bio
         ..userName = userName
-        ..isFavorited = isFavorited,
+        ..isFavorited = isFavorited
+        ..specialties = null,
     ),
   );
 

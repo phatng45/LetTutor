@@ -69,6 +69,21 @@ class _$TutorsRecordSerializer implements StructuredSerializer<TutorsRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.isFavorited;
+    if (value != null) {
+      result
+        ..add('is_favorited')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
+    value = object.specialties;
+    if (value != null) {
+      result
+        ..add('specialties')
+        ..add(serializers.serialize(value,
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(String)])));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -120,6 +135,16 @@ class _$TutorsRecordSerializer implements StructuredSerializer<TutorsRecord> {
           result.userName = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'is_favorited':
+          result.isFavorited = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
+          break;
+        case 'specialties':
+          result.specialties.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(String)]))!
+              as BuiltList<Object?>);
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -149,6 +174,10 @@ class _$TutorsRecord extends TutorsRecord {
   @override
   final String? userName;
   @override
+  final bool? isFavorited;
+  @override
+  final BuiltList<String>? specialties;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$TutorsRecord([void Function(TutorsRecordBuilder)? updates]) =>
@@ -162,6 +191,8 @@ class _$TutorsRecord extends TutorsRecord {
       this.createdTime,
       this.bio,
       this.userName,
+      this.isFavorited,
+      this.specialties,
       this.ffRef})
       : super._();
 
@@ -183,6 +214,8 @@ class _$TutorsRecord extends TutorsRecord {
         createdTime == other.createdTime &&
         bio == other.bio &&
         userName == other.userName &&
+        isFavorited == other.isFavorited &&
+        specialties == other.specialties &&
         ffRef == other.ffRef;
   }
 
@@ -193,12 +226,18 @@ class _$TutorsRecord extends TutorsRecord {
             $jc(
                 $jc(
                     $jc(
-                        $jc($jc($jc(0, email.hashCode), displayName.hashCode),
-                            photoUrl.hashCode),
-                        uid.hashCode),
-                    createdTime.hashCode),
-                bio.hashCode),
-            userName.hashCode),
+                        $jc(
+                            $jc(
+                                $jc(
+                                    $jc($jc(0, email.hashCode),
+                                        displayName.hashCode),
+                                    photoUrl.hashCode),
+                                uid.hashCode),
+                            createdTime.hashCode),
+                        bio.hashCode),
+                    userName.hashCode),
+                isFavorited.hashCode),
+            specialties.hashCode),
         ffRef.hashCode));
   }
 
@@ -212,6 +251,8 @@ class _$TutorsRecord extends TutorsRecord {
           ..add('createdTime', createdTime)
           ..add('bio', bio)
           ..add('userName', userName)
+          ..add('isFavorited', isFavorited)
+          ..add('specialties', specialties)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -249,6 +290,16 @@ class TutorsRecordBuilder
   String? get userName => _$this._userName;
   set userName(String? userName) => _$this._userName = userName;
 
+  bool? _isFavorited;
+  bool? get isFavorited => _$this._isFavorited;
+  set isFavorited(bool? isFavorited) => _$this._isFavorited = isFavorited;
+
+  ListBuilder<String>? _specialties;
+  ListBuilder<String> get specialties =>
+      _$this._specialties ??= new ListBuilder<String>();
+  set specialties(ListBuilder<String>? specialties) =>
+      _$this._specialties = specialties;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -267,6 +318,8 @@ class TutorsRecordBuilder
       _createdTime = $v.createdTime;
       _bio = $v.bio;
       _userName = $v.userName;
+      _isFavorited = $v.isFavorited;
+      _specialties = $v.specialties?.toBuilder();
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -288,16 +341,31 @@ class TutorsRecordBuilder
   TutorsRecord build() => _build();
 
   _$TutorsRecord _build() {
-    final _$result = _$v ??
-        new _$TutorsRecord._(
-            email: email,
-            displayName: displayName,
-            photoUrl: photoUrl,
-            uid: uid,
-            createdTime: createdTime,
-            bio: bio,
-            userName: userName,
-            ffRef: ffRef);
+    _$TutorsRecord _$result;
+    try {
+      _$result = _$v ??
+          new _$TutorsRecord._(
+              email: email,
+              displayName: displayName,
+              photoUrl: photoUrl,
+              uid: uid,
+              createdTime: createdTime,
+              bio: bio,
+              userName: userName,
+              isFavorited: isFavorited,
+              specialties: _specialties?.build(),
+              ffRef: ffRef);
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'specialties';
+        _specialties?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'TutorsRecord', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
