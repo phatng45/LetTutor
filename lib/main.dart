@@ -103,7 +103,14 @@ class _NavBarPageState extends State<NavBarPage> {
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
     return Scaffold(
-      body: _currentPage ?? tabs[_currentPageName],
+      body: Navigator(
+        onGenerateRoute: (settings) {
+          Widget page = HomePageWidget();
+          if (settings.name == 'tutorDetailedInfo') page = HomePageCopyWidget();
+          return MaterialPageRoute(builder: (_) => page);
+        },
+      ),
+      // body: _currentPage ?? tabs[_currentPageName],
       extendBody: true,
       bottomNavigationBar: FloatingNavbar(
         currentIndex: currentIndex,
