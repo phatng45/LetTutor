@@ -6,4 +6,4 @@ export 'package:let_tutor/forgot_password_page/forgot_password_page_widget.dart'
 export 'package:let_tutor/login_page/login_page_widget.dart' show LoginPageWidget;
 export 'package:let_tutor/schedule_page/schedule_page_widget.dart' show SchedulePageWidget;
 export 'package:let_tutor/home_page/home_page_widget.dart' show HomePageWidget;
-export 'package:let_tutor/home_page_copy/home_page_copy_widget.dart' show HomePageCopyWidget;
+export 'package:let_tutor/home_page_copy/tutor_detailed_info_widget.dart' show HomePageCopyWidget;

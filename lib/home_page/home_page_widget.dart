@@ -7,7 +7,7 @@ import 'package:let_tutor/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:let_tutor/home_page_copy/home_page_copy_widget.dart';
+import 'package:let_tutor/home_page_copy/tutor_detailed_info_widget.dart';
 import 'package:provider/provider.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';

@@ -12,9 +12,9 @@ import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_video_player.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_widgets.dart';
 
-import 'home_page_copy_model.dart';
+import 'tutor_detailed_info_model.dart';
 
-export 'home_page_copy_model.dart';
+export 'tutor_detailed_info_model.dart';
 
 class HomePageCopyWidget extends StatefulWidget {
   const HomePageCopyWidget({Key? key}) : super(key: key);
