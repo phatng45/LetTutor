@@ -92,6 +92,7 @@ flutter:
     - assets/lottie_animations/
     - assets/rive_animations/
     - assets/pdfs/
+    - assets/images/logo.png
   fonts:
     - family: 'Avenir Next'
       fonts:
