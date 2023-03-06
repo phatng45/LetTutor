@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:let_tutor/components/best_divider_widget.dart';
 import 'package:let_tutor/components/password_field_widget.dart';
 import 'package:let_tutor/components/text_field_widget.dart';
@@ -5,13 +8,10 @@ import 'package:let_tutor/flutter_flow/flutter_flow_icon_button.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_widgets.dart';
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:let_tutor/home_page_copy/tutor_detailed_info_widget.dart';
 import 'package:let_tutor/main.dart';
-import 'package:provider/provider.dart';
+
 import 'sign_up_page_model.dart';
+
 export 'sign_up_page_model.dart';
 
 class SignUpPageWidget extends StatefulWidget {
