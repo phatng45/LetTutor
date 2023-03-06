@@ -1,10 +1,10 @@
-import '/components/best_divider_widget.dart';
-import '/components/password_field_widget.dart';
-import '/components/text_field_widget.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:let_tutor/components/best_divider_widget.dart';
+import 'package:let_tutor/components/password_field_widget.dart';
+import 'package:let_tutor/components/text_field_widget.dart';
+import 'package:let_tutor/flutter_flow/flutter_flow_icon_button.dart';
+import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
+import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
+import 'package:let_tutor/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
