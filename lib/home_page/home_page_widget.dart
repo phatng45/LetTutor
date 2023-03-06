@@ -63,7 +63,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       ),
                       child: TextFormField(
                         controller: _model.textController,
-                        autofocus: true,
+                        autofocus: false,
                         obscureText: false,
                         decoration: InputDecoration(
                           isDense: true,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:let_tutor/backend/backend.dart';
+import 'package:let_tutor/components/text_field_widget.dart';
 import 'package:let_tutor/components/tutor_specialties_widget.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_choice_chips.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_icon_button.dart';
@@ -31,6 +32,7 @@ class _HomePageCopyWidgetState extends State<HomePageCopyWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => HomePageCopyModel());
+    _model.textController ??= TextEditingController();
   }
 
   @override
@@ -716,6 +718,23 @@ class _HomePageCopyWidgetState extends State<HomePageCopyWidget> {
                                       fontSize: 30.0,
                                     ),
                               ),
+                            ),
+                          ),
+                          RatingBarIndicator(
+                            itemBuilder: (context, index) => Icon(
+                              Icons.star_rounded,
+                              color: Color(0xFFFFCA77),
+                            ),
+                            direction: Axis.horizontal,
+                            rating: 2.0,
+                            unratedColor: Color(0xFF9E9E9E),
+                            itemCount: 5,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                            child: TextFieldWidget(
+                              fieldName: 'Write a review',
+                              icon: Icon(Icons.email_outlined),
                             ),
                           ),
                         ],

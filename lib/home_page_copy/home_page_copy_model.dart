@@ -10,6 +10,8 @@ import 'package:provider/provider.dart';
 class HomePageCopyModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
+  // State field(s) for TextField widget.
+  TextEditingController? textController;
   // State field(s) for ChoiceChips widget.
   String? choiceChipsValue;
   // Model for tutorSpecialties component.
