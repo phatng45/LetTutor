@@ -268,7 +268,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                             wrapWithModel(
                               model: _model.bestDividerModel,
                               updateCallback: () => setState(() {}),
-                              child: BestDividerWidget(),
+                              child: BestDividerWidget(title: 'OR',),
                             ),
                             Row(
                               mainAxisSize: MainAxisSize.max,
