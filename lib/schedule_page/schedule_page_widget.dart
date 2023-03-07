@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:let_tutor/components/best_divider_widget.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
-import 'package:let_tutor/models/class_status_widget.dart';
+import 'package:let_tutor/models/class_review_status_widget.dart';
+import 'package:let_tutor/models/class_schedule_status_widget.dart';
 import 'package:let_tutor/models/tutor_general_info_widget.dart';
 
 import 'schedule_page_model.dart';
@@ -83,12 +84,13 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
                           BestDividerWidget(
                             title: '',
                           ),
-                          ClassStatus(),
-                          ClassStatus(),
-                          ClassStatus(),
-                          ClassStatus(),
-                          ClassStatus(),
-                          ClassStatus(),
+                          ClassReviewStatus()
+                          // ClassScheduleStatus(),
+                          // ClassScheduleStatus(),
+                          // ClassScheduleStatus(),
+                          // ClassScheduleStatus(),
+                          // ClassScheduleStatus(),
+                          // ClassScheduleStatus(),
                         ],
                       ),
                     ),
@@ -100,4 +102,3 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
         ));
   }
 }
-

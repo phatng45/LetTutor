@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 
-class ClassStatus extends StatelessWidget {
-  const ClassStatus({
+class ClassScheduleStatus extends StatelessWidget {
+  const ClassScheduleStatus({
     Key? key,
   }) : super(key: key);
 
@@ -15,11 +15,7 @@ class ClassStatus extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Fri, 30 Sep 2023',
-            style: FlutterFlowTheme.of(context).title1,
-          ),
-          Text('18:30 - 18:55'),
+          ClassTime(),
           Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment:
@@ -67,6 +63,26 @@ class ClassStatus extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+}
+
+class ClassTime extends StatelessWidget {
+  const ClassTime({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Fri, 30 Sep 2023',
+          style: FlutterFlowTheme.of(context).title1,
+        ),
+        Text('18:30 - 18:55'),
+      ],
     );
   }
 }
