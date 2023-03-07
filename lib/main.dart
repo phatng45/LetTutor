@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:let_tutor/bottom_nav_bar/bottom_nav_bar_widget.dart';
 import 'package:let_tutor/home_page_copy/tutor_detailed_info_widget.dart';
+import 'package:let_tutor/models/bottom_nav_bar_widget.dart';
 
 import 'backend/firebase/firebase_config.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
