@@ -34,6 +34,7 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       key: scaffoldKey,
       backgroundColor: Color(0xFF1E2429),
       body: Container(
