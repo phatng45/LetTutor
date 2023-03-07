@@ -16,22 +16,22 @@ import 'tutor_detailed_info_model.dart';
 
 export 'tutor_detailed_info_model.dart';
 
-class HomePageCopyWidget extends StatefulWidget {
-  const HomePageCopyWidget({Key? key}) : super(key: key);
+class TutorDetailedInfoWidget extends StatefulWidget {
+  const TutorDetailedInfoWidget({Key? key}) : super(key: key);
 
   @override
-  _HomePageCopyWidgetState createState() => _HomePageCopyWidgetState();
+  _TutorDetailedInfoWidgetState createState() => _TutorDetailedInfoWidgetState();
 }
 
-class _HomePageCopyWidgetState extends State<HomePageCopyWidget> {
-  late HomePageCopyModel _model;
+class _TutorDetailedInfoWidgetState extends State<TutorDetailedInfoWidget> {
+  late TutorDetailedInfoModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => HomePageCopyModel());
+    _model = createModel(context, () => TutorDetailedInfoModel());
     _model.textController ??= TextEditingController();
   }
 

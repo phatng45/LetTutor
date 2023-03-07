@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:let_tutor/bottom_nav_bar/bottom_nav_bar_widget.dart';
+import 'package:let_tutor/home_page_copy/tutor_detailed_info_widget.dart';
 
 import 'backend/firebase/firebase_config.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
@@ -83,37 +85,47 @@ class NavBarPage extends StatefulWidget {
 
 /// This is the private State class that goes with NavBarPage.
 class _NavBarPageState extends State<NavBarPage> {
+  late ScrollController _controller;
   String _currentPageName = 'HomePage';
   late Widget? _currentPage;
 
   @override
   void initState() {
     super.initState();
-    _currentPageName = widget.initialPage ?? _currentPageName;
+    _controller = ScrollController();
+    _controller.addListener(_listen);
+    _currentPageName ='Schedule';// widget.initialPage ?? _currentPageName;
     _currentPage = widget.page;
   }
-
-  // bool _showFab = true;
-  bool _showNotch = true;
-  FloatingActionButtonLocation _fabLocation =
-      FloatingActionButtonLocation.endDocked;
-
-  void _onShowNotchChanged(bool value) {
-    setState(() {
-      _showNotch = value;
-    });
+  @override
+  void dispose() {
+    _controller.removeListener(_listen);
+    _controller.dispose();
+    super.dispose();
   }
 
-  // void _onShowFabChanged(bool value) {
-  //   setState(() {
-  //     _showFab = value;
-  //   });
-  // }
+  bool _showNotch = true;
+  bool _isVisible = true;
 
-  void _onFabLocationChanged(FloatingActionButtonLocation? value) {
-    setState(() {
-      _fabLocation = value ?? FloatingActionButtonLocation.endDocked;
-    });
+  void _listen() {
+    final ScrollDirection direction = _controller.position.userScrollDirection;
+    if (direction == ScrollDirection.forward) {
+      _show();
+    } else if (direction == ScrollDirection.reverse) {
+      _hide();
+    }
+  }
+
+  void _show() {
+    if (!_isVisible) {
+      setState(() => _isVisible = true);
+    }
+  }
+
+  void _hide() {
+    if (_isVisible) {
+      setState(() => _isVisible = false);
+    }
   }
 
   @override
@@ -122,29 +134,15 @@ class _NavBarPageState extends State<NavBarPage> {
       'HomePage': HomePageWidget(),
       'SchedulePage': SchedulePageWidget(),
       'ProfilePage': ProfilePageWidget(),
-      'HomePageCopy': HomePageCopyWidget(),
+      'TutorDetailedInfo': TutorDetailedInfoWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
     return Scaffold(
-      // body: Navigator(
-      //   onGenerateRoute: (settings) {
-      //     Widget page = HomePageWidget();
-      //     if (settings.name == 'tutorDetailedInfo') page = HomePageCopyWidget();
-      //     return MaterialPageRoute(builder: (_) => page);
-      //   },
-      // ),
       body: _currentPage ?? tabs[_currentPageName],
       extendBody: true,
-      // floatingActionButton: _showFab
-      //     ? FloatingActionButton(
-      //         onPressed: () {},
-      //         tooltip: 'Create',
-      //         child: const Icon(Icons.add),
-      //       )
-      //     : null,
       bottomNavigationBar: BottomNavBarWidget(
-        // fabLocation: _fabLocation,
         shape: _showNotch ? const CircularNotchedRectangle() : null,
+        isVisible: _isVisible,
 
         // currentIndex: currentIndex,
         // onTap: (i) => setState(() {
