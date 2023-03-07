@@ -83,7 +83,12 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
                           BestDividerWidget(
                             title: '',
                           ),
-                          ClassStatus()
+                          ClassStatus(),
+                          ClassStatus(),
+                          ClassStatus(),
+                          ClassStatus(),
+                          ClassStatus(),
+                          ClassStatus(),
                         ],
                       ),
                     ),
