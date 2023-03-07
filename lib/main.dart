@@ -94,7 +94,7 @@ class _NavBarPageState extends State<NavBarPage> {
     super.initState();
     _controller = ScrollController();
     _controller.addListener(_listen);
-    _currentPageName ='Schedule';// widget.initialPage ?? _currentPageName;
+    _currentPageName ='SchedulePage';// widget.initialPage ?? _currentPageName;
     _currentPage = widget.page;
   }
   @override
@@ -134,7 +134,7 @@ class _NavBarPageState extends State<NavBarPage> {
       'HomePage': HomePageWidget(),
       'SchedulePage': SchedulePageWidget(),
       'ProfilePage': ProfilePageWidget(),
-      'TutorDetailedInfo': TutorDetailedInfoWidget(),
+      'TutorDetailedInfoPage': TutorDetailedInfoWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
     return Scaffold(

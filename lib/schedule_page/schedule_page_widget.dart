@@ -34,7 +34,13 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      appBar: AppBar(
+        surfaceTintColor: FlutterFlowTheme.of(context).primaryColor,
+        iconTheme: IconThemeData(color: Colors.indigo),
+        bottomOpacity: 0.0,
+        elevation: 0.0,
+        shadowColor: Colors.white,
+      ),
       key: scaffoldKey,
       backgroundColor: Color(0xFF1E2429),
       body: Container(
@@ -43,6 +49,7 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
         ),
+        child: Text('abc'),
       ),
     );
   }

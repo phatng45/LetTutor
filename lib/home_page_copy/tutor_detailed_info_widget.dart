@@ -5,7 +5,6 @@ import 'package:let_tutor/backend/backend.dart';
 import 'package:let_tutor/components/text_field_widget.dart';
 import 'package:let_tutor/components/tutor_specialties_widget.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_choice_chips.dart';
-import 'package:let_tutor/flutter_flow/flutter_flow_icon_button.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_toggle_icon.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
@@ -20,7 +19,8 @@ class TutorDetailedInfoWidget extends StatefulWidget {
   const TutorDetailedInfoWidget({Key? key}) : super(key: key);
 
   @override
-  _TutorDetailedInfoWidgetState createState() => _TutorDetailedInfoWidgetState();
+  _TutorDetailedInfoWidgetState createState() =>
+      _TutorDetailedInfoWidgetState();
 }
 
 class _TutorDetailedInfoWidgetState extends State<TutorDetailedInfoWidget> {
@@ -47,6 +47,13 @@ class _TutorDetailedInfoWidgetState extends State<TutorDetailedInfoWidget> {
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+      appBar: AppBar(
+        surfaceTintColor: FlutterFlowTheme.of(context).primaryColor,
+        iconTheme: IconThemeData(color: Colors.indigo),
+        bottomOpacity: 0.0,
+        elevation: 0.0,
+        shadowColor: Colors.white,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -61,23 +68,6 @@ class _TutorDetailedInfoWidgetState extends State<TutorDetailedInfoWidget> {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Align(
-                      alignment: AlignmentDirectional(-1.0, 0.0),
-                      child: FlutterFlowIconButton(
-                        borderColor: Colors.transparent,
-                        borderRadius: 0.0,
-                        borderWidth: 1.0,
-                        buttonSize: 60.0,
-                        icon: Icon(
-                          Icons.chevron_left_rounded,
-                          color: FlutterFlowTheme.of(context).primaryColor,
-                          size: 40.0,
-                        ),
-                        onPressed: () {
-                          print('IconButton pressed ...');
-                        },
-                      ),
-                    ),
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.start,
