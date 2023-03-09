@@ -3,29 +3,28 @@ import 'package:let_tutor/components/best_divider_widget.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
 import 'package:let_tutor/models/class_review_status_widget.dart';
-import 'package:let_tutor/models/class_schedule_status_widget.dart';
 import 'package:let_tutor/models/tutor_general_info_widget.dart';
 
-import 'schedule_page_model.dart';
+import 'history_page_model.dart';
 
-export 'schedule_page_model.dart';
+export 'history_page_model.dart';
 
-class SchedulePageWidget extends StatefulWidget {
-  const SchedulePageWidget({Key? key}) : super(key: key);
+class HistoryPageWidget extends StatefulWidget {
+  const HistoryPageWidget({Key? key}) : super(key: key);
 
   @override
-  _SchedulePageWidgetState createState() => _SchedulePageWidgetState();
+  _HistoryPageWidgetState createState() => _HistoryPageWidgetState();
 }
 
-class _SchedulePageWidgetState extends State<SchedulePageWidget> {
-  late SchedulePageModel _model;
+class _HistoryPageWidgetState extends State<HistoryPageWidget> {
+  late HistoryPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => SchedulePageModel());
+    _model = createModel(context, () => HistoryPageModel());
   }
 
   @override
@@ -84,9 +83,14 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
                           BestDividerWidget(
                             title: '',
                           ),
-                          ClassScheduleStatus(),
-                          ClassScheduleStatus(),
-                          ClassScheduleStatus(),
+                          ClassReviewStatus(),
+                          ClassReviewStatus(),
+                          ClassReviewStatus(),
+                          ClassReviewStatus(),
+                          ClassReviewStatus(),
+                          ClassReviewStatus(),
+                          ClassReviewStatus(),
+                          ClassReviewStatus(),
                         ],
                       ),
                     ),

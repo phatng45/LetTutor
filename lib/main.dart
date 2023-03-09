@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:let_tutor/home_page_copy/tutor_detailed_info_widget.dart';
 import 'package:let_tutor/models/bottom_nav_bar_widget.dart';
 
 import 'backend/firebase/firebase_config.dart';
@@ -94,9 +93,11 @@ class _NavBarPageState extends State<NavBarPage> {
     super.initState();
     _controller = ScrollController();
     _controller.addListener(_listen);
-    _currentPageName ='SchedulePage';// widget.initialPage ?? _currentPageName;
+    _currentPageName =
+        'HistoryPage'; // widget.initialPage ?? _currentPageName;
     _currentPage = widget.page;
   }
+
   @override
   void dispose() {
     _controller.removeListener(_listen);
@@ -135,6 +136,7 @@ class _NavBarPageState extends State<NavBarPage> {
       'SchedulePage': SchedulePageWidget(),
       'ProfilePage': ProfilePageWidget(),
       'TutorDetailedInfoPage': TutorDetailedInfoWidget(),
+      'HistoryPage': HistoryPageWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
     return Scaffold(

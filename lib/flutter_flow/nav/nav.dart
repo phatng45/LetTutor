@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:let_tutor/home_page_copy/tutor_detailed_info_widget.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../../index.dart';
