@@ -1,5 +1,8 @@
+import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:let_tutor/components/best_divider_widget.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
+import 'package:let_tutor/models/class_schedule_status_widget.dart';
 
 class ClassReviewStatus extends StatelessWidget {
   const ClassReviewStatus({
@@ -15,55 +18,62 @@ class ClassReviewStatus extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ClassTime(),
           Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment:
-            MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                      side: BorderSide(
-                          width: 1.0,
-                          color: Colors.black12),
-                      textStyle:
-                      FlutterFlowTheme.of(context)
-                          .bodyText1,
-                      foregroundColor: Colors.red,
-                      disabledForegroundColor: Colors.white,
-                      disabledBackgroundColor:
-                      Colors.black54),
-                  onPressed: () {},
-                  child: const Text('Cancel')),
-              ElevatedButton.icon(
-                icon: Icon(
-                  Icons.people_rounded,
-                  size: 18,
-                ),
-                style: OutlinedButton.styleFrom(
-                    side: BorderSide(
-                        width: 1.0, color: Colors.black12),
-                    textStyle: FlutterFlowTheme.of(context)
-                        .bodyText1
-                        .override(
-                        fontFamily:
-                        FlutterFlowTheme.of(context)
-                            .bodyText1Family,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500),
-                    foregroundColor: Colors.white,
-                    backgroundColor: Colors.indigo,
-                    disabledBackgroundColor: Colors.black54,
-                    disabledForegroundColor: Colors.white),
-                onPressed: () {},
-                label: const Text('Go to meeting'),
-              ),
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ClassTime(),
+              Text(
+                "Joined",
+                style: FlutterFlowTheme.of(context).title2,
+              )
             ],
-          )
+          ),
+          BestDividerWidget(title: ''),
+          TutorReview(context),
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                NegativeButton(title: 'Report'),
+                PositiveButton(title: 'Add a rating',icon: Icon(Icons.star_rounded, size: 22),)
+                 ],
+            ),
+          ),
         ],
       ),
     );
+  }
+
+  ExpandablePanel TutorReview(BuildContext context) {
+    return ExpandablePanel(
+          collapsed: Text(
+            "Good student \nWe finished this lesson",
+            softWrap: true,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+          expanded: Text(
+            "Good student \nWe finished this lesson",
+            softWrap: true,
+          ),
+          header: Text(
+            "Tutor reviews",
+            style: FlutterFlowTheme.of(context).title1.override(
+                fontFamily: FlutterFlowTheme.of(context).title1Family,
+                color: Colors.indigo),
+          ),
+          theme: ExpandableThemeData(
+            tapHeaderToExpand: true,
+            hasIcon: true,
+            iconColor: Colors.indigo,
+            useInkWell: true,
+            inkWellBorderRadius: BorderRadius.circular(20),
+            collapseIcon: Icons.chevron_right,
+            expandIcon: Icons.chevron_right,
+            iconRotationAngle: 3.14 / 2,
+          ),
+        );
   }
 }
 
