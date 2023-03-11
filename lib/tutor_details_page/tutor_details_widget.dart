@@ -11,27 +11,27 @@ import 'package:let_tutor/flutter_flow/flutter_flow_video_player.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_widgets.dart';
 import 'package:let_tutor/models/tutor_general_info_widget.dart';
 
-import 'tutor_detailed_info_model.dart';
+import 'tutor_details_model.dart';
 
-export 'tutor_detailed_info_model.dart';
+export 'tutor_details_model.dart';
 
-class TutorDetailedInfoWidget extends StatefulWidget {
-  const TutorDetailedInfoWidget({Key? key}) : super(key: key);
+class TutorDetailsWidget extends StatefulWidget {
+  const TutorDetailsWidget({Key? key}) : super(key: key);
 
   @override
-  _TutorDetailedInfoWidgetState createState() =>
-      _TutorDetailedInfoWidgetState();
+  _TutorDetailsWidgetState createState() =>
+      _TutorDetailsWidgetState();
 }
 
-class _TutorDetailedInfoWidgetState extends State<TutorDetailedInfoWidget> {
-  late TutorDetailedInfoModel _model;
+class _TutorDetailsWidgetState extends State<TutorDetailsWidget> {
+  late TutorDetailsModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => TutorDetailedInfoModel());
+    _model = createModel(context, () => TutorDetailsModel());
     _model.textController ??= TextEditingController();
   }
 
@@ -56,7 +56,7 @@ class _TutorDetailedInfoWidgetState extends State<TutorDetailedInfoWidget> {
         titleTextStyle: FlutterFlowTheme.of(context).title1.override(
             fontFamily: FlutterFlowTheme.of(context).title1Family,
             color: Colors.indigo),
-        title: Text('Details'),
+        title: Text('Tutor'),
       ),
       body: SafeArea(
         child: SingleChildScrollView(

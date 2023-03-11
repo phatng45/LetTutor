@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:let_tutor/course_details_page/course_details_page_widget.dart';
 
 import 'backend/firebase/firebase_config.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
@@ -136,7 +137,7 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
       'HomePage': HomePageWidget(),
       'SchedulePage': SchedulePageWidget(),
       'ProfilePage': ProfilePageWidget(),
-      'TutorDetailedInfoPage': TutorDetailedInfoWidget(),
+      'TutorDetailedInfoPage': TutorDetailsWidget(),
       'HistoryPage': HistoryPageWidget(),
       'CoursesPage': CoursesPageWidget(),
     };
@@ -148,15 +149,17 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
           physics: NeverScrollableScrollPhysics(),
           children: [
             HomePageWidget(),
-            SchedulePageWidget(),
+            TutorDetailsWidget(),
             CoursesPageWidget(),
+            CourseDetailsPageWidget(),
             ProfilePageWidget(),
-            TutorDetailedInfoWidget(),
+            SchedulePageWidget(),
             HistoryPageWidget(),
           ]),
       extendBody: true,
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
+        height: _isVisible? 80.0: 0,
         surfaceTintColor: FlutterFlowTheme.of(context).primaryColor,
         color: FlutterFlowTheme.of(context).primaryColor,
         child: IconTheme(
