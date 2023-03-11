@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
+import 'package:let_tutor/models/class_schedule_status_widget.dart';
 
 import 'courses_page_model.dart';
 
@@ -115,8 +116,17 @@ class CourseGeneralInfo extends StatelessWidget {
                         'Let\'s discuss how technology is changing the way we live' + '\n',
                     style: FlutterFlowTheme.of(context).bodyText1,
                     maxLines: 2,),
-                    Text('Intermediate • 9 Lessons',
-                        style: FlutterFlowTheme.of(context).subtitle1),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Intermediate • 9 Lessons',
+                              style: FlutterFlowTheme.of(context).subtitle1),
+                          PositiveButton(title: 'Discover', icon: Icon(Icons.public,size: 20,))
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
