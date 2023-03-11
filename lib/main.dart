@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:let_tutor/courses_page/courses_page_widget.dart';
-import 'package:let_tutor/models/bottom_nav_bar_widget.dart';
 
 import 'backend/firebase/firebase_config.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
@@ -84,25 +82,26 @@ class NavBarPage extends StatefulWidget {
 }
 
 /// This is the private State class that goes with NavBarPage.
-class _NavBarPageState extends State<NavBarPage> {
-  late ScrollController _controller;
+class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
+  late ScrollController _scrollController;
+  late TabController _tabController;
   String _currentPageName = 'HomePage';
   late Widget? _currentPage;
 
   @override
   void initState() {
     super.initState();
-    _controller = ScrollController();
-    _controller.addListener(_listen);
-    _currentPageName =
-        'CoursesPage'; // widget.initialPage ?? _currentPageName;
+    _scrollController = ScrollController();
+    _tabController = TabController(length: 6, vsync: this);
+    _scrollController.addListener(_listen);
+    _currentPageName = 'CoursesPage'; // widget.initialPage ?? _currentPageName;
     _currentPage = widget.page;
   }
 
   @override
   void dispose() {
-    _controller.removeListener(_listen);
-    _controller.dispose();
+    _scrollController.removeListener(_listen);
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -110,7 +109,8 @@ class _NavBarPageState extends State<NavBarPage> {
   bool _isVisible = true;
 
   void _listen() {
-    final ScrollDirection direction = _controller.position.userScrollDirection;
+    final ScrollDirection direction =
+        _scrollController.position.userScrollDirection;
     if (direction == ScrollDirection.forward) {
       _show();
     } else if (direction == ScrollDirection.reverse) {
@@ -142,11 +142,60 @@ class _NavBarPageState extends State<NavBarPage> {
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
     return Scaffold(
-      body: _currentPage ?? tabs[_currentPageName],
+      //body: _currentPage ?? tabs[_currentPageName],
+      body: TabBarView(
+          controller: _tabController,
+          physics: NeverScrollableScrollPhysics(),
+          children: [
+            HomePageWidget(),
+            SchedulePageWidget(),
+            CoursesPageWidget(),
+            ProfilePageWidget(),
+            TutorDetailedInfoWidget(),
+            HistoryPageWidget(),
+          ]),
       extendBody: true,
-      bottomNavigationBar: BottomNavBarWidget(
-        shape: _showNotch ? const CircularNotchedRectangle() : null,
-        isVisible: _isVisible,
+      bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        surfaceTintColor: FlutterFlowTheme.of(context).primaryColor,
+        color: FlutterFlowTheme.of(context).primaryColor,
+        child: IconTheme(
+          data: IconThemeData(color: Colors.indigo),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.search),
+                    onPressed: () => _tabController.animateTo(0),
+                  ),
+                  IconButton(
+                    tooltip: 'Search',
+                    icon: const Icon(Icons.schedule),
+                    onPressed: () => _tabController.animateTo(1),
+                  ),
+                  IconButton(
+                    tooltip: 'Favorite',
+                    icon: const Icon(Icons.collections_bookmark_outlined),
+                    onPressed: () => _tabController.animateTo(2),
+                  ),
+                  IconButton(
+                    tooltip: 'Favorite',
+                    icon: const Icon(Icons.person_outline_rounded),
+                    onPressed: () => _tabController.animateTo(3),
+                  ),
+                ],
+              ),
+              IconButton(
+                  onPressed: () {}, icon: const Icon(Icons.more_vert_rounded))
+            ],
+          ),
+        ),
+
+        // BottomNavBarWidget(
+        //   shape: _showNotch ? const CircularNotchedRectangle() : null,
+        //   isVisible: _isVisible,
 
         // currentIndex: currentIndex,
         // onTap: (i) => setState(() {
