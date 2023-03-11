@@ -8,3 +8,4 @@ export 'package:let_tutor/profile_page/profile_page_widget.dart' show ProfilePag
 export 'package:let_tutor/schedule_page/schedule_page_widget.dart' show SchedulePageWidget;
 export 'package:let_tutor/sign_up_page/sign_up_page_widget.dart' show SignUpPageWidget;
 export 'package:let_tutor/history_page/history_page_widget.dart' show HistoryPageWidget;
+export 'package:let_tutor/courses_page/courses_page_widget.dart' show CoursesPageWidget;
