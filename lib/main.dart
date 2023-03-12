@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:let_tutor/course_details_page/course_details_page_widget.dart';
 
 import 'backend/firebase/firebase_config.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
@@ -156,10 +155,10 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
             SchedulePageWidget(),
             HistoryPageWidget(),
           ]),
-      extendBody: true,
+      extendBody: false,
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
-        height: _isVisible? 80.0: 0,
+        height: _isVisible ? 80.0 : 0,
         surfaceTintColor: FlutterFlowTheme.of(context).primaryColor,
         color: FlutterFlowTheme.of(context).primaryColor,
         child: IconTheme(
@@ -174,17 +173,14 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
                     onPressed: () => _tabController.animateTo(0),
                   ),
                   IconButton(
-                    tooltip: 'Search',
                     icon: const Icon(Icons.schedule),
                     onPressed: () => _tabController.animateTo(1),
                   ),
                   IconButton(
-                    tooltip: 'Favorite',
                     icon: const Icon(Icons.collections_bookmark_outlined),
                     onPressed: () => _tabController.animateTo(2),
                   ),
                   IconButton(
-                    tooltip: 'Favorite',
                     icon: const Icon(Icons.person_outline_rounded),
                     onPressed: () => _tabController.animateTo(3),
                   ),
@@ -195,126 +191,6 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
             ],
           ),
         ),
-
-        // BottomNavBarWidget(
-        //   shape: _showNotch ? const CircularNotchedRectangle() : null,
-        //   isVisible: _isVisible,
-
-        // currentIndex: currentIndex,
-        // onTap: (i) => setState(() {
-        //   _currentPage = null;
-        //   _currentPageName = tabs.keys.toList()[i];
-        // }),
-        // backgroundColor: Colors.white,
-        // selectedItemColor: FlutterFlowTheme.of(context).primaryColor,
-        // unselectedItemColor: FlutterFlowTheme.of(context).secondaryText,
-        // selectedBackgroundColor: Color(0x00000000),
-        // borderRadius: 8.0,
-        // itemBorderRadius: 8.0,
-        // margin: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-        // padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-        // width: MediaQuery.of(context).size.width * 1.0,
-        // elevation: 0.0,
-        // items: [
-        //   FloatingNavbarItem(
-        //     customWidget: Column(
-        //       mainAxisAlignment: MainAxisAlignment.center,
-        //       children: [
-        //         Icon(
-        //           currentIndex == 0 ? Icons.home_rounded : Icons.home_outlined,
-        //           color: currentIndex == 0
-        //               ? FlutterFlowTheme.of(context).primaryColor
-        //               : FlutterFlowTheme.of(context).secondaryText,
-        //           size: 24.0,
-        //         ),
-        //         Text(
-        //           'Home',
-        //           overflow: TextOverflow.ellipsis,
-        //           style: TextStyle(
-        //             color: currentIndex == 0
-        //                 ? FlutterFlowTheme.of(context).primaryColor
-        //                 : FlutterFlowTheme.of(context).secondaryText,
-        //             fontSize: 11.0,
-        //           ),
-        //         ),
-        //       ],
-        //     ),
-        //   ),
-        //   FloatingNavbarItem(
-        //     customWidget: Column(
-        //       mainAxisAlignment: MainAxisAlignment.center,
-        //       children: [
-        //         Icon(
-        //           Icons.access_time_rounded,
-        //           color: currentIndex == 1
-        //               ? FlutterFlowTheme.of(context).primaryColor
-        //               : FlutterFlowTheme.of(context).secondaryText,
-        //           size: 24.0,
-        //         ),
-        //         Text(
-        //           'Schedule',
-        //           overflow: TextOverflow.ellipsis,
-        //           style: TextStyle(
-        //             color: currentIndex == 1
-        //                 ? FlutterFlowTheme.of(context).primaryColor
-        //                 : FlutterFlowTheme.of(context).secondaryText,
-        //             fontSize: 11.0,
-        //           ),
-        //         ),
-        //       ],
-        //     ),
-        //   ),
-        //   FloatingNavbarItem(
-        //     customWidget: Column(
-        //       mainAxisAlignment: MainAxisAlignment.center,
-        //       children: [
-        //         Icon(
-        //           currentIndex == 2
-        //               ? Icons.person_rounded
-        //               : Icons.person_outline,
-        //           color: currentIndex == 2
-        //               ? FlutterFlowTheme.of(context).primaryColor
-        //               : FlutterFlowTheme.of(context).secondaryText,
-        //           size: 24.0,
-        //         ),
-        //         Text(
-        //           'Profile',
-        //           overflow: TextOverflow.ellipsis,
-        //           style: TextStyle(
-        //             color: currentIndex == 2
-        //                 ? FlutterFlowTheme.of(context).primaryColor
-        //                 : FlutterFlowTheme.of(context).secondaryText,
-        //             fontSize: 11.0,
-        //           ),
-        //         ),
-        //       ],
-        //     ),
-        //   ),
-        //   FloatingNavbarItem(
-        //     customWidget: Column(
-        //       mainAxisAlignment: MainAxisAlignment.center,
-        //       children: [
-        //         Icon(
-        //           currentIndex == 3 ? Icons.home_rounded : Icons.home_outlined,
-        //           color: currentIndex == 3
-        //               ? FlutterFlowTheme.of(context).primaryColor
-        //               : FlutterFlowTheme.of(context).secondaryText,
-        //           size: 24.0,
-        //         ),
-        //         Text(
-        //           'Home',
-        //           overflow: TextOverflow.ellipsis,
-        //           style: TextStyle(
-        //             color: currentIndex == 3
-        //                 ? FlutterFlowTheme.of(context).primaryColor
-        //                 : FlutterFlowTheme.of(context).secondaryText,
-        //             fontSize: 11.0,
-        //           ),
-        //         ),
-        //       ],
-        //     ),
-        //   )
-        // ],
       ),
     );
   }

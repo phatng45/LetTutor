@@ -99,8 +99,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           ),
                           filled: true,
                           fillColor: Color(0xFFE4E4E4),
-                          contentPadding:
-                              EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                          contentPadding: EdgeInsetsDirectional.fromSTEB(
+                              16.0, 0.0, 0.0, 0.0),
                           prefixIcon: Icon(
                             Icons.search_rounded,
                           ),
@@ -116,7 +116,17 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       child: Container(
                         width: MediaQuery.of(context).size.width * 1.0,
                         decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).primaryColor,
+                          // color:Gradient(colors:[
+                          //   Colors.indigo, Colors.white
+                          // ],),
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment(0, .9),
+                            colors: <Color>[
+                              Colors.blue.shade600,
+                              Colors.blue.shade900,
+                            ],
+                          ),
                           boxShadow: [
                             BoxShadow(
                               blurRadius: 4.0,
@@ -169,8 +179,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             width: 100.0,
                                             height: 100.0,
                                             decoration: BoxDecoration(
-                                              color: FlutterFlowTheme.of(context)
-                                                  .secondaryBackground,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
                                               boxShadow: [
                                                 BoxShadow(
                                                   blurRadius: 2.0,
@@ -200,7 +211,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     Expanded(
                                       flex: 2,
                                       child: Align(
-                                        alignment: AlignmentDirectional(0.0, 0.0),
+                                        alignment:
+                                            AlignmentDirectional(0.0, 0.0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
                                           mainAxisAlignment:
@@ -211,72 +223,79 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             Text(
                                               '[ClassTitle]',
                                               textAlign: TextAlign.start,
-                                              style: FlutterFlowTheme.of(context)
-                                                  .bodyText1
-                                                  .override(
-                                                    fontFamily:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyText1Family,
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.w600,
-                                                    useGoogleFonts: GoogleFonts
-                                                            .asMap()
-                                                        .containsKey(
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodyText1Family),
-                                                  ),
+                                                                .bodyText1Family,
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1Family),
+                                                      ),
                                             ),
                                             Text(
                                               '[Teacher]',
                                               textAlign: TextAlign.start,
-                                              style: FlutterFlowTheme.of(context)
-                                                  .bodyText1
-                                                  .override(
-                                                    fontFamily:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyText1Family,
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.w600,
-                                                    useGoogleFonts: GoogleFonts
-                                                            .asMap()
-                                                        .containsKey(
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodyText1Family),
-                                                  ),
+                                                                .bodyText1Family,
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1Family),
+                                                      ),
                                             ),
                                             Text(
                                               '[weekday], [dd] [hh:mm - hh:mm]',
                                               textAlign: TextAlign.start,
-                                              style: FlutterFlowTheme.of(context)
-                                                  .bodyText1
-                                                  .override(
-                                                    fontFamily:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyText1Family,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryBtnText,
-                                                    fontSize: 12.0,
-                                                    useGoogleFonts: GoogleFonts
-                                                            .asMap()
-                                                        .containsKey(
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodyText1Family),
-                                                  ),
+                                                                .bodyText1Family,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryBtnText,
+                                                        fontSize: 12.0,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1Family),
+                                                      ),
                                             ),
                                             Padding(
-                                              padding:
-                                                  EdgeInsetsDirectional.fromSTEB(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
                                                       25.0, 10.0, 25.0, 0.0),
                                               child: FFButtonWidget(
                                                 onPressed: () {
-                                                  print('buttonJoin pressed ...');
+                                                  print(
+                                                      'buttonJoin pressed ...');
                                                 },
                                                 text: 'Enter Lesson Room',
                                                 icon: Icon(
@@ -289,36 +308,38 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                           0.0, 0.0, 0.0, 0.0),
                                                   iconPadding:
                                                       EdgeInsetsDirectional
-                                                          .fromSTEB(
-                                                              0.0, 0.0, 0.0, 0.0),
-                                                  color:
-                                                      FlutterFlowTheme.of(context)
-                                                          .secondaryBackground,
-                                                  textStyle:
-                                                      FlutterFlowTheme.of(context)
-                                                          .subtitle2
-                                                          .override(
-                                                            fontFamily:
+                                                          .fromSTEB(0.0, 0.0,
+                                                              0.0, 0.0),
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryBackground,
+                                                  textStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .subtitle2
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .subtitle2Family,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryColor,
+                                                        fontSize: 14.0,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
                                                                 FlutterFlowTheme.of(
                                                                         context)
-                                                                    .subtitle2Family,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primaryColor,
-                                                            fontSize: 14.0,
-                                                            useGoogleFonts: GoogleFonts
-                                                                    .asMap()
-                                                                .containsKey(
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .subtitle2Family),
-                                                          ),
+                                                                    .subtitle2Family),
+                                                      ),
                                                   borderSide: BorderSide(
                                                     color: Colors.transparent,
                                                     width: 1.0,
                                                   ),
                                                   borderRadius:
-                                                      BorderRadius.circular(20.0),
+                                                      BorderRadius.circular(
+                                                          20.0),
                                                 ),
                                               ),
                                             ),
@@ -342,12 +363,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         child: Text(
                           'Recommended Tutors',
                           textAlign: TextAlign.start,
-                          style: FlutterFlowTheme.of(context).title1.override(
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.normal,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context).title1Family),
-                              ),
+                          style: FlutterFlowTheme.of(context).title1,
                         ),
                       ),
                     ),
@@ -370,8 +386,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   width: 50.0,
                                   height: 50.0,
                                   child: CircularProgressIndicator(
-                                    color:
-                                        FlutterFlowTheme.of(context).primaryColor,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryColor,
                                   ),
                                 ),
                               );
@@ -419,7 +435,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             children: [
                                               ClipRRect(
                                                 borderRadius:
-                                                    BorderRadius.circular(900.0),
+                                                    BorderRadius.circular(
+                                                        900.0),
                                                 child: Image.network(
                                                   'https://picsum.photos/seed/437/600',
                                                   width: 80.0,
@@ -432,21 +449,24 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                     .fromSTEB(
                                                         10.0, 0.0, 0.0, 0.0),
                                                 child: Column(
-                                                  mainAxisSize: MainAxisSize.max,
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
                                                       'Adelia Rice',
-                                                      style: FlutterFlowTheme.of(
-                                                              context)
-                                                          .title3,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .title3,
                                                     ),
                                                     Row(
                                                       mainAxisSize:
                                                           MainAxisSize.max,
                                                       mainAxisAlignment:
-                                                          MainAxisAlignment.start,
+                                                          MainAxisAlignment
+                                                              .start,
                                                       children: [
                                                         Padding(
                                                           padding:
@@ -465,10 +485,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                         ),
                                                         Text(
                                                           'France',
-                                                          style:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyText1,
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1,
                                                         ),
                                                       ],
                                                     ),
@@ -477,9 +496,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                           (context, index) =>
                                                               Icon(
                                                         Icons.star_rounded,
-                                                        color: Color(0xFFFFCA77),
+                                                        color:
+                                                            Color(0xFFFFCA77),
                                                       ),
-                                                      direction: Axis.horizontal,
+                                                      direction:
+                                                          Axis.horizontal,
                                                       rating: 3.0,
                                                       unratedColor:
                                                           Color(0xFF9E9E9E),
@@ -491,8 +512,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                               ),
                                               Expanded(
                                                 child: Align(
-                                                  alignment: AlignmentDirectional(
-                                                      1.0, -1.0),
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          1.0, -1.0),
                                                   child: ToggleIcon(
                                                     onPressed: () async {
                                                       final tutorsUpdateData = {
@@ -538,31 +560,32 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                 AlignmentDirectional(-1.0, 0.0),
                                             child: Text(
                                               'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ',
-                                              style: FlutterFlowTheme.of(context)
-                                                  .bodyText1,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1,
                                             ),
                                           ),
                                           Align(
                                             alignment:
                                                 AlignmentDirectional(1.0, 0.0),
                                             child: Padding(
-                                              padding:
-                                                  EdgeInsetsDirectional.fromSTEB(
-                                                      0.0, 5.0, 0.0, 0.0),
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 5.0, 0.0, 0.0),
                                               child: FFButtonWidget(
                                                 onPressed: () {
-                                                  print('buttonBook pressed ...');
+                                                  print(
+                                                      'buttonBook pressed ...');
                                                   Navigator.pushNamed(
                                                     context,
                                                     'tutorDetailedInfo',
                                                   );
-                                                 },
+                                                },
                                                 text: 'Book',
                                                 icon: Icon(
                                                   Icons.person_add_rounded,
-                                                  color:
-                                                      FlutterFlowTheme.of(context)
-                                                          .primaryColor,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryColor,
                                                   size: 15.0,
                                                 ),
                                                 options: FFButtonOptions(
@@ -573,29 +596,30 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                           0.0, 0.0, 0.0, 0.0),
                                                   iconPadding:
                                                       EdgeInsetsDirectional
-                                                          .fromSTEB(
-                                                              0.0, 0.0, 0.0, 0.0),
-                                                  color:
-                                                      FlutterFlowTheme.of(context)
-                                                          .primaryBtnText,
-                                                  textStyle:
-                                                      FlutterFlowTheme.of(context)
-                                                          .subtitle2
-                                                          .override(
-                                                            fontFamily:
+                                                          .fromSTEB(0.0, 0.0,
+                                                              0.0, 0.0),
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryBtnText,
+                                                  textStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .subtitle2
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .subtitle2Family,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryColor,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
                                                                 FlutterFlowTheme.of(
                                                                         context)
-                                                                    .subtitle2Family,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primaryColor,
-                                                            useGoogleFonts: GoogleFonts
-                                                                    .asMap()
-                                                                .containsKey(
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .subtitle2Family),
-                                                          ),
+                                                                    .subtitle2Family),
+                                                      ),
                                                   borderSide: BorderSide(
                                                     color: FlutterFlowTheme.of(
                                                             context)
@@ -603,7 +627,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                     width: 2.0,
                                                   ),
                                                   borderRadius:
-                                                      BorderRadius.circular(20.0),
+                                                      BorderRadius.circular(
+                                                          20.0),
                                                 ),
                                               ),
                                             ),

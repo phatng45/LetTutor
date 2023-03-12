@@ -85,7 +85,7 @@ DeviceSize getDeviceSize(BuildContext context) {
 }
 
 class LightModeTheme extends FlutterFlowTheme {
-  late Color primaryColor = const Color(0xFF2767FF);
+  late Color primaryColor = Colors.indigo;
   late Color secondaryColor = const Color(0xFFF594B7);
   late Color tertiaryColor = const Color(0xFFAD7FFB);
   late Color alternate = const Color(0xFFCCD0F6);
@@ -122,15 +122,15 @@ class MobileTypography extends Typography {
 
   String get title1Family => 'Outfit';
   TextStyle get title1 => GoogleFonts.getFont(
-        'Outfit',
-        color: theme.primaryText,
-        fontWeight: FontWeight.normal,
+    'Outfit',
+        color: Colors.indigo,
+        fontWeight: FontWeight.w500,
         fontSize: 24.0,
       );
   String get title2Family => 'Outfit';
   TextStyle get title2 => GoogleFonts.getFont(
         'Outfit',
-        color: theme.secondaryText,
+        color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 22.0,
       );
@@ -160,7 +160,7 @@ class MobileTypography extends Typography {
         'Outfit',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
-        fontSize: 14.0,
+        fontSize: 16.0,
       );
   String get bodyText2Family => 'Outfit';
   TextStyle get bodyText2 => GoogleFonts.getFont(
@@ -179,7 +179,7 @@ class TabletTypography extends Typography {
   String get title1Family => 'Outfit';
   TextStyle get title1 => GoogleFonts.getFont(
         'Outfit',
-        color: theme.primaryText,
+        color: Colors.indigo,
         fontWeight: FontWeight.normal,
         fontSize: 24.0,
       );
