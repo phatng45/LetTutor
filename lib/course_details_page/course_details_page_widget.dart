@@ -102,52 +102,60 @@ class _CourseDetailsPageWidgetState extends State<CourseDetailsPageWidget> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: <Widget>[
-                                    Column(
-                                      children: <Widget>[
-                                        Icon(
-                                          Icons.signal_cellular_alt_rounded,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                        ),
-                                        Text(experienceLevelDescription,
-                                            style: FlutterFlowTheme.of(context)
-                                                .title1
-                                                .override(
-                                                    fontFamily:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .title1Family,
-                                                    fontSize: 17,
-                                                    fontWeight:
-                                                        FontWeight.w400)),
-                                      ],
+                                    Expanded(
+                                      flex: 1,
+                                      child: Column(
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.signal_cellular_alt_rounded,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                          ),
+                                          Text(experienceLevelDescription,
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .title1
+                                                  .override(
+                                                      fontFamily:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .title1Family,
+                                                      fontSize: 17,
+                                                      fontWeight:
+                                                          FontWeight.w400)),
+                                        ],
+                                      ),
                                     ),
                                     VerticalDivider(
                                       width: 20,
-                                      thickness: 1,
+                                      thickness: 1.5,
                                       indent: 5,
                                       endIndent: 5,
                                       color: Colors.black12,
                                     ),
-                                    Column(
-                                      children: <Widget>[
-                                        Icon(
-                                          Icons.schedule_rounded,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                        ),
-                                        Text(coursesLengthDescription,
-                                            style: FlutterFlowTheme.of(context)
-                                                .title1
-                                                .override(
-                                                    fontFamily:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .title1Family,
-                                                    fontSize: 17,
-                                                    fontWeight:
-                                                        FontWeight.w400)),
-                                      ],
+                                    Expanded(
+                                      flex: 1,
+                                      child: Column(
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.schedule_rounded,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                          ),
+                                          Text(coursesLengthDescription,
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .title1
+                                                  .override(
+                                                      fontFamily:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .title1Family,
+                                                      fontSize: 17,
+                                                      fontWeight:
+                                                          FontWeight.w400)),
+                                        ],
+                                      ),
                                     )
                                   ],
                                 ),
