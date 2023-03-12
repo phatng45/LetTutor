@@ -47,17 +47,32 @@ class _CoursesPageWidgetState extends State<CoursesPageWidget> {
               color: Colors.indigo),
         ),
         key: scaffoldKey,
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              CourseGeneralInfo(),
-              CourseGeneralInfo(),
-              CourseGeneralInfo(),
-              CourseGeneralInfo(),
-              CourseGeneralInfo(),
-            ],
+        body:
+        CustomScrollView(slivers: [
+          SliverAppBar(
+          pinned: false,
+          snap: false,
+          floating: true,
+          expandedHeight: 60.0,
+          backgroundColor: Colors.indigo,
+          flexibleSpace: const FlexibleSpaceBar(
+            title: Text('SliverAppBar'),
+            background: FlutterLogo(),
           ),
-        ));
+        ),
+        SliverToBoxAdapter(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                CourseGeneralInfo(),
+                CourseGeneralInfo(),
+                CourseGeneralInfo(),
+                CourseGeneralInfo(),
+                CourseGeneralInfo(),
+              ],
+            ),
+          ),
+        )]));
   }
 }
 

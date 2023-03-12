@@ -51,12 +51,27 @@ class _PdfPageWidgetState extends State<PdfPageWidget>
             color: Colors.indigo),
       ),
       key: scaffoldKey,
-      body: Center(
-        child: PdfView(
-          controller: pdfController,
-          scrollDirection: Axis.vertical,
+      body: CustomScrollView(slivers: [
+        SliverAppBar(
+          pinned: true,
+          snap: false,
+          floating: false,
+          expandedHeight: 60.0,
+          backgroundColor: Colors.indigo,
+          flexibleSpace: const FlexibleSpaceBar(
+            title: Text('SliverAppBar'),
+            background: FlutterLogo(),
+          ),
         ),
-      ),
+        SliverFillRemaining(
+          child: Center(
+            child: PdfView(
+              controller: pdfController,
+              scrollDirection: Axis.vertical,
+            ),
+          ),
+        ),
+      ]),
     );
   }
 }
