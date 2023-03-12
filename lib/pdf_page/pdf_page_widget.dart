@@ -55,7 +55,6 @@ class _PdfPageWidgetState extends State<PdfPageWidget>
         child: PdfView(
           controller: pdfController,
           scrollDirection: Axis.vertical,
-           // pageSnapping: false,
         ),
       ),
     );
