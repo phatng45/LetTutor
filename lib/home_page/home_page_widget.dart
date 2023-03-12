@@ -116,9 +116,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       child: Container(
                         width: MediaQuery.of(context).size.width * 1.0,
                         decoration: BoxDecoration(
-                          // color:Gradient(colors:[
-                          //   Colors.indigo, Colors.white
-                          // ],),
                           gradient: LinearGradient(
                             begin: Alignment.topCenter,
                             end: Alignment(0, .9),
