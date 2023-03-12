@@ -10,3 +10,4 @@ export 'package:let_tutor/sign_up_page/sign_up_page_widget.dart' show SignUpPage
 export 'package:let_tutor/history_page/history_page_widget.dart' show HistoryPageWidget;
 export 'package:let_tutor/courses_page/courses_page_widget.dart' show CoursesPageWidget;
 export 'package:let_tutor/course_details_page/course_details_page_widget.dart' show CourseDetailsPageWidget;
+export 'package:let_tutor/pdf_page/pdf_page_widget.dart' show PdfPageWidget;

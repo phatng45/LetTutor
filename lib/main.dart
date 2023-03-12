@@ -150,6 +150,7 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
             HomePageWidget(),
             TutorDetailsWidget(),
             CoursesPageWidget(),
+            PdfPageWidget(),
             CourseDetailsPageWidget(),
             ProfilePageWidget(),
             SchedulePageWidget(),
