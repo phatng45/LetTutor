@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
+import 'package:let_tutor/courses_page/courses_page_widget.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
 import 'package:pdfx/pdfx.dart';
 
@@ -38,40 +38,17 @@ class _PdfPageWidgetState extends State<PdfPageWidget>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        surfaceTintColor: FlutterFlowTheme.of(context).primaryColor,
-        iconTheme: IconThemeData(color: Colors.indigo),
-        bottomOpacity: 0.0,
-        elevation: 0.0,
-        shadowColor: Colors.white,
-        title: const Text('Lesson'),
-        titleTextStyle: FlutterFlowTheme.of(context).title1.override(
-            fontFamily: FlutterFlowTheme.of(context).title1Family,
-            color: Colors.indigo),
+    return SliverScaffold(
+      scaffoldKey: scaffoldKey,
+      title: 'Lesson',
+      body: SliverFillRemaining(
+        child: Center(
+          child: PdfView(
+            controller: pdfController,
+            scrollDirection: Axis.vertical,
+          ),
+        ),
       ),
-      key: scaffoldKey,
-      body: CustomScrollView(slivers: [
-        SliverAppBar(
-          pinned: true,
-          snap: false,
-          floating: false,
-          expandedHeight: 60.0,
-          backgroundColor: Colors.indigo,
-          flexibleSpace: const FlexibleSpaceBar(
-            title: Text('SliverAppBar'),
-            background: FlutterLogo(),
-          ),
-        ),
-        SliverFillRemaining(
-          child: Center(
-            child: PdfView(
-              controller: pdfController,
-              scrollDirection: Axis.vertical,
-            ),
-          ),
-        ),
-      ]),
     );
   }
 }

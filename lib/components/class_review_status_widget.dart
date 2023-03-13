@@ -2,7 +2,7 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:let_tutor/components/best_divider_widget.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
-import 'package:let_tutor/models/class_schedule_status_widget.dart';
+import 'package:let_tutor/components/class_schedule_status_widget.dart';
 
 class ClassReviewStatus extends StatelessWidget {
   const ClassReviewStatus({

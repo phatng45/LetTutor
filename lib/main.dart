@@ -149,12 +149,12 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
           children: [
             HomePageWidget(),
             TutorDetailsWidget(),
-            CoursesPageWidget(),
+            SchedulePageWidget(),
             PdfPageWidget(),
+            CoursesPageWidget(),
+            HistoryPageWidget(),
             CourseDetailsPageWidget(),
             ProfilePageWidget(),
-            SchedulePageWidget(),
-            HistoryPageWidget(),
           ]),
       extendBody: false,
       bottomNavigationBar: BottomAppBar(

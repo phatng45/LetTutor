@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:let_tutor/components/class_schedule_status_widget.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
-import 'package:let_tutor/models/class_schedule_status_widget.dart';
 
 import 'courses_page_model.dart';
 
@@ -34,45 +34,65 @@ class _CoursesPageWidgetState extends State<CoursesPageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          surfaceTintColor: FlutterFlowTheme.of(context).primaryColor,
-          iconTheme: IconThemeData(color: Colors.indigo),
-          bottomOpacity: 0.0,
-          elevation: 0.0,
-          shadowColor: Colors.white,
-          title: const Text('Courses'),
-          titleTextStyle: FlutterFlowTheme.of(context).title1.override(
-              fontFamily: FlutterFlowTheme.of(context).title1Family,
-              color: Colors.indigo),
-        ),
-        key: scaffoldKey,
-        body:
-        CustomScrollView(slivers: [
-          SliverAppBar(
-          pinned: false,
-          snap: false,
-          floating: true,
-          expandedHeight: 60.0,
-          backgroundColor: Colors.indigo,
-          flexibleSpace: const FlexibleSpaceBar(
-            title: Text('SliverAppBar'),
-            background: FlutterLogo(),
+    return SliverScaffold(
+      scaffoldKey: scaffoldKey,
+      title: 'Courses',
+      body: SliverToBoxAdapter(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              CourseGeneralInfo(),
+              CourseGeneralInfo(),
+              CourseGeneralInfo(),
+              CourseGeneralInfo(),
+              CourseGeneralInfo(),
+            ],
           ),
         ),
-        SliverToBoxAdapter(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                CourseGeneralInfo(),
-                CourseGeneralInfo(),
-                CourseGeneralInfo(),
-                CourseGeneralInfo(),
-                CourseGeneralInfo(),
-              ],
+      ),
+    );
+  }
+}
+
+class SliverScaffold extends StatelessWidget {
+  const SliverScaffold({
+    Key? key,
+    required this.scaffoldKey,
+    required this.title,
+    required this.body,
+  }) : super(key: key);
+
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  final String title;
+  final Widget body;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        key: scaffoldKey,
+        body: CustomScrollView(slivers: [
+          SliverAppBar(
+            pinned: false,
+            snap: false,
+            floating: true,
+            expandedHeight: 60.0,
+            iconTheme: IconThemeData(color: Colors.indigo),
+            backgroundColor: Color(0xfff0ecfc),
+            flexibleSpace: FlexibleSpaceBar(
+              title: Align(
+                alignment: Alignment(-1, 1),
+                child: Text(
+                  title,
+                  style: FlutterFlowTheme.of(context).title1.override(
+                      fontFamily: FlutterFlowTheme.of(context).title1Family,
+                      color: Colors.indigo,
+                      fontSize: 18),
+                ),
+              ),
             ),
           ),
-        )]));
+         body,
+        ]));
   }
 }
 
@@ -110,11 +130,8 @@ class CourseGeneralInfo extends StatelessWidget {
             children: <Widget>[
               ClipRRect(
                 borderRadius: BorderRadius.circular(20.0),
-                child: Image.network(
-                    'https://picsum.photos/seed/437/600',
-                    height: 250,
-                    width: 1000,
-                    fit: BoxFit.cover),
+                child: Image.network('https://picsum.photos/seed/437/600',
+                    height: 250, width: 1000, fit: BoxFit.cover),
               ),
               Padding(
                 padding: const EdgeInsets.all(15.0),
@@ -128,9 +145,11 @@ class CourseGeneralInfo extends StatelessWidget {
                             // fontWeight: FontWeight.w500,
                             color: Colors.indigo)),
                     Text(
-                        'Let\'s discuss how technology is changing the way we live' + '\n',
-                    style: FlutterFlowTheme.of(context).bodyText1,
-                    maxLines: 2,),
+                      'Let\'s discuss how technology is changing the way we live' +
+                          '\n',
+                      style: FlutterFlowTheme.of(context).bodyText1,
+                      maxLines: 2,
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(top: 8.0),
                       child: Row(
@@ -138,7 +157,12 @@ class CourseGeneralInfo extends StatelessWidget {
                         children: [
                           Text('Intermediate • 9 Lessons',
                               style: FlutterFlowTheme.of(context).subtitle1),
-                          PositiveButton(title: 'Discover', icon: Icon(Icons.public,size: 20,))
+                          PositiveButton(
+                              title: 'Discover',
+                              icon: Icon(
+                                Icons.public,
+                                size: 20,
+                              ))
                         ],
                       ),
                     ),

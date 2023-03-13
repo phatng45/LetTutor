@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:let_tutor/components/best_divider_widget.dart';
+import 'package:let_tutor/components/class_review_status_widget.dart';
+import 'package:let_tutor/components/tutor_general_info_widget.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
-import 'package:let_tutor/models/class_review_status_widget.dart';
-import 'package:let_tutor/models/tutor_general_info_widget.dart';
 
+import '../courses_page/courses_page_widget.dart';
 import 'history_page_model.dart';
 
 export 'history_page_model.dart';
@@ -36,20 +37,11 @@ class _HistoryPageWidgetState extends State<HistoryPageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          surfaceTintColor: FlutterFlowTheme.of(context).primaryColor,
-          iconTheme: IconThemeData(color: Colors.indigo),
-          bottomOpacity: 0.0,
-          elevation: 0.0,
-          shadowColor: Colors.white,
-          title: const Text('Schedule'),
-          titleTextStyle: FlutterFlowTheme.of(context).title1.override(
-              fontFamily: FlutterFlowTheme.of(context).title1Family,
-              color: Colors.indigo),
-        ),
-        key: scaffoldKey,
-        body: SingleChildScrollView(
+    return SliverScaffold(
+        scaffoldKey: scaffoldKey,
+        title: 'History',
+        body: SliverToBoxAdapter(
+            child: SingleChildScrollView(
           child: Column(
             children: [
               Container(
@@ -99,6 +91,6 @@ class _HistoryPageWidgetState extends State<HistoryPageWidget> {
               ),
             ],
           ),
-        ));
+        )));
   }
 }
