@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_svg/svg.dart';
 
 import 'backend/firebase/firebase_config.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
@@ -163,25 +164,50 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
               Row(
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.search),
+                    icon: SvgPicture.network(
+                      'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/home/wght500/48px.svg',
+                      colorFilter:
+                          ColorFilter.mode(Colors.indigo, BlendMode.srcIn),
+                      width: 26,
+                    ),
                     onPressed: () => _tabController.animateTo(0),
                   ),
                   IconButton(
-                    icon: const Icon(Icons.schedule),
+                    icon: SvgPicture.network(
+                      'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/schedule/wght500/48px.svg',
+                      colorFilter:
+                          ColorFilter.mode(Colors.indigo, BlendMode.srcIn),
+                      width: 26,
+                    ),
                     onPressed: () => _tabController.animateTo(1),
                   ),
                   IconButton(
-                    icon: const Icon(Icons.collections_bookmark_outlined),
+                    icon: SvgPicture.network(
+                      'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/sticky_note_2/wght500/48px.svg',
+                      colorFilter:
+                          ColorFilter.mode(Colors.indigo, BlendMode.srcIn),
+                      width: 26,
+                    ),
                     onPressed: () => _tabController.animateTo(2),
                   ),
                   IconButton(
-                    icon: const Icon(Icons.person_outline_rounded),
+                    icon: SvgPicture.network(
+                      'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/person/wght500/48px.svg',
+                      colorFilter:
+                          ColorFilter.mode(Colors.indigo, BlendMode.srcIn),
+                      width: 26,
+                    ),
                     onPressed: () => _tabController.animateTo(3),
                   ),
                 ],
               ),
               IconButton(
-                  onPressed: () {}, icon: const Icon(Icons.more_vert_rounded))
+                  icon: SvgPicture.network(
+                    'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/more_vert/wght500/48px.svg', colorFilter:
+                    ColorFilter.mode(Colors.indigo, BlendMode.srcIn),
+                    width: 26,
+                  ),
+                 onPressed: () {})
             ],
           ),
         ),
