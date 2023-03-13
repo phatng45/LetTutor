@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:let_tutor/components/tutor_specialties_widget.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_model.dart';
 
-class TutorDetailsModel extends FlutterFlowModel {
+class TutorDetailsModelPage extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for TextField widget.

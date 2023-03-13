@@ -134,11 +134,13 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     final tabs = {
       'HomePage': HomePageWidget(),
+      'TutorDetailsPage': TutorDetailsPageWidget(),
       'SchedulePage': SchedulePageWidget(),
-      'ProfilePage': ProfilePageWidget(),
-      'TutorDetailedInfoPage': TutorDetailsWidget(),
-      'HistoryPage': HistoryPageWidget(),
+      'PdfPage': PdfPageWidget(),
       'CoursesPage': CoursesPageWidget(),
+      'HistoryPage': HistoryPageWidget(),
+      'CourseDetailsPage': CourseDetailsPageWidget(),
+      'ProfilePage': ProfilePageWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
     return Scaffold(
@@ -146,16 +148,7 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
       body: TabBarView(
           controller: _tabController,
           physics: NeverScrollableScrollPhysics(),
-          children: [
-            HomePageWidget(),
-            TutorDetailsWidget(),
-            SchedulePageWidget(),
-            PdfPageWidget(),
-            CoursesPageWidget(),
-            HistoryPageWidget(),
-            CourseDetailsPageWidget(),
-            ProfilePageWidget(),
-          ]),
+          children: tabs.values.toList()),
       extendBody: false,
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),

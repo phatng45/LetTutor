@@ -75,7 +75,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'tutorDetailedInfo',
               builder: (context, params) => params.isEmpty
                   ? NavBarPage(initialPage: 'TutorDetailedInfo')
-                  : TutorDetailsWidget(),
+                  : TutorDetailsPageWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),

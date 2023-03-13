@@ -16,22 +16,22 @@ import 'tutor_details_model.dart';
 
 export 'tutor_details_model.dart';
 
-class TutorDetailsWidget extends StatefulWidget {
-  const TutorDetailsWidget({Key? key}) : super(key: key);
+class TutorDetailsPageWidget extends StatefulWidget {
+  const TutorDetailsPageWidget({Key? key}) : super(key: key);
 
   @override
-  _TutorDetailsWidgetState createState() => _TutorDetailsWidgetState();
+  _TutorDetailsPageWidgetState createState() => _TutorDetailsPageWidgetState();
 }
 
-class _TutorDetailsWidgetState extends State<TutorDetailsWidget> {
-  late TutorDetailsModel _model;
+class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
+  late TutorDetailsModelPage _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => TutorDetailsModel());
+    _model = createModel(context, () => TutorDetailsModelPage());
     _model.textController ??= TextEditingController();
   }
 
