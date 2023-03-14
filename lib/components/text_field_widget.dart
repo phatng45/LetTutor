@@ -1,9 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+
 import 'text_field_model.dart';
+
 export 'text_field_model.dart';
 
 class TextFieldWidget extends StatefulWidget {
@@ -46,45 +46,49 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: _model.textController,
-      autofocus: false,
-      obscureText: false,
-      decoration: InputDecoration(
-        labelText: widget.fieldName,
-        hintStyle: FlutterFlowTheme.of(context).bodyText2,
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: FlutterFlowTheme.of(context).secondaryText,
-            width: 1.0,
+    return Padding(
+      padding: const EdgeInsets.only(top: 5.0),
+      child: TextFormField(
+        controller: _model.textController,
+        autofocus: false,
+        obscureText: false,
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.symmetric(vertical: 15),
+          labelText: widget.fieldName,
+          hintStyle: FlutterFlowTheme.of(context).bodyText2,
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: FlutterFlowTheme.of(context).secondaryText,
+              width: 1.0,
+            ),
+            borderRadius: BorderRadius.circular(12.0),
           ),
-          borderRadius: BorderRadius.circular(12.0),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xFF757575),
-            width: 1.0,
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Color(0xFF757575),
+              width: 1.0,
+            ),
+            borderRadius: BorderRadius.circular(12.0),
           ),
-          borderRadius: BorderRadius.circular(12.0),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xFF757575),
-            width: 1.0,
+          errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Color(0xFF757575),
+              width: 1.0,
+            ),
+            borderRadius: BorderRadius.circular(12.0),
           ),
-          borderRadius: BorderRadius.circular(12.0),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xFF757575),
-            width: 1.0,
+          focusedErrorBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Color(0xFF757575),
+              width: 1.0,
+            ),
+            borderRadius: BorderRadius.circular(12.0),
           ),
-          borderRadius: BorderRadius.circular(12.0),
+          prefixIcon: widget.icon,
         ),
-        prefixIcon: widget.icon,
+        style: FlutterFlowTheme.of(context).bodyText1,
+        validator: _model.textControllerValidator.asValidator(context),
       ),
-      style: FlutterFlowTheme.of(context).bodyText1,
-      validator: _model.textControllerValidator.asValidator(context),
     );
   }
 }

@@ -27,12 +27,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, _) => SignUpPageWidget(),
+      errorBuilder: (context, _) => LoginPageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => SignUpPageWidget(),
+          builder: (context, _) => LoginPageWidget(),
           routes: [
             FFRoute(
               name: 'SignUpPage',
