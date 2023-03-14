@@ -8,6 +8,7 @@ import 'package:let_tutor/flutter_flow/flutter_flow_icon_button.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_widgets.dart';
+import 'package:let_tutor/index.dart';
 import 'package:let_tutor/main.dart';
 
 import 'sign_up_page_model.dart';
@@ -68,7 +69,8 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 70.0, 0.0, 0.0),
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -76,8 +78,8 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                           width: 100.0,
                           height: 100.0,
                           decoration: BoxDecoration(
-                            color:
-                                FlutterFlowTheme.of(context).secondaryBackground,
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
                             boxShadow: [
                               BoxShadow(
                                 blurRadius: 5.0,
@@ -104,20 +106,24 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                         ),
                         Text(
                           'LetTutor',
-                          style: FlutterFlowTheme.of(context).bodyText1.override(
+                          style: FlutterFlowTheme.of(context)
+                              .bodyText1
+                              .override(
                                 fontFamily: 'Outfit',
                                 color: Color(0xFF2F65E3),
                                 fontSize: 40.0,
                                 fontWeight: FontWeight.bold,
                                 useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context).bodyText1Family),
+                                    FlutterFlowTheme.of(context)
+                                        .bodyText1Family),
                               ),
                         ),
                       ],
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 36.0, 0.0, 0.0),
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                     child: Container(
                       width: MediaQuery.of(context).size.width * 0.9,
                       decoration: BoxDecoration(
@@ -133,8 +139,8 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                       child: Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 15.0, 0.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            15.0, 0.0, 15.0, 0.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
@@ -225,10 +231,13 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                                     alignment: AlignmentDirectional(0.0, 0.0),
                                     child: FFButtonWidget(
                                       onPressed: () {
-                                        print('buttonCreateAccount pressed ...');
+                                        print(
+                                            'buttonCreateAccount pressed ...');
                                         Navigator.push(
                                           context,
-                                          MaterialPageRoute(builder: (context) => NavBarPage()),
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  NavBarPage()),
                                         );
                                       },
                                       text: 'Create Account',
@@ -249,16 +258,19 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                                                   FlutterFlowTheme.of(context)
                                                       .subtitle2Family,
                                               color: Colors.white,
-                                              useGoogleFonts: GoogleFonts.asMap()
-                                                  .containsKey(
-                                                      FlutterFlowTheme.of(context)
-                                                          .subtitle2Family),
+                                              useGoogleFonts:
+                                                  GoogleFonts.asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .subtitle2Family),
                                             ),
                                         borderSide: BorderSide(
                                           color: Colors.transparent,
                                           width: 1.0,
                                         ),
-                                        borderRadius: BorderRadius.circular(8.0),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
                                       ),
                                     ),
                                   ),
@@ -268,22 +280,24 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                             wrapWithModel(
                               model: _model.bestDividerModel,
                               updateCallback: () => setState(() {}),
-                              child: BestDividerWidget(title: 'OR',),
+                              child: BestDividerWidget(
+                                title: 'OR',
+                              ),
                             ),
                             Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 FlutterFlowIconButton(
-                                  borderColor:
-                                      FlutterFlowTheme.of(context).secondaryText,
+                                  borderColor: FlutterFlowTheme.of(context)
+                                      .secondaryText,
                                   borderRadius: 30.0,
                                   borderWidth: 1.0,
                                   buttonSize: 47.0,
                                   icon: Icon(
                                     Icons.mail_rounded,
-                                    color:
-                                        FlutterFlowTheme.of(context).primaryColor,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryColor,
                                     size: 25.0,
                                   ),
                                   onPressed: () {
@@ -311,15 +325,15 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                                   ),
                                 ),
                                 FlutterFlowIconButton(
-                                  borderColor:
-                                      FlutterFlowTheme.of(context).secondaryText,
+                                  borderColor: FlutterFlowTheme.of(context)
+                                      .secondaryText,
                                   borderRadius: 30.0,
                                   borderWidth: 1.0,
                                   buttonSize: 47.0,
                                   icon: Icon(
                                     Icons.phone,
-                                    color:
-                                        FlutterFlowTheme.of(context).primaryColor,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryColor,
                                     size: 25.0,
                                   ),
                                   onPressed: () {
@@ -336,40 +350,25 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                                   'Already have your account?',
                                   style: FlutterFlowTheme.of(context).bodyText1,
                                 ),
-                                FFButtonWidget(
+                                TextButton(
                                   onPressed: () {
-                                    print('Button pressed ...');
+                                    MyApp.To(context, LoginPageWidget());
                                   },
-                                  text: 'Login',
-                                  options: FFButtonOptions(
-                                    width: 65.0,
-                                    height: 40.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: Colors.white,
+                                  style: TextButton.styleFrom(
+                                    foregroundColor:
+                                        FlutterFlowTheme.of(context)
+                                            .secondaryColor,
                                     textStyle: FlutterFlowTheme.of(context)
                                         .subtitle2
                                         .override(
-                                          fontFamily: FlutterFlowTheme.of(context)
-                                              .subtitle2Family,
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryColor,
-                                          fontSize: 17.0,
-                                          fontWeight: FontWeight.bold,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey(
-                                                  FlutterFlowTheme.of(context)
-                                                      .subtitle2Family),
+                                          fontSize: 16,
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .subtitle2Family,
+                                          fontWeight: FontWeight.w700,
                                         ),
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 0,
-                                    ),
-                                    elevation: 0,
-                                    borderRadius: BorderRadius.circular(8.0),
                                   ),
+                                  child: Text('Login'),
                                 ),
                               ],
                             ),

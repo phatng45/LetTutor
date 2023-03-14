@@ -26,6 +26,10 @@ class MyApp extends StatefulWidget {
 
   static _MyAppState of(BuildContext context) =>
       context.findAncestorStateOfType<_MyAppState>()!;
+
+  static void To(BuildContext context, Widget page) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => page));
+  }
 }
 
 class _MyAppState extends State<MyApp> {
@@ -135,13 +139,13 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     final tabs = {
       'HomePage': HomePageWidget(),
-      'TutorDetailsPage': TutorDetailsPageWidget(),
       'SchedulePage': SchedulePageWidget(),
-      'PdfPage': PdfPageWidget(),
       'CoursesPage': CoursesPageWidget(),
+      'ProfilePage': ProfilePageWidget(),
+      'TutorDetailsPage': TutorDetailsPageWidget(),
+      'PdfPage': PdfPageWidget(),
       'HistoryPage': HistoryPageWidget(),
       'CourseDetailsPage': CourseDetailsPageWidget(),
-      'ProfilePage': ProfilePageWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
     return Scaffold(
@@ -201,13 +205,64 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
                   ),
                 ],
               ),
-              IconButton(
-                  icon: SvgPicture.network(
-                    'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/more_vert/wght500/48px.svg', colorFilter:
-                    ColorFilter.mode(Colors.indigo, BlendMode.srcIn),
-                    width: 26,
+              PopupMenuButton(
+                icon: SvgPicture.network(
+                  'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/more_vert/wght500/48px.svg',
+                  colorFilter: ColorFilter.mode(Colors.indigo, BlendMode.srcIn),
+                  width: 26,
+                ),
+                constraints: BoxConstraints(
+                  minWidth: 150,
+                  maxWidth: 150,
+                ),
+                itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+                  PopupMenuItem(
+                    onTap: () {},
+                    child: Row(children: <Widget>[
+                      Icon(
+                        Icons.logout_outlined,
+                        color: Colors.red,
+                      ),
+                      SizedBox(width: 10),
+                      Text('Logout',
+                          style: FlutterFlowTheme.of(context)
+                              .bodyText1
+                              .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .bodyText1Family,
+                                  color: Colors.red))
+                    ]),
                   ),
-                 onPressed: () {})
+                  PopupMenuItem(
+                    onTap: () {},
+                    child: Row(children: <Widget>[
+                      Icon(Icons.settings),
+                      SizedBox(width: 10),
+                      Text('Settings',
+                          style: FlutterFlowTheme.of(context)
+                              .bodyText1
+                              .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .bodyText1Family,
+                                  color: Colors.indigo))
+                    ]),
+                  ),
+                  PopupMenuItem(
+                    onTap: () {},
+                    child: Row(children: <Widget>[
+                      Icon(Icons.dark_mode_outlined),
+                      SizedBox(width: 10),
+                      Text('Dark mode',
+                          style: FlutterFlowTheme.of(context)
+                              .bodyText1
+                              .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .bodyText1Family,
+                                  color: Colors.indigo))
+                    ]),
+                  ),
+                ],
+              )
             ],
           ),
         ),

@@ -8,6 +8,8 @@ import 'package:let_tutor/flutter_flow/flutter_flow_icon_button.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_widgets.dart';
+import 'package:let_tutor/index.dart';
+import 'package:let_tutor/main.dart';
 
 import 'login_page_model.dart';
 
@@ -332,7 +334,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                         FlutterFlowTheme.of(context).bodyText1),
                                 TextButton(
                                   onPressed: () {
-                                    print('buttonRegister pressed ...');
+                                    MyApp.To(context, SignUpPageWidget());
                                   },
                                   style: TextButton.styleFrom(
                                     foregroundColor:

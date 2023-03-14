@@ -3,6 +3,7 @@ import 'package:let_tutor/components/class_schedule_status_widget.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
 
+import '../schedule_page/schedule_page_widget.dart';
 import 'courses_page_model.dart';
 
 export 'courses_page_model.dart';
@@ -34,20 +35,18 @@ class _CoursesPageWidgetState extends State<CoursesPageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return SliverScaffold(
-      scaffoldKey: scaffoldKey,
-      title: 'Courses',
-      body: SliverToBoxAdapter(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              CourseGeneralInfo(),
-              CourseGeneralInfo(),
-              CourseGeneralInfo(),
-              CourseGeneralInfo(),
-              CourseGeneralInfo(),
-            ],
-          ),
+    return Scaffold(
+      key: scaffoldKey,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            TabHeader(title: 'Courses'),
+            CourseGeneralInfo(),
+            CourseGeneralInfo(),
+            CourseGeneralInfo(),
+            CourseGeneralInfo(),
+            CourseGeneralInfo(),
+          ],
         ),
       ),
     );

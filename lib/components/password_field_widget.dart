@@ -50,7 +50,6 @@ class _PasswordFieldWidgetState extends State<PasswordFieldWidget> {
       padding: const EdgeInsets.only(top: 5.0),
       child: TextFormField(
         controller: _model.textController,
-        autofocus: true,
         obscureText: !_model.passwordVisibility,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: 15),

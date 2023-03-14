@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
+import 'package:let_tutor/schedule_page/schedule_page_widget.dart';
 
 import 'profile_page_model.dart';
 
@@ -35,13 +36,10 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: Color(0xFF1E2429),
-      body: Container(
-        width: MediaQuery.of(context).size.width * 1.0,
-        height: MediaQuery.of(context).size.height * 1.0,
-        decoration: BoxDecoration(
-          color: FlutterFlowTheme.of(context).secondaryBackground,
-        ),
+      body: Column(
+        children: <Widget>[
+          TabHeader(title: 'Profile')
+        ],
       ),
     );
   }
