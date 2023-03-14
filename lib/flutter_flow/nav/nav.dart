@@ -32,7 +32,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => SignUpPageWidget(),
+          builder: (context, _) => LoginPageWidget(),
           routes: [
             FFRoute(
               name: 'SignUpPage',
