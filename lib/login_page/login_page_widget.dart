@@ -231,7 +231,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                   alignment: AlignmentDirectional(0.0, 0.0),
                                   child: FFButtonWidget(
                                     onPressed: () {
-                                      print('buttonLogin pressed ...');
+                                      MyApp.To(context, NavBarPage());
                                     },
                                     text: 'Login',
                                     options: FFButtonOptions(

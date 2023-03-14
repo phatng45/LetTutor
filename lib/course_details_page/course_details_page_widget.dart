@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
-import 'package:let_tutor/components/class_schedule_status_widget.dart';
+import 'package:let_tutor/index.dart';
+import 'package:let_tutor/main.dart';
 
+import '../courses_page/courses_page_widget.dart';
 import 'course_details_page_model.dart';
 
 export 'course_details_page_model.dart';
@@ -44,20 +46,12 @@ class _CourseDetailsPageWidgetState extends State<CourseDetailsPageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          surfaceTintColor: FlutterFlowTheme.of(context).primaryColor,
-          iconTheme: IconThemeData(color: Colors.indigo),
-          bottomOpacity: 0.0,
-          elevation: 0.0,
-          shadowColor: Colors.white,
-          title: const Text('Courses'),
-          titleTextStyle: FlutterFlowTheme.of(context).title1.override(
-              fontFamily: FlutterFlowTheme.of(context).title1Family,
-              color: Colors.indigo),
-        ),
-        key: scaffoldKey,
-        body: SingleChildScrollView(
+    return SliverScaffold(
+        scaffoldKey: scaffoldKey,
+        title: 'Course',
+        body: SliverToBoxAdapter(
+            child: SafeArea(
+                child: SingleChildScrollView(
           child: Container(
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -259,29 +253,63 @@ class _CourseDetailsPageWidgetState extends State<CourseDetailsPageWidget> {
                         ),
                         Text('Topics',
                             style: FlutterFlowTheme.of(context).title2),
-                        TopicButton('1. The Internet'),
-                        TopicButton('2. Artificial Intelligence (AI)'),
-                        TopicButton('3. Social Media'),
-                        TopicButton('4. Internet Privacy'),
-                        TopicButton('5. Live Streaming'),
-                        TopicButton('6. Coding'),
-                        TopicButton('7. Technology Transforming Healthcare'),
+                        TopicButton(
+                          '1. The Internet',
+                          onPressed: () {
+                            MyApp.To(context, PdfPageWidget());
+                          },
+                        ),
+                        TopicButton(
+                          '2. Artificial Intelligence (AI)',
+                          onPressed: () {
+                            MyApp.To(context, PdfPageWidget());
+                          },
+                        ),
+                        TopicButton(
+                          '3. Social Media',
+                          onPressed: () {
+                            MyApp.To(context, PdfPageWidget());
+                          },
+                        ),
+                        TopicButton(
+                          '4. Internet Privacy',
+                          onPressed: () {
+                            MyApp.To(context, PdfPageWidget());
+                          },
+                        ),
+                        TopicButton(
+                          '5. Live Streaming',
+                          onPressed: () {
+                            MyApp.To(context, PdfPageWidget());
+                          },
+                        ),
+                        TopicButton(
+                          '6. Coding',
+                          onPressed: () {
+                            MyApp.To(context, PdfPageWidget());
+                          },
+                        ),
+                        TopicButton(
+                          '7. Technology Transforming Healthcare',
+                          onPressed: () {
+                            MyApp.To(context, PdfPageWidget());
+                          },
+                        ),
                       ]),
                 )
               ],
             ),
           ),
-        ));
+        ))));
   }
 }
 
 class TopicButton extends StatelessWidget {
-  const TopicButton(
-    this.title, {
-    Key? key,
-  }) : super(key: key);
+  const TopicButton(this.title, {Key? key, required this.onPressed})
+      : super(key: key);
 
   final String title;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -302,86 +330,9 @@ class TopicButton extends StatelessWidget {
                 foregroundColor: Colors.indigo,
                 backgroundColor: Colors.white,
               ),
-              onPressed: () {},
+              onPressed: onPressed,
               child:
                   Align(alignment: Alignment.centerLeft, child: Text(title)))),
-    );
-  }
-}
-
-class CourseGeneralInfo extends StatelessWidget {
-  const CourseGeneralInfo({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width * 1.0,
-      decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).secondaryBackground,
-      ),
-      child: Container(
-        decoration: BoxDecoration(
-          color: FlutterFlowTheme.of(context).secondaryBackground,
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 4.0,
-              color: Color(0x33000000),
-              offset: Offset(0.0, 2.0),
-              spreadRadius: 2.0,
-            )
-          ],
-          borderRadius: BorderRadius.circular(20.0),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: Image.network('https://picsum.photos/seed/437/600',
-                  height: 250, width: 1000, fit: BoxFit.cover),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Life in the Internet Age',
-                      style: FlutterFlowTheme.of(context).title1.override(
-                          fontFamily: FlutterFlowTheme.of(context).title1Family,
-                          // fontWeight: FontWeight.w500,
-                          color: Colors.indigo)),
-                  Text(
-                    'Let\'s discuss how technology is changing the way we live' +
-                        '\n',
-                    style: FlutterFlowTheme.of(context).bodyText1,
-                    maxLines: 2,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Intermediate • 9 Lessons',
-                            style: FlutterFlowTheme.of(context).subtitle1),
-                        PositiveButton(
-                            title: 'Discover',
-                            icon: Icon(
-                              Icons.public,
-                              size: 20,
-                            ))
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

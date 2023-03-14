@@ -36,7 +36,8 @@ class ClassReviewStatus extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 NegativeButton(title: 'Report'),
-                PositiveButton(title: 'Add a rating',icon: Icon(Icons.star_rounded, size: 22),)
+                PositiveButton(title: 'Add a rating',icon: Icon(Icons.star_rounded, size: 22),
+                onPressed: (){},)
                  ],
             ),
           ),

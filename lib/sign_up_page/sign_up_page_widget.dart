@@ -237,7 +237,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  NavBarPage()),
+                                                  LoginPageWidget()),
                                         );
                                       },
                                       text: 'Create Account',

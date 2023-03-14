@@ -5,12 +5,13 @@ import 'package:let_tutor/backend/backend.dart';
 import 'package:let_tutor/components/text_field_widget.dart';
 import 'package:let_tutor/components/tutor_general_info_widget.dart';
 import 'package:let_tutor/components/tutor_specialties_widget.dart';
+import 'package:let_tutor/course_details_page/course_details_page_widget.dart';
 import 'package:let_tutor/courses_page/courses_page_widget.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_choice_chips.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_video_player.dart';
-import 'package:let_tutor/flutter_flow/flutter_flow_widgets.dart';
+import 'package:let_tutor/main.dart';
 
 import 'tutor_details_model.dart';
 
@@ -333,199 +334,14 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                             ),
                             ListView(
                               padding: EdgeInsets.zero,
+                              physics: NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 3.0, 0.0, 3.0),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                      borderRadius: BorderRadius.circular(20.0),
-                                      border: Border.all(
-                                        color: Color(0xFFE3E3E3),
-                                        width: 1.0,
-                                      ),
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          10.0, 5.0, 10.0, 5.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Text(
-                                            'Basic Conversation Topics',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1
-                                                .override(
-                                                  fontFamily:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyText1Family,
-                                                  fontSize: 16.0,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1Family),
-                                                ),
-                                          ),
-                                          Expanded(
-                                            child: Align(
-                                              alignment: AlignmentDirectional(
-                                                  1.0, 0.0),
-                                              child: FFButtonWidget(
-                                                onPressed: () {
-                                                  print('Button pressed ...');
-                                                },
-                                                text: '',
-                                                icon: Icon(
-                                                  Icons.arrow_forward,
-                                                  size: 20.0,
-                                                ),
-                                                options: FFButtonOptions(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 0.0, 0.0, 0.0),
-                                                  iconPadding:
-                                                      EdgeInsetsDirectional
-                                                          .fromSTEB(8.0, 0.0,
-                                                              0.0, 0.0),
-                                                  color: Color(0x00FFFFFF),
-                                                  textStyle: FlutterFlowTheme
-                                                          .of(context)
-                                                      .subtitle2
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .subtitle2Family,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryColor,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .subtitle2Family),
-                                                      ),
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryColor,
-                                                    width: 1.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
+                                CourseWidget(
+                                  title: 'Basic Conversation Topics',
                                 ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 3.0, 0.0, 3.0),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                      borderRadius: BorderRadius.circular(20.0),
-                                      border: Border.all(
-                                        color: Color(0xFFE3E3E3),
-                                        width: 1.0,
-                                      ),
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          10.0, 5.0, 10.0, 5.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Text(
-                                            'Life in the Internet Ages',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1
-                                                .override(
-                                                  fontFamily:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyText1Family,
-                                                  fontSize: 16.0,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1Family),
-                                                ),
-                                          ),
-                                          Expanded(
-                                            child: Align(
-                                              alignment: AlignmentDirectional(
-                                                  1.0, 0.0),
-                                              child: FFButtonWidget(
-                                                onPressed: () {
-                                                  print('Button pressed ...');
-                                                },
-                                                text: '',
-                                                icon: Icon(
-                                                  Icons.arrow_forward,
-                                                  size: 20.0,
-                                                ),
-                                                options: FFButtonOptions(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 0.0, 0.0, 0.0),
-                                                  iconPadding:
-                                                      EdgeInsetsDirectional
-                                                          .fromSTEB(8.0, 0.0,
-                                                              0.0, 0.0),
-                                                  color: Color(0x00FFFFFF),
-                                                  textStyle: FlutterFlowTheme
-                                                          .of(context)
-                                                      .subtitle2
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .subtitle2Family,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryColor,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .subtitle2Family),
-                                                      ),
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryColor,
-                                                    width: 1.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
+                                CourseWidget(
+                                  title: 'Life In The Internet Ages',
                                 ),
                               ],
                             ),
@@ -626,6 +442,63 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                 ),
               ),
             ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CourseWidget extends StatelessWidget {
+  const CourseWidget({Key? key,  this.title =''}) : super(key: key);
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsetsDirectional.fromSTEB(0.0, 3.0, 0.0, 3.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: FlutterFlowTheme.of(context).secondaryBackground,
+          borderRadius: BorderRadius.circular(20.0),
+          border: Border.all(
+            color: Color(0xFFE3E3E3),
+            width: 1.0,
+          ),
+        ),
+        child: Padding(
+          padding: EdgeInsetsDirectional.fromSTEB(10.0, 5.0, 10.0, 5.0),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Text(
+                title,
+                style: FlutterFlowTheme.of(context).bodyText1.override(
+                      fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
+                      fontSize: 16.0,
+                      useGoogleFonts: GoogleFonts.asMap().containsKey(
+                          FlutterFlowTheme.of(context).bodyText1Family),
+                    ),
+              ),
+              Expanded(
+                child: Align(
+                  alignment: AlignmentDirectional(1.0, 0.0),
+                  child: OutlinedButton(
+                    onPressed: () {
+                      MyApp.To(context, CourseDetailsPageWidget());
+                    },
+                    style: OutlinedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.indigo,
+                      side: BorderSide(color: Color(0xFFd3d3d3), width: 1),
+                    ),
+                    child: Icon(Icons.arrow_forward,
+                        size: 20.0, color: Colors.indigo),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

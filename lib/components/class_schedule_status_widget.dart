@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:let_tutor/course_details_page/course_details_page_widget.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
+import 'package:let_tutor/index.dart';
+import 'package:let_tutor/main.dart';
 
 class ClassScheduleStatus extends StatelessWidget {
   const ClassScheduleStatus({
@@ -27,6 +30,9 @@ class ClassScheduleStatus extends StatelessWidget {
               PositiveButton(
                 title: 'Go to meeting',
                 icon: Icon(Icons.people_rounded, size: 18),
+                onPressed: () {
+                  MyApp.To(context, MeetingPageWidget());
+                },
               ),
             ],
           )
@@ -37,11 +43,16 @@ class ClassScheduleStatus extends StatelessWidget {
 }
 
 class PositiveButton extends StatelessWidget {
-  const PositiveButton({Key? key, required this.title, required this.icon})
+  const PositiveButton(
+      {Key? key,
+      required this.title,
+      required this.icon,
+      required this.onPressed})
       : super(key: key);
 
   final String title;
   final Icon icon;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +68,7 @@ class PositiveButton extends StatelessWidget {
           backgroundColor: Colors.indigo,
           disabledBackgroundColor: Colors.black54,
           disabledForegroundColor: Colors.white),
-      onPressed: () {},
+      onPressed: onPressed,
       label: Text(title),
     );
   }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:let_tutor/components/class_schedule_status_widget.dart';
+import 'package:let_tutor/course_details_page/course_details_page_widget.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
 
+import '../main.dart';
 import '../schedule_page/schedule_page_widget.dart';
 import 'courses_page_model.dart';
 
@@ -90,7 +92,7 @@ class SliverScaffold extends StatelessWidget {
               ),
             ),
           ),
-         body,
+          body,
         ]));
   }
 }
@@ -157,11 +159,15 @@ class CourseGeneralInfo extends StatelessWidget {
                           Text('Intermediate • 9 Lessons',
                               style: FlutterFlowTheme.of(context).subtitle1),
                           PositiveButton(
-                              title: 'Discover',
-                              icon: Icon(
-                                Icons.public,
-                                size: 20,
-                              ))
+                            title: 'Discover',
+                            icon: Icon(
+                              Icons.public,
+                              size: 20,
+                            ),
+                            onPressed: () {
+                              MyApp.To(context, CourseDetailsPageWidget());
+                            },
+                          )
                         ],
                       ),
                     ),

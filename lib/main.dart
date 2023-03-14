@@ -215,9 +215,20 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
                   minWidth: 150,
                   maxWidth: 150,
                 ),
+                onSelected: (result) {
+                  switch (result) {
+                    case 0:
+                      MyApp.To(context, LoginPageWidget());
+                      break;
+                    case 1:
+                      break;
+                    case 2:
+                      break;
+                  }
+                },
                 itemBuilder: (BuildContext context) => <PopupMenuEntry>[
                   PopupMenuItem(
-                    onTap: () {},
+                    value: 0,
                     child: Row(children: <Widget>[
                       Icon(
                         Icons.logout_outlined,
@@ -234,7 +245,7 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
                     ]),
                   ),
                   PopupMenuItem(
-                    onTap: () {},
+                    value: 1,
                     child: Row(children: <Widget>[
                       Icon(Icons.settings),
                       SizedBox(width: 10),
@@ -248,7 +259,7 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
                     ]),
                   ),
                   PopupMenuItem(
-                    onTap: () {},
+                    value: 2,
                     child: Row(children: <Widget>[
                       Icon(Icons.dark_mode_outlined),
                       SizedBox(width: 10),

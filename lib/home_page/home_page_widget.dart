@@ -571,12 +571,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                   .fromSTEB(0.0, 5.0, 0.0, 0.0),
                                               child: FFButtonWidget(
                                                 onPressed: () {
-                                                  print(
-                                                      'buttonBook pressed ...');
-                                                  Navigator.pushNamed(
-                                                    context,
-                                                    'tutorDetailedInfo',
-                                                  );
+                                                  MyApp.To(context, TutorDetailsPageWidget());
                                                 },
                                                 text: 'Book',
                                                 icon: Icon(
