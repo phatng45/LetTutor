@@ -7,6 +7,8 @@ import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_toggle_icon.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_widgets.dart';
+import 'package:let_tutor/index.dart';
+import 'package:let_tutor/main.dart';
 
 import 'home_page_model.dart';
 
@@ -291,8 +293,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                       25.0, 10.0, 25.0, 0.0),
                                               child: FFButtonWidget(
                                                 onPressed: () {
-                                                  print(
-                                                      'buttonJoin pressed ...');
+                                                  MyApp.To(context, MeetingPageWidget());
                                                 },
                                                 text: 'Enter Lesson Room',
                                                 icon: Icon(

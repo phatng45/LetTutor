@@ -24,14 +24,14 @@ class TutorDetailsPageWidget extends StatefulWidget {
 }
 
 class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
-  late TutorDetailsModelPage _model;
+  late TutorDetailsPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => TutorDetailsModelPage());
+    _model = createModel(context, () => TutorDetailsPageModel());
     _model.textController ??= TextEditingController();
   }
 
