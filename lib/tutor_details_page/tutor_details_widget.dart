@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:let_tutor/backend/backend.dart';
 import 'package:let_tutor/components/text_field_widget.dart';
 import 'package:let_tutor/components/tutor_general_info_widget.dart';
 import 'package:let_tutor/components/tutor_specialties_widget.dart';
@@ -43,7 +42,6 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
     super.dispose();
   }
 
-  String data = 'English';
   @override
   Widget build(BuildContext context) {
     return SliverScaffold(
@@ -113,7 +111,7 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                                             .subtitle2,
                                       ),
                                       Expanded(
-                                        child: MyChip(data: data),
+                                        child: MyChip(data: 'English'),
                                       ),
                                     ],
                                   ),
@@ -144,54 +142,7 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                                           alignment:
                                               AlignmentDirectional(0.0, 0.0),
                                           child:
-                                              StreamBuilder<List<TutorsRecord>>(
-                                            stream: queryTutorsRecord(
-                                              singleRecord: true,
-                                            ),
-                                            builder: (context, snapshot) {
-                                              // Customize what your widget looks like when it's loading.
-                                              if (!snapshot.hasData) {
-                                                return Center(
-                                                  child: SizedBox(
-                                                    width: 50.0,
-                                                    height: 50.0,
-                                                    child:
-                                                        CircularProgressIndicator(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryColor,
-                                                    ),
-                                                  ),
-                                                );
-                                              }
-                                              List<TutorsRecord>
-                                                  tutorSpecialtiesTutorsRecordList =
-                                                  snapshot.data!;
-                                              // Return an empty Container when the item does not exist.
-                                              if (snapshot.data!.isEmpty) {
-                                                return Container();
-                                              }
-                                              final tutorSpecialtiesTutorsRecord =
-                                                  tutorSpecialtiesTutorsRecordList
-                                                          .isNotEmpty
-                                                      ? tutorSpecialtiesTutorsRecordList
-                                                          .first
-                                                      : null;
-                                              return wrapWithModel(
-                                                model: _model
-                                                    .tutorSpecialtiesModel,
-                                                updateCallback: () =>
-                                                    setState(() {}),
-                                                child: TutorSpecialtiesWidget(
-                                                  specialties:
-                                                      tutorSpecialtiesTutorsRecord!
-                                                          .specialties!
-                                                          .toList(),
-                                                ),
-                                              );
-                                            },
-                                          ),
+                                          MyChip(data: 'Adu'),
                                         ),
                                       ),
                                     ],

@@ -40,6 +40,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
     super.dispose();
   }
 
+  List<Tutor> listViewTutorsRecordList = <Tutor>[
+    Tutor(),
+  ];
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -373,267 +377,502 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       child: Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
-                        child: StreamBuilder<List<TutorsRecord>>(
-                          stream: queryTutorsRecord(),
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 50.0,
-                                  height: 50.0,
-                                  child: CircularProgressIndicator(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryColor,
+                        child:ListView.builder(
+                          padding: EdgeInsets.zero,
+                          primary: false,
+                          itemCount: listViewTutorsRecordList.length,
+                          itemBuilder: (context, listViewIndex) {
+                            final listViewTutorsRecord =
+                            listViewTutorsRecordList[listViewIndex];
+                            return Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 5.0, 0.0, 5.0),
+                              child: Container(
+                                width:
+                                MediaQuery.of(context).size.width * 1.0,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 4.0,
+                                      color: Color(0x33000000),
+                                      offset: Offset(0.0, 2.0),
+                                    )
+                                  ],
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  border: Border.all(
+                                    color: Color(0x98E4E4E4),
                                   ),
                                 ),
-                              );
-                            }
-                            List<TutorsRecord> listViewTutorsRecordList =
-                                snapshot.data!;
-                            return ListView.builder(
-                              padding: EdgeInsets.zero,
-                              primary: false,
-                              itemCount: listViewTutorsRecordList.length,
-                              itemBuilder: (context, listViewIndex) {
-                                final listViewTutorsRecord =
-                                    listViewTutorsRecordList[listViewIndex];
-                                return Padding(
+                                child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 5.0, 0.0, 5.0),
-                                  child: Container(
-                                    width:
-                                        MediaQuery.of(context).size.width * 1.0,
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          blurRadius: 4.0,
-                                          color: Color(0x33000000),
-                                          offset: Offset(0.0, 2.0),
-                                        )
-                                      ],
-                                      borderRadius: BorderRadius.circular(20.0),
-                                      border: Border.all(
-                                        color: Color(0x98E4E4E4),
-                                      ),
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          10.0, 10.0, 10.0, 10.0),
-                                      child: Column(
+                                      10.0, 10.0, 10.0, 10.0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Row(
                                         mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                         children: [
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        900.0),
-                                                child: Image.network(
-                                                  'https://picsum.photos/seed/437/600',
-                                                  width: 80.0,
-                                                  height: 80.0,
-                                                  fit: BoxFit.cover,
+                                          ClipRRect(
+                                            borderRadius:
+                                            BorderRadius.circular(
+                                                900.0),
+                                            child: Image.network(
+                                              'https://picsum.photos/seed/437/600',
+                                              width: 80.0,
+                                              height: 80.0,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsetsDirectional
+                                                .fromSTEB(
+                                                10.0, 0.0, 0.0, 0.0),
+                                            child: Column(
+                                              mainAxisSize:
+                                              MainAxisSize.max,
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'Adelia Rice',
+                                                  style:
+                                                  FlutterFlowTheme.of(
+                                                      context)
+                                                      .title3,
                                                 ),
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        10.0, 0.0, 0.0, 0.0),
-                                                child: Column(
+                                                Row(
                                                   mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
+                                                  MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .start,
                                                   children: [
-                                                    Text(
-                                                      'Adelia Rice',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .title3,
-                                                    ),
-                                                    Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      0.0,
-                                                                      0.0,
-                                                                      5.0,
-                                                                      0.0),
-                                                          child: Image.network(
-                                                            'https://cdn-icons-png.flaticon.com/512/4060/4060248.png',
-                                                            width: 20.0,
-                                                            height: 20.0,
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          'France',
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyText1,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    RatingBarIndicator(
-                                                      itemBuilder:
-                                                          (context, index) =>
-                                                              Icon(
-                                                        Icons.star_rounded,
-                                                        color:
-                                                            Color(0xFFFFCA77),
+                                                    Padding(
+                                                      padding:
+                                                      EdgeInsetsDirectional
+                                                          .fromSTEB(
+                                                          0.0,
+                                                          0.0,
+                                                          5.0,
+                                                          0.0),
+                                                      child: Image.network(
+                                                        'https://cdn-icons-png.flaticon.com/512/4060/4060248.png',
+                                                        width: 20.0,
+                                                        height: 20.0,
+                                                        fit: BoxFit.cover,
                                                       ),
-                                                      direction:
-                                                          Axis.horizontal,
-                                                      rating: 3.0,
-                                                      unratedColor:
-                                                          Color(0xFF9E9E9E),
-                                                      itemCount: 5,
-                                                      itemSize: 20.0,
+                                                    ),
+                                                    Text(
+                                                      'France',
+                                                      style: FlutterFlowTheme
+                                                          .of(context)
+                                                          .bodyText1,
                                                     ),
                                                   ],
                                                 ),
-                                              ),
-                                              Expanded(
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          1.0, -1.0),
-                                                  child: ToggleIcon(
-                                                    onPressed: () async {
-                                                      final tutorsUpdateData = {
-                                                        'is_favorited':
-                                                            !listViewTutorsRecord
-                                                                .isFavorited!,
-                                                      };
-                                                      await listViewTutorsRecord
-                                                          .reference
-                                                          .update(
-                                                              tutorsUpdateData);
-                                                    },
-                                                    value: listViewTutorsRecord
-                                                        .isFavorited!,
-                                                    onIcon: Icon(
-                                                      Icons.favorite_border,
-                                                      color: Color(0xFFFF5686),
-                                                      size: 22.0,
-                                                    ),
-                                                    offIcon: Icon(
-                                                      Icons.favorite_rounded,
-                                                      color: Color(0xFFFF5686),
-                                                      size: 22.0,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Align(
-                                            alignment:
-                                                AlignmentDirectional(-1.0, 0.0),
-                                            child: TutorSpecialtiesWidget(
-                                              key: Key(
-                                                  'Key70e_${listViewIndex}_of_${listViewTutorsRecordList.length}'),
-                                              specialties: listViewTutorsRecord
-                                                  .specialties!
-                                                  .toList(),
-                                            ),
-                                          ),
-                                          Align(
-                                            alignment:
-                                                AlignmentDirectional(-1.0, 0.0),
-                                            child: Text(
-                                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText1,
-                                            ),
-                                          ),
-                                          Align(
-                                            alignment:
-                                                AlignmentDirectional(1.0, 0.0),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 5.0, 0.0, 0.0),
-                                              child: FFButtonWidget(
-                                                onPressed: () {
-                                                  MyApp.To(context, TutorDetailsPageWidget());
-                                                },
-                                                text: 'Book',
-                                                icon: Icon(
-                                                  Icons.person_add_rounded,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryColor,
-                                                  size: 15.0,
-                                                ),
-                                                options: FFButtonOptions(
-                                                  width: 130.0,
-                                                  height: 40.0,
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 0.0, 0.0, 0.0),
-                                                  iconPadding:
-                                                      EdgeInsetsDirectional
-                                                          .fromSTEB(0.0, 0.0,
-                                                              0.0, 0.0),
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryBtnText,
-                                                  textStyle: FlutterFlowTheme
-                                                          .of(context)
-                                                      .subtitle2
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .subtitle2Family,
+                                                RatingBarIndicator(
+                                                  itemBuilder:
+                                                      (context, index) =>
+                                                      Icon(
+                                                        Icons.star_rounded,
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryColor,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .subtitle2Family),
+                                                        Color(0xFFFFCA77),
                                                       ),
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryColor,
-                                                    width: 2.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0),
+                                                  direction:
+                                                  Axis.horizontal,
+                                                  rating: 3.0,
+                                                  unratedColor:
+                                                  Color(0xFF9E9E9E),
+                                                  itemCount: 5,
+                                                  itemSize: 20.0,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: Align(
+                                              alignment:
+                                              AlignmentDirectional(
+                                                  1.0, -1.0),
+                                              child: ToggleIcon(
+                                                onPressed: () {
+                                                  setState(() {
+                                                    listViewTutorsRecord.isFavorited = !listViewTutorsRecord.isFavorited;
+                                                  });
+                                                },
+                                                value: listViewTutorsRecord
+                                                    .isFavorited!,
+                                                onIcon: Icon(
+                                                  Icons.favorite_border,
+                                                  color: Color(0xFFFF5686),
+                                                  size: 22.0,
+                                                ),
+                                                offIcon: Icon(
+                                                  Icons.favorite_rounded,
+                                                  color: Color(0xFFFF5686),
+                                                  size: 22.0,
                                                 ),
                                               ),
                                             ),
                                           ),
                                         ],
                                       ),
-                                    ),
+                                      Align(
+                                        alignment:
+                                        AlignmentDirectional(-1.0, 0.0),
+                                        child: TutorSpecialtiesWidget(
+                                          key: Key(
+                                              'Key70e_${listViewIndex}_of_${listViewTutorsRecordList.length}'),
+                                          specialties: listViewTutorsRecord
+                                              .specialties!
+                                              .toList(),
+                                        ),
+                                      ),
+                                      Align(
+                                        alignment:
+                                        AlignmentDirectional(-1.0, 0.0),
+                                        child: Text(
+                                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ',
+                                          style:
+                                          FlutterFlowTheme.of(context)
+                                              .bodyText1,
+                                        ),
+                                      ),
+                                      Align(
+                                        alignment:
+                                        AlignmentDirectional(1.0, 0.0),
+                                        child: Padding(
+                                          padding: EdgeInsetsDirectional
+                                              .fromSTEB(0.0, 5.0, 0.0, 0.0),
+                                          child: FFButtonWidget(
+                                            onPressed: () {
+                                              MyApp.To(context, TutorDetailsPageWidget());
+                                            },
+                                            text: 'Book',
+                                            icon: Icon(
+                                              Icons.person_add_rounded,
+                                              color: FlutterFlowTheme.of(
+                                                  context)
+                                                  .primaryColor,
+                                              size: 15.0,
+                                            ),
+                                            options: FFButtonOptions(
+                                              width: 130.0,
+                                              height: 40.0,
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
+                                              iconPadding:
+                                              EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0,
+                                                  0.0, 0.0),
+                                              color: FlutterFlowTheme.of(
+                                                  context)
+                                                  .primaryBtnText,
+                                              textStyle: FlutterFlowTheme
+                                                  .of(context)
+                                                  .subtitle2
+                                                  .override(
+                                                fontFamily:
+                                                FlutterFlowTheme.of(
+                                                    context)
+                                                    .subtitle2Family,
+                                                color:
+                                                FlutterFlowTheme.of(
+                                                    context)
+                                                    .primaryColor,
+                                                useGoogleFonts: GoogleFonts
+                                                    .asMap()
+                                                    .containsKey(
+                                                    FlutterFlowTheme.of(
+                                                        context)
+                                                        .subtitle2Family),
+                                              ),
+                                              borderSide: BorderSide(
+                                                color: FlutterFlowTheme.of(
+                                                    context)
+                                                    .primaryColor,
+                                                width: 2.0,
+                                              ),
+                                              borderRadius:
+                                              BorderRadius.circular(
+                                                  20.0),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                );
-                              },
+                                ),
+                              ),
                             );
                           },
                         ),
+                        // StreamBuilder<List<TutorsRecord>>(
+                        //   stream: queryTutorsRecord(),
+                        //   builder: (context, snapshot) {
+                        //     // Customize what your widget looks like when it's loading.
+                        //     if (!snapshot.hasData) {
+                        //       return Center(
+                        //         child: SizedBox(
+                        //           width: 50.0,
+                        //           height: 50.0,
+                        //           child: CircularProgressIndicator(
+                        //             color: FlutterFlowTheme.of(context)
+                        //                 .primaryColor,
+                        //           ),
+                        //         ),
+                        //       );
+                        //     }
+                        //     List<TutorsRecord> listViewTutorsRecordList =
+                        //         snapshot.data!;
+                        //     return ListView.builder(
+                        //       padding: EdgeInsets.zero,
+                        //       primary: false,
+                        //       itemCount: listViewTutorsRecordList.length,
+                        //       itemBuilder: (context, listViewIndex) {
+                        //         final listViewTutorsRecord =
+                        //             listViewTutorsRecordList[listViewIndex];
+                        //         return Padding(
+                        //           padding: EdgeInsetsDirectional.fromSTEB(
+                        //               0.0, 5.0, 0.0, 5.0),
+                        //           child: Container(
+                        //             width:
+                        //                 MediaQuery.of(context).size.width * 1.0,
+                        //             decoration: BoxDecoration(
+                        //               color: FlutterFlowTheme.of(context)
+                        //                   .secondaryBackground,
+                        //               boxShadow: [
+                        //                 BoxShadow(
+                        //                   blurRadius: 4.0,
+                        //                   color: Color(0x33000000),
+                        //                   offset: Offset(0.0, 2.0),
+                        //                 )
+                        //               ],
+                        //               borderRadius: BorderRadius.circular(20.0),
+                        //               border: Border.all(
+                        //                 color: Color(0x98E4E4E4),
+                        //               ),
+                        //             ),
+                        //             child: Padding(
+                        //               padding: EdgeInsetsDirectional.fromSTEB(
+                        //                   10.0, 10.0, 10.0, 10.0),
+                        //               child: Column(
+                        //                 mainAxisSize: MainAxisSize.max,
+                        //                 children: [
+                        //                   Row(
+                        //                     mainAxisSize: MainAxisSize.max,
+                        //                     crossAxisAlignment:
+                        //                         CrossAxisAlignment.start,
+                        //                     children: [
+                        //                       ClipRRect(
+                        //                         borderRadius:
+                        //                             BorderRadius.circular(
+                        //                                 900.0),
+                        //                         child: Image.network(
+                        //                           'https://picsum.photos/seed/437/600',
+                        //                           width: 80.0,
+                        //                           height: 80.0,
+                        //                           fit: BoxFit.cover,
+                        //                         ),
+                        //                       ),
+                        //                       Padding(
+                        //                         padding: EdgeInsetsDirectional
+                        //                             .fromSTEB(
+                        //                                 10.0, 0.0, 0.0, 0.0),
+                        //                         child: Column(
+                        //                           mainAxisSize:
+                        //                               MainAxisSize.max,
+                        //                           crossAxisAlignment:
+                        //                               CrossAxisAlignment.start,
+                        //                           children: [
+                        //                             Text(
+                        //                               'Adelia Rice',
+                        //                               style:
+                        //                                   FlutterFlowTheme.of(
+                        //                                           context)
+                        //                                       .title3,
+                        //                             ),
+                        //                             Row(
+                        //                               mainAxisSize:
+                        //                                   MainAxisSize.max,
+                        //                               mainAxisAlignment:
+                        //                                   MainAxisAlignment
+                        //                                       .start,
+                        //                               children: [
+                        //                                 Padding(
+                        //                                   padding:
+                        //                                       EdgeInsetsDirectional
+                        //                                           .fromSTEB(
+                        //                                               0.0,
+                        //                                               0.0,
+                        //                                               5.0,
+                        //                                               0.0),
+                        //                                   child: Image.network(
+                        //                                     'https://cdn-icons-png.flaticon.com/512/4060/4060248.png',
+                        //                                     width: 20.0,
+                        //                                     height: 20.0,
+                        //                                     fit: BoxFit.cover,
+                        //                                   ),
+                        //                                 ),
+                        //                                 Text(
+                        //                                   'France',
+                        //                                   style: FlutterFlowTheme
+                        //                                           .of(context)
+                        //                                       .bodyText1,
+                        //                                 ),
+                        //                               ],
+                        //                             ),
+                        //                             RatingBarIndicator(
+                        //                               itemBuilder:
+                        //                                   (context, index) =>
+                        //                                       Icon(
+                        //                                 Icons.star_rounded,
+                        //                                 color:
+                        //                                     Color(0xFFFFCA77),
+                        //                               ),
+                        //                               direction:
+                        //                                   Axis.horizontal,
+                        //                               rating: 3.0,
+                        //                               unratedColor:
+                        //                                   Color(0xFF9E9E9E),
+                        //                               itemCount: 5,
+                        //                               itemSize: 20.0,
+                        //                             ),
+                        //                           ],
+                        //                         ),
+                        //                       ),
+                        //                       Expanded(
+                        //                         child: Align(
+                        //                           alignment:
+                        //                               AlignmentDirectional(
+                        //                                   1.0, -1.0),
+                        //                           child: ToggleIcon(
+                        //                             onPressed: () async {
+                        //                               final tutorsUpdateData = {
+                        //                                 'is_favorited':
+                        //                                     !listViewTutorsRecord
+                        //                                         .isFavorited!,
+                        //                               };
+                        //                               await listViewTutorsRecord
+                        //                                   .reference
+                        //                                   .update(
+                        //                                       tutorsUpdateData);
+                        //                             },
+                        //                             value: listViewTutorsRecord
+                        //                                 .isFavorited!,
+                        //                             onIcon: Icon(
+                        //                               Icons.favorite_border,
+                        //                               color: Color(0xFFFF5686),
+                        //                               size: 22.0,
+                        //                             ),
+                        //                             offIcon: Icon(
+                        //                               Icons.favorite_rounded,
+                        //                               color: Color(0xFFFF5686),
+                        //                               size: 22.0,
+                        //                             ),
+                        //                           ),
+                        //                         ),
+                        //                       ),
+                        //                     ],
+                        //                   ),
+                        //                   Align(
+                        //                     alignment:
+                        //                         AlignmentDirectional(-1.0, 0.0),
+                        //                     child: TutorSpecialtiesWidget(
+                        //                       key: Key(
+                        //                           'Key70e_${listViewIndex}_of_${listViewTutorsRecordList.length}'),
+                        //                       specialties: listViewTutorsRecord
+                        //                           .specialties!
+                        //                           .toList(),
+                        //                     ),
+                        //                   ),
+                        //                   Align(
+                        //                     alignment:
+                        //                         AlignmentDirectional(-1.0, 0.0),
+                        //                     child: Text(
+                        //                       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ',
+                        //                       style:
+                        //                           FlutterFlowTheme.of(context)
+                        //                               .bodyText1,
+                        //                     ),
+                        //                   ),
+                        //                   Align(
+                        //                     alignment:
+                        //                         AlignmentDirectional(1.0, 0.0),
+                        //                     child: Padding(
+                        //                       padding: EdgeInsetsDirectional
+                        //                           .fromSTEB(0.0, 5.0, 0.0, 0.0),
+                        //                       child: FFButtonWidget(
+                        //                         onPressed: () {
+                        //                           MyApp.To(context, TutorDetailsPageWidget());
+                        //                         },
+                        //                         text: 'Book',
+                        //                         icon: Icon(
+                        //                           Icons.person_add_rounded,
+                        //                           color: FlutterFlowTheme.of(
+                        //                                   context)
+                        //                               .primaryColor,
+                        //                           size: 15.0,
+                        //                         ),
+                        //                         options: FFButtonOptions(
+                        //                           width: 130.0,
+                        //                           height: 40.0,
+                        //                           padding: EdgeInsetsDirectional
+                        //                               .fromSTEB(
+                        //                                   0.0, 0.0, 0.0, 0.0),
+                        //                           iconPadding:
+                        //                               EdgeInsetsDirectional
+                        //                                   .fromSTEB(0.0, 0.0,
+                        //                                       0.0, 0.0),
+                        //                           color: FlutterFlowTheme.of(
+                        //                                   context)
+                        //                               .primaryBtnText,
+                        //                           textStyle: FlutterFlowTheme
+                        //                                   .of(context)
+                        //                               .subtitle2
+                        //                               .override(
+                        //                                 fontFamily:
+                        //                                     FlutterFlowTheme.of(
+                        //                                             context)
+                        //                                         .subtitle2Family,
+                        //                                 color:
+                        //                                     FlutterFlowTheme.of(
+                        //                                             context)
+                        //                                         .primaryColor,
+                        //                                 useGoogleFonts: GoogleFonts
+                        //                                         .asMap()
+                        //                                     .containsKey(
+                        //                                         FlutterFlowTheme.of(
+                        //                                                 context)
+                        //                                             .subtitle2Family),
+                        //                               ),
+                        //                           borderSide: BorderSide(
+                        //                             color: FlutterFlowTheme.of(
+                        //                                     context)
+                        //                                 .primaryColor,
+                        //                             width: 2.0,
+                        //                           ),
+                        //                           borderRadius:
+                        //                               BorderRadius.circular(
+                        //                                   20.0),
+                        //                         ),
+                        //                       ),
+                        //                     ),
+                        //                   ),
+                        //                 ],
+                        //               ),
+                        //             ),
+                        //           ),
+                        //         );
+                        //       },
+                        //     );
+                        //   },
+                        // ),
                       ),
                     ),
                   ],
@@ -645,4 +884,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       ),
     );
   }
+}
+
+class Tutor {
+  late bool isFavorited;
+  late bool reference;
+  late List<String> specialties;
 }
