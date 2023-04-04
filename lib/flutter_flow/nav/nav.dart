@@ -6,11 +6,8 @@ import 'package:page_transition/page_transition.dart';
 
 import '../../index.dart';
 import '../../main.dart';
-import 'serialization_util.dart';
 
 export 'package:go_router/go_router.dart';
-
-export 'serialization_util.dart';
 
 const kTransitionInfoKey = '__transition_info__';
 
@@ -133,27 +130,6 @@ class FFParameters {
           },
         ),
       ).onError((_, __) => [false]).then((v) => v.every((e) => e));
-
-  dynamic getParam<T>(
-    String paramName,
-    ParamType type, [
-    bool isList = false,
-    List<String>? collectionNamePath,
-  ]) {
-    if (futureParamValues.containsKey(paramName)) {
-      return futureParamValues[paramName];
-    }
-    if (!state.allParams.containsKey(paramName)) {
-      return null;
-    }
-    final param = state.allParams[paramName];
-    // Got parameter from `extras`, so just directly return it.
-    if (param is! String) {
-      return param;
-    }
-    // Return serialized value.
-    return deserializeParam<T>(param, type, isList, collectionNamePath);
-  }
 }
 
 class FFRoute {
