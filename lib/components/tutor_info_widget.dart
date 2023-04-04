@@ -198,6 +198,8 @@ class _TutorInfoWidgetState extends State<TutorInfoWidget> {
                   verticalDirection: VerticalDirection.down,
                   clipBehavior: Clip.none,
                   children: [
+
+
                     FlutterFlowChoiceChips(
                       initiallySelected: widget.chipLabels,
                       options: widget.chipLabels!

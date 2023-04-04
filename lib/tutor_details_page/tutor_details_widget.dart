@@ -7,12 +7,12 @@ import 'package:let_tutor/components/tutor_general_info_widget.dart';
 import 'package:let_tutor/components/tutor_specialties_widget.dart';
 import 'package:let_tutor/course_details_page/course_details_page_widget.dart';
 import 'package:let_tutor/courses_page/courses_page_widget.dart';
-import 'package:let_tutor/flutter_flow/flutter_flow_choice_chips.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_video_player.dart';
 import 'package:let_tutor/main.dart';
 
+import '../components/my_chip.dart';
 import 'tutor_details_model.dart';
 
 export 'tutor_details_model.dart';
@@ -43,6 +43,7 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
     super.dispose();
   }
 
+  String data = 'English';
   @override
   Widget build(BuildContext context) {
     return SliverScaffold(
@@ -112,67 +113,7 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                                             .subtitle2,
                                       ),
                                       Expanded(
-                                        child: Align(
-                                          alignment:
-                                              AlignmentDirectional(0.0, 0.0),
-                                          child: FlutterFlowChoiceChips(
-                                            options: [ChipData('English')],
-                                            onChanged: (val) => setState(() =>
-                                                _model.choiceChipsValue =
-                                                    val?.first),
-                                            selectedChipStyle: ChipStyle(
-                                              backgroundColor:
-                                                  Color(0xFFBCE8FF),
-                                              textStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1Family,
-                                                        color:
-                                                            Color(0xFF2767FF),
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText1Family),
-                                                      ),
-                                              iconColor: Colors.white,
-                                              iconSize: 18.0,
-                                              elevation: 0.0,
-                                            ),
-                                            unselectedChipStyle: ChipStyle(
-                                              backgroundColor:
-                                                  Color(0xFFE1E1E1),
-                                              textStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText2
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText2Family,
-                                                        color:
-                                                            Color(0xFF8C8C8C),
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText2Family),
-                                                      ),
-                                              iconColor: Color(0xFFE3E7ED),
-                                              iconSize: 18.0,
-                                              elevation: 0.0,
-                                            ),
-                                            chipSpacing: 20.0,
-                                            multiselect: false,
-                                            alignment: WrapAlignment.start,
-                                          ),
-                                        ),
+                                        child: MyChip(data: data),
                                       ),
                                     ],
                                   ),
@@ -450,7 +391,7 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
 }
 
 class CourseWidget extends StatelessWidget {
-  const CourseWidget({Key? key,  this.title =''}) : super(key: key);
+  const CourseWidget({Key? key, this.title = ''}) : super(key: key);
 
   final String title;
 
