@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
@@ -20,13 +21,22 @@ void main() async {
 class MyApp extends StatefulWidget {
   // This widget is the root of your application.
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<MyApp> createState() {
+    _getSharedPrefs().then((pref) => prefs = pref);
+    return _MyAppState();
+  }
 
   static _MyAppState of(BuildContext context) =>
       context.findAncestorStateOfType<_MyAppState>()!;
 
   static void To(BuildContext context, Widget page) {
     Navigator.push(context, MaterialPageRoute(builder: (context) => page));
+  }
+
+  static late SharedPreferences prefs;
+
+  Future<SharedPreferences> _getSharedPrefs() async {
+    return SharedPreferences.getInstance();
   }
 }
 
