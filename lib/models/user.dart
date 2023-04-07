@@ -22,25 +22,25 @@ class User {
 
   User(
       {this.id,
-        this.email,
-        this.name,
-        this.avatar,
-        this.country,
-        this.phone,
-        this.roles,
-        this.language,
-        this.birthday,
-        this.isActivated,
-        this.walletInfo,
-        this.courses,
-        this.requireNote,
-        this.level,
-        this.learnTopics,
-        this.testPreparations,
-        this.isPhoneActivated,
-        this.timezone,
-        this.studySchedule,
-        this.canSendMessage});
+      this.email,
+      this.name,
+      this.avatar,
+      this.country,
+      this.phone,
+      this.roles,
+      this.language,
+      this.birthday,
+      this.isActivated,
+      this.walletInfo,
+      this.courses,
+      this.requireNote,
+      this.level,
+      this.learnTopics,
+      this.testPreparations,
+      this.isPhoneActivated,
+      this.timezone,
+      this.studySchedule,
+      this.canSendMessage});
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -106,12 +106,12 @@ class WalletInfo {
 
   WalletInfo(
       {this.id,
-        this.userId,
-        this.amount,
-        this.isBlocked,
-        this.createdAt,
-        this.updatedAt,
-        this.bonus});
+      this.userId,
+      this.amount,
+      this.isBlocked,
+      this.createdAt,
+      this.updatedAt,
+      this.bonus});
 
   WalletInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
