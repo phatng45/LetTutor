@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,6 +12,7 @@ import 'package:let_tutor/flutter_flow/flutter_flow_widgets.dart';
 import 'package:let_tutor/index.dart';
 import 'package:let_tutor/main.dart';
 
+import '../models/user.dart';
 import 'login_page_model.dart';
 
 export 'login_page_model.dart';
@@ -231,7 +233,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                   alignment: AlignmentDirectional(0.0, 0.0),
                                   child: FFButtonWidget(
                                     onPressed: () {
-                                      MyApp.To(context, NavBarPage());
+                                      _login(widget.);
                                     },
                                     text: 'Login',
                                     options: FFButtonOptions(
@@ -366,5 +368,18 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
         ),
       ),
     );
+  }
+
+  void _login(String email, String password) async {
+    final url = "https://sandbox.api.lettutor.com/auth/login";
+    final data = {"email": email, "password": password};
+    final response = await Dio().post(
+      url,
+      data: data,
+    );
+    if (response.statusCode == 200) {
+      User user = User.fromJson(response.data);
+      MyApp.To(context, NavBarPage());
+    }
   }
 }
