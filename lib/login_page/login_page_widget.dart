@@ -1,7 +1,7 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:let_tutor/api/api_service.dart';
 import 'package:let_tutor/components/best_divider_widget.dart';
 import 'package:let_tutor/components/password_field_widget.dart';
 import 'package:let_tutor/components/text_field_widget.dart';
@@ -12,7 +12,6 @@ import 'package:let_tutor/flutter_flow/flutter_flow_widgets.dart';
 import 'package:let_tutor/index.dart';
 import 'package:let_tutor/main.dart';
 
-import '../models/user.dart';
 import 'login_page_model.dart';
 
 export 'login_page_model.dart';
@@ -55,17 +54,17 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
             width: MediaQuery.of(context).size.width * 1.0,
             height: MediaQuery.of(context).size.height * 1.0,
             decoration: BoxDecoration(
-              // color: Colors.white
-              // gradient: LinearGradient(
-              //   colors: [
-              //     FlutterFlowTheme.of(context).primaryBackground,
-              //     FlutterFlowTheme.of(context).secondaryBackground
-              //   ],
-              //   stops: [0.0, 0.5],
-              //   begin: AlignmentDirectional(0.0, -1.0),
-              //   end: AlignmentDirectional(0, 1.0),
-              // ),
-            ),
+                // color: Colors.white
+                // gradient: LinearGradient(
+                //   colors: [
+                //     FlutterFlowTheme.of(context).primaryBackground,
+                //     FlutterFlowTheme.of(context).secondaryBackground
+                //   ],
+                //   stops: [0.0, 0.5],
+                //   begin: AlignmentDirectional(0.0, -1.0),
+                //   end: AlignmentDirectional(0, 1.0),
+                // ),
+                ),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -372,17 +371,14 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
   }
 
   void _login(String email, String password) async {
-    final url = "https://sandbox.api.lettutor.com/auth/login";
-    final data = {"email": email, "password": password};
-    final response = await Dio().post(
-      url,
-      data: data,
-    );
-    if (response.statusCode == 200) {
-      User user = User.fromJson(response.data["user"]);
-      String accessToken = response.data["tokens"]["access"]["token"];
-      MyApp.prefs.setString("ACCESS_TOKEN", accessToken);
-      MyApp.To(context, NavBarPage());
+    var user = (await ApiService().login(email, password));
+
+    if (user != null) {
+      MyApp.To(
+          context,
+          NavBarPage(
+            user: user,
+          ));
     }
   }
 }

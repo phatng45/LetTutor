@@ -9,6 +9,7 @@ import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
 import 'flutter_flow/nav/nav.dart';
 import 'index.dart';
+import 'models/user.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -85,10 +86,11 @@ class _MyAppState extends State<MyApp> {
 }
 
 class NavBarPage extends StatefulWidget {
-  NavBarPage({Key? key, this.initialPage, this.page}) : super(key: key);
+  NavBarPage({Key? key, this.initialPage, this.page, required this.user}) : super(key: key);
 
   final String? initialPage;
   final Widget? page;
+  final User user;
 
   @override
   _NavBarPageState createState() => _NavBarPageState();

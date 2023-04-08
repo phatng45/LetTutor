@@ -46,34 +46,34 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'loginPage',
               builder: (context, params) => LoginPageWidget(),
             ),
-            FFRoute(
-              name: 'SchedulePage',
-              path: 'schedulePage',
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'SchedulePage')
-                  : SchedulePageWidget(),
-            ),
-            FFRoute(
-              name: 'ProfilePage',
-              path: 'profilePage',
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'ProfilePage')
-                  : ProfilePageWidget(),
-            ),
-            FFRoute(
-              name: 'HomePage',
-              path: 'homePage',
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'HomePage')
-                  : HomePageWidget(),
-            ),
-            FFRoute(
-              name: 'TutorDetailedInfo',
-              path: 'tutorDetailedInfo',
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'TutorDetailedInfo')
-                  : TutorDetailsPageWidget(),
-            )
+            // FFRoute(
+            //   name: 'SchedulePage',
+            //   path: 'schedulePage',
+            //   builder: (context, params) => params.isEmpty
+            //       ? NavBarPage(initialPage: 'SchedulePage')
+            //       : SchedulePageWidget(),
+            // ),
+            // FFRoute(
+            //   name: 'ProfilePage',
+            //   path: 'profilePage',
+            //   builder: (context, params) => params.isEmpty
+            //       ? NavBarPage(initialPage: 'ProfilePage')
+            //       : ProfilePageWidget(),
+            // ),
+            // FFRoute(
+            //   name: 'HomePage',
+            //   path: 'homePage',
+            //   builder: (context, params) => params.isEmpty
+            //       ? NavBarPage(initialPage: 'HomePage')
+            //       : HomePageWidget(),
+            // ),
+            // FFRoute(
+            //   name: 'TutorDetailedInfo',
+            //   path: 'tutorDetailedInfo',
+            //   builder: (context, params) => params.isEmpty
+            //       ? NavBarPage(initialPage: 'TutorDetailedInfo')
+            //       : TutorDetailsPageWidget(),)
+
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),
       ],
