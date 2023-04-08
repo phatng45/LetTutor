@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:let_tutor/search_page/search_page_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'flutter_flow/flutter_flow_theme.dart';
@@ -153,15 +154,19 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+
     final tabs = {
-      'HomePage': HomePageWidget(),
+      'HomePage': HomePageWidget(
+        onSearchPressed: () => _tabController.animateTo(4),
+      ),
       'SchedulePage': SchedulePageWidget(),
       'CoursesPage': CoursesPageWidget(),
       'ProfilePage': ProfilePageWidget(),
-      'TutorDetailsPage': TutorDetailsPageWidget(),
-      'PdfPage': PdfPageWidget(),
-      'HistoryPage': HistoryPageWidget(),
-      'CourseDetailsPage': CourseDetailsPageWidget(),
+      'SearchPage': SearchPage(),
+      // 'TutorDetailsPage': TutorDetailsPageWidget(),
+      // 'PdfPage': PdfPageWidget(),
+      // 'HistoryPage': HistoryPageWidget(),
+      // 'CourseDetailsPage': CourseDetailsPageWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
     return Scaffold(
@@ -222,85 +227,6 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
                       'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/menu/default/48px.svg',
                   isSelected: _tabController.index == 3,
                   name: 'Menu'),
-              // IconButton(
-              //   icon: SvgPicture.network(
-              //     'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/person/wght500/48px.svg',
-              //     colorFilter:
-              //     ColorFilter.mode(Colors.indigo, BlendMode.srcIn),
-              //     width: 26,
-              //   ),
-              //   onPressed: () => _tabController.animateTo(3),
-              // ),
-
-              // PopupMenuButton(
-              //   icon: SvgPicture.network(
-              //     'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/more_vert/wght500/48px.svg',
-              //     colorFilter: ColorFilter.mode(Colors.indigo, BlendMode.srcIn),
-              //     width: 26,
-              //   ),
-              //   constraints: BoxConstraints(
-              //     minWidth: 150,
-              //     maxWidth: 150,
-              //   ),
-              //   onSelected: (result) {
-              //     switch (result) {
-              //       case 0:
-              //         MyApp.To(context, LoginPageWidget());
-              //         break;
-              //       case 1:
-              //         break;
-              //       case 2:
-              //         break;
-              //     }
-              //   },
-              //   itemBuilder: (BuildContext context) => <PopupMenuEntry>[
-              //     PopupMenuItem(
-              //       value: 0,
-              //       child: Row(children: <Widget>[
-              //         Icon(
-              //           Icons.logout_outlined,
-              //           color: Colors.red,
-              //         ),
-              //         SizedBox(width: 10),
-              //         Text('Logout',
-              //             style: FlutterFlowTheme.of(context)
-              //                 .bodyText1
-              //                 .override(
-              //                     fontFamily: FlutterFlowTheme.of(context)
-              //                         .bodyText1Family,
-              //                     color: Colors.red))
-              //       ]),
-              //     ),
-              //     PopupMenuItem(
-              //       value: 1,
-              //       child: Row(children: <Widget>[
-              //         Icon(Icons.settings),
-              //         SizedBox(width: 10),
-              //         Text('Settings',
-              //             style: FlutterFlowTheme.of(context)
-              //                 .bodyText1
-              //                 .override(
-              //                     fontFamily: FlutterFlowTheme.of(context)
-              //                         .bodyText1Family,
-              //                     color: Colors.indigo))
-              //       ]),
-              //     ),
-              //     PopupMenuItem(
-              //       value: 2,
-              //       child: Row(children: <Widget>[
-              //         Icon(Icons.dark_mode_outlined),
-              //         SizedBox(width: 10),
-              //         Text('Dark mode',
-              //             style: FlutterFlowTheme.of(context)
-              //                 .bodyText1
-              //                 .override(
-              //                     fontFamily: FlutterFlowTheme.of(context)
-              //                         .bodyText1Family,
-              //                     color: Colors.indigo))
-              //       ]),
-              //     ),
-              //   ],
-              // )
             ],
           ),
         ),

@@ -19,7 +19,10 @@ import 'home_page_model.dart';
 export 'home_page_model.dart';
 
 class HomePageWidget extends StatefulWidget {
-  const HomePageWidget({Key? key}) : super(key: key);
+  final VoidCallback? onSearchPressed;
+
+  const HomePageWidget({Key? key, this.onSearchPressed}) : super(key: key);
+
 
   @override
   _HomePageWidgetState createState() => _HomePageWidgetState();
@@ -74,7 +77,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   ),
                   iconSize: 30,
                   style: IconButton.styleFrom(backgroundColor: Colors.black12),
-                  onPressed: () {},
+                  onPressed: widget.onSearchPressed,
                 ),
               ),
               Padding(
@@ -82,59 +85,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    // Container(
-                    //   decoration: BoxDecoration(
-                    //     borderRadius: BorderRadius.circular(0.0),
-                    //   ),
-                    //   child: TextFormField(
-                    //     controller: _model.textController,
-                    //     autofocus: false,
-                    //     obscureText: false,
-                    //     decoration: InputDecoration(
-                    //       isDense: true,
-                    //       hintText: 'Find a tutor...',
-                    //       hintStyle: FlutterFlowTheme.of(context).bodyText2,
-                    //       enabledBorder: OutlineInputBorder(
-                    //         borderSide: BorderSide(
-                    //           color: Color(0x00000000),
-                    //           width: 1.0,
-                    //         ),
-                    //         borderRadius: BorderRadius.circular(20.0),
-                    //       ),
-                    //       focusedBorder: OutlineInputBorder(
-                    //         borderSide: BorderSide(
-                    //           color: Color(0x00000000),
-                    //           width: 1.0,
-                    //         ),
-                    //         borderRadius: BorderRadius.circular(20.0),
-                    //       ),
-                    //       errorBorder: OutlineInputBorder(
-                    //         borderSide: BorderSide(
-                    //           color: Color(0x00000000),
-                    //           width: 1.0,
-                    //         ),
-                    //         borderRadius: BorderRadius.circular(20.0),
-                    //       ),
-                    //       focusedErrorBorder: OutlineInputBorder(
-                    //         borderSide: BorderSide(
-                    //           color: Color(0x00000000),
-                    //           width: 1.0,
-                    //         ),
-                    //         borderRadius: BorderRadius.circular(20.0),
-                    //       ),
-                    //       filled: true,
-                    //       fillColor: Color(0xFFE4E4E4),
-                    //       contentPadding:
-                    //           EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                    //       prefixIcon: Icon(
-                    //         Icons.search_rounded,
-                    //       ),
-                    //     ),
-                    //     style: FlutterFlowTheme.of(context).bodyText1,
-                    //     validator:
-                    //         _model.textControllerValidator.asValidator(context),
-                    //   ),
-                    // ),
                     _buildUpcomingLesson(context),
                     Align(
                       alignment: AlignmentDirectional(-1.0, 0.0),
