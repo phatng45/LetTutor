@@ -4,7 +4,9 @@ import 'package:let_tutor/schedule_page/schedule_page_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 
 class SearchPage extends StatefulWidget {
-  SearchPage({Key? key}) : super(key: key);
+  SearchPage({Key? key, this.onBackPressed}) : super(key: key);
+
+  VoidCallback? onBackPressed;
 
   @override
   State<SearchPage> createState() => _SearchPageState();
@@ -44,7 +46,16 @@ class _SearchPageState extends State<SearchPage> {
           children: <Widget>[
             Column(
               children: <Widget>[
-                TabHeader(title: 'Find a Tutor'),
+                TabHeader(
+                  title: 'Find a Tutor',
+                  start: IconButton(
+                      onPressed: widget.onBackPressed,
+                      icon: Icon(
+                        Icons.chevron_left,
+                        size: 30,
+                        color: Colors.indigo,
+                      )),
+                ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
                   child: Column(
@@ -192,7 +203,11 @@ class _SearchPageState extends State<SearchPage> {
                           );
                         }).toList(),
                       ),
-                      Divider(indent: 10, endIndent: 10,color: Colors.black12,),
+                      Divider(
+                        indent: 10,
+                        endIndent: 10,
+                        color: Colors.black12,
+                      ),
                     ],
                   ),
                 ),

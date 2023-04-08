@@ -23,7 +23,6 @@ class HomePageWidget extends StatefulWidget {
 
   const HomePageWidget({Key? key, this.onSearchPressed}) : super(key: key);
 
-
   @override
   _HomePageWidgetState createState() => _HomePageWidgetState();
 }
@@ -271,7 +270,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
                   child: FFButtonWidget(
                     onPressed: () {
-                      MyApp.To(context, TutorDetailsPageWidget());
+                      MyApp.To(context, TutorDetailsPageWidget(tutor));
                     },
                     text: 'Book',
                     icon: Icon(

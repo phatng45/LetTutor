@@ -3,13 +3,13 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:let_tutor/components/text_field_widget.dart';
 import 'package:let_tutor/components/tutor_general_info_widget.dart';
-import 'package:let_tutor/components/tutor_specialties_widget.dart';
 import 'package:let_tutor/course_details_page/course_details_page_widget.dart';
 import 'package:let_tutor/courses_page/courses_page_widget.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_video_player.dart';
 import 'package:let_tutor/main.dart';
+import 'package:let_tutor/models/tutor.dart';
 
 import '../components/my_chip.dart';
 import 'tutor_details_model.dart';
@@ -17,8 +17,9 @@ import 'tutor_details_model.dart';
 export 'tutor_details_model.dart';
 
 class TutorDetailsPageWidget extends StatefulWidget {
-  const TutorDetailsPageWidget({Key? key}) : super(key: key);
+  const TutorDetailsPageWidget(this.tutor, {Key? key}) : super(key: key);
 
+  final Tutor tutor;
   @override
   _TutorDetailsPageWidgetState createState() => _TutorDetailsPageWidgetState();
 }

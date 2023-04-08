@@ -92,24 +92,31 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
 }
 
 class TabHeader extends StatelessWidget {
-  const TabHeader({Key? key, required this.title, this.end}) : super(key: key);
+  const TabHeader({Key? key, required this.title, this.end, this.start})
+      : super(key: key);
 
   final String title;
   final Widget? end;
+  final Widget? start;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(30, 10, 30, 0),
+      padding: EdgeInsets.fromLTRB(start == null ? 30 : 0, 10, 30, 0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(title,
-              style: FlutterFlowTheme.of(context).title1.override(
-                    fontFamily: FlutterFlowTheme.of(context).title1Family,
-                    color: Colors.indigo,
-                    fontSize: 30,
-                  )),
+          Row(
+            children: [
+              start ?? SizedBox.shrink(),
+              Text(title,
+                  style: FlutterFlowTheme.of(context).title1.override(
+                        fontFamily: FlutterFlowTheme.of(context).title1Family,
+                        color: Colors.indigo,
+                        fontSize: 30,
+                      )),
+            ],
+          ),
           end ?? SizedBox.shrink(),
         ],
       ),
