@@ -92,10 +92,7 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
 }
 
 class TabHeader extends StatelessWidget {
-  const TabHeader({
-    Key? key,
-    required this.title
-  }) : super(key: key);
+  const TabHeader({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -103,13 +100,12 @@ class TabHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         child: Padding(
-      padding: const EdgeInsets.only(top: 20),
+      padding: const EdgeInsets.only(top: 10),
       child: Align(
         alignment: Alignment(-.8, 0),
         child: Text(title,
             style: FlutterFlowTheme.of(context).title1.override(
-                  fontFamily:
-                      FlutterFlowTheme.of(context).title1Family,
+                  fontFamily: FlutterFlowTheme.of(context).title1Family,
                   color: Colors.indigo,
                   fontSize: 35,
                 )),

@@ -39,16 +39,18 @@ class _CoursesPageWidgetState extends State<CoursesPageWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            TabHeader(title: 'Courses'),
-            CourseGeneralInfo(),
-            CourseGeneralInfo(),
-            CourseGeneralInfo(),
-            CourseGeneralInfo(),
-            CourseGeneralInfo(),
-          ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              TabHeader(title: 'Courses'),
+              CourseGeneralInfo(),
+              CourseGeneralInfo(),
+              CourseGeneralInfo(),
+              CourseGeneralInfo(),
+              CourseGeneralInfo(),
+            ],
+          ),
         ),
       ),
     );
