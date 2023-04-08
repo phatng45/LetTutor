@@ -162,9 +162,7 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
       'SchedulePage': SchedulePageWidget(),
       'CoursesPage': CoursesPageWidget(),
       'ProfilePage': ProfilePageWidget(),
-      'SearchPage': SearchPage(
-        onBackPressed: () => _tabController.animateTo(0),
-      ),
+      'SearchPage': SearchPage(),
       // 'TutorDetailsPage': TutorDetailsPageWidget(),
       // 'PdfPage': PdfPageWidget(),
       // 'HistoryPage': HistoryPageWidget(),
