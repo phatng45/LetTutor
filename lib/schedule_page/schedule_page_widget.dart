@@ -39,51 +39,53 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
     return Scaffold(
         key: scaffoldKey,
         // title: 'Schedule',
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              TabHeader(title: 'Schedule'),
-              Container(
-                width: MediaQuery.of(context).size.width * 1.0,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 4.0,
-                          color: Color(0x33000000),
-                          offset: Offset(0.0, 2.0),
-                          spreadRadius: 2.0,
-                        )
-                      ],
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          TutorGeneralInfoWidget(hasRating: false),
-                          BestDividerWidget(
-                            title: '',
-                          ),
-                          ClassScheduleStatus(),
-                          ClassScheduleStatus(),
-                          ClassScheduleStatus(),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                TabHeader(title: 'Schedule'),
+                Container(
+                  width: MediaQuery.of(context).size.width * 1.0,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 4.0,
+                            color: Color(0x33000000),
+                            offset: Offset(0.0, 2.0),
+                            spreadRadius: 2.0,
+                          )
                         ],
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            TutorGeneralInfoWidget(hasRating: false),
+                            BestDividerWidget(
+                              title: '',
+                            ),
+                            ClassScheduleStatus(),
+                            ClassScheduleStatus(),
+                            ClassScheduleStatus(),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ));
   }

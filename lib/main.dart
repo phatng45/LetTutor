@@ -68,6 +68,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       title: 'LetTutor',
       localizationsDelegates: [
         FFLocalizationsDelegate(),
@@ -87,7 +88,8 @@ class _MyAppState extends State<MyApp> {
 }
 
 class NavBarPage extends StatefulWidget {
-  NavBarPage({Key? key, this.initialPage, this.page, required this.user}) : super(key: key);
+  NavBarPage({Key? key, this.initialPage, this.page, required this.user})
+      : super(key: key);
 
   final String? initialPage;
   final Widget? page;
@@ -109,8 +111,9 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
     super.initState();
     _scrollController = ScrollController();
     _tabController = TabController(length: 6, vsync: this);
-    _tabController.addListener(() {setState(() {
-    });});
+    _tabController.addListener(() {
+      setState(() {});
+    });
     _scrollController.addListener(_listen);
     _currentPageName = 'CoursesPage'; // widget.initialPage ?? _currentPageName;
     _currentPage = widget.page;
@@ -171,7 +174,7 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
       extendBody: false,
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
-        height: _isVisible ? 80.0 : 0,
+        height: _isVisible ? 72.0 : 0,
         surfaceTintColor: FlutterFlowTheme.of(context).primaryColor,
         color: FlutterFlowTheme.of(context).primaryColor,
         child: IconTheme(
@@ -180,7 +183,7 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               BottomAppBarButton(
-                  onPressed: (){
+                  onPressed: () {
                     _tabController.animateTo(0);
                   },
                   unselectedIconUrl:
@@ -190,7 +193,7 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
                   isSelected: _tabController.index == 0,
                   name: 'Home'),
               BottomAppBarButton(
-                  onPressed: (){
+                  onPressed: () {
                     _tabController.animateTo(1);
                   },
                   unselectedIconUrl:
@@ -200,7 +203,7 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
                   isSelected: _tabController.index == 1,
                   name: 'Schedule'),
               BottomAppBarButton(
-                  onPressed: (){
+                  onPressed: () {
                     _tabController.animateTo(2);
                   },
                   unselectedIconUrl:
@@ -210,7 +213,7 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
                   isSelected: _tabController.index == 2,
                   name: 'Courses'),
               BottomAppBarButton(
-                  onPressed: (){
+                  onPressed: () {
                     _tabController.animateTo(3);
                   },
                   unselectedIconUrl:
@@ -309,12 +312,12 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
 class BottomAppBarButton extends StatelessWidget {
   const BottomAppBarButton(
       {Key? key,
-        required this.onPressed,
+      required this.onPressed,
       required this.unselectedIconUrl,
       required this.selectedIconUrl,
-        required this.isSelected,
+      required this.isSelected,
       required this.name})
-     :super(key: key);
+      : super(key: key);
 
   final String unselectedIconUrl;
   final String selectedIconUrl;
@@ -324,31 +327,25 @@ class BottomAppBarButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        IconButton(
-          padding: EdgeInsets.all(15),
-          icon: SvgPicture.network(
+    return ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            shadowColor: Colors.transparent),
+        onPressed: onPressed,
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          SvgPicture.network(
             isSelected ? selectedIconUrl : unselectedIconUrl,
             colorFilter: ColorFilter.mode(Colors.indigo, BlendMode.srcIn),
             width: 26,
-          ), onPressed: onPressed,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 37),
-          child: Text(
+          ),
+          Text(
             name,
             textAlign: TextAlign.center,
             style: FlutterFlowTheme.of(context).title1.override(
                 fontFamily: FlutterFlowTheme.of(context).title1Family,
                 fontSize: 15),
           ),
-        ),
-        SizedBox(
-          height: 5,
-        )
-      ],
-    );
+        ]));
   }
 }
