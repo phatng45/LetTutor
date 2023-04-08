@@ -41,15 +41,18 @@ class _CoursesPageWidgetState extends State<CoursesPageWidget> {
       key: scaffoldKey,
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              TabHeader(title: 'Courses'),
-              CourseGeneralInfo(),
-              CourseGeneralInfo(),
-              CourseGeneralInfo(),
-              CourseGeneralInfo(),
-              CourseGeneralInfo(),
-            ],
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                TabHeader(title: 'Courses'),
+                CourseGeneralInfo(),
+                CourseGeneralInfo(),
+                CourseGeneralInfo(),
+                CourseGeneralInfo(),
+                CourseGeneralInfo(),
+              ],
+            ),
           ),
         ),
       ),

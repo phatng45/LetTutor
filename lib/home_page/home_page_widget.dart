@@ -63,7 +63,20 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           primary: true,
           child: Column(
             children: [
-              TabHeader(title: 'LetTutor'),
+              TabHeader(
+                title: 'LetTutor',
+                end: IconButton(
+                  icon: Image.network(
+                    'https://cdn-icons-png.flaticon.com/512/3626/3626504.png',
+                    width: 25,
+                    colorBlendMode: BlendMode.srcIn,
+                    color: Colors.indigo,
+                  ),
+                  iconSize: 30,
+                  style: IconButton.styleFrom(backgroundColor: Colors.black12),
+                  onPressed: () {},
+                ),
+              ),
               Padding(
                 padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: Column(
@@ -151,7 +164,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   itemCount: _listTutor.length,
                                   itemBuilder: (context, index) {
                                     final tutor = _listTutor[index];
-                                    return _buildTutorWidget(context, tutor, index);
+                                    return _buildTutorWidget(
+                                        context, tutor, index);
                                   },
                                 ),
                               ],

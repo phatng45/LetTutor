@@ -104,6 +104,7 @@ flutter:
     - assets/pdfs/TheInternet.pdf
     - assets/icons/home.svg
     - assets/icons/home.png
+    - assets/icons/search.png
 
 
   fonts:
