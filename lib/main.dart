@@ -35,6 +35,7 @@ class MyApp extends StatefulWidget {
   }
 
   static late SharedPreferences prefs;
+  static late final String accessToken;
 
   Future<SharedPreferences> _getSharedPrefs() async {
     return SharedPreferences.getInstance();

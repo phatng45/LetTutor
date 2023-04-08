@@ -1,9 +1,9 @@
 class Tutor {
   String? level;
   String? email;
-  Null? google;
-  Null? facebook;
-  Null? apple;
+  String? google;
+  String? facebook;
+  String? apple;
   String? avatar;
   String? name;
   String? country;
@@ -12,19 +12,19 @@ class Tutor {
   String? birthday;
   bool? requestPassword;
   bool? isActivated;
-  Null? isPhoneActivated;
-  Null? requireNote;
+  String? isPhoneActivated;
+  String? requireNote;
   int? timezone;
-  Null? phoneAuth;
+  String? phoneAuth;
   bool? isPhoneAuthActivated;
   String? studySchedule;
   bool? canSendMessage;
   bool? isPublicRecord;
-  Null? caredByStaffId;
+  String? caredByStaffId;
   String? createdAt;
   String? updatedAt;
-  Null? deletedAt;
-  Null? studentGroupId;
+  String? deletedAt;
+  String? studentGroupId;
   List<Feedbacks>? feedbacks;
   String? id;
   String? userId;
@@ -33,62 +33,63 @@ class Tutor {
   String? education;
   String? experience;
   String? profession;
-  Null? accent;
+  String? accent;
   String? targetStudent;
   String? interests;
   String? languages;
   String? specialties;
-  Null? resume;
+  String? resume;
   double? rating;
-  Null? isNative;
+  String? isNative;
   int? price;
   bool? isOnline;
+  bool isFavorited = false;
 
   Tutor(
       {this.level,
-      this.email,
-      this.google,
-      this.facebook,
-      this.apple,
-      this.avatar,
-      this.name,
-      this.country,
-      this.phone,
-      this.language,
-      this.birthday,
-      this.requestPassword,
-      this.isActivated,
-      this.isPhoneActivated,
-      this.requireNote,
-      this.timezone,
-      this.phoneAuth,
-      this.isPhoneAuthActivated,
-      this.studySchedule,
-      this.canSendMessage,
-      this.isPublicRecord,
-      this.caredByStaffId,
-      this.createdAt,
-      this.updatedAt,
-      this.deletedAt,
-      this.studentGroupId,
-      this.feedbacks,
-      this.id,
-      this.userId,
-      this.video,
-      this.bio,
-      this.education,
-      this.experience,
-      this.profession,
-      this.accent,
-      this.targetStudent,
-      this.interests,
-      this.languages,
-      this.specialties,
-      this.resume,
-      this.rating,
-      this.isNative,
-      this.price,
-      this.isOnline});
+        this.email,
+        this.google,
+        this.facebook,
+        this.apple,
+        this.avatar,
+        this.name,
+        this.country,
+        this.phone,
+        this.language,
+        this.birthday,
+        this.requestPassword,
+        this.isActivated,
+        this.isPhoneActivated,
+        this.requireNote,
+        this.timezone,
+        this.phoneAuth,
+        this.isPhoneAuthActivated,
+        this.studySchedule,
+        this.canSendMessage,
+        this.isPublicRecord,
+        this.caredByStaffId,
+        this.createdAt,
+        this.updatedAt,
+        this.deletedAt,
+        this.studentGroupId,
+        this.feedbacks,
+        this.id,
+        this.userId,
+        this.video,
+        this.bio,
+        this.education,
+        this.experience,
+        this.profession,
+        this.accent,
+        this.targetStudent,
+        this.interests,
+        this.languages,
+        this.specialties,
+        this.resume,
+        this.rating,
+        this.isNative,
+        this.price,
+        this.isOnline});
 
   Tutor.fromJson(Map<String, dynamic> json) {
     level = json['level'];
@@ -207,14 +208,14 @@ class Feedbacks {
 
   Feedbacks(
       {this.id,
-      this.bookingId,
-      this.firstId,
-      this.secondId,
-      this.rating,
-      this.content,
-      this.createdAt,
-      this.updatedAt,
-      this.firstInfo});
+        this.bookingId,
+        this.firstId,
+        this.secondId,
+        this.rating,
+        this.content,
+        this.createdAt,
+        this.updatedAt,
+        this.firstInfo});
 
   Feedbacks.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -277,31 +278,31 @@ class FirstInfo {
 
   FirstInfo(
       {this.level,
-      this.email,
-      this.google,
-      this.facebook,
-      this.apple,
-      this.avatar,
-      this.name,
-      this.country,
-      this.phone,
-      this.language,
-      this.birthday,
-      this.requestPassword,
-      this.isActivated,
-      this.isPhoneActivated,
-      this.requireNote,
-      this.timezone,
-      this.phoneAuth,
-      this.isPhoneAuthActivated,
-      this.studySchedule,
-      this.canSendMessage,
-      this.isPublicRecord,
-      this.caredByStaffId,
-      this.createdAt,
-      this.updatedAt,
-      this.deletedAt,
-      this.studentGroupId});
+        this.email,
+        this.google,
+        this.facebook,
+        this.apple,
+        this.avatar,
+        this.name,
+        this.country,
+        this.phone,
+        this.language,
+        this.birthday,
+        this.requestPassword,
+        this.isActivated,
+        this.isPhoneActivated,
+        this.requireNote,
+        this.timezone,
+        this.phoneAuth,
+        this.isPhoneAuthActivated,
+        this.studySchedule,
+        this.canSendMessage,
+        this.isPublicRecord,
+        this.caredByStaffId,
+        this.createdAt,
+        this.updatedAt,
+        this.deletedAt,
+        this.studentGroupId});
 
   FirstInfo.fromJson(Map<String, dynamic> json) {
     level = json['level'];
