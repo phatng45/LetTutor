@@ -69,6 +69,9 @@ dependencies:
   internet_file: ^1.2.0
   flutter_svg: ^2.0.3
   dio: ^5.1.1
+  flutter_country: ^1.0.1
+  country_picker: ^2.0.20
+  country_flags: ^1.1.1
 
 dev_dependencies:
   build_runner: 2.2.0

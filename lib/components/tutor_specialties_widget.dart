@@ -14,28 +14,30 @@ class TutorSpecialtiesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: AlignmentDirectional(-1.0, 0.0),
-      child: Wrap(
-        spacing: 0.0,
-        runSpacing: 0.0,
-        alignment: WrapAlignment.start,
-        crossAxisAlignment: WrapCrossAlignment.start,
-        direction: Axis.horizontal,
-        runAlignment: WrapAlignment.start,
-        verticalDirection: VerticalDirection.down,
-        clipBehavior: Clip.none,
-        children: _getSpecialties(specialties!),
+    return Padding(
+      padding: const EdgeInsets.only(top: 8.0),
+      child: Align(
+        alignment: AlignmentDirectional(-1.0, 0.0),
+        child: Wrap(
+          spacing: 0.0,
+          runSpacing: 0.0,
+          alignment: WrapAlignment.start,
+          crossAxisAlignment: WrapCrossAlignment.start,
+          direction: Axis.horizontal,
+          runAlignment: WrapAlignment.start,
+          verticalDirection: VerticalDirection.down,
+          clipBehavior: Clip.none,
+          children: _getSpecialties(specialties!),
+        ),
       ),
     );
   }
 
   List<MyChip> _getSpecialties(String specialties) {
     var list = <MyChip>[];
-    var parsedSpecialties = specialties.split(',');
-    for (var specialties in parsedSpecialties) {
-      list.add(MyChip(data: specialties));
-    }
+    var parsedSpecialties = specialties.replaceAll('-', ' ').split(',');
+    parsedSpecialties.forEach((element) => list.add(MyChip(data: element)));
+
     return list;
   }
 }
