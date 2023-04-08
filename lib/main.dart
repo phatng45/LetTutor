@@ -106,6 +106,8 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
     super.initState();
     _scrollController = ScrollController();
     _tabController = TabController(length: 6, vsync: this);
+    _tabController.addListener(() {setState(() {
+    });});
     _scrollController.addListener(_listen);
     _currentPageName = 'CoursesPage'; // widget.initialPage ?? _currentPageName;
     _currentPage = widget.page;
@@ -159,9 +161,10 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
     return Scaffold(
       //body: _currentPage ?? tabs[_currentPageName],
       body: TabBarView(
-          controller: _tabController,
-          physics: NeverScrollableScrollPhysics(),
-          children: tabs.values.toList()),
+        controller: _tabController,
+        physics: NeverScrollableScrollPhysics(),
+        children: tabs.values.toList(),
+      ),
       extendBody: false,
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
@@ -173,119 +176,176 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Row(
-                children: [
-                  IconButton(
-                    icon: SvgPicture.network(
+              BottomAppBarButton(
+                  onPressed: (){
+                    _tabController.animateTo(0);
+                  },
+                  unselectedIconUrl:
                       'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/home/wght500/48px.svg',
-                      colorFilter:
-                          ColorFilter.mode(Colors.indigo, BlendMode.srcIn),
-                      width: 26,
-                    ),
-                    onPressed: () => _tabController.animateTo(0),
-                  ),
-                  IconButton(
-                    icon: SvgPicture.network(
+                  selectedIconUrl:
+                      'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/home/fill1/48px.svg',
+                  isSelected: _tabController.index == 0,
+                  name: 'Home'),
+              BottomAppBarButton(
+                  onPressed: (){
+                    _tabController.animateTo(1);
+                  },
+                  unselectedIconUrl:
                       'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/schedule/wght500/48px.svg',
-                      colorFilter:
-                          ColorFilter.mode(Colors.indigo, BlendMode.srcIn),
-                      width: 26,
-                    ),
-                    onPressed: () => _tabController.animateTo(1),
-                  ),
-                  IconButton(
-                    icon: SvgPicture.network(
-                      'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/sticky_note_2/wght500/48px.svg',
-                      colorFilter:
-                          ColorFilter.mode(Colors.indigo, BlendMode.srcIn),
-                      width: 26,
-                    ),
-                    onPressed: () => _tabController.animateTo(2),
-                  ),
-                  IconButton(
-                    icon: SvgPicture.network(
-                      'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/person/wght500/48px.svg',
-                      colorFilter:
-                          ColorFilter.mode(Colors.indigo, BlendMode.srcIn),
-                      width: 26,
-                    ),
-                    onPressed: () => _tabController.animateTo(3),
-                  ),
-                ],
-              ),
-              PopupMenuButton(
-                icon: SvgPicture.network(
-                  'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/more_vert/wght500/48px.svg',
-                  colorFilter: ColorFilter.mode(Colors.indigo, BlendMode.srcIn),
-                  width: 26,
-                ),
-                constraints: BoxConstraints(
-                  minWidth: 150,
-                  maxWidth: 150,
-                ),
-                onSelected: (result) {
-                  switch (result) {
-                    case 0:
-                      MyApp.To(context, LoginPageWidget());
-                      break;
-                    case 1:
-                      break;
-                    case 2:
-                      break;
-                  }
-                },
-                itemBuilder: (BuildContext context) => <PopupMenuEntry>[
-                  PopupMenuItem(
-                    value: 0,
-                    child: Row(children: <Widget>[
-                      Icon(
-                        Icons.logout_outlined,
-                        color: Colors.red,
-                      ),
-                      SizedBox(width: 10),
-                      Text('Logout',
-                          style: FlutterFlowTheme.of(context)
-                              .bodyText1
-                              .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .bodyText1Family,
-                                  color: Colors.red))
-                    ]),
-                  ),
-                  PopupMenuItem(
-                    value: 1,
-                    child: Row(children: <Widget>[
-                      Icon(Icons.settings),
-                      SizedBox(width: 10),
-                      Text('Settings',
-                          style: FlutterFlowTheme.of(context)
-                              .bodyText1
-                              .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .bodyText1Family,
-                                  color: Colors.indigo))
-                    ]),
-                  ),
-                  PopupMenuItem(
-                    value: 2,
-                    child: Row(children: <Widget>[
-                      Icon(Icons.dark_mode_outlined),
-                      SizedBox(width: 10),
-                      Text('Dark mode',
-                          style: FlutterFlowTheme.of(context)
-                              .bodyText1
-                              .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .bodyText1Family,
-                                  color: Colors.indigo))
-                    ]),
-                  ),
-                ],
-              )
+                  selectedIconUrl:
+                      'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/schedule/fill1/48px.svg',
+                  isSelected: _tabController.index == 1,
+                  name: 'Schedule'),
+              BottomAppBarButton(
+                  onPressed: (){
+                    _tabController.animateTo(2);
+                  },
+                  unselectedIconUrl:
+                      'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/book/default/48px.svg',
+                  selectedIconUrl:
+                      'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/book/fill1/48px.svg',
+                  isSelected: _tabController.index == 2,
+                  name: 'Courses'),
+              BottomAppBarButton(
+                  onPressed: (){
+                    _tabController.animateTo(3);
+                  },
+                  unselectedIconUrl:
+                      'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/menu/default/48px.svg',
+                  selectedIconUrl:
+                      'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/menu/default/48px.svg',
+                  isSelected: _tabController.index == 3,
+                  name: 'Menu'),
+              // IconButton(
+              //   icon: SvgPicture.network(
+              //     'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/person/wght500/48px.svg',
+              //     colorFilter:
+              //     ColorFilter.mode(Colors.indigo, BlendMode.srcIn),
+              //     width: 26,
+              //   ),
+              //   onPressed: () => _tabController.animateTo(3),
+              // ),
+
+              // PopupMenuButton(
+              //   icon: SvgPicture.network(
+              //     'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/more_vert/wght500/48px.svg',
+              //     colorFilter: ColorFilter.mode(Colors.indigo, BlendMode.srcIn),
+              //     width: 26,
+              //   ),
+              //   constraints: BoxConstraints(
+              //     minWidth: 150,
+              //     maxWidth: 150,
+              //   ),
+              //   onSelected: (result) {
+              //     switch (result) {
+              //       case 0:
+              //         MyApp.To(context, LoginPageWidget());
+              //         break;
+              //       case 1:
+              //         break;
+              //       case 2:
+              //         break;
+              //     }
+              //   },
+              //   itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+              //     PopupMenuItem(
+              //       value: 0,
+              //       child: Row(children: <Widget>[
+              //         Icon(
+              //           Icons.logout_outlined,
+              //           color: Colors.red,
+              //         ),
+              //         SizedBox(width: 10),
+              //         Text('Logout',
+              //             style: FlutterFlowTheme.of(context)
+              //                 .bodyText1
+              //                 .override(
+              //                     fontFamily: FlutterFlowTheme.of(context)
+              //                         .bodyText1Family,
+              //                     color: Colors.red))
+              //       ]),
+              //     ),
+              //     PopupMenuItem(
+              //       value: 1,
+              //       child: Row(children: <Widget>[
+              //         Icon(Icons.settings),
+              //         SizedBox(width: 10),
+              //         Text('Settings',
+              //             style: FlutterFlowTheme.of(context)
+              //                 .bodyText1
+              //                 .override(
+              //                     fontFamily: FlutterFlowTheme.of(context)
+              //                         .bodyText1Family,
+              //                     color: Colors.indigo))
+              //       ]),
+              //     ),
+              //     PopupMenuItem(
+              //       value: 2,
+              //       child: Row(children: <Widget>[
+              //         Icon(Icons.dark_mode_outlined),
+              //         SizedBox(width: 10),
+              //         Text('Dark mode',
+              //             style: FlutterFlowTheme.of(context)
+              //                 .bodyText1
+              //                 .override(
+              //                     fontFamily: FlutterFlowTheme.of(context)
+              //                         .bodyText1Family,
+              //                     color: Colors.indigo))
+              //       ]),
+              //     ),
+              //   ],
+              // )
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class BottomAppBarButton extends StatelessWidget {
+  const BottomAppBarButton(
+      {Key? key,
+        required this.onPressed,
+      required this.unselectedIconUrl,
+      required this.selectedIconUrl,
+        required this.isSelected,
+      required this.name})
+     :super(key: key);
+
+  final String unselectedIconUrl;
+  final String selectedIconUrl;
+  final bool isSelected;
+  final String name;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        IconButton(
+          padding: EdgeInsets.all(15),
+          icon: SvgPicture.network(
+            isSelected ? selectedIconUrl : unselectedIconUrl,
+            colorFilter: ColorFilter.mode(Colors.indigo, BlendMode.srcIn),
+            width: 26,
+          ), onPressed: onPressed,
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 37),
+          child: Text(
+            name,
+            textAlign: TextAlign.center,
+            style: FlutterFlowTheme.of(context).title1.override(
+                fontFamily: FlutterFlowTheme.of(context).title1Family,
+                fontSize: 15),
+          ),
+        ),
+        SizedBox(
+          height: 5,
+        )
+      ],
     );
   }
 }

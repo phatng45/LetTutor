@@ -55,15 +55,16 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
             width: MediaQuery.of(context).size.width * 1.0,
             height: MediaQuery.of(context).size.height * 1.0,
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  FlutterFlowTheme.of(context).primaryBackground,
-                  FlutterFlowTheme.of(context).secondaryBackground
-                ],
-                stops: [0.0, 0.5],
-                begin: AlignmentDirectional(0.0, -1.0),
-                end: AlignmentDirectional(0, 1.0),
-              ),
+              // color: Colors.white
+              // gradient: LinearGradient(
+              //   colors: [
+              //     FlutterFlowTheme.of(context).primaryBackground,
+              //     FlutterFlowTheme.of(context).secondaryBackground
+              //   ],
+              //   stops: [0.0, 0.5],
+              //   begin: AlignmentDirectional(0.0, -1.0),
+              //   end: AlignmentDirectional(0, 1.0),
+              // ),
             ),
             child: SingleChildScrollView(
               child: Column(
@@ -82,14 +83,14 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
-                            boxShadow: [
-                              BoxShadow(
-                                blurRadius: 5.0,
-                                color: Color(0x33000000),
-                                offset: Offset(0.0, 2.0),
-                                spreadRadius: 2.0,
-                              )
-                            ],
+                            // boxShadow: [
+                            //   BoxShadow(
+                            //     blurRadius: 5.0,
+                            //     color: Color(0x33000000),
+                            //     offset: Offset(0.0, 2.0),
+                            //     spreadRadius: 2.0,
+                            //   )
+                            // ],
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                           child: ClipRRect(
@@ -124,18 +125,18 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                         EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                     child: Container(
                       width: MediaQuery.of(context).size.width * 0.9,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 5.0,
-                            color: Color(0x33000000),
-                            offset: Offset(0.0, 2.0),
-                            spreadRadius: 5.0,
-                          )
-                        ],
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
+                      // decoration: BoxDecoration(
+                      //   color: FlutterFlowTheme.of(context).secondaryBackground,
+                      //   boxShadow: [
+                      //     BoxShadow(
+                      //       blurRadius: 5.0,
+                      //       color: Color(0x33000000),
+                      //       offset: Offset(0.0, 2.0),
+                      //       spreadRadius: 5.0,
+                      //     )
+                      //   ],
+                      //   borderRadius: BorderRadius.circular(20.0),
+                      // ),
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
                             15.0, 0.0, 15.0, 0.0),
