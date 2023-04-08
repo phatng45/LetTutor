@@ -18,5 +18,6 @@ class ApiService{
       MyApp.prefs.setString("ACCESS_TOKEN", accessToken);
       return user;
     }
+    return null;
   }
 }
