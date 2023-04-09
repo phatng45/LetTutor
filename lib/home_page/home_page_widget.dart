@@ -113,8 +113,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   itemCount: _listTutor.length,
                                   itemBuilder: (context, index) {
                                     final tutor = _listTutor[index];
-                                    return _buildTutorWidget(
-                                        context, tutor, index);
+                                    return buildTutorWidget(
+                                        context, tutor);
                                   },
                                 ),
                               ],
@@ -130,7 +130,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
     );
   }
 
-  Padding _buildTutorWidget(BuildContext context, Tutor tutor, int index) {
+  Padding buildTutorWidget(BuildContext context, Tutor tutor) {
     var country = Countries.byCodeOrName(
         tutor.country ?? 'VN', tutor.country ?? 'Vietnam');
     // var country = Countries.byCode(tutor.country ?? 'VN');

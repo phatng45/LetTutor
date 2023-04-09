@@ -48,6 +48,7 @@ class _SearchPageState extends State<SearchPage> {
               children: <Widget>[
                 TabHeader(
                   title: 'Find a Tutor',
+                  centerTitle: false,
                   start: IconButton(
                       onPressed: widget.onBackPressed,
                       icon: Icon(

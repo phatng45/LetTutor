@@ -71,7 +71,8 @@ class _HistoryPageWidgetState extends State<HistoryPageWidget> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          TutorGeneralInfoWidget(hasRating: false),
+                          TutorGeneralInfoWidget(hasRating: true, context: context, tutor: null,),
+
                           BestDividerWidget(
                             title: '',
                           ),

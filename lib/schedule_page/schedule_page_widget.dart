@@ -71,7 +71,7 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            TutorGeneralInfoWidget(hasRating: false),
+                            TutorGeneralInfoWidget(hasRating:false, context: context,),
                             BestDividerWidget(
                               title: '',
                             ),
@@ -92,18 +92,20 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
 }
 
 class TabHeader extends StatelessWidget {
-  const TabHeader({Key? key, required this.title, this.end, this.start})
+   TabHeader({Key? key, required this.title, this.end, this.start, this.centerTitle = false})
       : super(key: key);
 
   final String title;
   final Widget? end;
   final Widget? start;
+   bool? centerTitle = false;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.fromLTRB(start == null ? 30 : 0, 10, 30, 0),
-      child: Row(
+      child: centerTitle == false ?
+      Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
@@ -119,7 +121,22 @@ class TabHeader extends StatelessWidget {
           ),
           end ?? SizedBox.shrink(),
         ],
-      ),
+      ):
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          start ?? SizedBox.shrink(),
+          Text(title,
+              style: FlutterFlowTheme.of(context).title1.override(
+                fontFamily: FlutterFlowTheme.of(context).title1Family,
+                color: Colors.indigo,
+                fontSize: 30,
+              )),
+          end ?? SizedBox.shrink(),
+        ],
+      )
+
+      ,
     );
   }
 }
