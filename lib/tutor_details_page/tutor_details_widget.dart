@@ -129,28 +129,28 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                         ),
                       ),
                     ),
-                    Divider(
-                      indent: 10,
-                      endIndent: 10,
-                      color: Colors.black12,
-                    ),
-                    Text(
-                      'Courses',
-                      style: FlutterFlowTheme.of(context).title3,
-                    ),
-                    ListView(
-                      padding: EdgeInsets.zero,
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      children: [
-                        CourseWidget(
-                          title: 'Basic Conversation Topics',
-                        ),
-                        CourseWidget(
-                          title: 'Life In The Internet Ages',
-                        ),
-                      ],
-                    ),
+                    // Divider(
+                    //   indent: 10,
+                    //   endIndent: 10,
+                    //   color: Colors.black12,
+                    // ),
+                    // Text(
+                    //   'Courses',
+                    //   style: FlutterFlowTheme.of(context).title3,
+                    // ),
+                    // ListView(
+                    //   padding: EdgeInsets.zero,
+                    //   physics: NeverScrollableScrollPhysics(),
+                    //   shrinkWrap: true,
+                    //   children: [
+                    //     CourseWidget(
+                    //       title: 'Basic Conversation Topics',
+                    //     ),
+                    //     CourseWidget(
+                    //       title: 'Life In The Internet Ages',
+                    //     ),
+                    //   ],
+                    // ),
                     Divider(
                       indent: 10,
                       endIndent: 10,
