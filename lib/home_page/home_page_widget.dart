@@ -113,8 +113,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   itemCount: _listTutor.length,
                                   itemBuilder: (context, index) {
                                     final tutor = _listTutor[index];
-                                    return buildTutorWidget(
-                                        context, tutor);
+                                    return buildTutorWidget(context, tutor);
                                   },
                                 ),
                               ],
@@ -261,6 +260,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 alignment: AlignmentDirectional(-1.0, 0.0),
                 child: Text(
                   tutor.bio ?? '',
+                  maxLines: 4,
+                  overflow: TextOverflow.ellipsis,
                   style: FlutterFlowTheme.of(context).bodyText1,
                 ),
               ),
