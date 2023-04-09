@@ -34,7 +34,6 @@ class _CoursesPageWidgetState extends State<CoursesPageWidget> {
 
   void _getData() async {
     _listCourse = (await ApiService().coursePagination(10, 1))!;
-    print(_listCourse.length);
     Future.delayed(const Duration(milliseconds: 500))
         .then((value) => setState(() {}));
   }
@@ -57,12 +56,32 @@ class _CoursesPageWidgetState extends State<CoursesPageWidget> {
             child: Column(
               children: [
                 TabHeader(title: 'Courses'),
-                _buildCourseInfo(),
-                _buildCourseInfo(),
-                _buildCourseInfo(),
-                _buildCourseInfo(),
-                _buildCourseInfo(),
-                _buildCourseInfo(),
+                _listCourse.isEmpty
+                    ? const Align(
+                  alignment: Alignment.topCenter,
+                  child: CircularProgressIndicator(),
+                )
+                    : Column(
+                  children: [
+                    ListView.builder(
+                      clipBehavior: Clip.none,
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: _listCourse.length,
+                      itemBuilder: (context, index) {
+                        final course = _listCourse[index];
+                        return _buildCourseInfo(context, course);
+                      },
+                    ),
+                  ],
+                ),
+
+                // _buildCourseInfo(),
+                // _buildCourseInfo(),
+                // _buildCourseInfo(),
+                // _buildCourseInfo(),
+                // _buildCourseInfo(),
+                // _buildCourseInfo(),
               ],
             ),
           ),
@@ -71,7 +90,7 @@ class _CoursesPageWidgetState extends State<CoursesPageWidget> {
     );
   }
 
-  _buildCourseInfo() {
+  _buildCourseInfo(BuildContext context, Course course) {
     return Container(
       width: MediaQuery.of(context).size.width * 1.0,
       decoration: BoxDecoration(
