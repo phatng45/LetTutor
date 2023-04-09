@@ -72,6 +72,7 @@ dependencies:
   flutter_country: ^1.0.1
   country_picker: ^2.0.20
   country_flags: ^1.1.1
+  transparent_image: ^2.0.1
 
 dev_dependencies:
   build_runner: 2.2.0
@@ -104,7 +105,8 @@ flutter:
     - assets/pdfs/TheInternet.pdf
     - assets/icons/home.svg
     - assets/icons/home.png
-    - assets/icons/search.png
+    - assets/icons/search.png    - assets/icons/defaultCourseImg.png
+
 
 
   fonts:

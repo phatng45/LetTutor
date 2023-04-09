@@ -161,7 +161,7 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                       style: FlutterFlowTheme.of(context).title3,
                     ),
                     Text(
-                      tutor.experience ?? 'null',
+                      tutor.experience ?? 'N/A',
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily:
                                 FlutterFlowTheme.of(context).bodyText1Family,
@@ -178,7 +178,7 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                       style: FlutterFlowTheme.of(context).title3,
                     ),
                     Text(
-                      tutor.interests ?? 'null',
+                      tutor.interests ??  'N/A',
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily:
                                 FlutterFlowTheme.of(context).bodyText1Family,
@@ -263,7 +263,7 @@ class CourseWidget extends StatelessWidget {
                   alignment: AlignmentDirectional(1.0, 0.0),
                   child: OutlinedButton(
                     onPressed: () {
-                      MyApp.To(context, CourseDetailsPageWidget());
+                      //MyApp.To(context, CourseDetailsPageWidget(null));
                     },
                     style: OutlinedButton.styleFrom(
                       backgroundColor: Colors.white,

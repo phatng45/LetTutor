@@ -58,30 +58,23 @@ class _CoursesPageWidgetState extends State<CoursesPageWidget> {
                 TabHeader(title: 'Courses'),
                 _listCourse.isEmpty
                     ? const Align(
-                  alignment: Alignment.topCenter,
-                  child: CircularProgressIndicator(),
-                )
+                        alignment: Alignment.topCenter,
+                        child: CircularProgressIndicator(),
+                      )
                     : Column(
-                  children: [
-                    ListView.builder(
-                      clipBehavior: Clip.none,
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: _listCourse.length,
-                      itemBuilder: (context, index) {
-                        final course = _listCourse[index];
-                        return _buildCourseInfo(context, course);
-                      },
-                    ),
-                  ],
-                ),
-
-                // _buildCourseInfo(),
-                // _buildCourseInfo(),
-                // _buildCourseInfo(),
-                // _buildCourseInfo(),
-                // _buildCourseInfo(),
-                // _buildCourseInfo(),
+                        children: [
+                          ListView.builder(
+                            clipBehavior: Clip.none,
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: _listCourse.length,
+                            itemBuilder: (context, index) {
+                              final course = _listCourse[index];
+                              return _buildCourseInfo(context, course);
+                            },
+                          ),
+                        ],
+                      ),
               ],
             ),
           ),
@@ -91,78 +84,91 @@ class _CoursesPageWidgetState extends State<CoursesPageWidget> {
   }
 
   _buildCourseInfo(BuildContext context, Course course) {
-    return Container(
-      width: MediaQuery.of(context).size.width * 1.0,
-      decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).secondaryBackground,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
-        child: Container(
-          decoration: BoxDecoration(
-            color: FlutterFlowTheme.of(context).secondaryBackground,
-            boxShadow: [
-              BoxShadow(
-                blurRadius: 4.0,
-                color: Color(0x33000000),
-                offset: Offset(0.0, 2.0),
-                spreadRadius: 2.0,
-              )
-            ],
-            borderRadius: BorderRadius.circular(20.0),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              ClipRRect(
-                borderRadius: BorderRadius.circular(20.0),
-                child: Image.network('https://picsum.photos/seed/437/600',
-                    height: 250, width: 1000, fit: BoxFit.cover),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Life in the Internet Age',
-                        style: FlutterFlowTheme.of(context).title1.override(
-                            fontFamily:
-                            FlutterFlowTheme.of(context).title1Family,
-                            // fontWeight: FontWeight.w500,
-                            color: Colors.indigo)),
-                    Text(
-                      'Let\'s discuss how technology is changing the way we live' +
-                          '\n',
-                      style: FlutterFlowTheme.of(context).bodyText1,
-                      maxLines: 2,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Intermediate • 9 Lessons',
-                              style: FlutterFlowTheme.of(context).subtitle1),
-                          PositiveButton(
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
+      child: Container(
+        decoration: BoxDecoration(
+          color: FlutterFlowTheme.of(context).secondaryBackground,
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 10.0,
+              color: Color(0x33000000),
+              offset: Offset(0.0, 1.0),
+              spreadRadius: 0,
+            )
+          ],
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20.0),
+              child: Image.network(course.imageUrl!,
+                  errorBuilder: (context, error, stackTrace) {
+                return Image.asset('assets/icons/defaultCourseImg.png');
+              }, height: 265, width: 1000, fit: BoxFit.cover),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(course.name ?? 'N/A',
+                      style: FlutterFlowTheme.of(context).title1.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).title1Family,
+                          // fontWeight: FontWeight.w500,
+                          color: Colors.indigo)),
+                  Text(
+                    course.description ?? 'N/A',
+                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                        fontFamily:
+                            FlutterFlowTheme.of(context).bodyText1Family,
+                        fontSize: 18),
+                    maxLines: 2,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 3,
+                          child: Text(
+                              (course.levelString ?? 'N/A') +
+                                  ' • ' +
+                                  (course.topics?.length ?? 0).toString() +
+                                  ' Lessons',
+                              style: FlutterFlowTheme.of(context)
+                                  .subtitle1
+                                  .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .subtitle1Family,
+                                      color: Colors.black38,
+                                      fontSize: 16)),
+                        ),
+                        Expanded(
+                          flex: 2,
+                          child: PositiveButton(
                             title: 'Discover',
                             icon: Icon(
                               Icons.public,
                               size: 20,
                             ),
                             onPressed: () {
-                              MyApp.To(context, CourseDetailsPageWidget());
+                              MyApp.To(context, CourseDetailsPageWidget(course));
                             },
-                          )
-                        ],
-                      ),
+                          ),
+                        )
+                      ],
                     ),
-                  ],
-                ),
+                  )
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

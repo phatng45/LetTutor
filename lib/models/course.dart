@@ -15,28 +15,30 @@ class Course {
   String? displayOrder;
   String? createdAt;
   String? updatedAt;
+  String? levelString;
   List<Topics>? topics;
   List<Categories>? categories;
 
   Course(
       {this.id,
-        this.name,
-        this.description,
-        this.imageUrl,
-        this.level,
-        this.reason,
-        this.purpose,
-        this.otherDetails,
-        this.defaultPrice,
-        this.coursePrice,
-        this.courseType,
-        this.sectionType,
-        this.visible,
-        this.displayOrder,
-        this.createdAt,
-        this.updatedAt,
-        this.topics,
-        this.categories});
+      this.name,
+      this.description,
+      this.imageUrl,
+      this.level,
+      this.reason,
+      this.purpose,
+      this.otherDetails,
+      this.defaultPrice,
+      this.coursePrice,
+      this.courseType,
+      this.sectionType,
+      this.visible,
+      this.displayOrder,
+      this.createdAt,
+      this.updatedAt,
+      this.topics,
+      this.categories,
+      this.levelString});
 
   Course.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -55,6 +57,13 @@ class Course {
     displayOrder = json['displayOrder'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
+
+    levelString = int.parse(level!) < 3
+        ? 'Beginner'
+        : int.parse(level!) < 7
+            ? 'Intermediate'
+            : 'Advanced';
+
     if (json['topics'] != null) {
       topics = <Topics>[];
       json['topics'].forEach((v) {
@@ -112,16 +121,16 @@ class Topics {
 
   Topics(
       {this.id,
-        this.courseId,
-        this.orderCourse,
-        this.name,
-        this.nameFile,
-        this.numberOfPages,
-        this.description,
-        this.videoUrl,
-        this.type,
-        this.createdAt,
-        this.updatedAt});
+      this.courseId,
+      this.orderCourse,
+      this.name,
+      this.nameFile,
+      this.numberOfPages,
+      this.description,
+      this.videoUrl,
+      this.type,
+      this.createdAt,
+      this.updatedAt});
 
   Topics.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -165,12 +174,12 @@ class Categories {
 
   Categories(
       {this.id,
-        this.title,
-        this.description,
-        this.key,
-        this.displayOrder,
-        this.createdAt,
-        this.updatedAt});
+      this.title,
+      this.description,
+      this.key,
+      this.displayOrder,
+      this.createdAt,
+      this.updatedAt});
 
   Categories.fromJson(Map<String, dynamic> json) {
     id = json['id'];
