@@ -4,7 +4,9 @@ import 'package:let_tutor/main.dart';
 class ApiConstants {
   static String baseUrl = 'https://sandbox.api.lettutor.com/';
 
-  static Map<String, dynamic> authorization = {'Authorization': 'Bearer ' + MyApp.prefs.getString("ACCESS_TOKEN")!};
+  static Map<String, dynamic> authorization = {
+    'Authorization': 'Bearer ' + MyApp.prefs.getString("ACCESS_TOKEN")!
+  };
 
   static Options authorizationOptions = Options(headers: authorization);
 
@@ -26,5 +28,9 @@ class ApiConstants {
   static String userInfo = 'user/info';
   static String userInfoUpdate = 'user/info';
 
-  static String tutorPagination(int perPage, int page) => 'tutor/more?perPage=' + perPage.toString() + '&page=' + page.toString();
+  static String tutorPagination(int perPage, int page) =>
+      'tutor/more?perPage=' + perPage.toString() + '&page=' + page.toString();
+
+  static String coursePagination(int perPage, int page) =>
+      'course?page=' + page.toString() + '&size=' + perPage.toString();
 }

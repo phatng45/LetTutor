@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 
 import '../main.dart';
+import '../models/course.dart';
 import '../models/tutor.dart';
 import '../models/user.dart';
 import 'api_constants.dart';
@@ -35,6 +36,23 @@ class ApiService {
           .toList();
 
       return tutors;
+    }
+
+    return null;
+  }
+
+  Future<List<Course>?> coursePagination(int perPage, int page) async {
+    final url =
+        ApiConstants.baseUrl + ApiConstants.coursePagination(perPage, page);
+    final response =
+        await Dio().get(url, options: ApiConstants.authorizationOptions);
+
+    if (response.statusCode == 200) {
+      List<Course> courses = (response.data["data"]["rows"] as List)
+          .map((x) => Course.fromJson(x))
+          .toList();
+
+      return courses;
     }
 
     return null;

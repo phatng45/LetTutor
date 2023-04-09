@@ -42,8 +42,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
   void _getData() async {
     _listTutor = (await ApiService().tutorPagination(10, 1))!;
-    Future.delayed(const Duration(milliseconds: 500))
-        .then((value) => setState(() {}));
+    setState(() {});
   }
 
   @override

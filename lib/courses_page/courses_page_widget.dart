@@ -4,7 +4,9 @@ import 'package:let_tutor/course_details_page/course_details_page_widget.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
 
+import '../api/api_service.dart';
 import '../main.dart';
+import '../models/course.dart';
 import '../schedule_page/schedule_page_widget.dart';
 import 'courses_page_model.dart';
 
@@ -21,11 +23,20 @@ class _CoursesPageWidgetState extends State<CoursesPageWidget> {
   late CoursesPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  late List<Course> _listCourse = [];
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => CoursesPageModel());
+    _getData();
+  }
+
+  void _getData() async {
+    _listCourse = (await ApiService().coursePagination(10, 1))!;
+    print(_listCourse.length);
+    Future.delayed(const Duration(milliseconds: 500))
+        .then((value) => setState(() {}));
   }
 
   @override
@@ -46,13 +57,92 @@ class _CoursesPageWidgetState extends State<CoursesPageWidget> {
             child: Column(
               children: [
                 TabHeader(title: 'Courses'),
-                CourseGeneralInfo(),
-                CourseGeneralInfo(),
-                CourseGeneralInfo(),
-                CourseGeneralInfo(),
-                CourseGeneralInfo(),
+                _buildCourseInfo(),
+                _buildCourseInfo(),
+                _buildCourseInfo(),
+                _buildCourseInfo(),
+                _buildCourseInfo(),
+                _buildCourseInfo(),
               ],
             ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  _buildCourseInfo() {
+    return Container(
+      width: MediaQuery.of(context).size.width * 1.0,
+      decoration: BoxDecoration(
+        color: FlutterFlowTheme.of(context).secondaryBackground,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
+        child: Container(
+          decoration: BoxDecoration(
+            color: FlutterFlowTheme.of(context).secondaryBackground,
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 4.0,
+                color: Color(0x33000000),
+                offset: Offset(0.0, 2.0),
+                spreadRadius: 2.0,
+              )
+            ],
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20.0),
+                child: Image.network('https://picsum.photos/seed/437/600',
+                    height: 250, width: 1000, fit: BoxFit.cover),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Life in the Internet Age',
+                        style: FlutterFlowTheme.of(context).title1.override(
+                            fontFamily:
+                            FlutterFlowTheme.of(context).title1Family,
+                            // fontWeight: FontWeight.w500,
+                            color: Colors.indigo)),
+                    Text(
+                      'Let\'s discuss how technology is changing the way we live' +
+                          '\n',
+                      style: FlutterFlowTheme.of(context).bodyText1,
+                      maxLines: 2,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Intermediate • 9 Lessons',
+                              style: FlutterFlowTheme.of(context).subtitle1),
+                          PositiveButton(
+                            title: 'Discover',
+                            icon: Icon(
+                              Icons.public,
+                              size: 20,
+                            ),
+                            onPressed: () {
+                              MyApp.To(context, CourseDetailsPageWidget());
+                            },
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -99,90 +189,5 @@ class SliverScaffold extends StatelessWidget {
           ),
           body,
         ]));
-  }
-}
-
-class CourseGeneralInfo extends StatelessWidget {
-  const CourseGeneralInfo({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width * 1.0,
-      decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).secondaryBackground,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
-        child: Container(
-          decoration: BoxDecoration(
-            color: FlutterFlowTheme.of(context).secondaryBackground,
-            boxShadow: [
-              BoxShadow(
-                blurRadius: 4.0,
-                color: Color(0x33000000),
-                offset: Offset(0.0, 2.0),
-                spreadRadius: 2.0,
-              )
-            ],
-            borderRadius: BorderRadius.circular(20.0),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              ClipRRect(
-                borderRadius: BorderRadius.circular(20.0),
-                child: Image.network('https://picsum.photos/seed/437/600',
-                    height: 250, width: 1000, fit: BoxFit.cover),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Life in the Internet Age',
-                        style: FlutterFlowTheme.of(context).title1.override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).title1Family,
-                            // fontWeight: FontWeight.w500,
-                            color: Colors.indigo)),
-                    Text(
-                      'Let\'s discuss how technology is changing the way we live' +
-                          '\n',
-                      style: FlutterFlowTheme.of(context).bodyText1,
-                      maxLines: 2,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Intermediate • 9 Lessons',
-                              style: FlutterFlowTheme.of(context).subtitle1),
-                          PositiveButton(
-                            title: 'Discover',
-                            icon: Icon(
-                              Icons.public,
-                              size: 20,
-                            ),
-                            onPressed: () {
-                              MyApp.To(context, CourseDetailsPageWidget());
-                            },
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
   }
 }
