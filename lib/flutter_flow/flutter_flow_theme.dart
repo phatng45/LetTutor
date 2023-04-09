@@ -137,8 +137,8 @@ class MobileTypography extends Typography {
   String get title3Family => 'Outfit';
   TextStyle get title3 => GoogleFonts.getFont(
         'Outfit',
-        color: theme.primaryText,
-        fontWeight: FontWeight.normal,
+        color: Colors.indigo,
+        fontWeight: FontWeight.w500,
         fontSize: 20.0,
       );
   String get subtitle1Family => 'Outfit';
@@ -193,7 +193,7 @@ class TabletTypography extends Typography {
   String get title3Family => 'Outfit';
   TextStyle get title3 => GoogleFonts.getFont(
         'Outfit',
-        color: theme.primaryText,
+        color: Colors.indigo,
         fontWeight: FontWeight.normal,
         fontSize: 20.0,
       );
@@ -250,7 +250,7 @@ class DesktopTypography extends Typography {
   TextStyle get title3 => GoogleFonts.getFont(
         'Outfit',
         color: theme.primaryText,
-        fontWeight: FontWeight.normal,
+        fontWeight: FontWeight.bold,
         fontSize: 20.0,
       );
   String get subtitle1Family => 'Outfit';
