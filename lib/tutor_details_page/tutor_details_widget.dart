@@ -66,7 +66,7 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                     )),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(10,0,10,0),
+                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: TutorGeneralInfoWidget(
                   hasRating: true,
                   context: context,
@@ -74,8 +74,7 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                 ),
               ),
               Padding(
-                padding:
-                    EdgeInsets.fromLTRB(15, 0, 15, 0),
+                padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -162,16 +161,11 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                       style: FlutterFlowTheme.of(context).title3,
                     ),
                     Text(
-                     tutor.experience?? 'null',
-                      style: FlutterFlowTheme.of(context)
-                          .bodyText1
-                          .override(
-                            fontFamily: FlutterFlowTheme.of(context)
-                                .bodyText1Family,
+                      tutor.experience ?? 'null',
+                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily:
+                                FlutterFlowTheme.of(context).bodyText1Family,
                             fontSize: 16.0,
-                            useGoogleFonts: GoogleFonts.asMap()
-                                .containsKey(FlutterFlowTheme.of(context)
-                                    .bodyText1Family),
                           ),
                     ),
                     Divider(
@@ -184,16 +178,11 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                       style: FlutterFlowTheme.of(context).title3,
                     ),
                     Text(
-                      tutor.interests??'null',
-                      style: FlutterFlowTheme.of(context)
-                          .bodyText1
-                          .override(
-                            fontFamily: FlutterFlowTheme.of(context)
-                                .bodyText1Family,
+                      tutor.interests ?? 'null',
+                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily:
+                                FlutterFlowTheme.of(context).bodyText1Family,
                             fontSize: 16.0,
-                            useGoogleFonts: GoogleFonts.asMap()
-                                .containsKey(FlutterFlowTheme.of(context)
-                                    .bodyText1Family),
                           ),
                     ),
                     Divider(
