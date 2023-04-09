@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
+import 'package:let_tutor/index.dart';
+import 'package:let_tutor/main.dart';
 import 'package:let_tutor/models/course.dart';
 import 'package:let_tutor/schedule_page/schedule_page_widget.dart';
 
@@ -265,7 +267,7 @@ class _CourseDetailsPageWidgetState extends State<CourseDetailsPageWidget> {
                               (index + 1).toString() +
                                   '. ' +
                                   (topic.name ?? 'N/A'),
-                              () {},
+                              () => MyApp.To(context, PdfPageWidget(topic.nameFile!, topic.name ?? 'N/A')),
                             );
                           },
                           gridDelegate:
@@ -295,7 +297,7 @@ class _CourseDetailsPageWidgetState extends State<CourseDetailsPageWidget> {
                 elevation: 0,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
-                    side: BorderSide(color: Colors.grey.withAlpha(100))),
+                    side: BorderSide(color: Colors.grey.withAlpha(50))),
                 minimumSize: Size.fromHeight(45),
                 textStyle: FlutterFlowTheme.of(context).bodyText1.override(
                     fontFamily: FlutterFlowTheme.of(context).bodyText1Family,

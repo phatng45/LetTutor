@@ -185,7 +185,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          tutor.name ?? 'Unknown',
+                          tutor.name ?? 'N/A',
                           style: FlutterFlowTheme.of(context).title3,
                         ),
                         Row(

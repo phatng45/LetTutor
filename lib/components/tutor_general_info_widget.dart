@@ -86,7 +86,7 @@ class _TutorGeneralInfoWidgetState extends State<TutorGeneralInfoWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      tutor.name ?? 'Unknown',
+                      tutor.name ?? 'N/A',
                       style: FlutterFlowTheme.of(context).title3,
                     ),
                     Row(

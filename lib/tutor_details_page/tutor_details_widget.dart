@@ -49,14 +49,13 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      // title: 'Tutor',
-      // centerTitle: widget.tutor.name,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
               TabHeader(
                 title: tutor.name ?? '',
+                centerTitle: true,
                 start: IconButton(
                     onPressed: () => Navigator.pop(context),
                     icon: Icon(
