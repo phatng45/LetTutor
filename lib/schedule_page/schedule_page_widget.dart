@@ -115,7 +115,7 @@ class TabHeader extends StatelessWidget {
                   style: FlutterFlowTheme.of(context).title1.override(
                         fontFamily: FlutterFlowTheme.of(context).title1Family,
                         color: Colors.indigo,
-                        fontSize: 30,
+                        fontSize: 25,
                       )),
             ],
           ),

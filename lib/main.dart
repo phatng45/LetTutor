@@ -158,10 +158,11 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
     final tabs = {
       'HomePage': HomePageWidget(
         onSearchPressed: () => _tabController.animateTo(4),
+        userImgUrl: widget.user.avatar,
       ),
       'SchedulePage': SchedulePageWidget(),
       'CoursesPage': CoursesPageWidget(),
-      'ProfilePage': ProfilePageWidget(),
+      // 'ProfilePage': ProfilePageWidget(),
       'SearchPage': SearchPage(
         onBackPressed: () => _tabController.animateTo(0),
       ),
@@ -219,16 +220,16 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
                       'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/book/fill1/48px.svg',
                   isSelected: _tabController.index == 2,
                   name: 'Courses'),
-              BottomAppBarButton(
-                  onPressed: () {
-                    _tabController.animateTo(3);
-                  },
-                  unselectedIconUrl:
-                      'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/menu/default/48px.svg',
-                  selectedIconUrl:
-                      'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/menu/default/48px.svg',
-                  isSelected: _tabController.index == 3,
-                  name: 'Menu'),
+              // BottomAppBarButton(
+              //     onPressed: () {
+              //       _tabController.animateTo(3);
+              //     },
+              //     unselectedIconUrl:
+              //         'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/menu/default/48px.svg',
+              //     selectedIconUrl:
+              //         'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/menu/default/48px.svg',
+              //     isSelected: _tabController.index == 3,
+              //     name: 'Menu'),
             ],
           ),
         ),

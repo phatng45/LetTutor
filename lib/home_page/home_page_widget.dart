@@ -12,6 +12,7 @@ import 'package:let_tutor/flutter_flow/flutter_flow_widgets.dart';
 import 'package:let_tutor/index.dart';
 import 'package:let_tutor/main.dart';
 
+import '../menu_page/menu_page_widget.dart';
 import '../models/tutor.dart';
 import '../schedule_page/schedule_page_widget.dart';
 import 'home_page_model.dart';
@@ -20,8 +21,10 @@ export 'home_page_model.dart';
 
 class HomePageWidget extends StatefulWidget {
   final VoidCallback? onSearchPressed;
+  final String? userImgUrl;
 
-  const HomePageWidget({Key? key, this.onSearchPressed}) : super(key: key);
+  const HomePageWidget({Key? key, this.onSearchPressed, this.userImgUrl})
+      : super(key: key);
 
   @override
   _HomePageWidgetState createState() => _HomePageWidgetState();
@@ -65,16 +68,41 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           child: Column(
             children: [
               TabHeader(
-                title: 'LetTutor',
-                end: IconButton(
-                  icon: Image.network(
-                    'https://cdn-icons-png.flaticon.com/512/3626/3626504.png',
-                    width: 25,
-                    colorBlendMode: BlendMode.srcIn,
-                    color: Colors.indigo,
+                title: '',
+                start: Padding(
+                  padding: const EdgeInsets.only(left: 10.0),
+                  child: IconButton(
+                    icon: ClipRRect(
+                      borderRadius: BorderRadius.circular(900.0),
+                      child: Image.network(
+                        widget.userImgUrl ??
+                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU',
+                        width: 35,
+                        height: 35,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Image.network(
+                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU',
+                            fit: BoxFit.cover,
+                          );
+                        },
+                      ),
+                    ),
+                    onPressed: () {MyApp.To(context, MenuPageWidget());},
                   ),
-                  iconSize: 30,
-                  style: IconButton.styleFrom(backgroundColor: Colors.black12),
+                ),
+                end: IconButton(
+                  icon: SizedBox(
+                    width: 25,
+                    height: 25,
+                    child: Image.network(
+                      'https://cdn-icons-png.flaticon.com/512/3626/3626504.png',
+                      colorBlendMode: BlendMode.srcIn,
+                      color: Colors.indigo,
+                      scale: .5,
+                    ),
+                  ),
+                  style: IconButton.styleFrom(backgroundColor: Colors.black12,padding: EdgeInsets.zero),
                   onPressed: widget.onSearchPressed,
                 ),
               ),
