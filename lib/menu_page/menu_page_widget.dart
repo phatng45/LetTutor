@@ -48,10 +48,21 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
                     },
                   ),
                 ),
-                Text(widget.user.name ?? 'Unnamed'),
+                Text((widget.user.name ?? 'Unnamed') +
+                    (widget.user.roles?[0] == 'student'
+                        ? " (Student)"
+                        : " (Tutor)")),
+                SizedBox(
+                  height: 20,
+                ),
                 ListTile(
-                  title: Text('Update Profile'),
+                  title: Text('Update Information'),
                   leading: Icon(Icons.person),
+                  trailing: Icon(Icons.chevron_right),
+                ),
+                ListTile(
+                  title: Text('Become a Tutor'),
+                  leading: Icon(Icons.school),
                   trailing: Icon(Icons.chevron_right),
                 ),
                 Divider(),
