@@ -214,6 +214,16 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                         icon: Icon(Icons.email_outlined),
                       ),
                     ),
+                    ListView.builder(
+                      clipBehavior: Clip.none,
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: tutor.feedbacks!.length,
+                      itemBuilder: (context, index) {
+                        final feedback = tutor.feedbacks![index];
+                        return Text(feedback.content!);
+                      },
+                    )
                   ],
                 ),
               ),
