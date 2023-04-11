@@ -14,6 +14,7 @@ import 'package:let_tutor/main.dart';
 
 import '../menu_page/menu_page_widget.dart';
 import '../models/tutor.dart';
+import '../models/user.dart';
 import '../schedule_page/schedule_page_widget.dart';
 import 'home_page_model.dart';
 
@@ -22,8 +23,9 @@ export 'home_page_model.dart';
 class HomePageWidget extends StatefulWidget {
   final VoidCallback? onSearchPressed;
   final String? userImgUrl;
+  final User user;
 
-  const HomePageWidget({Key? key, this.onSearchPressed, this.userImgUrl})
+  const HomePageWidget({Key? key, this.onSearchPressed,required this.user, this.userImgUrl})
       : super(key: key);
 
   @override
@@ -75,7 +77,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     icon: ClipRRect(
                       borderRadius: BorderRadius.circular(900.0),
                       child: Image.network(
-                        widget.userImgUrl ??
+                        widget.user.avatar ??
                             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU',
                         width: 35,
                         height: 35,
@@ -88,7 +90,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         },
                       ),
                     ),
-                    onPressed: () {MyApp.To(context, MenuPageWidget());},
+                    onPressed: () {MyApp.To(context, MenuPageWidget(user: widget.user,));},
                   ),
                 ),
                 end: IconButton(

@@ -158,7 +158,7 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
     final tabs = {
       'HomePage': HomePageWidget(
         onSearchPressed: () => _tabController.animateTo(4),
-        userImgUrl: widget.user.avatar,
+       user: widget.user,
       ),
       'SchedulePage': SchedulePageWidget(),
       'CoursesPage': CoursesPageWidget(),
