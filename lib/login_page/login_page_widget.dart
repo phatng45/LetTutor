@@ -233,7 +233,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                   alignment: AlignmentDirectional(0.0, 0.0),
                                   child: FFButtonWidget(
                                     onPressed: () {
-                                      _login("phhai@ymail.com", "123456");
+                                      _login(_model.textFieldModel.textController.text, _model.passwordFieldModel.textController.text);
+                                      // _login("phhai@ymail.com", "123456");
                                     },
                                     text: 'Login',
                                     options: FFButtonOptions(

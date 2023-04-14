@@ -11,6 +11,7 @@ import 'package:let_tutor/flutter_flow/flutter_flow_widgets.dart';
 import 'package:let_tutor/index.dart';
 import 'package:let_tutor/main.dart';
 
+import '../api/api_service.dart';
 import 'sign_up_page_model.dart';
 
 export 'sign_up_page_model.dart';
@@ -53,16 +54,16 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
             width: MediaQuery.of(context).size.width * 1.0,
             height: MediaQuery.of(context).size.height * 1.0,
             decoration: BoxDecoration(
-              // gradient: LinearGradient(
-              //   colors: [
-              //     FlutterFlowTheme.of(context).primaryBackground,
-              //     FlutterFlowTheme.of(context).secondaryBackground
-              //   ],
-              //   stops: [0.0, 0.5],
-              //   begin: AlignmentDirectional(0.0, -1.0),
-              //   end: AlignmentDirectional(0, 1.0),
-              // ),
-            ),
+                // gradient: LinearGradient(
+                //   colors: [
+                //     FlutterFlowTheme.of(context).primaryBackground,
+                //     FlutterFlowTheme.of(context).secondaryBackground
+                //   ],
+                //   stops: [0.0, 0.5],
+                //   begin: AlignmentDirectional(0.0, -1.0),
+                //   end: AlignmentDirectional(0, 1.0),
+                // ),
+                ),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -230,16 +231,11 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                                   Align(
                                     alignment: AlignmentDirectional(0.0, 0.0),
                                     child: FFButtonWidget(
-                                      onPressed: () {
-                                        print(
-                                            'buttonCreateAccount pressed ...');
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  LoginPageWidget()),
-                                        );
-                                      },
+                                      onPressed: () => _signup(
+                                          _model.textFieldModel.textController
+                                              .text,
+                                          _model.passwordFieldModel1
+                                              .textController.text),
                                       text: 'Create Account',
                                       options: FFButtonOptions(
                                         width: 200.0,
@@ -384,5 +380,17 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
         ),
       ),
     );
+  }
+
+  void _signup(String email, String password) async {
+    var user = (await ApiService().register(email, password));
+
+    if (user != null) {
+      MyApp.To(
+          context,
+          NavBarPage(
+            user: user,
+          ));
+    }
   }
 }

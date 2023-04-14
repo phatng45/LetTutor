@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
+import 'package:let_tutor/index.dart';
 import 'package:let_tutor/schedule_page/schedule_page_widget.dart';
 
+import '../main.dart';
 import '../models/user.dart';
 
 class MenuPageWidget extends StatefulWidget {
@@ -86,7 +88,7 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
                         backgroundColor: Colors.red,
                         foregroundColor: Colors.white,
                         textStyle: FlutterFlowTheme.of(context).subtitle1),
-                    onPressed: () {},
+                    onPressed: () => _logout(),
                     child: SizedBox(
                         width: double.maxFinite,
                         height: 50,
@@ -97,5 +99,10 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
         ),
       ),
     );
+  }
+
+  _logout() {
+    MyApp.prefs.remove("ACCESS_TOKEN");
+    MyApp.To(context, LoginPageWidget());
   }
 }

@@ -24,6 +24,24 @@ class ApiService {
     return null;
   }
 
+  Future<User?> register(String email, String password) async {
+    final url = ApiConstants.baseUrl + ApiConstants.register;
+    final data = {"email": email, "password": password};
+    final response = await Dio().post(url,
+        data: data,
+        options: Options(
+            headers: ApiConstants.authorization,
+            contentType: Headers.formUrlEncodedContentType));
+
+    if (response.statusCode == 200) {
+      User user = User.fromJson(response.data["user"]);
+      String accessToken = response.data["tokens"]["access"]["token"];
+      MyApp.prefs.setString("ACCESS_TOKEN", accessToken);
+      return user;
+    }
+    return null;
+  }
+
   Future<List<Tutor>?> tutorPagination(int perPage, int page) async {
     final url =
         ApiConstants.baseUrl + ApiConstants.tutorPagination(perPage, page);
