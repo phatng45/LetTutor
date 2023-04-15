@@ -11,6 +11,7 @@ import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_widgets.dart';
 import 'package:let_tutor/index.dart';
 import 'package:let_tutor/main.dart';
+import 'package:let_tutor/models/user.dart';
 
 import 'login_page_model.dart';
 
@@ -233,8 +234,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                   alignment: AlignmentDirectional(0.0, 0.0),
                                   child: FFButtonWidget(
                                     onPressed: () {
-                                      _login(_model.textFieldModel.textController.text, _model.passwordFieldModel.textController.text);
-                                      // _login("phhai@ymail.com", "123456");
+                                      // _login(_model.textFieldModel.textController.text, _model.passwordFieldModel.textController.text);
+                                      _login("phhai@ymail.com", "123456");
                                     },
                                     text: 'Login',
                                     options: FFButtonOptions(
@@ -381,5 +382,11 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
             user: user,
           ));
     }
+
+    // MyApp.To(
+    //     context,
+    //     NavBarPage(
+    //       user: new User(),
+    //     ));
   }
 }

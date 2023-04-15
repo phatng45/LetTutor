@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 
 import '../main.dart';
 import '../models/course.dart';
@@ -10,10 +11,13 @@ class ApiService {
   Future<User?> login(String email, String password) async {
     final url = ApiConstants.baseUrl + ApiConstants.login;
     final data = {"email": email, "password": password};
+   print("before");
+
     final response = await Dio().post(
       url,
       data: data,
     );
+    print("after");
 
     if (response.statusCode == 200) {
       User user = User.fromJson(response.data["user"]);
@@ -30,7 +34,6 @@ class ApiService {
     final response = await Dio().post(url,
         data: data,
         options: Options(
-            headers: ApiConstants.authorization,
             contentType: Headers.formUrlEncodedContentType));
 
     if (response.statusCode == 200) {
@@ -38,6 +41,9 @@ class ApiService {
       String accessToken = response.data["tokens"]["access"]["token"];
       MyApp.prefs.setString("ACCESS_TOKEN", accessToken);
       return user;
+    }
+    else{
+      print(response.data);
     }
     return null;
   }
