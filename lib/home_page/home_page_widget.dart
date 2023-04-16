@@ -76,18 +76,20 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   child: IconButton(
                     icon: ClipRRect(
                       borderRadius: BorderRadius.circular(900.0),
-                      child: Image.network(
-                        widget.user.avatar ??
-                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU',
-                        width: 35,
-                        height: 35,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Image.network(
-                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU',
-                            fit: BoxFit.cover,
-                          );
-                        },
+                      child: SizedBox(
+                        width: 37,
+                        height: 37,
+                        child: Image.network(
+                          widget.user.avatar ??
+                              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU',
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Image.network(
+                              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU',
+                              fit: BoxFit.cover,
+                            );
+                          },
+                        ),
                       ),
                     ),
                     onPressed: () {MyApp.To(context, MenuPageWidget(user: widget.user,));},

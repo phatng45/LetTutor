@@ -21,6 +21,11 @@ class ApiService {
         User user = User.fromJson(response.data["user"]);
         String accessToken = response.data["tokens"]["access"]["token"];
         MyApp.prefs.setString("ACCESS_TOKEN", accessToken);
+
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Login successfully!'),
+        ));
+
         return user;
       }
     } catch (e) {
@@ -41,14 +46,15 @@ class ApiService {
       final response = await Dio().post(url,
           data: data,
           options: Options(contentType: Headers.formUrlEncodedContentType));
-      print(response.data["user"]);
 
-      User user = User.fromJsonRegister(response.data["user"]);
+      User user = User.fromJsonFromRegister(response.data["user"]);
 
-      print(response.data["user"]);
-      print("USER: $user");
       String accessToken = response.data["tokens"]["access"]["token"];
       MyApp.prefs.setString("ACCESS_TOKEN", accessToken);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Account created successfully!'),
+      ));
+
       return user;
     } catch (e) {
       if (e is DioError)

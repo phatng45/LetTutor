@@ -34,26 +34,34 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
                         color: Colors.indigo,
                       )),
                 ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(900.0),
-                  child: Image.network(
-                    widget.user.avatar ??
-                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU',
-                    width: 100,
-                    height: 100,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Image.network(
-                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU',
-                        fit: BoxFit.cover,
-                      );
-                    },
+                SizedBox(
+                  width: 100,
+                  height: 100,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(900.0),
+                    child: Image.network(
+                      widget.user.avatar ??
+                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU',
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Image.network(
+                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU',
+                          fit: BoxFit.cover,
+                        );
+                      },
+                    ),
                   ),
                 ),
-                Text((widget.user.name ?? 'Unnamed') +
-                    (widget.user.roles?[0] == 'student'
-                        ? " (Student)"
-                        : " (Tutor)")),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  (widget.user.name ?? 'Unnamed') +
+                      (widget.user.roles?.contains('tutor') ?? false
+                          ? " (Tutor)"
+                          : " (Student)"),
+                  style: FlutterFlowTheme.of(context).title1,
+                ),
                 SizedBox(
                   height: 20,
                 ),

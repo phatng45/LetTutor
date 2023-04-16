@@ -67,7 +67,7 @@ class User {
     canSendMessage = json['canSendMessage'];
   }
 
-  User.fromJsonRegister(Map<String, dynamic> json) {
+  User.fromJsonFromRegister(Map<String, dynamic> json) {
     id = json['id'];
     email = json['email'];
     name = json['name'];
