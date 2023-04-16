@@ -43,7 +43,28 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                TabHeader(title: 'Schedule'),
+                TabHeader(
+                  title: 'Schedule',
+                  end: IconButton(
+                    icon: SizedBox(
+                      width: 25,
+                      height: 25,
+                      child: Image.network(
+                        'https://cdn-icons-png.flaticon.com/512/9297/9297236.png',
+                        colorBlendMode: BlendMode.srcIn,
+                        color: Colors.indigo,
+                      ),
+                    ),
+                    style: IconButton.styleFrom(padding: EdgeInsets.zero),
+
+                    // style: IconButton.styleFrom(
+                    //   backgroundColor: Colors.white,
+                    //   padding: EdgeInsets.zero,
+                    // ),
+
+                    onPressed: () {},
+                  ),
+                ),
                 Container(
                   width: MediaQuery.of(context).size.width * 1.0,
                   decoration: BoxDecoration(
@@ -71,7 +92,10 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            TutorGeneralInfoWidget(hasRating:false, context: context,),
+                            TutorGeneralInfoWidget(
+                              hasRating: false,
+                              context: context,
+                            ),
                             BestDividerWidget(
                               title: '',
                             ),
@@ -92,51 +116,55 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
 }
 
 class TabHeader extends StatelessWidget {
-   TabHeader({Key? key, required this.title, this.end, this.start, this.centerTitle = false})
+  TabHeader(
+      {Key? key,
+      required this.title,
+      this.end,
+      this.start,
+      this.centerTitle = false})
       : super(key: key);
 
   final String title;
   final Widget? end;
   final Widget? start;
-   bool? centerTitle = false;
+  bool? centerTitle = false;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.fromLTRB(start == null ? 30 : 0, 10, 30, 0),
-      child: centerTitle == false ?
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              start ?? SizedBox.shrink(),
-              Text(title,
-                  style: FlutterFlowTheme.of(context).title1.override(
-                        fontFamily: FlutterFlowTheme.of(context).title1Family,
-                        color: Colors.indigo,
-                        fontSize: 25,
-                      )),
-            ],
-          ),
-          end ?? SizedBox.shrink(),
-        ],
-      ):
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          start ?? SizedBox.shrink(),
-          Text(title,
-              style: FlutterFlowTheme.of(context).title1.override(
-                fontFamily: FlutterFlowTheme.of(context).title1Family,
-                color: Colors.indigo,
-                fontSize: 30,
-              )),
-          end ?? SizedBox.shrink(),
-        ],
-      )
-
-      ,
+      child: centerTitle == false
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    start ?? SizedBox.shrink(),
+                    Text(title,
+                        style: FlutterFlowTheme.of(context).title1.override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).title1Family,
+                              color: Colors.indigo,
+                              fontSize: 25,
+                            )),
+                  ],
+                ),
+                end ?? SizedBox.shrink(),
+              ],
+            )
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                start ?? SizedBox.shrink(),
+                Text(title,
+                    style: FlutterFlowTheme.of(context).title1.override(
+                          fontFamily: FlutterFlowTheme.of(context).title1Family,
+                          color: Colors.indigo,
+                          fontSize: 30,
+                        )),
+                end ?? SizedBox.shrink(),
+              ],
+            ),
     );
   }
 }

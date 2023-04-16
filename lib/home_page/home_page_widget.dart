@@ -106,7 +106,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       scale: .5,
                     ),
                   ),
-                  style: IconButton.styleFrom(backgroundColor: Colors.black12,padding: EdgeInsets.zero),
+                  style: IconButton.styleFrom(padding: EdgeInsets.zero),
                   onPressed: widget.onSearchPressed,
                 ),
               ),

@@ -205,9 +205,9 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
                     _tabController.animateTo(1);
                   },
                   unselectedIconUrl:
-                      'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/schedule/wght500/48px.svg',
+                      'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/event/default/48px.svg',
                   selectedIconUrl:
-                      'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/schedule/fill1/48px.svg',
+                      'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/event/fill1/48px.svg',
                   isSelected: _tabController.index == 1,
                   name: 'Schedule'),
               BottomAppBarButton(
