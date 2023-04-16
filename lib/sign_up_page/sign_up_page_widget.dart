@@ -383,8 +383,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
   }
 
   void _signup(String email, String password) async {
-    var user = (await ApiService().register(email, password));
-
+    var user = (await ApiService().register(email, password, context));
     if (user != null) {
       MyApp.To(
           context,

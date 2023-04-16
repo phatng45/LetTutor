@@ -6,7 +6,7 @@ class User {
   String? country;
   String? phone;
   List<String>? roles;
-  Null? language;
+  String? language;
   String? birthday;
   bool? isActivated;
   WalletInfo? walletInfo;
@@ -17,7 +17,7 @@ class User {
   List<String>? testPreparations;
   bool? isPhoneActivated;
   int? timezone;
-  Null? studySchedule;
+  String? studySchedule;
   bool? canSendMessage;
 
   User(
@@ -61,6 +61,24 @@ class User {
     level = json['level'];
     learnTopics = json['learnTopics'].cast<String>();
     testPreparations = json['testPreparations'].cast<String>();
+    isPhoneActivated = json['isPhoneActivated'];
+    timezone = json['timezone'];
+    studySchedule = json['studySchedule'];
+    canSendMessage = json['canSendMessage'];
+  }
+
+  User.fromJsonRegister(Map<String, dynamic> json) {
+    id = json['id'];
+    email = json['email'];
+    name = json['name'];
+    avatar = json['avatar'];
+    country = json['country'];
+    phone = json['phone'];
+    language = json['language'];
+    birthday = json['birthday'];
+    isActivated = json['isActivated'];
+    requireNote = json['requireNote'];
+    level = json['level'];
     isPhoneActivated = json['isPhoneActivated'];
     timezone = json['timezone'];
     studySchedule = json['studySchedule'];

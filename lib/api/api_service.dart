@@ -8,43 +8,55 @@ import '../models/user.dart';
 import 'api_constants.dart';
 
 class ApiService {
-  Future<User?> login(String email, String password) async {
+  Future<User?> login(
+      String email, String password, BuildContext context) async {
     final url = ApiConstants.baseUrl + ApiConstants.login;
     final data = {"email": email, "password": password};
-   print("before");
-
-    final response = await Dio().post(
-      url,
-      data: data,
-    );
-    print("after");
-
-    if (response.statusCode == 200) {
-      User user = User.fromJson(response.data["user"]);
-      String accessToken = response.data["tokens"]["access"]["token"];
-      MyApp.prefs.setString("ACCESS_TOKEN", accessToken);
-      return user;
+    try {
+      final response = await Dio().post(
+        url,
+        data: data,
+      );
+      if (response.statusCode == 200) {
+        User user = User.fromJson(response.data["user"]);
+        String accessToken = response.data["tokens"]["access"]["token"];
+        MyApp.prefs.setString("ACCESS_TOKEN", accessToken);
+        return user;
+      }
+    } catch (e) {
+      if (e is DioError)
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(e.message!),
+        ));
     }
     return null;
   }
 
-  Future<User?> register(String email, String password) async {
+  Future<User?> register(
+      String email, String password, BuildContext context) async {
     final url = ApiConstants.baseUrl + ApiConstants.register;
     final data = {"email": email, "password": password};
-    final response = await Dio().post(url,
-        data: data,
-        options: Options(
-            contentType: Headers.formUrlEncodedContentType));
 
-    if (response.statusCode == 200) {
-      User user = User.fromJson(response.data["user"]);
+    try {
+      final response = await Dio().post(url,
+          data: data,
+          options: Options(contentType: Headers.formUrlEncodedContentType));
+      print(response.data["user"]);
+
+      User user = User.fromJsonRegister(response.data["user"]);
+
+      print(response.data["user"]);
+      print("USER: $user");
       String accessToken = response.data["tokens"]["access"]["token"];
       MyApp.prefs.setString("ACCESS_TOKEN", accessToken);
       return user;
+    } catch (e) {
+      if (e is DioError)
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(e.message!),
+        ));
     }
-    else{
-      print(response.data);
-    }
+
     return null;
   }
 
