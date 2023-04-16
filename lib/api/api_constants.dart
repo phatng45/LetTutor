@@ -28,6 +28,9 @@ class ApiConstants {
   static String userInfo = 'user/info';
   static String userInfoUpdate = 'user/info';
 
+  static String schedule = 'schedule';
+
+
   static String tutorPagination(int perPage, int page) =>
       'tutor/more?perPage=' + perPage.toString() + '&page=' + page.toString();
 
