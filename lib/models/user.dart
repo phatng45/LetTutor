@@ -13,8 +13,8 @@ class User {
   List<String>? courses;
   String? requireNote;
   String? level;
-  List<String>? learnTopics;
-  List<String>? testPreparations;
+  List<Topic>? learnTopics;
+  List<Topic>? testPreparations;
   bool? isPhoneActivated;
   int? timezone;
   String? studySchedule;
@@ -59,8 +59,19 @@ class User {
     courses = json['courses'].cast<String>();
     requireNote = json['requireNote'];
     level = json['level'];
-    learnTopics = json['learnTopics'].cast<String>();
-    testPreparations = json['testPreparations'].cast<String>();
+    if (json['learnTopics'] != null) {
+      learnTopics = <Topic>[];
+      json['learnTopics'].forEach((v) {
+        learnTopics!.add(new Topic.fromJson(v));
+      });
+    }
+    if (json['testPreparations'] != null) {
+      testPreparations = <Topic>[];
+      json['testPreparations'].forEach((v) {
+        testPreparations!.add(new Topic.fromJson(v));
+      });
+    }
+
     isPhoneActivated = json['isPhoneActivated'];
     timezone = json['timezone'];
     studySchedule = json['studySchedule'];
@@ -150,6 +161,28 @@ class WalletInfo {
     data['createdAt'] = this.createdAt;
     data['updatedAt'] = this.updatedAt;
     data['bonus'] = this.bonus;
+    return data;
+  }
+}
+
+class Topic {
+  int? id;
+  String? key;
+  String? name;
+
+  Topic({this.id, this.key, this.name});
+
+  Topic.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    key = json['key'];
+    name = json['name'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['key'] = this.key;
+    data['name'] = this.name;
     return data;
   }
 }

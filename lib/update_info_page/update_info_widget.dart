@@ -1,10 +1,14 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:let_tutor/components/copied_multi_select_chip_display.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/models/user.dart';
 import 'package:let_tutor/schedule_page/schedule_page_widget.dart';
+import 'package:multi_select_flutter/util/multi_select_item.dart';
+import 'package:multi_select_flutter/util/multi_select_list_type.dart';
 
+import '../components/copied_multi_select_dialog_field.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 
 class UpdateInfoWidget extends StatefulWidget {
@@ -111,6 +115,9 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
                       ],
                     ),
                     _levelField(context),
+                    Text('Want to learn',
+                        style: FlutterFlowTheme.of(context).bodyText1),
+                    _wantToLearnField(context),
                     Text('Study Schedule',
                         style: FlutterFlowTheme.of(context).bodyText1),
                     _scheduleField(context),
@@ -365,9 +372,9 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
         });
   }
 
-  String levelValue = levels.keys.first;
+  String levelValue = LevelToLevelId.keys.first;
 
-  static const Map<String, String> levels = {
+  static const Map<String, String> LevelToLevelId = {
     'Pre A1 (Beginner)': 'BEGINNER',
     'A1 (Higher Beginner)': 'HIGHER_BEGINNER',
     'A2 (Pre-Intermediate)': 'PRE_INTERMEDIATE',
@@ -428,12 +435,74 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
           levelValue = value!;
         });
       },
-      items: levels.keys.map<DropdownMenuItem<String>>((String value) {
+      items: LevelToLevelId.keys.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
           child: Text(value),
         );
       }).toList(),
+    );
+  }
+
+  late List<dynamic> wantToLearn = [];
+
+  static const Map<String, int> TopicNameToTopicId = {
+    'STARTERS': 1,
+    'MOVERS': 2,
+    'FLYERS': 3,
+    'KET': 4,
+    'PET': 5,
+    'IELTS': 6,
+    'TOEFL': 7,
+    'TOEIC': 8,
+    'English for Kids': 3,
+    'Business English': 4,
+    'Conversational English': 5
+  };
+
+  _wantToLearnField(BuildContext context) {
+
+    return DefaultTextStyle.merge(
+      style: FlutterFlowTheme.of(context).bodyText1,
+      child: Container(
+          decoration: BoxDecoration(
+            color: FlutterFlowTheme.of(context).secondaryBackground,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(
+              color: Colors.grey.shade300,
+            ),
+          ),
+          child: MultiSelectDialogField(
+            listType: MultiSelectListType.CHIP,
+            initialValue: wantToLearn,
+            items:
+                TopicNameToTopicId.keys.map((e) => MultiSelectItem(e, e)).toList(),
+            chipDisplay: MultiSelectChipDisplay(
+              chipColor: Color(0xFFBCE8FF),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(200),
+              ),
+              textStyle:  FlutterFlowTheme.of(context).bodyText1,
+              items: wantToLearn.map((e) => MultiSelectItem(e, e)).toList(),
+              onTap: (value) {
+                setState(() {
+                  wantToLearn.remove(value);
+                });
+              },
+            ),
+            buttonIcon: Icon(Icons.search),
+            decoration: BoxDecoration(),
+            searchHintStyle: FlutterFlowTheme.of(context).bodyText1,
+            itemsTextStyle: FlutterFlowTheme.of(context).bodyText1,
+            searchTextStyle: FlutterFlowTheme.of(context).bodyText1,
+            selectedItemsTextStyle: FlutterFlowTheme.of(context).bodyText1,
+            onConfirm: (List<dynamic> value) {
+              setState(() {
+                wantToLearn = value;
+              });
+            },
+          ),
+        ),
     );
   }
 }
