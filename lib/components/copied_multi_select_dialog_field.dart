@@ -2,9 +2,9 @@
 
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';
-import 'package:multi_select_flutter/dialog/mult_select_dialog.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
 import 'package:multi_select_flutter/util/multi_select_list_type.dart';
+import 'copied_mult_select_dialog.dart';
 import 'copied_multi_select_chip_display.dart';
 
 /// A customizable InkWell widget that opens the MultiSelectDialog
@@ -400,7 +400,7 @@ class __MultiSelectDialogFieldViewState<V>
           width: widget.dialogWidth,
           listType: widget.listType,
           items: widget.items,
-          title: widget.title ?? const Text("Select"),
+          title: widget.title ?? const SizedBox.shrink(),
           initialValue: _selectedItems,
           searchable: widget.searchable ?? false,
           confirmText: widget.confirmText,

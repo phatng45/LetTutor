@@ -133,6 +133,7 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
 
   TextFormField _scheduleField(BuildContext context) {
     return TextFormField(
+      autofocus: false,
       initialValue: user.studySchedule,
       style: FlutterFlowTheme.of(context).bodyText1,
       decoration: InputDecoration(
@@ -444,7 +445,9 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
     );
   }
 
-  late List<dynamic> wantToLearn = [];
+  late List<String> wantToLearn =
+      user.learnTopics?.map((e) => e.name ?? '').toList() ?? []
+        ..addAll(user.testPreparations?.map((e) => e.name ?? '') ?? []);
 
   static const Map<String, int> TopicNameToTopicId = {
     'STARTERS': 1,
@@ -461,48 +464,52 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
   };
 
   _wantToLearnField(BuildContext context) {
-
     return DefaultTextStyle.merge(
       style: FlutterFlowTheme.of(context).bodyText1,
       child: Container(
-          decoration: BoxDecoration(
-            color: FlutterFlowTheme.of(context).secondaryBackground,
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(
-              color: Colors.grey.shade300,
-            ),
+        decoration: BoxDecoration(
+          color: FlutterFlowTheme.of(context).secondaryBackground,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            color: Colors.grey.shade300,
           ),
-          child: MultiSelectDialogField(
-            listType: MultiSelectListType.CHIP,
-            initialValue: wantToLearn,
-            items:
-                TopicNameToTopicId.keys.map((e) => MultiSelectItem(e, e)).toList(),
-            chipDisplay: MultiSelectChipDisplay(
-              chipColor: Color(0xFFBCE8FF),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(200),
-              ),
-              textStyle:  FlutterFlowTheme.of(context).bodyText1,
-              items: wantToLearn.map((e) => MultiSelectItem(e, e)).toList(),
-              onTap: (value) {
-                setState(() {
-                  wantToLearn.remove(value);
-                });
-              },
+        ),
+        child: MultiSelectDialogField(
+          title: Text('Select'),
+          buttonText: Text('Select Category'),
+          cancelText: Text(''),
+          confirmText: Text('Save'),
+          initialValue: wantToLearn,
+          listType: MultiSelectListType.CHIP,
+          items: TopicNameToTopicId.keys
+              .map((e) => MultiSelectItem(e, e))
+              .toList(),
+          chipDisplay: MultiSelectChipDisplay(
+            chipColor: Color(0xFFBCE8FF),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(200),
             ),
-            buttonIcon: Icon(Icons.search),
-            decoration: BoxDecoration(),
-            searchHintStyle: FlutterFlowTheme.of(context).bodyText1,
-            itemsTextStyle: FlutterFlowTheme.of(context).bodyText1,
-            searchTextStyle: FlutterFlowTheme.of(context).bodyText1,
-            selectedItemsTextStyle: FlutterFlowTheme.of(context).bodyText1,
-            onConfirm: (List<dynamic> value) {
+            textStyle: FlutterFlowTheme.of(context).bodyText1,
+            items: wantToLearn.map((e) => MultiSelectItem(e, e)).toList(),
+            onTap: (value) {
               setState(() {
-                wantToLearn = value;
+                wantToLearn.remove(value);
               });
             },
           ),
+          buttonIcon: Icon(Icons.search),
+          decoration: BoxDecoration(),
+          searchHintStyle: FlutterFlowTheme.of(context).bodyText1,
+          itemsTextStyle: FlutterFlowTheme.of(context).bodyText1,
+          searchTextStyle: FlutterFlowTheme.of(context).bodyText1,
+          selectedItemsTextStyle: FlutterFlowTheme.of(context).bodyText1,
+          onConfirm: (List<dynamic> value) {
+            setState(() {
+              wantToLearn = value.map((e) => e as String).toList();
+            });
+          },
         ),
+      ),
     );
   }
 }
