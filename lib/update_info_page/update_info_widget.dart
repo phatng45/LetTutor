@@ -1,4 +1,3 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
@@ -77,65 +76,67 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
                       children: <Widget>[
                         Text(
                           '*',
-                          style: FlutterFlowTheme.of(context)
-                              .bodyText1
-                              .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .bodyText1Family,
-                                  color: Colors.red),
+                          style: FlutterFlowTheme.of(context).title4.override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).title4Family,
+                              color: Colors.red),
                         ),
                         Text('Name',
-                            style: FlutterFlowTheme.of(context).bodyText1),
+                            style: FlutterFlowTheme.of(context).title4),
                       ],
                     ),
                     _nameField(context),
+                    SizedBox(height: 6),
                     Row(
                       children: <Widget>[
                         Text(
                           '*',
-                          style: FlutterFlowTheme.of(context)
-                              .bodyText1
-                              .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .bodyText1Family,
-                                  color: Colors.red),
+                          style: FlutterFlowTheme.of(context).title4.override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).title4Family,
+                              color: Colors.red),
                         ),
                         Text('Country',
-                            style: FlutterFlowTheme.of(context).bodyText1),
+                            style: FlutterFlowTheme.of(context).title4),
                       ],
                     ),
                     _countryField(context),
+                    SizedBox(height: 6),
                     Text('Email Address',
-                        style: FlutterFlowTheme.of(context).bodyText1),
+                        style: FlutterFlowTheme.of(context).title4),
                     _emailField(context),
+                    SizedBox(height: 6),
                     Text('Phone Number',
-                        style: FlutterFlowTheme.of(context).bodyText1),
+                        style: FlutterFlowTheme.of(context).title4),
                     _phoneField(context),
+                    SizedBox(height: 6),
                     Text('Birthday',
-                        style: FlutterFlowTheme.of(context).bodyText1),
+                        style: FlutterFlowTheme.of(context).title4),
                     _birthdayField(context),
+                    SizedBox(height: 6),
                     Row(
                       children: <Widget>[
                         Text(
                           '*',
-                          style: FlutterFlowTheme.of(context)
-                              .bodyText1
-                              .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .bodyText1Family,
-                                  color: Colors.red),
+                          style: FlutterFlowTheme.of(context).title4.override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).title4Family,
+                              color: Colors.red),
                         ),
                         Text('Level',
-                            style: FlutterFlowTheme.of(context).bodyText1),
+                            style: FlutterFlowTheme.of(context).title4),
                       ],
                     ),
                     _levelField(context),
+                    SizedBox(height: 6),
                     Text('Want to learn',
-                        style: FlutterFlowTheme.of(context).bodyText1),
+                        style: FlutterFlowTheme.of(context).title4),
                     _wantToLearnField(context),
+                    SizedBox(height: 6),
                     Text('Study Schedule',
-                        style: FlutterFlowTheme.of(context).bodyText1),
+                        style: FlutterFlowTheme.of(context).title4),
                     _scheduleField(context),
+                    SizedBox(height: 6),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
@@ -146,6 +147,7 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
                             }),
                       ],
                     ),
+                    SizedBox(height: 100),
                   ],
                 ),
               ),
@@ -411,7 +413,10 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
   _levelField(BuildContext context) {
     return DropdownButtonFormField(
       value: levelValue,
-      icon: const Icon(Icons.expand_more),
+      icon: const Icon(
+        Icons.expand_more,
+        color: Colors.grey,
+      ),
       elevation: 16,
       style: FlutterFlowTheme.of(context).bodyText1,
       decoration: InputDecoration(
@@ -525,7 +530,10 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
               });
             },
           ),
-          buttonIcon: Icon(Icons.search),
+          buttonIcon: Icon(
+            Icons.search,
+            color: Colors.grey,
+          ),
           decoration: BoxDecoration(),
           searchHintStyle: FlutterFlowTheme.of(context).bodyText1,
           itemsTextStyle: FlutterFlowTheme.of(context).bodyText1,
@@ -560,7 +568,5 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
 
     var user = (await ApiService().updateUserInfo(name, country, phone,
         birthday, level, learnTopics, testPreparations, context));
-
-
   }
 }

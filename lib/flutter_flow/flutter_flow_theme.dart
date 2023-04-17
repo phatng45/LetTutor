@@ -57,6 +57,8 @@ abstract class FlutterFlowTheme {
   TextStyle get title2 => typography.title2;
   String get title3Family => typography.title3Family;
   TextStyle get title3 => typography.title3;
+  String get title4Family => typography.title4Family;
+  TextStyle get title4 => typography.title4;
   String get subtitle1Family => typography.subtitle1Family;
   TextStyle get subtitle1 => typography.subtitle1;
   String get subtitle2Family => typography.subtitle2Family;
@@ -105,6 +107,8 @@ abstract class Typography {
   TextStyle get title2;
   String get title3Family;
   TextStyle get title3;
+  String get title4Family;
+  TextStyle get title4;
   String get subtitle1Family;
   TextStyle get subtitle1;
   String get subtitle2Family;
@@ -141,6 +145,13 @@ class MobileTypography extends Typography {
         fontWeight: FontWeight.w500,
         fontSize: 20.0,
       );
+  String get title4Family => 'Outfit';
+  TextStyle get title4 => GoogleFonts.getFont(
+    'Outfit',
+    color: Colors.indigo,
+    fontWeight: FontWeight.w500,
+    fontSize: 17.0,
+  );
   String get subtitle1Family => 'Outfit';
   TextStyle get subtitle1 => GoogleFonts.getFont(
         'Outfit',
@@ -197,6 +208,13 @@ class TabletTypography extends Typography {
         fontWeight: FontWeight.normal,
         fontSize: 20.0,
       );
+  String get title4Family => 'Outfit';
+  TextStyle get title4 => GoogleFonts.getFont(
+    'Outfit',
+    color: Colors.indigo,
+    fontWeight: FontWeight.w500,
+    fontSize: 18.0,
+       );
   String get subtitle1Family => 'Outfit';
   TextStyle get subtitle1 => GoogleFonts.getFont(
         'Outfit',
@@ -253,6 +271,13 @@ class DesktopTypography extends Typography {
         fontWeight: FontWeight.bold,
         fontSize: 20.0,
       );
+  String get title4Family => 'Outfit';
+  TextStyle get title4 => GoogleFonts.getFont(
+    'Outfit',
+    color: Colors.indigo,
+    fontWeight: FontWeight.w500,
+    fontSize: 18.0,
+  );
   String get subtitle1Family => 'Outfit';
   TextStyle get subtitle1 => GoogleFonts.getFont(
         'Outfit',
