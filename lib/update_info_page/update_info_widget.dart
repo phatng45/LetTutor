@@ -1,6 +1,9 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:let_tutor/api/api_service.dart';
+import 'package:let_tutor/components/class_schedule_status_widget.dart';
 import 'package:let_tutor/components/copied_multi_select_chip_display.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/models/user.dart';
@@ -21,12 +24,21 @@ class UpdateInfoWidget extends StatefulWidget {
 }
 
 class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
-  final _formKey = GlobalKey<FormState>();
   late User user = widget.user;
+
+  late TextEditingController _nameTextFieldController =
+      new TextEditingController(
+    text: user.name ?? '',
+  );
 
   late TextEditingController _countryTextFieldController =
       new TextEditingController(
     text: user.country ?? '',
+  );
+
+  late TextEditingController _phoneTextFieldController =
+      new TextEditingController(
+    text: user.phone ?? '',
   );
 
   late TextEditingController _birthdayTextFieldController =
@@ -34,9 +46,12 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
     text: user.birthday ?? '',
   );
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -121,6 +136,16 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
                     Text('Study Schedule',
                         style: FlutterFlowTheme.of(context).bodyText1),
                     _scheduleField(context),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        PositiveButton(
+                            title: 'Save changes',
+                            onPressed: () {
+                              _updateUserInfo();
+                            }),
+                      ],
+                    ),
                   ],
                 ),
               ),
@@ -219,7 +244,7 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
 
   TextFormField _phoneField(BuildContext context) {
     return TextFormField(
-      initialValue: user.studySchedule,
+      controller: _phoneTextFieldController,
       style: FlutterFlowTheme.of(context).bodyText1,
       decoration: InputDecoration(
         border: OutlineInputBorder(
@@ -322,10 +347,8 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
 
   TextFormField _nameField(BuildContext context) {
     return TextFormField(
-        initialValue: user.name,
+        controller: _nameTextFieldController,
         style: FlutterFlowTheme.of(context).bodyText1,
-        key: _formKey,
-        onEditingComplete: () => _formKey.currentState!.validate(),
         decoration: InputDecoration(
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
@@ -449,18 +472,21 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
       user.learnTopics?.map((e) => e.name ?? '').toList() ?? []
         ..addAll(user.testPreparations?.map((e) => e.name ?? '') ?? []);
 
-  static const Map<String, int> TopicNameToTopicId = {
-    'STARTERS': 1,
-    'MOVERS': 2,
-    'FLYERS': 3,
-    'KET': 4,
-    'PET': 5,
-    'IELTS': 6,
-    'TOEFL': 7,
-    'TOEIC': 8,
-    'English for Kids': 3,
-    'Business English': 4,
-    'Conversational English': 5
+  static const Map<String, String> LearnTopicsToId = {
+    'English for Kids': '3',
+    'Business English': '4',
+    'Conversational English': '5'
+  };
+
+  static const Map<String, String> TestPreparationsToId = {
+    'STARTERS': '1',
+    'MOVERS': '2',
+    'FLYERS': '3',
+    'KET': '4',
+    'PET': '5',
+    'IELTS': '6',
+    'TOEFL': '7',
+    'TOEIC': '8',
   };
 
   _wantToLearnField(BuildContext context) {
@@ -477,13 +503,15 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
         child: MultiSelectDialogField(
           title: Text('Select'),
           buttonText: Text('Select Category'),
-          cancelText: Text(''),
+          cancelText: Text('Cancel'),
           confirmText: Text('Save'),
           initialValue: wantToLearn,
           listType: MultiSelectListType.CHIP,
-          items: TopicNameToTopicId.keys
+          items: TestPreparationsToId.keys
               .map((e) => MultiSelectItem(e, e))
               .toList(),
+          items2:
+              LearnTopicsToId.keys.map((e) => MultiSelectItem(e, e)).toList(),
           chipDisplay: MultiSelectChipDisplay(
             chipColor: Color(0xFFBCE8FF),
             shape: RoundedRectangleBorder(
@@ -511,5 +539,28 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
         ),
       ),
     );
+  }
+
+  void _updateUserInfo() async {
+    String name = _nameTextFieldController.text;
+    String country = _countryTextFieldController.text;
+    String phone = _phoneTextFieldController.text;
+    String birthday = _birthdayTextFieldController.text;
+    String level = LevelToLevelId[levelValue] ?? '';
+    List<String> learnTopics = wantToLearn
+        .where((e) => LearnTopicsToId.keys.contains(e))
+        .map((e) => LearnTopicsToId[e] ?? '')
+        .where((e) => e != '')
+        .toList();
+    List<String> testPreparations = wantToLearn
+        .where((e) => TestPreparationsToId.keys.contains(e))
+        .map((e) => TestPreparationsToId[e] ?? '')
+        .where((e) => e != '')
+        .toList();
+
+    var user = (await ApiService().updateUserInfo(name, country, phone,
+        birthday, level, learnTopics, testPreparations, context));
+
+
   }
 }

@@ -1,7 +1,9 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:let_tutor/search_page/search_page_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -68,7 +70,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
+    return GetMaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'LetTutor',
       localizationsDelegates: [

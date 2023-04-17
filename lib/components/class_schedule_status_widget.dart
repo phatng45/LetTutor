@@ -46,18 +46,34 @@ class PositiveButton extends StatelessWidget {
   const PositiveButton(
       {Key? key,
       required this.title,
-      required this.icon,
+      this.icon,
       required this.onPressed})
       : super(key: key);
 
   final String title;
-  final Icon icon;
+  final Icon? icon;
   final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-      icon: icon,
+    return icon == null ?
+    ElevatedButton(
+      style: OutlinedButton.styleFrom(
+          side: BorderSide(width: 1.0, color: Colors.black12),
+          textStyle: FlutterFlowTheme.of(context).bodyText1.override(
+              fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
+              fontSize: 15,
+              fontWeight: FontWeight.w500),
+          foregroundColor: Colors.white,
+          backgroundColor: Colors.indigo,
+          disabledBackgroundColor: Colors.black54,
+          disabledForegroundColor: Colors.white),
+      onPressed: onPressed,
+      child: Text(title),
+    ):
+
+      ElevatedButton.icon(
+      icon: icon!,
       style: OutlinedButton.styleFrom(
           side: BorderSide(width: 1.0, color: Colors.black12),
           textStyle: FlutterFlowTheme.of(context).bodyText1.override(
@@ -78,9 +94,11 @@ class NegativeButton extends StatelessWidget {
   const NegativeButton({
     Key? key,
     required this.title,
+    this.onPressed
   }) : super(key: key);
 
   final String title;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -90,8 +108,9 @@ class NegativeButton extends StatelessWidget {
             textStyle: FlutterFlowTheme.of(context).bodyText1,
             foregroundColor: Colors.red,
             disabledForegroundColor: Colors.white,
-            disabledBackgroundColor: Colors.black54),
-        onPressed: () {},
+            disabledBackgroundColor: Colors.black54
+        ),
+        onPressed: onPressed,
         child: Text(title));
   }
 }

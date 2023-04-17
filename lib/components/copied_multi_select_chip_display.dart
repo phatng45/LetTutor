@@ -119,7 +119,8 @@ class MultiSelectChipDisplay<V> extends StatelessWidget {
                       },
                     ),
             )
-          : Wrap(
+          :
+      Wrap(
               children: items != null
                   ? items!.map((item) => _buildItem(item!, context)).toList()
                   : <Widget>[

@@ -4,6 +4,7 @@ import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
 import 'package:multi_select_flutter/util/multi_select_list_type.dart';
+
 import 'copied_mult_select_dialog.dart';
 import 'copied_multi_select_chip_display.dart';
 
@@ -27,6 +28,7 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
 
   /// List of items to select from.
   final List<MultiSelectItem<V>> items;
+  final List<MultiSelectItem<V>> items2;
 
   /// Fires when the an item is selected / unselected.
   final void Function(List<V>)? onSelectionChanged;
@@ -110,6 +112,7 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
 
   MultiSelectDialogField({
     required this.items,
+    required this.items2,
     required this.onConfirm,
     this.title,
     this.buttonText,
@@ -154,6 +157,7 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
         _MultiSelectDialogFieldView<V>(
           title: title,
           items: items,
+          items2: items2,
           buttonText: buttonText,
           buttonIcon: buttonIcon,
           chipDisplay: chipDisplay,
@@ -195,6 +199,7 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
   final Icon? buttonIcon;
   final Widget? title;
   final List<MultiSelectItem<V>> items;
+  final List<MultiSelectItem<V>> items2;
   final void Function(List<V>)? onSelectionChanged;
   final MultiSelectChipDisplay<V>? chipDisplay;
   final List<V> initialValue;
@@ -223,6 +228,7 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
 
   _MultiSelectDialogFieldView({
     required this.items,
+    required this.items2,
     this.title,
     this.buttonText,
     this.buttonIcon,
@@ -258,6 +264,7 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
   _MultiSelectDialogFieldView._withState(
       _MultiSelectDialogFieldView<V> field, FormFieldState<List<V>> state)
       : items = field.items,
+        items2 = field.items2,
         title = field.title,
         buttonText = field.buttonText,
         buttonIcon = field.buttonIcon,
@@ -322,8 +329,10 @@ class __MultiSelectDialogFieldViewState<V>
     List<MultiSelectItem<V>?> chipDisplayItems = [];
     chipDisplayItems = _selectedItems
         .map((e) =>
-        widget.items.firstWhereOrNull((element) => e == element.value))
-        .toList();
+            widget.items2.firstWhereOrNull((element) => e == element.value))
+        .toList()
+      ..addAll(_selectedItems.map((e) =>
+          widget.items.firstWhereOrNull((element) => e == element.value)));
     chipDisplayItems.removeWhere((element) => element == null);
     if (widget.chipDisplay != null) {
       // if user has specified a chipDisplay, use its params
@@ -400,6 +409,7 @@ class __MultiSelectDialogFieldViewState<V>
           width: widget.dialogWidth,
           listType: widget.listType,
           items: widget.items,
+          items2: widget.items2,
           title: widget.title ?? const SizedBox.shrink(),
           initialValue: _selectedItems,
           searchable: widget.searchable ?? false,

@@ -1,3 +1,4 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -375,6 +376,9 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
     var user = (await ApiService().login(email, password, context));
 
     if (user != null) {
+
+
+
       MyApp.To(
           context,
           NavBarPage(

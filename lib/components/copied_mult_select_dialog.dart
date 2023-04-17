@@ -1,6 +1,7 @@
 // edited from https://pub.dev/packages/multi_select_flutter
 
 import 'package:flutter/material.dart';
+import 'package:let_tutor/components/class_schedule_status_widget.dart';
 import 'package:multi_select_flutter/util/multi_select_actions.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
 import 'package:multi_select_flutter/util/multi_select_list_type.dart';
@@ -11,6 +12,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 class MultiSelectDialog<T> extends StatefulWidget with MultiSelectActions<T> {
   /// List of items to select from.
   final List<MultiSelectItem<T>> items;
+  final List<MultiSelectItem<T>> items2;
 
   /// The list of selected values before interaction.
   final List<T> initialValue;
@@ -84,6 +86,7 @@ class MultiSelectDialog<T> extends StatefulWidget with MultiSelectActions<T> {
 
   MultiSelectDialog({
     required this.items,
+    required this.items2,
     required this.initialValue,
     this.title,
     this.onSelectionChanged,
@@ -110,15 +113,16 @@ class MultiSelectDialog<T> extends StatefulWidget with MultiSelectActions<T> {
   });
 
   @override
-  State<StatefulWidget> createState() => _MultiSelectDialogState<T>(items);
+  State<StatefulWidget> createState() => _MultiSelectDialogState<T>(items, items2);
 }
 
 class _MultiSelectDialogState<T> extends State<MultiSelectDialog<T>> {
   List<T> _selectedValues = [];
   bool _showSearch = false;
   List<MultiSelectItem<T>> _items;
+  List<MultiSelectItem<T>> _items2;
 
-  _MultiSelectDialogState(this._items);
+  _MultiSelectDialogState(this._items, this._items2);
 
   @override
   void initState() {
@@ -129,6 +133,13 @@ class _MultiSelectDialogState<T> extends State<MultiSelectDialog<T>> {
       _items[i].selected = false;
       if (_selectedValues.contains(_items[i].value)) {
         _items[i].selected = true;
+      }
+    }
+
+    for (int i = 0; i < _items2.length; i++) {
+      _items2[i].selected = false;
+      if (_selectedValues.contains(_items2[i].value)) {
+        _items2[i].selected = true;
       }
     }
 
@@ -223,7 +234,7 @@ class _MultiSelectDialogState<T> extends State<MultiSelectDialog<T>> {
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(15.0)),
             side: BorderSide(color: Colors.grey.shade300)),
-        title: widget.title,
+        // title: widget.title,
         contentPadding: widget.listType == null ||
                 widget.listType == MultiSelectListType.LIST
             ? EdgeInsets.only(top: 12.0)
@@ -240,41 +251,54 @@ class _MultiSelectDialogState<T> extends State<MultiSelectDialog<T>> {
                   },
                 )
               : SingleChildScrollView(
-                  child: Wrap(
-                    children: _items.map(_buildChipItem).toList(),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Subjects',
+                        style: FlutterFlowTheme.of(context).title2,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Wrap(
+                        children: _items2.map(_buildChipItem).toList(),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        'Test Preparation',
+                        style: FlutterFlowTheme.of(context).title2,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Wrap(
+                        children: _items.map(_buildChipItem).toList(),
+                      ),
+                    ],
                   ),
                 ),
         ),
         actions: <Widget>[
-          TextButton(
-            child: widget.cancelText ??
-                Text(
-                  "CANCEL",
-                  style: TextStyle(
-                    color: (widget.selectedColor != null &&
-                            widget.selectedColor != Colors.transparent)
-                        ? widget.selectedColor!.withOpacity(1)
-                        : Theme.of(context).primaryColor,
-                  ),
-                ),
-            onPressed: () {
-              widget.onCancelTap(context, widget.initialValue);
-            },
+          SizedBox(
+            width: 85,
+            child: NegativeButton(
+              title: 'Cancel',
+              onPressed: () {
+                widget.onCancelTap(context, widget.initialValue);
+              },
+            ),
           ),
-          TextButton(
-            child: widget.confirmText ??
-                Text(
-                  'OK',
-                  style: TextStyle(
-                    color: (widget.selectedColor != null &&
-                            widget.selectedColor != Colors.transparent)
-                        ? widget.selectedColor!.withOpacity(1)
-                        : Theme.of(context).primaryColor,
-                  ),
-                ),
-            onPressed: () {
-              widget.onConfirmTap(context, _selectedValues, widget.onConfirm);
-            },
+          SizedBox(
+            width: 85,
+            child: PositiveButton(
+              title: 'Save',
+              onPressed: () {
+                widget.onConfirmTap(context, _selectedValues, widget.onConfirm);
+              },
+            ),
           )
         ],
       ),
