@@ -203,7 +203,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
     // var country = Countries.byCode(tutor.country ?? 'VN');
 
     return GestureDetector(
-      onTap: () => MyApp.To(context, TutorDetailsPageWidget(tutor)),
+      onTap: () => MyApp.To(context, TutorDetailsPageWidget(tutor.userId ?? '')),
       child: Padding(
         padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
         child: Container(

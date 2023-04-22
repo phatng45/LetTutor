@@ -1,24 +1,27 @@
+import 'package:country_flags/country_flags.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_country/countries.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:let_tutor/components/text_field_widget.dart';
-import 'package:let_tutor/components/tutor_general_info_widget.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_video_player.dart';
 import 'package:let_tutor/models/tutor.dart';
 
+import '../api/api_service.dart';
 import '../components/my_chip.dart';
 import '../components/tutor_specialties_widget.dart';
+import '../flutter_flow/flutter_flow_toggle_icon.dart';
 import '../schedule_page/schedule_page_widget.dart';
 import 'tutor_details_model.dart';
 
 export 'tutor_details_model.dart';
 
 class TutorDetailsPageWidget extends StatefulWidget {
-  const TutorDetailsPageWidget(this.tutor, {Key? key}) : super(key: key);
+  const TutorDetailsPageWidget(this.tutorId, {Key? key}) : super(key: key);
 
-  final Tutor tutor;
+  final String tutorId;
 
   @override
   _TutorDetailsPageWidgetState createState() => _TutorDetailsPageWidgetState();
@@ -26,12 +29,18 @@ class TutorDetailsPageWidget extends StatefulWidget {
 
 class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
   late TutorDetailsPageModel _model;
-  late Tutor tutor = widget.tutor;
+  Tutor? tutor;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  late var country = Countries.byCodeOrName(
+      tutor?.country ?? tutor?.user?.country ?? 'VN',
+      tutor?.country ?? tutor?.user?.country ?? 'Vietnam');
 
   @override
   void initState() {
     super.initState();
+
+    _getTutorById(widget.tutorId);
     _model = createModel(context, () => TutorDetailsPageModel());
     _model.textController ??= TextEditingController();
   }
@@ -52,7 +61,7 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
           child: Column(
             children: [
               TabHeader(
-                title: tutor.name ?? '',
+                title: tutor?.name ?? 'N/A',
                 centerTitle: true,
                 start: IconButton(
                     onPressed: () => Navigator.pop(context),
@@ -82,15 +91,119 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: TutorGeneralInfoWidget(
-                        hasRating: true,
-                        context: context,
-                        tutor: widget.tutor,
+                      padding: const EdgeInsets.fromLTRB(10, 15, 10, 10),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(900.0),
+                                child: Image.network(
+                                  tutor?.avatar ??
+                                      tutor?.user?.avatar ??
+                                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU',
+                                  width: 70.0,
+                                  height: 70.0,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Image.network(
+                                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU',
+                                      width: 70.0,
+                                      height: 70.0,
+                                      fit: BoxFit.cover,
+                                    );
+                                  },
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 0.0, 0.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      tutor?.name ??
+                                          tutor?.user?.name ??
+                                          'N/A',
+                                      style:
+                                          FlutterFlowTheme.of(context).title3,
+                                    ),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 5.0, 0.0),
+                                          child: CountryFlags.flag(
+                                            (country.alpha2Code ?? 'vn')
+                                                .toLowerCase(),
+                                            height: 22,
+                                            width: 22,
+                                            // borderRadius: 8,
+                                          ),
+                                        ),
+                                        Text(
+                                          country.name ?? 'Vietnam',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1,
+                                        ),
+                                      ],
+                                    ),
+                                    RatingBarIndicator(
+                                      itemBuilder: (context, index) => Icon(
+                                        Icons.star_rounded,
+                                        color: Color(0xFFFFCA77),
+                                      ),
+                                      direction: Axis.horizontal,
+                                      rating: tutor?.rating ?? 0,
+                                      unratedColor: Color(0xFF9E9E9E),
+                                      itemCount: 5,
+                                      itemSize: 20.0,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                child: Align(
+                                  alignment: AlignmentDirectional(1.0, -1.0),
+                                  child: ToggleIcon(
+                                    onPressed: () {
+                                      setState(() {
+                                        if (tutor != null) {
+                                          tutor!.isFavorited =
+                                              !tutor!.isFavorited;
+                                        }
+                                      });
+                                    },
+                                    value: tutor?.isFavorited ?? false,
+                                    onIcon: Icon(
+                                      Icons.favorite_border,
+                                      color: Color(0xFFFF5686),
+                                      size: 25.0,
+                                    ),
+                                    offIcon: Icon(
+                                      Icons.favorite_rounded,
+                                      color: Color(0xFFFF5686),
+                                      size: 25.0,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                     Text(
-                      widget.tutor.bio!,
+                      tutor?.bio ?? 'N/A',
                       textAlign: TextAlign.justify,
                       style: FlutterFlowTheme.of(context).bodyText1,
                     ),
@@ -147,7 +260,8 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                       'Languages',
                       style: FlutterFlowTheme.of(context).title3,
                     ),
-                    MyChip(data: tutor.country ?? ''),
+                    MyChip(
+                        data: tutor?.country ?? tutor?.user?.country ?? 'N/A'),
                     Divider(
                       indent: 10,
                       endIndent: 10,
@@ -157,7 +271,8 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                       'Specialties',
                       style: FlutterFlowTheme.of(context).title3,
                     ),
-                    TutorSpecialtiesWidget(specialties: tutor.specialties),
+                    TutorSpecialtiesWidget(
+                        specialties: tutor?.specialties ?? 'N/A'),
                     Divider(
                       indent: 10,
                       endIndent: 10,
@@ -171,7 +286,7 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                       height: 300,
                       child: Center(
                         child: FlutterFlowVideoPlayer(
-                          path: tutor.video ?? '',
+                          path: tutor?.video ?? '',
                           videoType: VideoType.network,
                           autoPlay: false,
                           looping: true,
@@ -191,7 +306,7 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                       style: FlutterFlowTheme.of(context).title3,
                     ),
                     Text(
-                      tutor.experience ?? 'N/A',
+                      tutor?.experience ?? 'N/A',
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily:
                                 FlutterFlowTheme.of(context).bodyText1Family,
@@ -208,7 +323,7 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                       style: FlutterFlowTheme.of(context).title3,
                     ),
                     Text(
-                      tutor.interests ?? 'N/A',
+                      tutor?.interests ?? 'N/A',
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily:
                                 FlutterFlowTheme.of(context).bodyText1Family,
@@ -249,10 +364,10 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                       clipBehavior: Clip.none,
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: tutor.feedbacks!.length,
+                      itemCount: tutor?.feedbacks?.length ?? 0,
                       itemBuilder: (context, index) {
-                        final feedback = tutor.feedbacks![index];
-                        return Text(feedback.content!);
+                        final feedback = tutor?.feedbacks?[index] ?? null;
+                        return Text(feedback?.content ?? 'N/A');
                       },
                     )
                   ],
@@ -264,10 +379,19 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
       ),
     );
   }
+
+  void _getTutorById(String userId) async {
+    var tutor = (await ApiService().tutorById(userId));
+
+    if (tutor != null)
+      setState(() {
+        this.tutor = tutor;
+      });
+  }
 }
 
 class CourseWidget extends StatelessWidget {
-  const CourseWidget({Key? key, this.title = ''}) : super(key: key);
+  const CourseWidget({Key? key, this.title = 'N/A'}) : super(key: key);
 
   final String title;
 

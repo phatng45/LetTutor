@@ -107,6 +107,7 @@ class ApiService {
       )..show(context);
       String accessToken = response.data["tokens"]["access"]["token"];
       MyApp.prefs.setString("ACCESS_TOKEN", accessToken);
+      return user;
     } catch (e) {
       if (e is DioError)
         Flushbar(
@@ -178,5 +179,20 @@ class ApiService {
     }
 
     return null;
+  }
+
+  Future<Tutor?> tutorById(String userId) async {
+    final url = ApiConstants.baseUrl + ApiConstants.tutorInfo(userId);
+    final response = await Dio().get(url, options: ApiConstants.authorizationOptions);
+
+    if (response.statusCode == 200) {
+      Tutor tutor =Tutor.fromJsonFromGetTutorById (response.data);
+
+      return tutor;
+    }
+
+    return null;
+
+
   }
 }

@@ -43,9 +43,9 @@ class TutorGeneralInfoWidget extends StatefulWidget {
 
 class _TutorGeneralInfoWidgetState extends State<TutorGeneralInfoWidget> {
 
-  late Tutor tutor = widget.tutor!;
+  late Tutor? tutor = widget.tutor;
   late var country = Countries.byCodeOrName(
-      tutor.country ?? 'VN', tutor.country ?? 'Vietnam');
+      tutor?.country ?? 'VN', tutor?.country ?? 'Vietnam');
 
 
 
@@ -63,7 +63,7 @@ class _TutorGeneralInfoWidgetState extends State<TutorGeneralInfoWidget> {
               ClipRRect(
                 borderRadius: BorderRadius.circular(900.0),
                 child: Image.network(
-                  tutor.avatar ??
+                  tutor?.avatar ?? tutor?.user?.avatar ??
                       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU',
                   width: 70.0,
                   height: 70.0,
@@ -86,7 +86,7 @@ class _TutorGeneralInfoWidgetState extends State<TutorGeneralInfoWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      tutor.name ?? 'N/A',
+                      tutor?.name ?? tutor?.user?.name ??  'N/A',
                       style: FlutterFlowTheme.of(context).title3,
                     ),
                     Row(
@@ -115,7 +115,7 @@ class _TutorGeneralInfoWidgetState extends State<TutorGeneralInfoWidget> {
                         color: Color(0xFFFFCA77),
                       ),
                       direction: Axis.horizontal,
-                      rating: tutor.rating ?? 0,
+                      rating: tutor?.rating ?? 0,
                       unratedColor: Color(0xFF9E9E9E),
                       itemCount: 5,
                       itemSize: 20.0,
@@ -129,10 +129,13 @@ class _TutorGeneralInfoWidgetState extends State<TutorGeneralInfoWidget> {
                   child: ToggleIcon(
                     onPressed: () {
                       setState(() {
-                        tutor.isFavorited = !tutor.isFavorited;
+                        if(tutor != null){
+                          tutor!.isFavorited = !tutor!.isFavorited;
+                        }
+
                       });
                     },
-                    value: tutor.isFavorited,
+                    value: tutor?.isFavorited ?? false,
                     onIcon: Icon(
                       Icons.favorite_border,
                       color: Color(0xFFFF5686),

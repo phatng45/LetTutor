@@ -1,3 +1,5 @@
+import 'package:let_tutor/models/user.dart';
+
 class Tutor {
   String? level;
   String? email;
@@ -44,6 +46,7 @@ class Tutor {
   int? price;
   bool? isOnline;
   bool isFavorited = false;
+  User? user;
 
   Tutor(
       {this.level,
@@ -89,7 +92,8 @@ class Tutor {
         this.rating,
         this.isNative,
         this.price,
-        this.isOnline});
+        this.isOnline,
+      this.user,});
 
   Tutor.fromJson(Map<String, dynamic> json) {
     level = json['level'];
@@ -141,6 +145,25 @@ class Tutor {
     isNative = json['isNative'];
     price = json['price'];
     isOnline = json['isOnline'];
+  }
+
+
+  Tutor.fromJsonFromGetTutorById(Map<String, dynamic> json) {
+    video = json['video'];
+    bio = json['bio'];
+    education = json['education'];
+    experience = json['experience'];
+    profession = json['profession'];
+    accent = json['accent'];
+    targetStudent = json['targetStudent'];
+    interests = json['interests'];
+    languages = json['languages'];
+    specialties = json['specialties'];
+    rating = json['rating'];
+    isNative = json['isNative'];
+    user = json['User'] != null ? new User.fromJsonFromGetTutorById(json['User']) : null;
+    isFavorited = json['isFavorite'];
+    rating = json['avgRating'];
   }
 
   Map<String, dynamic> toJson() {

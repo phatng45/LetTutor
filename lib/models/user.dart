@@ -1,3 +1,5 @@
+import 'package:let_tutor/models/course.dart';
+
 class User {
   String? id;
   String? email;
@@ -10,7 +12,7 @@ class User {
   String? birthday;
   bool? isActivated;
   WalletInfo? walletInfo;
-  List<String>? courses;
+  List<UserCourse>? courses;
   String? requireNote;
   String? level;
   List<Topic>? learnTopics;
@@ -19,6 +21,9 @@ class User {
   int? timezone;
   String? studySchedule;
   bool? canSendMessage;
+  bool? isPublicRecord;
+  String? caredByStaffId;
+  String? studentGroupId;
 
   User(
       {this.id,
@@ -94,6 +99,23 @@ class User {
     timezone = json['timezone'];
     studySchedule = json['studySchedule'];
     canSendMessage = json['canSendMessage'];
+  }
+  User.fromJsonFromGetTutorById(Map<String, dynamic> json) {
+    id = json['id'];
+    level = json['level'];
+    avatar = json['avatar'];
+    name = json['name'];
+    country = json['country'];
+    language = json['language'];
+    isPublicRecord = json['isPublicRecord'];
+    caredByStaffId = json['caredByStaffId'];
+    studentGroupId = json['studentGroupId'];
+    if (json['courses'] != null) {
+      courses = [];
+      json['courses'].forEach((v) {
+        courses!.add(new UserCourse.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -183,6 +205,57 @@ class Topic {
     data['id'] = this.id;
     data['key'] = this.key;
     data['name'] = this.name;
+    return data;
+  }
+}
+
+class UserCourse {
+  String? id;
+  String? name;
+  TutorCourse? tutorCourse;
+
+  UserCourse({this.id, this.name, this.tutorCourse});
+
+  UserCourse.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    tutorCourse = json['TutorCourse'] != null
+        ? new TutorCourse.fromJson(json['TutorCourse'])
+        : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    if (this.tutorCourse != null) {
+      data['TutorCourse'] = this.tutorCourse!.toJson();
+    }
+    return data;
+  }
+}
+
+class TutorCourse {
+  String? userId;
+  String? courseId;
+  String? createdAt;
+  String? updatedAt;
+
+  TutorCourse({this.userId, this.courseId, this.createdAt, this.updatedAt});
+
+  TutorCourse.fromJson(Map<String, dynamic> json) {
+    userId = json['UserId'];
+    courseId = json['CourseId'];
+    createdAt = json['createdAt'];
+    updatedAt = json['updatedAt'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['UserId'] = this.userId;
+    data['CourseId'] = this.courseId;
+    data['createdAt'] = this.createdAt;
+    data['updatedAt'] = this.updatedAt;
     return data;
   }
 }

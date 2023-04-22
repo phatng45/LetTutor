@@ -31,15 +31,11 @@ class ApiConstants {
 
   static String schedule = 'schedule';
 
-
-  static String tutorPagination(int perPage, int page) =>
-      'tutor/more?perPage=' + perPage.toString() + '&page=' + page.toString();
+  static String tutorSearch = 'tutor/search';
 
   static String coursePagination(int perPage, int page) =>
       'course?page=' + page.toString() + '&size=' + perPage.toString();
 
-  static String tutorSearch = 'tutor/search';
-
-  static String tutorPaginationFiltered(int perPage, int page, SearchInfo searchInfo) =>
-      'tutor/more?perPage=' + perPage.toString() + '&page=' + page.toString();
+  static String tutorInfo(String userId) =>
+      'tutor/$userId';
 }
