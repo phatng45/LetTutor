@@ -197,6 +197,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               color: Color(0x98E4E4E4),
             ),
           ),
+
           child: Padding(
             padding: EdgeInsets.all(10),
             child: Column(
@@ -307,49 +308,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   child: Text(
                     tutor.bio ?? '',
                     maxLines: 4,
-                    overflow: TextOverflow.ellipsis,
+                    overflow: TextOverflow.fade,
+                    textAlign: TextAlign.justify,
                     style: FlutterFlowTheme.of(context).bodyText1,
                   ),
                 ),
-                // Align(
-                //   alignment: AlignmentDirectional(1.0, 0.0),
-                //   child: Padding(
-                //     padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
-                //     child: FFButtonWidget(
-                //       onPressed: () {
-                //         MyApp.To(context, TutorDetailsPageWidget(tutor));
-                //       },
-                //       text: 'Book',
-                //       icon: Icon(
-                //         Icons.person_add_rounded,
-                //         color: FlutterFlowTheme.of(context).primaryColor,
-                //         size: 15.0,
-                //       ),
-                //       options: FFButtonOptions(
-                //         elevation: 0,
-                //         width: 130.0,
-                //         height: 40.0,
-                //         padding:
-                //             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                //         iconPadding:
-                //             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                //         color: FlutterFlowTheme.of(context).primaryBtnText,
-                //         textStyle: FlutterFlowTheme.of(context)
-                //             .subtitle2
-                //             .override(
-                //               fontFamily:
-                //                   FlutterFlowTheme.of(context).subtitle2Family,
-                //               color: FlutterFlowTheme.of(context).primaryColor,
-                //             ),
-                //         borderSide: BorderSide(
-                //           color: FlutterFlowTheme.of(context).primaryColor,
-                //           width: 2.0,
-                //         ),
-                //         borderRadius: BorderRadius.circular(20.0),
-                //       ),
-                //     ),
-                //   ),
-                // ),
               ],
             ),
           ),
@@ -575,7 +538,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       child: new Center(
         child: new Opacity(
           opacity: isLoading ? 1.0 : 00,
-          child: new CircularProgressIndicator(),
+          child: new CircularProgressIndicator(color: Colors.indigo,),
         ),
       ),
     );

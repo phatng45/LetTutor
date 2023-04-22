@@ -3,11 +3,9 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:let_tutor/components/text_field_widget.dart';
 import 'package:let_tutor/components/tutor_general_info_widget.dart';
-import 'package:let_tutor/course_details_page/course_details_page_widget.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_video_player.dart';
-import 'package:let_tutor/main.dart';
 import 'package:let_tutor/models/tutor.dart';
 
 import '../components/my_chip.dart';
@@ -64,12 +62,66 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                       color: Colors.indigo,
                     )),
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                child: TutorGeneralInfoWidget(
-                  hasRating: true,
-                  context: context,
-                  tutor: widget.tutor,
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                margin: EdgeInsets.symmetric(horizontal: 10),
+                decoration: BoxDecoration(
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 4.0,
+                      color: Color(0x33000000),
+                      offset: Offset(0.0, 2.0),
+                    )
+                  ],
+                  borderRadius: BorderRadius.circular(20.0),
+                  border: Border.all(
+                    color: Color(0x98E4E4E4),
+                  ),
+                ),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                      child: TutorGeneralInfoWidget(
+                        hasRating: true,
+                        context: context,
+                        tutor: widget.tutor,
+                      ),
+                    ),
+                    Text(
+                      widget.tutor.bio!,
+                      textAlign: TextAlign.justify,
+                      style: FlutterFlowTheme.of(context).bodyText1,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18)),
+                          backgroundColor: Colors.indigo,
+                          foregroundColor: Colors.white,
+                          elevation: 0,
+                        ),
+                        onPressed: () {},
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Icon(Icons.person_add_rounded),
+                            SizedBox(width: 5),
+                            Text('Book Now',
+                                style: FlutterFlowTheme.of(context)
+                                    .subtitle1
+                                    .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .subtitle1Family,
+                                        color: Colors.white))
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Padding(
@@ -78,13 +130,14 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Align(
-                      alignment: AlignmentDirectional(-1.0, 0.0),
-                      child: Text(
-                        widget.tutor.bio!,
-                        style: FlutterFlowTheme.of(context).bodyText1,
-                      ),
-                    ),
+                    // Align(
+                    //   alignment: AlignmentDirectional(-1.0, 0.0),
+                    //   child:
+                    // ),
+
+                    // SizedBox(height: 50, width: double.maxFinite,child: PositiveButton(title: 'Book', onPressed: (){}, icon:  Icon(Icons.person_add_rounded, color: Colors.white) ))
+                    // ,
+
                     Divider(
                       indent: 10,
                       endIndent: 10,
@@ -128,28 +181,6 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                         ),
                       ),
                     ),
-                    // Divider(
-                    //   indent: 10,
-                    //   endIndent: 10,
-                    //   color: Colors.black12,
-                    // ),
-                    // Text(
-                    //   'Courses',
-                    //   style: FlutterFlowTheme.of(context).title3,
-                    // ),
-                    // ListView(
-                    //   padding: EdgeInsets.zero,
-                    //   physics: NeverScrollableScrollPhysics(),
-                    //   shrinkWrap: true,
-                    //   children: [
-                    //     CourseWidget(
-                    //       title: 'Basic Conversation Topics',
-                    //     ),
-                    //     CourseWidget(
-                    //       title: 'Life In The Internet Ages',
-                    //     ),
-                    //   ],
-                    // ),
                     Divider(
                       indent: 10,
                       endIndent: 10,
@@ -177,7 +208,7 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                       style: FlutterFlowTheme.of(context).title3,
                     ),
                     Text(
-                      tutor.interests ??  'N/A',
+                      tutor.interests ?? 'N/A',
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily:
                                 FlutterFlowTheme.of(context).bodyText1Family,
