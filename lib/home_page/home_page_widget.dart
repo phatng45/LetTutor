@@ -776,8 +776,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   Row(
                     children: [
                       NegativeButton(
-                        title: 'Cancel',
-                        onPressed: () {},
+                        title: 'Reset',
+                        onPressed: () => _resetSearch(),
                       ),
                       Spacer(),
                       SizedBox(
@@ -821,5 +821,15 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
     Navigator.pop(context);
     // widget.onSearchInfoReceived!(info);
+  }
+
+  _resetSearch() {
+    setState(() {
+      page = 1;
+      searchInfo = null;
+      _getData();
+    });
+
+    Navigator.pop(context);
   }
 }
