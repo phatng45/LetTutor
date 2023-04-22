@@ -24,9 +24,14 @@ class HomePageWidget extends StatefulWidget {
   final VoidCallback? onSearchPressed;
   final String? userImgUrl;
   final User user;
+  Future<List<Tutor>?>? queriedTutors;
 
-  const HomePageWidget(
-      {Key? key, this.onSearchPressed, required this.user, this.userImgUrl})
+  HomePageWidget(
+      {Key? key,
+      this.onSearchPressed,
+      required this.user,
+      this.userImgUrl,
+      this.queriedTutors})
       : super(key: key);
 
   @override
@@ -64,7 +69,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       isLoading = true;
     });
 
-    _tutors = (await ApiService().tutorPagination(10, page))!;
+    _tutors = widget.queriedTutors == null ?
+    (await ApiService().tutorPagination(perPage, page))! :
+    (await widget.queriedTutors)!;
+
     setState(() {
       page++;
       isLoading = false;
@@ -120,20 +128,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     },
                   ),
                 ),
-                // end: IconButton(
-                //   icon: SizedBox(
-                //     width: 25,
-                //     height: 25,
-                //     child: Image.network(
-                //       'https://cdn-icons-png.flaticon.com/512/3626/3626504.png',
-                //       colorBlendMode: BlendMode.srcIn,
-                //       color: Colors.indigo,
-                //       scale: .5,
-                //     ),
-                //   ),
-                //   style: IconButton.styleFrom(padding: EdgeInsets.zero),
-                //   onPressed: ,
-                // ),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10),
@@ -542,7 +536,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       isLoading = true;
     });
 
-    List<Tutor> nextPage = (await ApiService().tutorPagination(10, page))!;
+    List<Tutor> nextPage = (await ApiService().tutorPagination(perPage, page))!;
 
     setState(() {
       isLoading = false;

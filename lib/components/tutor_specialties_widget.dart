@@ -33,10 +33,24 @@ class TutorSpecialtiesWidget extends StatelessWidget {
     );
   }
 
+  static Map<String, String> mappedString = {
+    'english-for-kids': 'English for Kids',
+    'business-english': 'Business English',
+    'conversational-english': 'Conversational English',
+    'starters': 'STARTERS',
+    'movers': 'MOVERS',
+    'flyers': 'FLYERS',
+    'ket': 'KET',
+    'pet': 'PET',
+    'ielts': 'IELTS',
+    'toefl': 'TOEFL',
+    'toeic': 'TOEIC',
+  };
+
   List<MyChip> _getSpecialties(String specialties) {
     var list = <MyChip>[];
-    var parsedSpecialties = specialties.replaceAll('-', ' ').split(',');
-    parsedSpecialties.forEach((element) => list.add(MyChip(data: element)));
+    var parsedSpecialties = specialties.split(',').map((e) => mappedString[e]).toList();
+    parsedSpecialties.forEach((element) => list.add(MyChip(data: element ?? '')));
 
     return list;
   }
