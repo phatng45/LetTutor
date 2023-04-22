@@ -35,6 +35,12 @@ class HomePageWidget extends StatefulWidget {
 
 class _HomePageWidgetState extends State<HomePageWidget> {
   late HomePageModel _model;
+  final int perPage = 10;
+  int page = 1;
+  List<Tutor> _tutors = [];
+
+  bool isLoading = false;
+  final ScrollController _scrollController = new ScrollController();
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -44,11 +50,25 @@ class _HomePageWidgetState extends State<HomePageWidget> {
     _model = createModel(context, () => HomePageModel());
     _model.textController ??= TextEditingController();
     _getData();
+
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        _getNextPage();
+      }
+    });
   }
 
   void _getData() async {
-    _listTutor = (await ApiService().tutorPagination(10, 1))!;
-    setState(() {});
+    setState(() {
+      isLoading = true;
+    });
+
+    _tutors = (await ApiService().tutorPagination(10, page))!;
+    setState(() {
+      page++;
+      isLoading = false;
+    });
   }
 
   @override
@@ -57,8 +77,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
     super.dispose();
   }
 
-  late List<Tutor> _listTutor = [];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,8 +84,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
       body: SafeArea(
         child: SingleChildScrollView(
+          controller: _scrollController,
           physics: ScrollPhysics(),
-          primary: true,
           child: Column(
             children: [
               TabHeader(
@@ -118,45 +136,33 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
-                  mainAxisSize: MainAxisSize.max,
                   children: [
                     _buildUpcomingLesson(context),
-                    Align(
-                      alignment: AlignmentDirectional(-1.0, 0.0),
-                      child: Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-                        child: Text(
-                          'Recommended Tutors',
-                          textAlign: TextAlign.start,
-                          style: FlutterFlowTheme.of(context).title1,
-                        ),
-                      ),
+                    Text(
+                      'Recommended Tutors',
+                      textAlign: TextAlign.start,
+                      style: FlutterFlowTheme.of(context).title1,
                     ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0.0, 10, 0.0, 0),
-                      child: _listTutor.isEmpty
-                          ? const Align(
-                              alignment: Alignment.topCenter,
-                              child: CircularProgressIndicator(),
-                            )
-                          : Column(
-                              children: [
-                                ListView.builder(
-                                  clipBehavior: Clip.none,
-                                  physics: NeverScrollableScrollPhysics(),
-                                  shrinkWrap: true,
-                                  itemCount: _listTutor.length,
-                                  itemBuilder: (context, index) {
-                                    final tutor = _listTutor[index];
-                                    return buildTutorWidget(context, tutor);
-                                  },
-                                ),
-                              ],
-                            ),
-                    ),
+                    _tutors.isEmpty
+                        ? Align(
+                            alignment: Alignment.topCenter,
+                            child: _buildProgressIndicator(),
+                          )
+                        : ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: _tutors.length + 1,
+                            itemBuilder: (context, index) {
+                              if (index == _tutors.length) {
+                                return _buildProgressIndicator();
+                              } else {
+                                final tutor = _tutors[index];
+                                return _buildTutorWidget(context, tutor);
+                              }
+                            },
+                          ),
                   ],
                 ),
               ),
@@ -167,7 +173,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
     );
   }
 
-  Widget buildTutorWidget(BuildContext context, Tutor tutor) {
+  Widget _buildTutorWidget(BuildContext context, Tutor tutor) {
     var country = Countries.byCodeOrName(
         tutor.country ?? 'VN', tutor.country ?? 'Vietnam');
     // var country = Countries.byCode(tutor.country ?? 'VN');
@@ -544,6 +550,32 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  void _getNextPage() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    List<Tutor> nextPage = (await ApiService().tutorPagination(10, page))!;
+
+    setState(() {
+      isLoading = false;
+      _tutors.addAll(nextPage);
+      page++;
+    });
+  }
+
+  Widget _buildProgressIndicator() {
+    return new Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: new Center(
+        child: new Opacity(
+          opacity: isLoading ? 1.0 : 00,
+          child: new CircularProgressIndicator(),
         ),
       ),
     );
