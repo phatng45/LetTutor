@@ -7,6 +7,7 @@ import 'package:let_tutor/components/text_field_widget.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_video_player.dart';
+import 'package:let_tutor/models/schedule.dart';
 import 'package:let_tutor/models/tutor.dart';
 
 import '../api/api_service.dart';
@@ -35,6 +36,8 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
   late var country = Countries.byCodeOrName(
       tutor?.country ?? tutor?.user?.country ?? 'VN',
       tutor?.country ?? tutor?.user?.country ?? 'Vietnam');
+
+  List<Schedule>? schedule;
 
   @override
   void initState() {
@@ -123,13 +126,10 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                                     10.0, 0.0, 0.0, 0.0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      tutor?.name ??
-                                          tutor?.user?.name ??
-                                          'N/A',
+                                      tutor?.name ?? tutor?.user?.name ?? 'N/A',
                                       style:
                                           FlutterFlowTheme.of(context).title3,
                                     ),
@@ -217,7 +217,7 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                           foregroundColor: Colors.white,
                           elevation: 0,
                         ),
-                        onPressed: () {},
+                        onPressed: _showBookBottomSheet,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
@@ -383,10 +383,160 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
   void _getTutorById(String userId) async {
     var tutor = (await ApiService().tutorById(userId));
 
-    if (tutor != null)
+    var start = DateTime.now();
+    var end = start.add(Duration(days: 7));
+    var schedule = null;
+    //var schedule = (await ApiService().tutorScheduleById(userId, start, end));
+    {
       setState(() {
-        this.tutor = tutor;
+        if (tutor != null) this.tutor = tutor;
+        if (schedule != null) {
+          this.schedule = schedule;
+        }
       });
+    }
+  }
+
+  void _showBookBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(10),
+        ),
+      ),
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      isScrollControlled: true,
+      builder: (context) {
+        return SafeArea(
+          child: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) =>
+                Container(
+              color: Colors.white,
+              height: MediaQuery.of(context).size.height * 0.6,
+              child: Column(
+                children: [
+                  Container(
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      margin: const EdgeInsets.only(bottom: 10),
+                      width: double.infinity,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            '',
+                            style: const TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                      decoration: BoxDecoration(color: Colors.grey[300])),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          right: 10, left: 10, bottom: 10),
+                      child: schedule == null
+                          ? SizedBox.shrink()
+                          : GridView.count(
+                              crossAxisCount: 2,
+                              childAspectRatio: .5,
+                              crossAxisSpacing: 10,
+                              mainAxisSpacing: 10,
+                              shrinkWrap: true,
+                              children: List.generate(
+                                schedule!.length,
+                                (index) => ElevatedButton(
+                                  onPressed: () async {
+                                    if ((!(schedule?[index].isBooked ??
+                                            true)) &&
+                                        DateTime.fromMillisecondsSinceEpoch(
+                                                schedule![index]
+                                                        .startTimestamp ??
+                                                    0)
+                                            .isAfter(DateTime.now())) {
+                                      try {
+                                        final res = await ApiService()
+                                            .book(schedule![index].id);
+                                        if (res) {
+                                          schedule![index].isBooked = true;
+                                          Navigator.pop(context);
+                                          Navigator.pop(context);
+
+                                          // showTopSnackBar(
+                                          //   context,
+                                          //   CustomSnackBar.success(
+                                          //     message: lang.bookingSuccess,
+                                          //     backgroundColor: Colors.green,
+                                          //   ),
+                                          //   showOutAnimationDuration: const Duration(milliseconds: 700),
+                                          //   displayDuration: const Duration(milliseconds: 200),
+                                          // );
+                                        }
+                                      } catch (e) {
+                                        // showTopSnackBar(
+                                        //   context,
+                                        //   CustomSnackBar.error(message: e.toString()),
+                                        //   showOutAnimationDuration: const Duration(milliseconds: 700),
+                                        //   displayDuration: const Duration(milliseconds: 200),
+                                        // );
+                                      }
+                                    }
+                                  },
+                                  child: Container(
+                                    padding: const EdgeInsets.only(
+                                        top: 13, bottom: 13),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          DateFormat('HH:mm').format(DateTime
+                                                  .fromMillisecondsSinceEpoch(
+                                                      schedule![index]
+                                                              .startTimestamp ??
+                                                          0)) +
+                                              " - ",
+                                          style: const TextStyle(
+                                              color: Colors.blue),
+                                        ),
+                                        Text(
+                                          DateFormat('HH:mm').format(DateTime
+                                              .fromMillisecondsSinceEpoch(
+                                                  schedule![index]
+                                                          .endTimestamp ??
+                                                      0)),
+                                          style: const TextStyle(
+                                              color: Colors.blue),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  style: ElevatedButton.styleFrom(
+                                    // primary: schedule[index].isBooked ||
+                                    //     DateTime.fromMillisecondsSinceEpoch(schedule[index].startPeriodTimestamp).isBefore(DateTime.now())
+                                    //     ? Colors.grey[200]
+                                    //     : Colors.white,
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(10),
+                                      ),
+                                      side: BorderSide(
+                                          color: Colors.blue, width: 1),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 }
 

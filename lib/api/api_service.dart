@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:another_flushbar/flushbar.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 import '../main.dart';
 import '../models/course.dart';
+import '../models/schedule.dart';
 import '../models/searchInfo.dart';
 import '../models/tutor.dart';
 import '../models/user.dart';
@@ -19,8 +22,14 @@ class ApiService {
         url,
         data: data,
       );
+
       if (response.statusCode == 200) {
+        print("response status code is 200");
+
         User user = User.fromJson(response.data["user"]);
+
+        print("user: " + user.toString());
+
         String accessToken = response.data["tokens"]["access"]["token"];
         MyApp.prefs.setString("ACCESS_TOKEN", accessToken);
 
@@ -150,8 +159,8 @@ class ApiService {
 
     print("data $data");
 
-    final response =
-        await Dio().post(url, data: data,options: ApiConstants.authorizationOptions);
+    final response = await Dio()
+        .post(url, data: data, options: ApiConstants.authorizationOptions);
 
     if (response.statusCode == 200) {
       List<Tutor> tutors = (response.data["rows"] as List)
@@ -183,16 +192,42 @@ class ApiService {
 
   Future<Tutor?> tutorById(String userId) async {
     final url = ApiConstants.baseUrl + ApiConstants.tutorInfo(userId);
-    final response = await Dio().get(url, options: ApiConstants.authorizationOptions);
+    final response =
+        await Dio().get(url, options: ApiConstants.authorizationOptions);
 
     if (response.statusCode == 200) {
-      Tutor tutor =Tutor.fromJsonFromGetTutorById (response.data);
+      Tutor tutor = Tutor.fromJsonFromGetTutorById(response.data);
 
       return tutor;
     }
 
     return null;
-
-
   }
+
+  Future<List<Schedule>?> tutorScheduleById(
+      String userId, DateTime start, DateTime end) async {
+    final url = ApiConstants.baseUrl + ApiConstants.schedule;
+    final response = await Dio()
+        .get(url, options: ApiConstants.authorizationOptions, queryParameters: {
+      "tutorId": userId,
+      "startTimestamp": json.encode(start),
+      "endTimestamp": json.encode(end)
+    });
+
+    if (response.statusCode == 200) {
+      {
+        List<Schedule> schedules = (response.data["data"] as List)
+            .map((x) => Schedule.fromJson(x))
+            .toList();
+
+        return schedules;
+      }
+
+      return null;
+    }
+  }
+
+ Future<bool> book(String? id) async{
+    return true;
+ }
 }
