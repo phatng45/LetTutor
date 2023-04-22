@@ -86,6 +86,7 @@ class _MyAppState extends State<MyApp> {
       themeMode: _themeMode,
       routeInformationParser: _router.routeInformationParser,
       routerDelegate: _router.routerDelegate,
+      color: Colors.indigo,
     );
   }
 }
@@ -113,7 +114,7 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     _scrollController = ScrollController();
-    _tabController = TabController(length: 6, vsync: this);
+    _tabController = TabController(length: 4, vsync: this);
     _tabController.addListener(() {
       setState(() {});
     });
@@ -159,19 +160,14 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
 
     final tabs = {
       'HomePage': HomePageWidget(
-        onSearchPressed: () => _tabController.animateTo(4),
+        onSearchPressed: () => _tabController.animateTo(3),
        user: widget.user,
       ),
       'SchedulePage': SchedulePageWidget(),
       'CoursesPage': CoursesPageWidget(),
-      // 'ProfilePage': ProfilePageWidget(),
       'SearchPage': SearchPage(
         onBackPressed: () => _tabController.animateTo(0),
       ),
-      // 'TutorDetailsPage': TutorDetailsPageWidget(),
-      // 'PdfPage': PdfPageWidget(),
-      // 'HistoryPage': HistoryPageWidget(),
-      // 'CourseDetailsPage': CourseDetailsPageWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
     return Scaffold(

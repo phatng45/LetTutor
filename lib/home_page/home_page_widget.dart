@@ -120,30 +120,50 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     },
                   ),
                 ),
-                end: IconButton(
-                  icon: SizedBox(
-                    width: 25,
-                    height: 25,
-                    child: Image.network(
-                      'https://cdn-icons-png.flaticon.com/512/3626/3626504.png',
-                      colorBlendMode: BlendMode.srcIn,
-                      color: Colors.indigo,
-                      scale: .5,
-                    ),
-                  ),
-                  style: IconButton.styleFrom(padding: EdgeInsets.zero),
-                  onPressed: widget.onSearchPressed,
-                ),
+                // end: IconButton(
+                //   icon: SizedBox(
+                //     width: 25,
+                //     height: 25,
+                //     child: Image.network(
+                //       'https://cdn-icons-png.flaticon.com/512/3626/3626504.png',
+                //       colorBlendMode: BlendMode.srcIn,
+                //       color: Colors.indigo,
+                //       scale: .5,
+                //     ),
+                //   ),
+                //   style: IconButton.styleFrom(padding: EdgeInsets.zero),
+                //   onPressed: ,
+                // ),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
                   children: [
                     _buildUpcomingLesson(context),
-                    Text(
-                      'Recommended Tutors',
-                      textAlign: TextAlign.start,
-                      style: FlutterFlowTheme.of(context).title1,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Recommended Tutors',
+                          textAlign: TextAlign.start,
+                          style: FlutterFlowTheme.of(context).title3,
+                        ),
+                        TextButton(
+                          onPressed: widget.onSearchPressed,
+                          child: Row(
+                            children: <Widget>[
+                              Icon(
+                                Icons.filter_list_rounded,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                              ),
+                              SizedBox(width: 5),
+                              Text('Filter',
+                                  style: FlutterFlowTheme.of(context).subtitle2)
+                            ],
+                          ),
+                        )
+                      ],
                     ),
                     _tutors.isEmpty
                         ? Align(
@@ -197,7 +217,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               color: Color(0x98E4E4E4),
             ),
           ),
-
           child: Padding(
             padding: EdgeInsets.all(10),
             child: Column(
@@ -538,7 +557,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       child: new Center(
         child: new Opacity(
           opacity: isLoading ? 1.0 : 00,
-          child: new CircularProgressIndicator(color: Colors.indigo,),
+          child: new CircularProgressIndicator(
+            color: Colors.indigo,
+          ),
         ),
       ),
     );
