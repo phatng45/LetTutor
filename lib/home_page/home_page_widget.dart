@@ -139,7 +139,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Recommended Tutors',
+                          'Tutors',
                           textAlign: TextAlign.start,
                           style: FlutterFlowTheme.of(context).title3,
                         ),
@@ -164,7 +164,15 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     _tutors.isEmpty
                         ? Align(
                             alignment: Alignment.topCenter,
-                            child: _buildProgressIndicator(),
+                            child: isLoading
+                                ? _buildProgressIndicator()
+                                : Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: new Center(
+                                        child: Text('Oops, there is no result.',
+                                            style: FlutterFlowTheme.of(context)
+                                                .subtitle1)),
+                                  ),
                           )
                         : ListView.builder(
                             physics: NeverScrollableScrollPhysics(),
