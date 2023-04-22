@@ -108,7 +108,7 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Icon(Icons.person_add_rounded),
+                            Icon(Icons.edit_calendar_rounded),
                             SizedBox(width: 5),
                             Text('Book Now',
                                 style: FlutterFlowTheme.of(context)
