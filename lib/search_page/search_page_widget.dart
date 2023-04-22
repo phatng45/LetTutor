@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:let_tutor/components/class_schedule_status_widget.dart';
 import 'package:let_tutor/schedule_page/schedule_page_widget.dart';
 
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -209,6 +210,23 @@ class _SearchPageState extends State<SearchPage> {
                         endIndent: 10,
                         color: Colors.black12,
                       ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        children: [
+                          Spacer(),
+                          SizedBox(
+                            width: 130,
+                            height: 40,
+                            child: PositiveButton(
+                              title: 'Search',
+                              onPressed: () {},
+                              icon: Icon(Icons.search),
+                            ),
+                          ),
+                        ],
+                      )
                     ],
                   ),
                 ),

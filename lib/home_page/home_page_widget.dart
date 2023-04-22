@@ -25,7 +25,8 @@ class HomePageWidget extends StatefulWidget {
   final String? userImgUrl;
   final User user;
 
-  const HomePageWidget({Key? key, this.onSearchPressed,required this.user, this.userImgUrl})
+  const HomePageWidget(
+      {Key? key, this.onSearchPressed, required this.user, this.userImgUrl})
       : super(key: key);
 
   @override
@@ -92,7 +93,13 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         ),
                       ),
                     ),
-                    onPressed: () {MyApp.To(context, MenuPageWidget(user: widget.user,));},
+                    onPressed: () {
+                      MyApp.To(
+                          context,
+                          MenuPageWidget(
+                            user: widget.user,
+                          ));
+                    },
                   ),
                 ),
                 end: IconButton(
@@ -160,182 +167,185 @@ class _HomePageWidgetState extends State<HomePageWidget> {
     );
   }
 
-  Padding buildTutorWidget(BuildContext context, Tutor tutor) {
+  Widget buildTutorWidget(BuildContext context, Tutor tutor) {
     var country = Countries.byCodeOrName(
         tutor.country ?? 'VN', tutor.country ?? 'Vietnam');
     // var country = Countries.byCode(tutor.country ?? 'VN');
 
-    return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
-      child: Container(
-        decoration: BoxDecoration(
-          color: FlutterFlowTheme.of(context).secondaryBackground,
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 4.0,
-              color: Color(0x33000000),
-              offset: Offset(0.0, 2.0),
-            )
-          ],
-          borderRadius: BorderRadius.circular(20.0),
-          border: Border.all(
-            color: Color(0x98E4E4E4),
-          ),
-        ),
-        child: Padding(
-          padding: EdgeInsets.all(10),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(900.0),
-                    child: Image.network(
-                      tutor.avatar ??
-                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU',
-                      width: 70.0,
-                      height: 70.0,
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) {
-                        return Image.network(
-                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU',
-                          width: 70.0,
-                          height: 70.0,
-                          fit: BoxFit.cover,
-                        );
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          tutor.name ?? 'N/A',
-                          style: FlutterFlowTheme.of(context).title3,
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 5.0, 0.0),
-                              child: CountryFlags.flag(
-                                (country.alpha2Code ?? 'vn').toLowerCase(),
-                                height: 22,
-                                width: 22,
-                                // borderRadius: 8,
-                              ),
-                            ),
-                            Text(
-                              country.name ?? 'Vietnam',
-                              style: FlutterFlowTheme.of(context).bodyText1,
-                            ),
-                          ],
-                        ),
-                        RatingBarIndicator(
-                          itemBuilder: (context, index) => Icon(
-                            Icons.star_rounded,
-                            color: Color(0xFFFFCA77),
-                          ),
-                          direction: Axis.horizontal,
-                          rating: tutor.rating ?? 0,
-                          unratedColor: Color(0xFF9E9E9E),
-                          itemCount: 5,
-                          itemSize: 20.0,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Align(
-                      alignment: AlignmentDirectional(1.0, -1.0),
-                      child: ToggleIcon(
-                        onPressed: () {
-                          setState(() {
-                            tutor.isFavorited = !tutor.isFavorited;
-                          });
-                        },
-                        value: tutor.isFavorited,
-                        onIcon: Icon(
-                          Icons.favorite_border,
-                          color: Color(0xFFFF5686),
-                          size: 22.0,
-                        ),
-                        offIcon: Icon(
-                          Icons.favorite_rounded,
-                          color: Color(0xFFFF5686),
-                          size: 22.0,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Align(
-                alignment: AlignmentDirectional(-1.0, 0.0),
-                child: tutor.specialties == null || tutor.specialties == ''
-                    ? SizedBox.shrink()
-                    : TutorSpecialtiesWidget(
-                        specialties: tutor.specialties,
-                      ),
-              ),
-              Align(
-                alignment: AlignmentDirectional(-1.0, 0.0),
-                child: Text(
-                  tutor.bio ?? '',
-                  maxLines: 4,
-                  overflow: TextOverflow.ellipsis,
-                  style: FlutterFlowTheme.of(context).bodyText1,
-                ),
-              ),
-              Align(
-                alignment: AlignmentDirectional(1.0, 0.0),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
-                  child: FFButtonWidget(
-                    onPressed: () {
-                      MyApp.To(context, TutorDetailsPageWidget(tutor));
-                    },
-                    text: 'Book',
-                    icon: Icon(
-                      Icons.person_add_rounded,
-                      color: FlutterFlowTheme.of(context).primaryColor,
-                      size: 15.0,
-                    ),
-                    options: FFButtonOptions(
-                      elevation: 0,
-                      width: 130.0,
-                      height: 40.0,
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).primaryBtnText,
-                      textStyle: FlutterFlowTheme.of(context)
-                          .subtitle2
-                          .override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).subtitle2Family,
-                            color: FlutterFlowTheme.of(context).primaryColor,
-                          ),
-                      borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).primaryColor,
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                  ),
-                ),
-              ),
+    return GestureDetector(
+      onTap: () => MyApp.To(context, TutorDetailsPageWidget(tutor)),
+      child: Padding(
+        padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: FlutterFlowTheme.of(context).secondaryBackground,
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 4.0,
+                color: Color(0x33000000),
+                offset: Offset(0.0, 2.0),
+              )
             ],
+            borderRadius: BorderRadius.circular(20.0),
+            border: Border.all(
+              color: Color(0x98E4E4E4),
+            ),
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(10),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(900.0),
+                      child: Image.network(
+                        tutor.avatar ??
+                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU',
+                        width: 70.0,
+                        height: 70.0,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Image.network(
+                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU',
+                            width: 70.0,
+                            height: 70.0,
+                            fit: BoxFit.cover,
+                          );
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            tutor.name ?? 'N/A',
+                            style: FlutterFlowTheme.of(context).title3,
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 5.0, 0.0),
+                                child: CountryFlags.flag(
+                                  (country.alpha2Code ?? 'vn').toLowerCase(),
+                                  height: 22,
+                                  width: 22,
+                                  // borderRadius: 8,
+                                ),
+                              ),
+                              Text(
+                                country.name ?? 'Vietnam',
+                                style: FlutterFlowTheme.of(context).bodyText1,
+                              ),
+                            ],
+                          ),
+                          RatingBarIndicator(
+                            itemBuilder: (context, index) => Icon(
+                              Icons.star_rounded,
+                              color: Color(0xFFFFCA77),
+                            ),
+                            direction: Axis.horizontal,
+                            rating: tutor.rating ?? 0,
+                            unratedColor: Color(0xFF9E9E9E),
+                            itemCount: 5,
+                            itemSize: 20.0,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Align(
+                        alignment: AlignmentDirectional(1.0, -1.0),
+                        child: ToggleIcon(
+                          onPressed: () {
+                            setState(() {
+                              tutor.isFavorited = !tutor.isFavorited;
+                            });
+                          },
+                          value: tutor.isFavorited,
+                          onIcon: Icon(
+                            Icons.favorite_border,
+                            color: Color(0xFFFF5686),
+                            size: 22.0,
+                          ),
+                          offIcon: Icon(
+                            Icons.favorite_rounded,
+                            color: Color(0xFFFF5686),
+                            size: 22.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Align(
+                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  child: tutor.specialties == null || tutor.specialties == ''
+                      ? SizedBox.shrink()
+                      : TutorSpecialtiesWidget(
+                          specialties: tutor.specialties,
+                        ),
+                ),
+                Align(
+                  alignment: AlignmentDirectional(-1.0, 0.0),
+                  child: Text(
+                    tutor.bio ?? '',
+                    maxLines: 4,
+                    overflow: TextOverflow.ellipsis,
+                    style: FlutterFlowTheme.of(context).bodyText1,
+                  ),
+                ),
+                // Align(
+                //   alignment: AlignmentDirectional(1.0, 0.0),
+                //   child: Padding(
+                //     padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                //     child: FFButtonWidget(
+                //       onPressed: () {
+                //         MyApp.To(context, TutorDetailsPageWidget(tutor));
+                //       },
+                //       text: 'Book',
+                //       icon: Icon(
+                //         Icons.person_add_rounded,
+                //         color: FlutterFlowTheme.of(context).primaryColor,
+                //         size: 15.0,
+                //       ),
+                //       options: FFButtonOptions(
+                //         elevation: 0,
+                //         width: 130.0,
+                //         height: 40.0,
+                //         padding:
+                //             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                //         iconPadding:
+                //             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                //         color: FlutterFlowTheme.of(context).primaryBtnText,
+                //         textStyle: FlutterFlowTheme.of(context)
+                //             .subtitle2
+                //             .override(
+                //               fontFamily:
+                //                   FlutterFlowTheme.of(context).subtitle2Family,
+                //               color: FlutterFlowTheme.of(context).primaryColor,
+                //             ),
+                //         borderSide: BorderSide(
+                //           color: FlutterFlowTheme.of(context).primaryColor,
+                //           width: 2.0,
+                //         ),
+                //         borderRadius: BorderRadius.circular(20.0),
+                //       ),
+                //     ),
+                //   ),
+                // ),
+              ],
+            ),
           ),
         ),
       ),
