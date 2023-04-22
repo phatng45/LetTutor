@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../main.dart';
 import '../models/course.dart';
+import '../models/searchInfo.dart';
 import '../models/tutor.dart';
 import '../models/user.dart';
 import 'api_constants.dart';
@@ -123,14 +124,36 @@ class ApiService {
     return null;
   }
 
-  Future<List<Tutor>?> tutorPagination(int perPage, int page) async {
-    final url =
-        ApiConstants.baseUrl + ApiConstants.tutorPagination(perPage, page);
+  Future<List<Tutor>?> tutorPagination(
+      int perPage, int page, SearchInfo? searchInfo) async {
+    final url = ApiConstants.baseUrl + ApiConstants.tutorSearch;
+
+    final data = searchInfo != null
+        ? {
+            "filters": {
+              "specialties": searchInfo.filters!.specialties,
+              // "nationality": {
+              //   "isVietNamese": searchInfo.filters!.nationality!.isVietNamese,
+              //   "isNative": searchInfo.filters!.nationality!.isNative
+              // },
+              "tutoringTimeAvailable": [null, null]
+            },
+            "search": searchInfo.search,
+            "page": page,
+            "perPage": perPage
+          }
+        : {
+            "page": page,
+            "perPage": perPage,
+          };
+
+    print("data $data");
+
     final response =
-        await Dio().get(url, options: ApiConstants.authorizationOptions);
+        await Dio().post(url, data: data,options: ApiConstants.authorizationOptions);
 
     if (response.statusCode == 200) {
-      List<Tutor> tutors = (response.data["tutors"]["rows"] as List)
+      List<Tutor> tutors = (response.data["rows"] as List)
           .map((x) => Tutor.fromJson(x))
           .toList();
 

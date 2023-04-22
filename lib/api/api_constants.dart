@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:let_tutor/main.dart';
+import 'package:let_tutor/models/searchInfo.dart';
 
 class ApiConstants {
   static String baseUrl = 'https://sandbox.api.lettutor.com/';
@@ -36,4 +37,9 @@ class ApiConstants {
 
   static String coursePagination(int perPage, int page) =>
       'course?page=' + page.toString() + '&size=' + perPage.toString();
+
+  static String tutorSearch = 'tutor/search';
+
+  static String tutorPaginationFiltered(int perPage, int page, SearchInfo searchInfo) =>
+      'tutor/more?perPage=' + perPage.toString() + '&page=' + page.toString();
 }

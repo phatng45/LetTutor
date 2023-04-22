@@ -11,7 +11,9 @@ import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_widgets.dart';
 import 'package:let_tutor/index.dart';
 import 'package:let_tutor/main.dart';
+import 'package:let_tutor/models/searchInfo.dart';
 
+import '../components/class_schedule_status_widget.dart';
 import '../menu_page/menu_page_widget.dart';
 import '../models/tutor.dart';
 import '../models/user.dart';
@@ -21,21 +23,19 @@ import 'home_page_model.dart';
 export 'home_page_model.dart';
 
 class HomePageWidget extends StatefulWidget {
-  final VoidCallback? onSearchPressed;
   final String? userImgUrl;
   final User user;
-  Future<List<Tutor>?>? queriedTutors;
 
-  HomePageWidget(
-      {Key? key,
-      this.onSearchPressed,
-      required this.user,
-      this.userImgUrl,
-      this.queriedTutors})
-      : super(key: key);
+  HomePageWidget({
+    Key? key,
+    required this.user,
+    this.userImgUrl,
+  }) : super(key: key);
 
   @override
-  _HomePageWidgetState createState() => _HomePageWidgetState();
+  _HomePageWidgetState createState() => homePageWidgetState;
+
+  final homePageWidgetState = _HomePageWidgetState();
 }
 
 class _HomePageWidgetState extends State<HomePageWidget> {
@@ -46,7 +46,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
   bool isLoading = false;
   final ScrollController _scrollController = new ScrollController();
-
+  SearchInfo? searchInfo;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -69,9 +69,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       isLoading = true;
     });
 
-    _tutors = widget.queriedTutors == null ?
-    (await ApiService().tutorPagination(perPage, page))! :
-    (await widget.queriedTutors)!;
+    _tutors = (await ApiService().tutorPagination(perPage, page, searchInfo))!;
 
     setState(() {
       page++;
@@ -88,6 +86,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawerEnableOpenDragGesture: false,
+      endDrawerEnableOpenDragGesture: false,
+      endDrawer: _buildEndDrawer(),
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
       body: SafeArea(
@@ -143,7 +144,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           style: FlutterFlowTheme.of(context).title3,
                         ),
                         TextButton(
-                          onPressed: widget.onSearchPressed,
+                          onPressed: () =>
+                              scaffoldKey.currentState!.openEndDrawer(),
                           child: Row(
                             children: <Widget>[
                               Icon(
@@ -536,7 +538,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       isLoading = true;
     });
 
-    List<Tutor> nextPage = (await ApiService().tutorPagination(perPage, page))!;
+    List<Tutor> nextPage =
+        (await ApiService().tutorPagination(perPage, page, searchInfo))!;
 
     setState(() {
       isLoading = false;
@@ -557,5 +560,266 @@ class _HomePageWidgetState extends State<HomePageWidget> {
         ),
       ),
     );
+  }
+
+  final TextEditingController controller = TextEditingController();
+  final List<String> _nationalitiesFilters = <String>[];
+  late String _specialty = 'All';
+
+  final List<String> _nationalities = <String>[
+    'Foreign',
+    'Vietnamese',
+    'Native English'
+  ];
+
+  final List<String> _specialties = <String>[
+    'All',
+    'English for kids',
+    'Conversational',
+    'STARTERS',
+    'MOVERS',
+    'FLYERS',
+    'KET',
+    'PET',
+    'IELTS',
+    'TOEFL',
+    'TOEIC',
+  ];
+
+  Widget _buildEndDrawer() {
+    return Drawer(
+        child: SingleChildScrollView(
+      child: SafeArea(
+        child: Column(
+          children: <Widget>[
+            SizedBox(height: 20),
+            TabHeader(
+              title: 'Filter',
+              centerTitle: false,
+              // start: IconButton(
+              //     onPressed: () {},
+              //     icon: Icon(
+              //       Icons.chevron_left,
+              //       size: 30,
+              //       color: Colors.indigo,
+              //     )),
+            ),
+            Divider(
+              indent: 20,
+              endIndent: 20,
+              color: Colors.black12,
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 5, 0, 0),
+                    child: Text('Name',
+                        textAlign: TextAlign.left,
+                        style: FlutterFlowTheme.of(context).title1.override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).title1Family,
+                              color: Colors.indigo,
+                              fontSize: 20,
+                            )),
+                  ),
+                  TextFormField(
+                    controller: controller,
+                    autofocus: false,
+                    obscureText: false,
+                    decoration: InputDecoration(
+                      // isDense: true,
+                      hintText: 'Enter tutor name',
+                      hintStyle: FlutterFlowTheme.of(context)
+                          .bodyText2
+                          .override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).bodyText2Family,
+                              fontSize: 16),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xFFdddddd),
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xFFdddddd),
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      filled: false,
+                      fillColor: Color(0xFFE4E4E4),
+                      contentPadding:
+                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                    ),
+                    style: FlutterFlowTheme.of(context).bodyText1,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 10, 0, 0),
+                    child: Text('Nationality',
+                        textAlign: TextAlign.left,
+                        style: FlutterFlowTheme.of(context).title1.override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).title1Family,
+                              color: Colors.indigo,
+                              fontSize: 20,
+                            )),
+                  ),
+                  Wrap(
+                    children: _nationalities.map((String nationality) {
+                      return Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 5, 5),
+                        child: FilterChip(
+                          showCheckmark: false,
+                          selectedColor: Color(0xFFBCE8FF),
+                          visualDensity:
+                              VisualDensity(horizontal: 0.0, vertical: -4),
+                          backgroundColor: Color(0xFFdddddd),
+                          side: BorderSide(color: Colors.transparent),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(200),
+                          ),
+                          // disabledColor: Colors.black12,
+                          label: Text(nationality),
+                          labelStyle: FlutterFlowTheme.of(context)
+                              .bodyText1
+                              .override(
+                                fontFamily: FlutterFlowTheme.of(context)
+                                    .bodyText1Family,
+                                fontSize: 15,
+                                color:
+                                    _nationalitiesFilters.contains(nationality)
+                                        ? Color(0xFF2767FF)
+                                        : Colors.black45,
+                              ),
+                          selected: _nationalitiesFilters.contains(nationality),
+                          onSelected: (bool value) {
+                            setState(() {
+                              if (value) {
+                                if (!_nationalitiesFilters
+                                    .contains(nationality)) {
+                                  _nationalitiesFilters.add(nationality);
+                                }
+                              } else {
+                                _nationalitiesFilters
+                                    .removeWhere((String name) {
+                                  return name == nationality;
+                                });
+                              }
+                            });
+                          },
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 5, 0, 0),
+                    child: Text('Specialties',
+                        textAlign: TextAlign.left,
+                        style: FlutterFlowTheme.of(context).title1.override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).title1Family,
+                              color: Colors.indigo,
+                              fontSize: 20,
+                            )),
+                  ),
+                  Wrap(
+                    children: _specialties.map((String specialty) {
+                      return Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 5, 5),
+                        child: FilterChip(
+                          showCheckmark: false,
+                          selectedColor: Color(0xFFBCE8FF),
+                          visualDensity:
+                              VisualDensity(horizontal: 0, vertical: -4),
+                          backgroundColor: Color(0xFFdddddd),
+                          side: BorderSide(color: Colors.transparent),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(200),
+                          ),
+                          // disabledColor: Colors.black12,
+                          label: Text(specialty),
+                          labelStyle:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .bodyText1Family,
+                                    fontSize: 15,
+                                    color: _specialty == specialty
+                                        ? Color(0xFF2767FF)
+                                        : Colors.black45,
+                                  ),
+                          selected: _specialty == specialty,
+                          onSelected: (bool value) {
+                            setState(() {
+                              if (value) {
+                                _specialty = specialty;
+                              }
+                            });
+                          },
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                  Divider(
+                    indent: 10,
+                    endIndent: 10,
+                    color: Colors.black12,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      NegativeButton(
+                        title: 'Cancel',
+                        onPressed: () {},
+                      ),
+                      Spacer(),
+                      SizedBox(
+                        width: 130,
+                        height: 40,
+                        child: PositiveButton(
+                          title: 'Confirm',
+                          onPressed: () => _search(
+                              _specialty.toLowerCase().replaceAll(' ', '-'),
+                              _nationalitiesFilters.contains('Vietnamese'),
+                              _nationalitiesFilters.contains('Native English'),
+                              controller.text),
+                          icon: Icon(Icons.search),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    ));
+  }
+
+  _search(
+      String specialty, bool isVietnamese, bool isNative, String name) async {
+    SearchInfo info = SearchInfo();
+    info.search = name;
+    info.filters = Filters(
+        specialties: [specialty],
+        nationality:
+            Nationality(isVietNamese: isVietnamese, isNative: isNative));
+
+    setState(() {
+      page = 1;
+      searchInfo = info;
+      _getData();
+    });
+
+    Navigator.pop(context);
+    // widget.onSearchInfoReceived!(info);
   }
 }

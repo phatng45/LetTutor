@@ -1,10 +1,8 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:let_tutor/search_page/search_page_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'flutter_flow/flutter_flow_theme.dart';
@@ -114,7 +112,7 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     _scrollController = ScrollController();
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
     _tabController.addListener(() {
       setState(() {});
     });
@@ -157,17 +155,28 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-
+   var homePage= HomePageWidget(
+      user: widget.user,
+    );
     final tabs = {
-      'HomePage': HomePageWidget(
-        onSearchPressed: () => _tabController.animateTo(3),
-       user: widget.user,
-      ),
+      'HomePage': homePage,
       'SchedulePage': SchedulePageWidget(),
       'CoursesPage': CoursesPageWidget(),
-      'SearchPage': SearchPage(
-        onBackPressed: () => _tabController.animateTo(0),
-      ),
+      // 'SearchPage': SearchPage(
+      //   onBackPressed: () => _tabController.animateTo(0),
+      //   onSearchInfoReceived: (value) {
+      //     print("from main "+value.toString());
+      //    setState(() {
+      //
+      //      homePage = HomePageWidget(
+      //        onSearchPressed: () => _tabController.animateTo(3),
+      //        user: widget.user,
+      //      );
+      //
+      //      _tabController.animateTo(0);
+      //    });
+      //   },
+      // ),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
     return Scaffold(
