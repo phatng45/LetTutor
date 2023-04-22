@@ -61,7 +61,12 @@ class User {
     walletInfo = json['walletInfo'] != null
         ? new WalletInfo.fromJson(json['walletInfo'])
         : null;
-    courses = json['courses'].cast<String>();
+    if (json['courses'] != null) {
+      courses = <UserCourse>[];
+      json['courses'].forEach((v) {
+        courses!.add(new UserCourse.fromJson(v));
+      });
+    }
     requireNote = json['requireNote'];
     level = json['level'];
     if (json['learnTopics'] != null) {
