@@ -260,7 +260,7 @@ class ApiService {
       "perPage": perPage,
       "dateTimeLte": currentTime,
       "orderBy": "meeting",
-      "sortBy": "asc"
+      "sortBy": "desc",
     });
 
     print(response.data["data"]["rows"]);

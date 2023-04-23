@@ -4,44 +4,6 @@ import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/index.dart';
 import 'package:let_tutor/main.dart';
 
-class ClassScheduleStatus extends StatelessWidget {
-  const ClassScheduleStatus({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClassTime(),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              NegativeButton(
-                title: 'Cancel',
-              ),
-              PositiveButton(
-                title: 'Go to meeting',
-                icon: Icon(Icons.people_rounded, size: 18),
-                onPressed: () {
-                  MyApp.To(context, MeetingPageWidget());
-                },
-              ),
-            ],
-          )
-        ],
-      ),
-    );
-  }
-}
-
 class PositiveButton extends StatelessWidget {
   const PositiveButton(
       {Key? key,
