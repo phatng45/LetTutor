@@ -297,4 +297,17 @@ class ApiService {
     }
     return null;
   }
+
+  Future<int?> getTotalHour() async {
+    final url = ApiConstants.baseUrl + ApiConstants.totalHour;
+
+    final response =
+        await Dio().get(url, options: ApiConstants.authorizationOptions);
+
+    if (response.statusCode == 200) {
+      return response.data["total"];
+    } else {
+      return null;
+    }
+  }
 }
