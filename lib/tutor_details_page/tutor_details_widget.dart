@@ -7,8 +7,8 @@ import 'package:let_tutor/components/text_field_widget.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_video_player.dart';
-import 'package:let_tutor/models/tutor_schedule.dart';
 import 'package:let_tutor/models/tutor.dart';
+import 'package:let_tutor/models/tutor_schedule.dart';
 
 import '../api/api_service.dart';
 import '../components/my_chip.dart';
@@ -393,10 +393,20 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
   void _getScheduleById(String userId) async {
     var start = DateTime.now();
     var end = start.add(Duration(days: 7));
-    var newSchedules = (await ApiService().tutorScheduleById(userId, start, end));
+    var newSchedules =
+        (await ApiService().tutorScheduleById(userId, start, end));
 
     print("finished");
-    if (newSchedules != null) {
+    if (newSchedules != null && mounted) {
+      newSchedules = newSchedules
+        ..sort((a, b) {
+          var timeA =
+              DateTime.fromMillisecondsSinceEpoch(a.startTimestamp ?? 0);
+          var timeB =
+              DateTime.fromMillisecondsSinceEpoch(b.startTimestamp ?? 0);
+          return timeA.compareTo(timeB);
+        });
+
       setState(() {
         this.schedules = newSchedules;
       });
@@ -406,6 +416,7 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
   void _showBookBottomSheet() {
     showModalBottomSheet(
       context: context,
+      backgroundColor: Colors.white,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(10),
@@ -419,7 +430,7 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
             builder: (BuildContext context, BoxConstraints constraints) =>
                 Container(
               color: Colors.white,
-              height: MediaQuery.of(context).size.height * 0.6,
+              height: MediaQuery.of(context).size.height * .7,
               child: Column(
                 children: [
                   Container(
@@ -431,19 +442,19 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            '',
-                            style: const TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                            'Select a Class',
+                            style: FlutterFlowTheme.of(context).title1,
                           ),
                         ],
                       ),
-                      decoration: BoxDecoration(color: Colors.grey[300])),
+                      decoration: BoxDecoration(color: Colors.white)),
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.only(
                           right: 10, left: 10, bottom: 10),
                       child: schedules == null
-                          ? Text('Oops, there are nothing here.', style: FlutterFlowTheme.of(context).subtitle1)
+                          ? Text('Oops, there are nothing here.',
+                              style: FlutterFlowTheme.of(context).subtitle1)
                           : GridView.count(
                               crossAxisCount: 2,
                               childAspectRatio: 2,
@@ -452,86 +463,11 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                               shrinkWrap: true,
                               children: List.generate(
                                 schedules!.length,
-                                (index) => ElevatedButton(
-                                  onPressed: () async {
-                                    if ((!(schedules?[index].isBooked ??
-                                            true)) &&
-                                        DateTime.fromMillisecondsSinceEpoch(
-                                                schedules![index]
-                                                        .startTimestamp ??
-                                                    0)
-                                            .isAfter(DateTime.now())) {
-                                      try {
-                                        final res = await ApiService()
-                                            .book(schedules![index].id);
-                                        if (res) {
-                                          schedules![index].isBooked = true;
-                                          Navigator.pop(context);
-                                          Navigator.pop(context);
+                                (index) {
+                                  final schedule = schedules![index];
 
-                                          // showTopSnackBar(
-                                          //   context,
-                                          //   CustomSnackBar.success(
-                                          //     message: lang.bookingSuccess,
-                                          //     backgroundColor: Colors.green,
-                                          //   ),
-                                          //   showOutAnimationDuration: const Duration(milliseconds: 700),
-                                          //   displayDuration: const Duration(milliseconds: 200),
-                                          // );
-                                        }
-                                      } catch (e) {
-                                        // showTopSnackBar(
-                                        //   context,
-                                        //   CustomSnackBar.error(message: e.toString()),
-                                        //   showOutAnimationDuration: const Duration(milliseconds: 700),
-                                        //   displayDuration: const Duration(milliseconds: 200),
-                                        // );
-                                      }
-                                    }
-                                  },
-                                  child: Container(
-                                    padding: const EdgeInsets.only(
-                                        top: 13, bottom: 13),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          DateFormat('HH:mm').format(DateTime
-                                                  .fromMillisecondsSinceEpoch(
-                                                      schedules![index]
-                                                              .startTimestamp ??
-                                                          0)) +
-                                              " - ",
-                                          style: const TextStyle(
-                                              color: Colors.blue),
-                                        ),
-                                        Text(
-                                          DateFormat('HH:mm').format(DateTime
-                                              .fromMillisecondsSinceEpoch(
-                                                  schedules![index]
-                                                          .endTimestamp ??
-                                                      0)),
-                                          style: const TextStyle(
-                                              color: Colors.blue),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  style: ElevatedButton.styleFrom(
-                                    // primary: schedule[index].isBooked ||
-                                    //     DateTime.fromMillisecondsSinceEpoch(schedule[index].startPeriodTimestamp).isBefore(DateTime.now())
-                                    //     ? Colors.grey[200]
-                                    //     : Colors.white,
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(10),
-                                      ),
-                                      side: BorderSide(
-                                          color: Colors.blue, width: 1),
-                                    ),
-                                  ),
-                                ),
+                                  return _buildClass(schedule, context);
+                                },
                               ),
                             ),
                     ),
@@ -543,6 +479,73 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
         );
       },
     );
+  }
+
+  ElevatedButton _buildClass(TutorSchedule schedule, BuildContext context) {
+    final String date = DateFormat('EEE, MMM d').format(
+            DateTime.fromMillisecondsSinceEpoch(schedule.startTimestamp ?? 0)) +
+        "\n" +
+        DateFormat('HH:mm').format(
+            DateTime.fromMillisecondsSinceEpoch(schedule.startTimestamp ?? 0)) +
+        " - " +
+        DateFormat('HH:mm').format(
+            DateTime.fromMillisecondsSinceEpoch(schedule.endTimestamp ?? 0));
+
+    final bool isClassAvailable = (schedule.isBooked ?? true) ||
+        DateTime.fromMillisecondsSinceEpoch(schedule.startTimestamp ?? 0)
+            .isBefore(DateTime.now());
+
+    return ElevatedButton(
+        onPressed: () async {
+          if (isClassAvailable) {
+            try {
+              final res = await ApiService().book(schedule.id);
+              if (res) {
+                schedule.isBooked = true;
+                Navigator.pop(context);
+                Navigator.pop(context);
+
+                // showTopSnackBar(
+                //   context,
+                //   CustomSnackBar.success(
+                //     message: lang.bookingSuccess,
+                //     backgroundColor: Colors.green,
+                //   ),
+                //   showOutAnimationDuration: const Duration(milliseconds: 700),
+                //   displayDuration: const Duration(milliseconds: 200),
+                // );
+              }
+            } catch (e) {
+              // showTopSnackBar(
+              //   context,
+              //   CustomSnackBar.error(message: e.toString()),
+              //   showOutAnimationDuration: const Duration(milliseconds: 700),
+              //   displayDuration: const Duration(milliseconds: 200),
+              // );
+            }
+          }
+        },
+        child: Container(
+          padding: const EdgeInsets.only(top: 13, bottom: 13),
+          child: Text(
+            date,
+            textAlign: TextAlign.center,
+            style: const TextStyle(color: Colors.indigo),
+          ),
+        ),
+        style: ElevatedButton.styleFrom(
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+              side: BorderSide(color: Colors.grey.withAlpha(50))),
+          minimumSize: Size.fromHeight(45),
+          textStyle: FlutterFlowTheme.of(context).bodyText1.override(
+              fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
+              fontSize: 16,
+              fontWeight: FontWeight.w500),
+          foregroundColor: Colors.indigo,
+          backgroundColor: !isClassAvailable ? Colors.grey[300] : Colors.white,
+        ));
   }
 }
 
