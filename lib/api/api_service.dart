@@ -260,6 +260,30 @@ class ApiService {
       "perPage": perPage,
       "dateTimeGte": currentTime,
       "orderBy": "meeting",
+      "sortBy": "asc",
+    });
+
+    print(response.data["data"]["rows"]);
+
+    if (response.statusCode == 200) {
+      List<BookingInfo> schedules = (response.data["data"]["rows"] as List)
+          .map((schedule) => BookingInfo.fromJson(schedule))
+          .toList();
+      return schedules;
+    }
+    return null;
+  }
+
+  Future<List<BookingInfo>?> getHistory(int page, int perPage) async {
+    final url = ApiConstants.baseUrl + ApiConstants.bookingListStudent;
+
+    final currentTime = DateTime.now().millisecondsSinceEpoch;
+    final response = await Dio()
+        .get(url, options: ApiConstants.authorizationOptions, queryParameters: {
+      "page": page,
+      "perPage": perPage,
+      "dateTimeLte": currentTime,
+      "orderBy": "meeting",
       "sortBy": "desc",
     });
 

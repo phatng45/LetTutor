@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
+import 'package:let_tutor/index.dart';
 
 import '../api/api_service.dart';
 import '../components/class_schedule_status_widget.dart';
@@ -108,7 +109,7 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
                     //   padding: EdgeInsets.zero,
                     // ),
 
-                    onPressed: () {},
+                    onPressed: () {MyApp.To(context, HistoryPageWidget());},
                   ),
                 ),
                 Padding(

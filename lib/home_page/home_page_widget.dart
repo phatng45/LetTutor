@@ -598,6 +598,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
   Widget _buildEndDrawer() {
     return Drawer(
+      width: MediaQuery.of(context).size.width * .85,
         child: SingleChildScrollView(
       child: SafeArea(
         child: Column(
