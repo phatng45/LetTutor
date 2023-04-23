@@ -250,7 +250,7 @@ class ApiService {
     }
   }
 
-  static Future<List<BookingInfo>?> getSchedule(int page, int perPage) async {
+  Future<List<BookingInfo>?> getSchedule(int page, int perPage) async {
     final url = ApiConstants.baseUrl + ApiConstants.bookingListStudent;
 
     final currentTime = DateTime.now().millisecondsSinceEpoch;

@@ -27,12 +27,20 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
   final int perPage = 10;
   List<BookingInfo> _schedules = [];
   bool isLoading = true;
+  final ScrollController _scrollController = new ScrollController();
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => SchedulePageModel());
     _getScheduleData();
+
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        _getNextPage();
+      }
+    });
   }
 
   void _getScheduleData() async {
@@ -40,12 +48,27 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
       isLoading = true;
     });
 
-    var schedules = (await ApiService.getSchedule(page, perPage))!;
+    var schedules = (await ApiService().getSchedule(page, perPage))!;
     if (mounted)
       setState(() {
         page++;
         isLoading = false;
         this._schedules = schedules;
+      });
+  }
+
+  void _getNextPage() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    var nextPage = (await ApiService().getSchedule(perPage, page))!;
+
+    if (mounted)
+      setState(() {
+        isLoading = false;
+        _schedules.addAll(nextPage);
+        page++;
       });
   }
 
@@ -63,6 +86,7 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
         // title: 'Schedule',
         body: SafeArea(
           child: SingleChildScrollView(
+            controller: _scrollController,
             child: Column(
               children: [
                 TabHeader(
@@ -111,8 +135,8 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
                             if (index == _schedules.length) {
                               return _buildProgressIndicator();
                             } else {
-                              final tutor = _schedules[index];
-                              return _buildScheduleWidget(context, tutor);
+                              final schedule = _schedules[index];
+                              return _buildScheduleWidget(context, schedule);
                             }
                           },
                         ),

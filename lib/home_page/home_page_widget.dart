@@ -77,6 +77,22 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       });
   }
 
+  void _getNextPage() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    List<Tutor> nextPage =
+        (await ApiService().tutorPagination(perPage, page, searchInfo))!;
+
+    if (mounted)
+      setState(() {
+        isLoading = false;
+        _tutors.addAll(nextPage);
+        page++;
+      });
+  }
+
   @override
   void dispose() {
     _model.dispose();
@@ -169,7 +185,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 : Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: new Center(
-                                        child: Text('There is no tutor matched this filter.',
+                                        child: Text(
+                                            'There is no tutor matched this filter.',
                                             style: FlutterFlowTheme.of(context)
                                                 .subtitle1)),
                                   ),
@@ -539,22 +556,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
         ),
       ),
     );
-  }
-
-  void _getNextPage() async {
-    setState(() {
-      isLoading = true;
-    });
-
-    List<Tutor> nextPage =
-        (await ApiService().tutorPagination(perPage, page, searchInfo))!;
-
-    if (mounted)
-      setState(() {
-        isLoading = false;
-        _tutors.addAll(nextPage);
-        page++;
-      });
   }
 
   Widget _buildProgressIndicator() {
