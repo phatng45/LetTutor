@@ -3,6 +3,9 @@ import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
 
 import '../api/api_service.dart';
+import '../components/best_divider_widget.dart';
+import '../components/class_schedule_status_widget.dart';
+import '../components/tutor_general_info_widget.dart';
 import '../models/tutor_schedule.dart';
 import 'schedule_page_model.dart';
 
@@ -109,49 +112,6 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
                           }
                         },
                       ),
-                // Container(
-                //   width: MediaQuery.of(context).size.width * 1.0,
-                //   decoration: BoxDecoration(
-                //     color: FlutterFlowTheme.of(context).secondaryBackground,
-                //   ),
-                //   child: Padding(
-                //     padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                //     child: Container(
-                //       decoration: BoxDecoration(
-                //         color: FlutterFlowTheme.of(context).secondaryBackground,
-                //         boxShadow: [
-                //           BoxShadow(
-                //             blurRadius: 4.0,
-                //             color: Color(0x33000000),
-                //             offset: Offset(0.0, 2.0),
-                //             spreadRadius: 2.0,
-                //           )
-                //         ],
-                //         borderRadius: BorderRadius.circular(20.0),
-                //       ),
-                //       child: Padding(
-                //         padding: const EdgeInsets.all(15.0),
-                //         child: Column(
-                //           mainAxisSize: MainAxisSize.max,
-                //           mainAxisAlignment: MainAxisAlignment.start,
-                //           crossAxisAlignment: CrossAxisAlignment.start,
-                //           children: <Widget>[
-                //             TutorGeneralInfoWidget(
-                //               hasRating: false,
-                //               context: context,
-                //             ),
-                //             BestDividerWidget(
-                //               title: '',
-                //             ),
-                //             ClassScheduleStatus(),
-                //             ClassScheduleStatus(),
-                //             ClassScheduleStatus(),
-                //           ],
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-                // ),
               ],
             ),
           ),
@@ -172,8 +132,46 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
     );
   }
 
-  Widget _buildScheduleWidget(BuildContext context, BookingInfo tutor) {
-    return SizedBox.shrink();
+  Widget _buildScheduleWidget(BuildContext context, BookingInfo book) {
+    return
+    Padding(
+      padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+      child: Container(
+        decoration:          BoxDecoration(
+          color: FlutterFlowTheme.of(context).secondaryBackground,
+      boxShadow: [
+        BoxShadow(
+          blurRadius: 4.0,
+          color: Color(0x33000000),
+          offset: Offset(0.0, 2.0),
+        )
+      ],
+      borderRadius: BorderRadius.circular(20.0),
+      border: Border.all(
+        color: Color(0x98E4E4E4),
+      ),
+    ),
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              TutorGeneralInfoWidget(
+                hasRating: false,
+                context: context,
+                tutor: book.scheduleDetailInfo?.scheduleInfo?.tutorInfo ?? null,
+              ),
+              BestDividerWidget(
+                title: '',
+              ),
+              ClassScheduleStatus(),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 

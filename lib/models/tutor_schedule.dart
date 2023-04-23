@@ -1,3 +1,5 @@
+import 'package:let_tutor/models/tutor.dart';
+
 class TutorSchedule {
   String? id;
   String? tutorId;
@@ -66,6 +68,7 @@ class ScheduleDetails {
   String? updatedAt;
   List<BookingInfo>? bookingInfo;
   bool? isBooked;
+  Schedule? scheduleInfo;
 
   ScheduleDetails(
       {this.startPeriodTimestamp,
@@ -77,7 +80,9 @@ class ScheduleDetails {
         this.createdAt,
         this.updatedAt,
         this.bookingInfo,
-        this.isBooked});
+        this.isBooked,
+        this.scheduleInfo,
+      });
 
   ScheduleDetails.fromJson(Map<String, dynamic> json) {
     startPeriodTimestamp = json['startPeriodTimestamp'];
@@ -95,6 +100,7 @@ class ScheduleDetails {
       });
     }
     isBooked = json['isBooked'];
+    scheduleInfo = json['scheduleInfo'] != null ? Schedule.fromJson(json['scheduleInfo']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -111,6 +117,11 @@ class ScheduleDetails {
       data['bookingInfo'] = this.bookingInfo!.map((v) => v.toJson()).toList();
     }
     data['isBooked'] = this.isBooked;
+    if (scheduleInfo != null) {
+      data['scheduleInfo'] = scheduleInfo!.toJson();
+    } else {
+      data['scheduleInfo'] = null;
+    }
     return data;
   }
 }
@@ -134,6 +145,7 @@ class BookingInfo {
   String? cancelNote;
   String? calendarId;
   bool? isDeleted;
+  ScheduleDetails? scheduleDetailInfo;
 
   BookingInfo(
       {this.createdAtTimeStamp,
@@ -153,7 +165,8 @@ class BookingInfo {
         this.lessonPlanId,
         this.cancelNote,
         this.calendarId,
-        this.isDeleted});
+        this.isDeleted  ,  this.scheduleDetailInfo,
+      });
 
   BookingInfo.fromJson(Map<String, dynamic> json) {
     createdAtTimeStamp = json['createdAtTimeStamp'];
@@ -174,6 +187,7 @@ class BookingInfo {
     cancelNote = json['cancelNote'];
     calendarId = json['calendarId'];
     isDeleted = json['isDeleted'];
+    scheduleDetailInfo = json["scheduleDetailInfo"] != null ? ScheduleDetails.fromJson(json["scheduleDetailInfo"]) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -196,6 +210,67 @@ class BookingInfo {
     data['cancelNote'] = this.cancelNote;
     data['calendarId'] = this.calendarId;
     data['isDeleted'] = this.isDeleted;
+    data['scheduleDetailInfo'] = scheduleDetailInfo != null ? scheduleDetailInfo!.toJson() : null;
+    return data;
+  }
+}
+
+class Schedule {
+  late String id;
+  late String tutorId;
+  late String startTime;
+  late String endTime;
+  late int startTimestamp;
+  late int endTimestamp;
+  late String createdAt;
+  bool isBooked = false;
+  List<ScheduleDetails> scheduleDetails = [];
+  Tutor? tutorInfo;
+
+  Schedule({
+    required this.id,
+    required this.tutorId,
+    required this.startTime,
+    required this.endTime,
+    required this.startTimestamp,
+    required this.endTimestamp,
+    required this.createdAt,
+    required this.isBooked,
+    required this.scheduleDetails,
+    this.tutorInfo,
+  });
+
+  Schedule.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    tutorId = json['tutorId'];
+    startTime = json['startTime'];
+    endTime = json['endTime'];
+    startTimestamp = json['startTimestamp'];
+    endTimestamp = json['endTimestamp'];
+    createdAt = json['createdAt'];
+    isBooked = json['isBooked'] ?? false;
+    if (json['scheduleDetails'] != null) {
+      scheduleDetails = [];
+      json['scheduleDetails'].forEach((v) {
+        scheduleDetails.add(ScheduleDetails.fromJson(v));
+      });
+    }
+
+    tutorInfo = json['tutorInfo'] != null ? Tutor.fromJson(json['tutorInfo']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['id'] = id;
+    data['tutorId'] = tutorId;
+    data['startTime'] = startTime;
+    data['endTime'] = endTime;
+    data['startTimestamp'] = startTimestamp;
+    data['endTimestamp'] = endTimestamp;
+    data['createdAt'] = createdAt;
+    data['isBooked'] = isBooked;
+    data['scheduleDetails'] = scheduleDetails.map((v) => v.toJson()).toList();
+    data['tutorInfo'] = tutorInfo?.toJson();
     return data;
   }
 }
