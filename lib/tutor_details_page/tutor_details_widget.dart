@@ -397,7 +397,6 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
     var newSchedules =
         (await ApiService().tutorScheduleById(userId, start, end));
 
-    print("finished");
     if (newSchedules != null && mounted) {
       newSchedules = newSchedules
         ..sort((a, b) {

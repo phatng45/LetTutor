@@ -13,6 +13,7 @@ import 'package:let_tutor/index.dart';
 import 'package:let_tutor/main.dart';
 import 'package:let_tutor/models/searchInfo.dart';
 import 'package:timer_count_down/timer_count_down.dart';
+
 import '../components/class_schedule_status_widget.dart';
 import '../menu_page/menu_page_widget.dart';
 import '../models/tutor.dart';
@@ -418,128 +419,148 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           ],
           borderRadius: BorderRadius.circular(12.0),
         ),
-        child: _upcomingLesson == null
-            ? Text('abc')
-            : Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(20.0, 5, 20.0, 10),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
-                      child: Text(
-                        'Upcoming Lesson',
-                        textAlign: TextAlign.center,
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily:
-                                  FlutterFlowTheme.of(context).bodyText1Family,
-                              color: Colors.white,
-                              fontSize: 25.0,
-                              fontWeight: FontWeight.normal,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context).bodyText1Family),
-                            ),
+        child: SizedBox(
+          height: 150,
+          child: _upcomingLesson == null
+              ? Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Welcome To LetTutor',
+                style: FlutterFlowTheme.of(context).bodyText1.override(
+                  fontFamily:
+                  FlutterFlowTheme.of(context).bodyText1Family,
+                  color: Colors.white,
+                  fontSize: 25.0,
+                )),
+                Text('Start scrolling down to explore more tutors!',
+                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                      fontFamily:
+                      FlutterFlowTheme.of(context).bodyText1Family,
+                      color: Colors.white,
+                      fontSize: 15.0,
+                    )),
+              ],
+            )
+          )
+              : Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(20.0, 5, 20.0, 10),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
+                        child: Text(
+                          'Upcoming Lesson',
+                          textAlign: TextAlign.center,
+                          style: FlutterFlowTheme.of(context).bodyText1.override(
+                                fontFamily:
+                                    FlutterFlowTheme.of(context).bodyText1Family,
+                                color: Colors.white,
+                                fontSize: 25.0,
+                              ),
+                        ),
                       ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          children: [
-                            Text(
-                              date,
-                              textAlign: TextAlign.start,
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyText1Family,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                            ),
-                            Countdown(
-                              seconds: remainingTime.inSeconds,
-                              build: (context, double time) {
-                                return Text(
-                                  '(starts in ${_tohhmmss(time.round())})',
-                                  textAlign: TextAlign.start,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyText1Family,
-                                        color: Colors.yellowAccent,
-                                      ),
-                                );
-                              },
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          width: 120,
-                          child: FFButtonWidget(
-                            onPressed: () {
-                              MyApp.To(context, MeetingPageWidget());
-                            },
-                            text: 'Join now',
-                            icon: Icon(
-                              Icons.people_rounded,
-                              size: 18.0,
-                            ),
-                            options: FFButtonOptions(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .subtitle2
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .subtitle2Family,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryColor,
-                                    fontSize: 14.0,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .subtitle2Family),
-                                  ),
-                              borderSide: BorderSide(
-                                color: Colors.transparent,
-                                width: 1.0,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            children: [
+                              Text(
+                                date,
+                                textAlign: TextAlign.start,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .bodyText1Family,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                               ),
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
+                              Countdown(
+                                seconds: remainingTime.inSeconds,
+                                build: (context, double time) {
+                                  return Text(
+                                    '(starts in ${_tohhmmss(time.round())})',
+                                    textAlign: TextAlign.start,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: FlutterFlowTheme.of(context)
+                                              .bodyText1Family,
+                                          color: Colors.yellowAccent,
+                                        ),
+                                  );
+                                },
+                              ),
+                            ],
                           ),
-                        )
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    Row(
-                      children: [
-                        Text(
-                          'Total lesson time: ${totalTime.inHours} hours ${totalTime.inMinutes % 60} minutes',
-                          textAlign: TextAlign.start,
-                          style: FlutterFlowTheme.of(context)
-                              .bodyText1
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .bodyText1Family,
-                                color:
-                                    FlutterFlowTheme.of(context).primaryBtnText,
-                                fontSize: 15.0,
+                          SizedBox(
+                            width: 120,
+                            child: FFButtonWidget(
+                              onPressed: () {
+                                MyApp.To(context, MeetingPageWidget());
+                              },
+                              text: 'Join now',
+                              icon: Icon(
+                                Icons.people_rounded,
+                                size: 18.0,
                               ),
-                        ),
-                      ],
-                    ),
-                  ],
+                              options: FFButtonOptions(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .subtitle2
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .subtitle2Family,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryColor,
+                                      fontSize: 14.0,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .subtitle2Family),
+                                    ),
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Text(
+                            'Total lesson time: ${totalTime.inHours} hours ${totalTime.inMinutes % 60} minutes',
+                            textAlign: TextAlign.start,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyText1
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .bodyText1Family,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryBtnText,
+                                  fontSize: 15.0,
+                                ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
+        ),
       ),
     );
   }

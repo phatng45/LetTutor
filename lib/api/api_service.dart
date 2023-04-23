@@ -24,11 +24,7 @@ class ApiService {
       );
 
       if (response.statusCode == 200) {
-        print("response status code is 200");
-
         User user = User.fromJson(response.data["user"]);
-
-        print("user: " + user.toString());
 
         String accessToken = response.data["tokens"]["access"]["token"];
         MyApp.prefs.setString("ACCESS_TOKEN", accessToken);
@@ -157,8 +153,6 @@ class ApiService {
             "perPage": perPage,
           };
 
-    print("data $data");
-
     final response = await Dio()
         .post(url, data: data, options: ApiConstants.authorizationOptions);
 
@@ -215,8 +209,6 @@ class ApiService {
     });
 
     if (response.statusCode == 200) {
-      print(response.data["scheduleOfTutor"]);
-
       List<TutorSchedule> schedules = (response.data["scheduleOfTutor"] as List)
           .map((x) => TutorSchedule.fromJson(x))
           .toList();
@@ -263,8 +255,6 @@ class ApiService {
       "sortBy": "asc",
     });
 
-    print(response.data["data"]["rows"]);
-
     if (response.statusCode == 200) {
       List<BookingInfo> schedules = (response.data["data"]["rows"] as List)
           .map((schedule) => BookingInfo.fromJson(schedule))
@@ -286,8 +276,6 @@ class ApiService {
       "orderBy": "meeting",
       "sortBy": "desc",
     });
-
-    print(response.data["data"]["rows"]);
 
     if (response.statusCode == 200) {
       List<BookingInfo> schedules = (response.data["data"]["rows"] as List)
