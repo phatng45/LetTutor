@@ -1,12 +1,10 @@
-import 'dart:convert';
-
 import 'package:another_flushbar/flushbar.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 import '../main.dart';
 import '../models/course.dart';
-import '../models/schedule.dart';
+import '../models/tutor_schedule.dart';
 import '../models/searchInfo.dart';
 import '../models/tutor.dart';
 import '../models/user.dart';
@@ -145,7 +143,7 @@ class ApiService {
               // "nationality": {
               //   "isVietNamese": searchInfo.filters!.nationality!.isVietNamese,
               //   "isNative": searchInfo.filters!.nationality!.isNative
-              // },
+              // }, // BUG
               "tutoringTimeAvailable": [null, null]
             },
             "search": searchInfo.search,
@@ -204,30 +202,30 @@ class ApiService {
     return null;
   }
 
-  Future<List<Schedule>?> tutorScheduleById(
+  Future<List<TutorSchedule>?> tutorScheduleById(
       String userId, DateTime start, DateTime end) async {
     final url = ApiConstants.baseUrl + ApiConstants.schedule;
     final response = await Dio()
         .get(url, options: ApiConstants.authorizationOptions, queryParameters: {
       "tutorId": userId,
-      "startTimestamp": json.encode(start),
-      "endTimestamp": json.encode(end)
+      "startTimestamp": start.millisecondsSinceEpoch,
+      "endTimestamp": end.millisecondsSinceEpoch
     });
 
     if (response.statusCode == 200) {
-      {
-        List<Schedule> schedules = (response.data["data"] as List)
-            .map((x) => Schedule.fromJson(x))
-            .toList();
+      print(response.data["scheduleOfTutor"]);
 
-        return schedules;
-      }
+      List<TutorSchedule> schedules = (response.data["scheduleOfTutor"] as List)
+          .map((x) => TutorSchedule.fromJson(x))
+          .toList();
 
-      return null;
+      return schedules;
     }
+
+    return null;
   }
 
- Future<bool> book(String? id) async{
+  Future<bool> book(String? id) async {
     return true;
- }
+  }
 }

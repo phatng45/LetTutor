@@ -7,7 +7,7 @@ import 'package:let_tutor/components/text_field_widget.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_video_player.dart';
-import 'package:let_tutor/models/schedule.dart';
+import 'package:let_tutor/models/tutor_schedule.dart';
 import 'package:let_tutor/models/tutor.dart';
 
 import '../api/api_service.dart';
@@ -37,13 +37,14 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
       tutor?.country ?? tutor?.user?.country ?? 'VN',
       tutor?.country ?? tutor?.user?.country ?? 'Vietnam');
 
-  List<Schedule>? schedule;
+  List<TutorSchedule>? schedules;
 
   @override
   void initState() {
     super.initState();
 
     _getTutorById(widget.tutorId);
+    _getScheduleById(widget.tutorId);
     _model = createModel(context, () => TutorDetailsPageModel());
     _model.textController ??= TextEditingController();
   }
@@ -383,16 +384,21 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
   void _getTutorById(String userId) async {
     var tutor = (await ApiService().tutorById(userId));
 
+    if (tutor != null)
+      setState(() {
+        this.tutor = tutor;
+      });
+  }
+
+  void _getScheduleById(String userId) async {
     var start = DateTime.now();
     var end = start.add(Duration(days: 7));
-    var schedule = null;
-    //var schedule = (await ApiService().tutorScheduleById(userId, start, end));
-    {
+    var newSchedules = (await ApiService().tutorScheduleById(userId, start, end));
+
+    print("finished");
+    if (newSchedules != null) {
       setState(() {
-        if (tutor != null) this.tutor = tutor;
-        if (schedule != null) {
-          this.schedule = schedule;
-        }
+        this.schedules = newSchedules;
       });
     }
   }
@@ -436,30 +442,30 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                     child: Padding(
                       padding: const EdgeInsets.only(
                           right: 10, left: 10, bottom: 10),
-                      child: schedule == null
-                          ? SizedBox.shrink()
+                      child: schedules == null
+                          ? Text('Oops, there are nothing here.', style: FlutterFlowTheme.of(context).subtitle1)
                           : GridView.count(
                               crossAxisCount: 2,
-                              childAspectRatio: .5,
+                              childAspectRatio: 2,
                               crossAxisSpacing: 10,
                               mainAxisSpacing: 10,
                               shrinkWrap: true,
                               children: List.generate(
-                                schedule!.length,
+                                schedules!.length,
                                 (index) => ElevatedButton(
                                   onPressed: () async {
-                                    if ((!(schedule?[index].isBooked ??
+                                    if ((!(schedules?[index].isBooked ??
                                             true)) &&
                                         DateTime.fromMillisecondsSinceEpoch(
-                                                schedule![index]
+                                                schedules![index]
                                                         .startTimestamp ??
                                                     0)
                                             .isAfter(DateTime.now())) {
                                       try {
                                         final res = await ApiService()
-                                            .book(schedule![index].id);
+                                            .book(schedules![index].id);
                                         if (res) {
-                                          schedule![index].isBooked = true;
+                                          schedules![index].isBooked = true;
                                           Navigator.pop(context);
                                           Navigator.pop(context);
 
@@ -493,7 +499,7 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                                         Text(
                                           DateFormat('HH:mm').format(DateTime
                                                   .fromMillisecondsSinceEpoch(
-                                                      schedule![index]
+                                                      schedules![index]
                                                               .startTimestamp ??
                                                           0)) +
                                               " - ",
@@ -503,7 +509,7 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                                         Text(
                                           DateFormat('HH:mm').format(DateTime
                                               .fromMillisecondsSinceEpoch(
-                                                  schedule![index]
+                                                  schedules![index]
                                                           .endTimestamp ??
                                                       0)),
                                           style: const TextStyle(

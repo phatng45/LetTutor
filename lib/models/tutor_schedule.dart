@@ -1,4 +1,4 @@
-class Schedule {
+class TutorSchedule {
   String? id;
   String? tutorId;
   String? startTime;
@@ -9,7 +9,7 @@ class Schedule {
   bool? isBooked;
   List<ScheduleDetails>? scheduleDetails;
 
-  Schedule(
+  TutorSchedule(
       {this.id,
         this.tutorId,
         this.startTime,
@@ -20,7 +20,7 @@ class Schedule {
         this.isBooked,
         this.scheduleDetails});
 
-  Schedule.fromJson(Map<String, dynamic> json) {
+  TutorSchedule.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     tutorId = json['tutorId'];
     startTime = json['startTime'];
@@ -129,8 +129,8 @@ class BookingInfo {
   String? createdAt;
   String? updatedAt;
   String? recordUrl;
-  String? cancelReasonId;
-  String? lessonPlanId;
+  int? cancelReasonId;
+  int? lessonPlanId;
   String? cancelNote;
   String? calendarId;
   bool? isDeleted;
