@@ -454,7 +454,7 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                       padding: const EdgeInsets.only(
                           right: 10, left: 10, bottom: 10),
                       child: schedules == null
-                          ? Text('Oops, there are nothing here.',
+                          ? Text('This tutor did not open any class.',
                               style: FlutterFlowTheme.of(context).subtitle1)
                           : GridView.count(
                               crossAxisCount: 2,

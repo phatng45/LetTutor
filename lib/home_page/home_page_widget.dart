@@ -70,11 +70,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
     });
 
     _tutors = (await ApiService().tutorPagination(perPage, page, searchInfo))!;
-
-    setState(() {
-      page++;
-      isLoading = false;
-    });
+    if (mounted)
+      setState(() {
+        page++;
+        isLoading = false;
+      });
   }
 
   @override
@@ -169,7 +169,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 : Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: new Center(
-                                        child: Text('Oops, there is no result.',
+                                        child: Text('There is no tutor matched this filter.',
                                             style: FlutterFlowTheme.of(context)
                                                 .subtitle1)),
                                   ),
@@ -200,10 +200,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   Widget _buildTutorWidget(BuildContext context, Tutor tutor) {
     var country = Countries.byCodeOrName(
         tutor.country ?? 'VN', tutor.country ?? 'Vietnam');
-    // var country = Countries.byCode(tutor.country ?? 'VN');
 
     return GestureDetector(
-      onTap: () => MyApp.To(context, TutorDetailsPageWidget(tutor.userId ?? '')),
+      onTap: () =>
+          MyApp.To(context, TutorDetailsPageWidget(tutor.userId ?? '')),
       child: Padding(
         padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
         child: Container(
@@ -549,11 +549,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
     List<Tutor> nextPage =
         (await ApiService().tutorPagination(perPage, page, searchInfo))!;
 
-    setState(() {
-      isLoading = false;
-      _tutors.addAll(nextPage);
-      page++;
-    });
+    if (mounted)
+      setState(() {
+        isLoading = false;
+        _tutors.addAll(nextPage);
+        page++;
+      });
   }
 
   Widget _buildProgressIndicator() {

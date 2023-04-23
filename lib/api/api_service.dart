@@ -229,26 +229,50 @@ class ApiService {
     print("id: $id");
 
     final url = ApiConstants.baseUrl + ApiConstants.booking;
-    print("a: "+url);
-try {
-  final response = await Dio()
-      .post(url, options: ApiConstants.authorizationOptions, data: {
-    "scheduleDetailIds": [id ?? ''],
-  });
+    print("a: " + url);
+    try {
+      final response = await Dio()
+          .post(url, options: ApiConstants.authorizationOptions, data: {
+        "scheduleDetailIds": [id ?? ''],
+      });
 
-  print("b: " + (response.statusCode == 200 ?? false).toString());
+      print("b: " + (response.statusCode == 200 ?? false).toString());
 
-  if(response.statusCode == 400){
-    print("error: " + response.data["message"]);
+      if (response.statusCode == 400) {
+        print("error: " + response.data["message"]);
+      }
+
+      return response.statusCode == 200;
+    } catch (e) {
+      if (e is DioError) {
+        print("c: " + (e.message).toString());
+      }
+    }
+    return false;
   }
 
-  return response.statusCode == 200;
-}
-catch(e){
-  if( e is DioError){
-    print("c: " + (e.message).toString());
-  }
-}
-return false;
+  static Future<List<BookingInfo>?> getSchedule(
+      int page, int perPage) async {
+    final url = ApiConstants.baseUrl + ApiConstants.bookingListStudent;
+
+    final currentTime = DateTime.now().millisecondsSinceEpoch;
+    final response = await Dio()
+        .get(url, options: ApiConstants.authorizationOptions, queryParameters: {
+      "page": page,
+      "perPage": perPage,
+      "dateTimeLte": currentTime,
+      "orderBy": "meeting",
+      "sortBy": "asc"
+    });
+
+    print(response.data["data"]["rows"]);
+
+    if (response.statusCode == 200) {
+      List<BookingInfo> schedules = (response.data["data"]["rows"] as List)
+          .map((schedule) => BookingInfo.fromJson(schedule))
+          .toList();
+      return schedules;
+    }
+    return null;
   }
 }
