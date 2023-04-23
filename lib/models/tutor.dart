@@ -163,7 +163,7 @@ class Tutor {
     isNative = json['isNative'];
     user = json['User'] != null ? new User.fromJsonFromGetTutorById(json['User']) : null;
     isFavorited = json['isFavorite'];
-    rating = json['avgRating'];
+    rating = json['avgRating'] * 1.0;
   }
 
   Map<String, dynamic> toJson() {

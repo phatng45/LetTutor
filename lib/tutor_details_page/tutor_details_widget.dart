@@ -1,3 +1,4 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:country_flags/country_flags.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_country/countries.dart';
@@ -491,40 +492,46 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
         DateFormat('HH:mm').format(
             DateTime.fromMillisecondsSinceEpoch(schedule.endTimestamp ?? 0));
 
-    final bool isClassAvailable = (schedule.isBooked ?? true) ||
+    final bool isClassUnavailable = (schedule.isBooked ?? false) ||
         DateTime.fromMillisecondsSinceEpoch(schedule.startTimestamp ?? 0)
             .isBefore(DateTime.now());
 
     return ElevatedButton(
-        onPressed: () async {
-          if (isClassAvailable) {
-            try {
-              final res = await ApiService().book(schedule.id);
-              if (res) {
-                schedule.isBooked = true;
-                Navigator.pop(context);
-                Navigator.pop(context);
-
-                // showTopSnackBar(
-                //   context,
-                //   CustomSnackBar.success(
-                //     message: lang.bookingSuccess,
-                //     backgroundColor: Colors.green,
-                //   ),
-                //   showOutAnimationDuration: const Duration(milliseconds: 700),
-                //   displayDuration: const Duration(milliseconds: 200),
-                // );
-              }
-            } catch (e) {
-              // showTopSnackBar(
-              //   context,
-              //   CustomSnackBar.error(message: e.toString()),
-              //   showOutAnimationDuration: const Duration(milliseconds: 700),
-              //   displayDuration: const Duration(milliseconds: 200),
-              // );
-            }
-          }
-        },
+        onPressed: isClassUnavailable
+            ? null
+            : () async {
+                  final res = await ApiService()
+                      .book(schedule.scheduleDetails?[0].id ?? "");
+                  if (res) {
+                    schedule.isBooked = true;
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                    Flushbar(
+                      title: "Booked Successfully!",
+                      message: '',
+                      duration: Duration(seconds: 1, milliseconds: 500),
+                      borderRadius: BorderRadius.circular(20),
+                      margin: EdgeInsets.all(10),
+                      flushbarStyle: FlushbarStyle.FLOATING,
+                      backgroundColor: Colors.grey.shade200,
+                      messageColor: Colors.indigo,
+                      titleColor: Colors.indigo,
+                    )..show(context);
+                  }
+                  else{
+                    Flushbar(
+                      title: "Book Failed.",
+                      message: 'Please try again later',
+                      duration: Duration(seconds: 2, milliseconds: 500),
+                      borderRadius: BorderRadius.circular(20),
+                      margin: EdgeInsets.all(10),
+                      flushbarStyle: FlushbarStyle.FLOATING,
+                      backgroundColor: Colors.red.shade100,
+                      messageColor: Colors.red.shade700,
+                      titleColor: Colors.red.shade700,
+                    )..show(context);
+                  }
+              },
         child: Container(
           padding: const EdgeInsets.only(top: 13, bottom: 13),
           child: Text(
@@ -544,7 +551,8 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
               fontSize: 16,
               fontWeight: FontWeight.w500),
           foregroundColor: Colors.indigo,
-          backgroundColor: !isClassAvailable ? Colors.grey[300] : Colors.white,
+          backgroundColor:
+              isClassUnavailable ? Colors.grey[300] : Colors.white,
         ));
   }
 }

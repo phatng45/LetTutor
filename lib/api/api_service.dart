@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 import '../main.dart';
 import '../models/course.dart';
-import '../models/tutor_schedule.dart';
 import '../models/searchInfo.dart';
 import '../models/tutor.dart';
+import '../models/tutor_schedule.dart';
 import '../models/user.dart';
 import 'api_constants.dart';
 
@@ -226,6 +226,29 @@ class ApiService {
   }
 
   Future<bool> book(String? id) async {
-    return true;
+    print("id: $id");
+
+    final url = ApiConstants.baseUrl + ApiConstants.booking;
+    print("a: "+url);
+try {
+  final response = await Dio()
+      .post(url, options: ApiConstants.authorizationOptions, data: {
+    "scheduleDetailIds": [id ?? ''],
+  });
+
+  print("b: " + (response.statusCode == 200 ?? false).toString());
+
+  if(response.statusCode == 400){
+    print("error: " + response.data["message"]);
+  }
+
+  return response.statusCode == 200;
+}
+catch(e){
+  if( e is DioError){
+    print("c: " + (e.message).toString());
+  }
+}
+return false;
   }
 }

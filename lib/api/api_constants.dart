@@ -15,6 +15,8 @@ class ApiConstants {
   static String login = 'auth/login';
   static String loginPhone = 'auth/phone-login';
 
+  static String booking = 'booking';
+
   static String verifyAccount(String token) =>
       'auth/verifyAccount?token=$token';
   static String loginGoogle = 'auth/google';
