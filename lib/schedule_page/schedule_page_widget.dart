@@ -233,7 +233,7 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Text(
-                                      DateFormat.yMEd().format(
+                                      DateFormat('EEE, yyyy MMM dd').format(
                                           DateTime.fromMillisecondsSinceEpoch(
                                               book.scheduleDetailInfo
                                                       ?.startPeriodTimestamp ??

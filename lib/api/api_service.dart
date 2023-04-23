@@ -258,7 +258,7 @@ class ApiService {
         .get(url, options: ApiConstants.authorizationOptions, queryParameters: {
       "page": page,
       "perPage": perPage,
-      "dateTimeLte": currentTime,
+      "dateTimeGte": currentTime,
       "orderBy": "meeting",
       "sortBy": "desc",
     });
