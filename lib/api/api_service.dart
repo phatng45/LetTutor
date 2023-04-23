@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:another_flushbar/flushbar.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -226,33 +228,29 @@ class ApiService {
   }
 
   Future<bool> book(String? id) async {
-    print("id: $id");
-
     final url = ApiConstants.baseUrl + ApiConstants.booking;
-    print("a: " + url);
+    final Map<String, dynamic> data = {
+      "scheduleDetailIds": [id!]
+    };
+
     try {
-      final response = await Dio()
-          .post(url, options: ApiConstants.authorizationOptions, data: {
-        "scheduleDetailIds": [id ?? ''],
-      });
-
-      print("b: " + (response.statusCode == 200 ?? false).toString());
-
-      if (response.statusCode == 400) {
-        print("error: " + response.data["message"]);
-      }
+      final response = await Dio().post(url,
+          options: Options(
+            headers: {
+              'authorization':
+                  'Bearer ' + MyApp.prefs.getString("ACCESS_TOKEN")!,
+              "content-Type": "application/json;encoding=utf-8",
+            },
+          ),
+          data: json.encode(data));
 
       return response.statusCode == 200;
     } catch (e) {
-      if (e is DioError) {
-        print("c: " + (e.message).toString());
-      }
+      return false;
     }
-    return false;
   }
 
-  static Future<List<BookingInfo>?> getSchedule(
-      int page, int perPage) async {
+  static Future<List<BookingInfo>?> getSchedule(int page, int perPage) async {
     final url = ApiConstants.baseUrl + ApiConstants.bookingListStudent;
 
     final currentTime = DateTime.now().millisecondsSinceEpoch;

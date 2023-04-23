@@ -66,7 +66,7 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
           child: Column(
             children: [
               TabHeader(
-                title: tutor?.name ?? 'N/A',
+                title: '',
                 centerTitle: true,
                 start: IconButton(
                     onPressed: () => Navigator.pop(context),
@@ -500,37 +500,37 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
         onPressed: isClassUnavailable
             ? null
             : () async {
-                  final res = await ApiService()
-                      .book(schedule.scheduleDetails?[0].id ?? "");
-                  if (res) {
-                    schedule.isBooked = true;
+                final res = await ApiService()
+                    .book(schedule.scheduleDetails?[0].id ?? "");
+                if (res) {
+                  schedule.isBooked = true;
+                  setState(() {
                     Navigator.pop(context);
-                    Navigator.pop(context);
-                    Flushbar(
-                      title: "Booked Successfully!",
-                      message: '',
-                      duration: Duration(seconds: 1, milliseconds: 500),
-                      borderRadius: BorderRadius.circular(20),
-                      margin: EdgeInsets.all(10),
-                      flushbarStyle: FlushbarStyle.FLOATING,
-                      backgroundColor: Colors.grey.shade200,
-                      messageColor: Colors.indigo,
-                      titleColor: Colors.indigo,
-                    )..show(context);
-                  }
-                  else{
-                    Flushbar(
-                      title: "Book Failed.",
-                      message: 'Please try again later',
-                      duration: Duration(seconds: 2, milliseconds: 500),
-                      borderRadius: BorderRadius.circular(20),
-                      margin: EdgeInsets.all(10),
-                      flushbarStyle: FlushbarStyle.FLOATING,
-                      backgroundColor: Colors.red.shade100,
-                      messageColor: Colors.red.shade700,
-                      titleColor: Colors.red.shade700,
-                    )..show(context);
-                  }
+                  });
+                  Flushbar(
+                    title: "Successfully!",
+                    message: 'Booked successfully! See you soon!',
+                    duration: Duration(seconds: 2, milliseconds: 500),
+                    borderRadius: BorderRadius.circular(20),
+                    margin: EdgeInsets.all(10),
+                    flushbarStyle: FlushbarStyle.FLOATING,
+                    backgroundColor: Colors.grey.shade200,
+                    messageColor: Colors.indigo,
+                    titleColor: Colors.indigo,
+                  )..show(context);
+                } else {
+                  Flushbar(
+                    title: "Book Failed.",
+                    message: 'Please try again later',
+                    duration: Duration(seconds: 2, milliseconds: 500),
+                    borderRadius: BorderRadius.circular(20),
+                    margin: EdgeInsets.all(10),
+                    flushbarStyle: FlushbarStyle.FLOATING,
+                    backgroundColor: Colors.red.shade100,
+                    messageColor: Colors.red.shade700,
+                    titleColor: Colors.red.shade700,
+                  )..show(context);
+                }
               },
         child: Container(
           padding: const EdgeInsets.only(top: 13, bottom: 13),
@@ -551,8 +551,7 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
               fontSize: 16,
               fontWeight: FontWeight.w500),
           foregroundColor: Colors.indigo,
-          backgroundColor:
-              isClassUnavailable ? Colors.grey[300] : Colors.white,
+          backgroundColor: isClassUnavailable ? Colors.grey[300] : Colors.white,
         ));
   }
 }
