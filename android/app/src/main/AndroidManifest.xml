@@ -56,7 +56,10 @@
             android:name="flutterEmbedding"
             android:value="2" />
 
-
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            tools:node="remove" />
 
     </application>
 </manifest>

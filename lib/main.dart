@@ -14,9 +14,8 @@ import 'models/user.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  SharedPreferences.setMockInitialValues({});
   await FlutterFlowTheme.initialize();
-
   runApp(MyApp());
 }
 
