@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -154,7 +155,7 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-   var homePage= HomePageWidget(
+    var homePage = HomePageWidget(
       user: widget.user,
     );
     final tabs = {
@@ -186,6 +187,22 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
         children: tabs.values.toList(),
       ),
       extendBody: false,
+      floatingActionButton: badges.Badge(
+        position: badges.BadgePosition.topEnd(top: -3, end: -3),
+        badgeStyle: badges.BadgeStyle(padding: EdgeInsets.all(7)),
+        child: FloatingActionButton(
+          onPressed: showChatGPTBottomSheet,
+          backgroundColor: Colors.indigo,
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Image.network(
+              "https://assets.stickpng.com/images/63c52af590250dd34bd6a9ab.png",
+              color: Colors.white,
+              colorBlendMode: BlendMode.srcIn,
+            ),
+          ),
+        ),
+      ),
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
         height: _isVisible ? 72.0 : 0,
@@ -241,6 +258,9 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
         ),
       ),
     );
+  }
+
+  void showChatGPTBottomSheet() {
   }
 }
 
