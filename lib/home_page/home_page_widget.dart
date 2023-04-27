@@ -1,6 +1,5 @@
 import 'package:country_flags/country_flags.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_country/countries.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:let_tutor/api/api_service.dart';
@@ -15,6 +14,7 @@ import 'package:let_tutor/models/searchInfo.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 
 import '../components/class_schedule_status_widget.dart';
+import '../components/copied_country.dart';
 import '../menu_page/menu_page_widget.dart';
 import '../models/tutor.dart';
 import '../models/tutor_schedule.dart';

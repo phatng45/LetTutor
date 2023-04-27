@@ -1,7 +1,6 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:country_flags/country_flags.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_country/countries.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:let_tutor/components/text_field_widget.dart';
@@ -12,6 +11,7 @@ import 'package:let_tutor/models/tutor.dart';
 import 'package:let_tutor/models/tutor_schedule.dart';
 
 import '../api/api_service.dart';
+import '../components/copied_country.dart';
 import '../components/my_chip.dart';
 import '../components/tutor_specialties_widget.dart';
 import '../flutter_flow/flutter_flow_toggle_icon.dart';
@@ -35,8 +35,7 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   late var country = Countries.byCodeOrName(
-      tutor?.country ?? tutor?.user?.country ?? 'VN',
-      tutor?.country ?? tutor?.user?.country ?? 'Vietnam');
+      tutor?.country ?? tutor?.user?.country ?? 'VN',tutor?.country ?? tutor?.user?.country ?? 'Vietnam');
 
   List<TutorSchedule>? schedules;
 

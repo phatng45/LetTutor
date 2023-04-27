@@ -1,15 +1,11 @@
 import 'package:country_flags/country_flags.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_country/countries.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:let_tutor/components/tutor_specialties_widget.dart';
+import 'package:let_tutor/components/copied_country.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 
 import '../flutter_flow/flutter_flow_toggle_icon.dart';
-import '../flutter_flow/flutter_flow_widgets.dart';
-import '../main.dart';
 import '../models/tutor.dart';
-import '../tutor_details_page/tutor_details_widget.dart';
 
 class TutorGeneralInfoWidget extends StatefulWidget {
   TutorGeneralInfoWidget({
@@ -44,8 +40,7 @@ class TutorGeneralInfoWidget extends StatefulWidget {
 class _TutorGeneralInfoWidgetState extends State<TutorGeneralInfoWidget> {
 
   late Tutor? tutor = widget.tutor;
-  late var country = Countries.byCodeOrName(
-      tutor?.country ?? 'VN', tutor?.country ?? 'Vietnam');
+  late var country = Countries.byCodeOrName(tutor?.country ?? 'VN', tutor?.country ?? 'Vietnam');
 
 
 

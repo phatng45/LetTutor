@@ -38,7 +38,7 @@ class ApiService {
     } catch (e) {
       if (e is DioError)
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(e.message!),
+          content: Text("DioError: " + (e.message ?? "")),
         ));
     }
     return null;
