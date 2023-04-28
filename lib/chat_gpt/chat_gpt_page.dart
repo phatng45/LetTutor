@@ -20,7 +20,6 @@ class _ChatGPTPageState extends State<ChatGPTPage> {
   final DateFormat timeFormat = DateFormat("HH:mm");
   late TextEditingController _textEditingController;
 
-  final List<bool> _speechOptions = <bool>[false, true];
   late List<Message> _messages = <Message>[];
 
   static const String MESSAGES_PREF_KEY = 'messages_key';
@@ -34,12 +33,8 @@ class _ChatGPTPageState extends State<ChatGPTPage> {
       baseOption: HttpSetup(receiveTimeout: const Duration(seconds: 100)),
       isLog: false);
 
-  bool _isListening = false;
   bool _isTextFieldNotEmpty = false;
   bool _darkMode = false;
-  bool _autoTTS = true;
-
-  late String _hintText = 'holdToTalk'.tr;
 
   @override
   void initState() {
@@ -59,7 +54,6 @@ class _ChatGPTPageState extends State<ChatGPTPage> {
             _messages = value;
           })
         });
-    _updateHintText();
   }
 
   @override
@@ -138,100 +132,6 @@ class _ChatGPTPageState extends State<ChatGPTPage> {
     );
   }
 
-  // Future<void> _buildLanguageBottomSheet(BuildContext context) {
-  //   return showModalBottomSheet<void>(
-  //     context: context,
-  //     backgroundColor: _darkMode ? Colors.grey[900] : Colors.white,
-  //     shape: const RoundedRectangleBorder(
-  //         borderRadius: BorderRadius.only(
-  //             topLeft: Radius.circular(20), topRight: Radius.circular(20))),
-  //     builder: (BuildContext context) {
-  //       return Container(
-  //         height: 200,
-  //         child: Column(
-  //           mainAxisAlignment: MainAxisAlignment.start,
-  //           mainAxisSize: MainAxisSize.min,
-  //           children: <Widget>[
-  //             Padding(
-  //               padding: const EdgeInsets.symmetric(vertical: 20.0),
-  //               child: Text(
-  //                 'Select Language'.tr,
-  //                 style: const TextStyle(fontSize: 25),
-  //               ),
-  //             ),
-  //             Row(
-  //               // crossAxisAlignment: CrossAxisAlignment.center,
-  //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //               children: <Widget>[
-  //                 Column(
-  //                   children: <Widget>[
-  //                     IconButton(
-  //                       onPressed: () {
-  //                         Get.updateLocale(const Locale('en', 'US'));
-  //                         Navigator.pop(context);
-  //                         _updateHintText();
-  //                         _saveSettings();
-  //                       },
-  //                       iconSize: 50,
-  //                       icon: Container(
-  //                         decoration: const BoxDecoration(
-  //                             shape: BoxShape.circle,
-  //                             boxShadow: [
-  //                               BoxShadow(
-  //                                 color: Colors.black38,
-  //                                 offset: Offset(0, 1),
-  //                                 blurRadius: 2.0,
-  //                               ),
-  //                             ]),
-  //                         child: Flag.fromCode(
-  //                           FlagsCode.US,
-  //                           borderRadius: 60,
-  //                           fit: BoxFit.cover,
-  //                         ),
-  //                       ),
-  //                     ),
-  //                     const Text('English (US)')
-  //                   ],
-  //                 ),
-  //                 Column(
-  //                   children: <Widget>[
-  //                     IconButton(
-  //                       onPressed: () {
-  //                         Get.updateLocale(const Locale('vi', 'VN'));
-  //                         Navigator.pop(context);
-  //                         _updateHintText();
-  //                         _saveSettings();
-  //                       },
-  //                       iconSize: 50,
-  //                       icon: Container(
-  //                         decoration: const BoxDecoration(
-  //                             shape: BoxShape.circle,
-  //                             boxShadow: [
-  //                               BoxShadow(
-  //                                 color: Colors.black38,
-  //                                 offset: Offset(0, 1),
-  //                                 blurRadius: 2.0,
-  //                               ),
-  //                             ]),
-  //                         child: Flag.fromCode(
-  //                           FlagsCode.VN,
-  //                           borderRadius: 60,
-  //                           fit: BoxFit.cover,
-  //                         ),
-  //                       ),
-  //                     ),
-  //                     const Text('Tiếng Việt (VN)')
-  //                   ],
-  //                 )
-  //               ],
-  //             ),
-  //           ],
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
-
   _buildMessageComposer() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(15, 17, 15, 17),
@@ -280,51 +180,6 @@ class _ChatGPTPageState extends State<ChatGPTPage> {
         ),
       ),
     );
-  }
-
-  bool isInHoldMode() => _speechOptions[1] == true;
-
-  void _updateHintText() {
-    setState(() {
-      if (_isListening) {
-        if (_speechOptions[0] == true) {
-          _hintText = "Touch to Stop".tr;
-        } else {
-          _hintText = "Release to Stop".tr;
-        }
-      } else {
-        if (_speechOptions[0] == true) {
-          _hintText = "Touch to Talk".tr;
-        } else {
-          _hintText = "Hold to Talk".tr;
-        }
-      }
-    });
-  }
-
-  void _listen() async {
-    // bool available = await _stt.initialize(onError: (val) {
-    //   setState(() {
-    //     _isListening = false;
-    //     _updateHintText();
-    //   });
-    // });
-    // if (available) {
-    //   setState(() {
-    //     _isListening = true;
-    //     _updateHintText();
-    //   });
-    //   _stt.listen(
-    //       listenMode: ListenMode.search,
-    //       onResult: (val) => setState(() {
-    //         _textEditingController.text = val.recognizedWords;
-    //         _updateHintText();
-    //       }));
-    // } else {
-    //   setState(() => _isListening = false);
-    //   _stt.stop();
-    //   _updateHintText();
-    // }
   }
 
   Widget _buildSystemMessage(Message m) {
@@ -437,59 +292,6 @@ class _ChatGPTPageState extends State<ChatGPTPage> {
     );
   }
 
-  // _buildCurrentVoiceGPTState(Message m) {
-  //   return Container(
-  //       child: m.state == BotMessageState.Null
-  //           ? null
-  //           : m.state == BotMessageState.Loading
-  //           ? Padding(
-  //         padding: const EdgeInsets.only(top: 10.0),
-  //         child: LoadingAnimationWidget.twoRotatingArc(
-  //             size: 20, color: Colors.green),
-  //       )
-  //           : m.state == BotMessageState.Speaking
-  //           ? Padding(
-  //         padding: const EdgeInsets.only(top: 10.0),
-  //         child: IconButton(
-  //           onPressed: () {
-  //             setState(() {
-  //               _tts.stop();
-  //               m.state = BotMessageState.CanPlay;
-  //             });
-  //           },
-  //           icon: LoadingAnimationWidget.beat(
-  //               size: 20, color: Colors.red),
-  //         ),
-  //       )
-  //           : m.state == BotMessageState.CanPlay
-  //           ? IconButton(
-  //         onPressed: () {
-  //           setState(() {
-  //             for (Message message in _messages) {
-  //               message.state = BotMessageState.CanPlay;
-  //             }
-  //
-  //             m.state = BotMessageState.Speaking;
-  //             _tts.speak(m.text);
-  //             _tts.setCompletionHandler(() {
-  //               setState(() {
-  //                 m.state = BotMessageState.CanPlay;
-  //               });
-  //             });
-  //           });
-  //         },
-  //         icon: const Padding(
-  //           padding: EdgeInsets.only(top: 8.0),
-  //           child: Icon(
-  //             Icons.play_circle_outline_rounded,
-  //             color: Colors.orange,
-  //             size: 28,
-  //           ),
-  //         ),
-  //       )
-  //           : null);
-  // }
-
   void _send(String prompt) async {
     setState(
       () {
@@ -513,21 +315,12 @@ class _ChatGPTPageState extends State<ChatGPTPage> {
         sender: MessageSender.Bot,
         text: result,
         time: timeFormat.format(DateTime.now()),
-        state: _autoTTS ? BotMessageState.Speaking : BotMessageState.CanPlay);
+        state: BotMessageState.CanPlay);
 
     _saveMessages();
 
     setState(() {
       _messages.add(newMessage);
-
-      if (newMessage.state == BotMessageState.Speaking) {
-        // _tts.speak(newMessage.text);
-        // _tts.setCompletionHandler(() {
-        //   setState(() {
-        //     newMessage.state = BotMessageState.CanPlay;
-        //   });
-        // });
-      }
 
       Future.delayed(const Duration(milliseconds: 50))
           .then((_) => _scrollDown());
@@ -551,9 +344,7 @@ class _ChatGPTPageState extends State<ChatGPTPage> {
   void _saveSettings() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool(DARK_MODE_PREF_KEY, _darkMode);
-    await prefs.setBool(AUTO_TTS_PREF_KEY, _autoTTS);
     await prefs.setBool(LANGUAGE_PREF_KEY, Get.locale?.countryCode == 'US');
-    await prefs.setBool(TOUCH_TO_SPEAK_PREF_KEY, _speechOptions[0]);
   }
 
   void _loadSettings() async {
@@ -568,17 +359,11 @@ class _ChatGPTPageState extends State<ChatGPTPage> {
       _darkMode = darkMode;
       // Get.changeTheme(darkMode ? MyApp.darkTheme : MyApp.lightTheme);
 
-      _autoTTS = autoTTS;
-
       if (isEnLanguage) {
         Get.updateLocale(const Locale('en', 'US'));
       } else {
         Get.updateLocale(const Locale('vn', 'VN'));
       }
-
-      _speechOptions[0] = isTouchMode;
-      _speechOptions[1] = !isTouchMode;
-      _updateHintText();
     });
   }
 
@@ -588,76 +373,5 @@ class _ChatGPTPageState extends State<ChatGPTPage> {
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeOut,
     );
-  }
-
-  void _buildConfirmRemoveHistoryDialog(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) => Dialog(
-            backgroundColor: _darkMode ? Colors.grey[900] : Colors.white,
-            elevation: 0,
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(15))),
-            child: Padding(
-              padding: const EdgeInsets.all(15),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Remove history?',
-                    style: TextStyle(fontSize: 22),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  const Text(
-                      'Are you sure you want to delete the conversation? You cannot undo this action.'),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      SizedBox(
-                        width: 85,
-                        child: OutlinedButton(
-                          onPressed: () {
-                            _messages = <Message>[];
-                            _saveMessages();
-                            setState(() {});
-                            Navigator.pop(context);
-                          },
-                          style: OutlinedButton.styleFrom(
-                            shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8))),
-                            side: const BorderSide(color: Colors.redAccent),
-                            foregroundColor: Colors.redAccent,
-                          ),
-                          child: const Text("Remove"),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      SizedBox(
-                        width: 85,
-                        child: ElevatedButton(
-                          onPressed: () => Navigator.pop(context),
-                          style: ElevatedButton.styleFrom(
-                            shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8))),
-                            elevation: 0,
-                          ),
-                          child: const Text("Cancel"),
-                        ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            )));
   }
 }

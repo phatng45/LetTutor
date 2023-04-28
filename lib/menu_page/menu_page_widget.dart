@@ -3,7 +3,9 @@ import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/index.dart';
 import 'package:let_tutor/schedule_page/schedule_page_widget.dart';
 import 'package:let_tutor/update_info_page/update_info_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../chat_gpt/message.dart';
 import '../main.dart';
 import '../models/user.dart';
 
@@ -106,6 +108,12 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
                       leading: Icon(Icons.lock),
                       trailing: Icon(Icons.chevron_right),
                     ),
+                    ListTile(
+                      title: Text('Remove ChatGPT History',
+                          style: FlutterFlowTheme.of(context).subtitle1),
+                      leading: Icon(Icons.delete_rounded),
+                      onTap: () => _buildConfirmRemoveHistoryDialog(context),
+                    ),
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
@@ -132,5 +140,80 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
   _logout() {
     MyApp.prefs.remove("ACCESS_TOKEN");
     MyApp.To(context, LoginPageWidget());
+  }
+
+  void _buildConfirmRemoveHistoryDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => Dialog(
+            backgroundColor: Colors.white,
+            elevation: 0,
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(15))),
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Remove history?',
+                    style: TextStyle(fontSize: 22),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Text(
+                      'Are you sure you want to delete the conversation? You cannot undo this action.'),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      SizedBox(
+                        width: 85,
+                        child: ElevatedButton(
+                          onPressed: () => Navigator.pop(context),
+                          style: ElevatedButton.styleFrom(
+                            shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8))),
+                            elevation: 0,
+                          ),
+                          child: const Text("Cancel"),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      SizedBox(
+                        width: 85,
+                        child: OutlinedButton(
+                          onPressed: () {
+                            _removeAllMessages();
+                            setState(() {});
+                            Navigator.pop(context);
+                          },
+                          style: OutlinedButton.styleFrom(
+                            shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8))),
+                            side: const BorderSide(color: Colors.redAccent),
+                            foregroundColor: Colors.redAccent,
+                          ),
+                          child: const Text("Remove"),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            )));
+  }
+
+  void _removeAllMessages() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('messages_key', Message.encode(<Message>[]));
   }
 }
