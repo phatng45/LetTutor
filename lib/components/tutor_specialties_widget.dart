@@ -49,8 +49,14 @@ class TutorSpecialtiesWidget extends StatelessWidget {
 
   List<MyChip> _getSpecialties(String specialties) {
     var list = <MyChip>[];
-    var parsedSpecialties = specialties.split(',').map((e) => mappedString[e]).toList();
-    parsedSpecialties.forEach((element) => list.add(MyChip(data: element ?? '')));
+    var parsedSpecialties = specialties.split(',').map((e) {
+      if (mappedString.containsKey(e))
+        return mappedString[e];
+      else
+        return e;
+    }).toList();
+    parsedSpecialties
+        .forEach((element) => list.add(MyChip(data: element ?? '')));
 
     return list;
   }
