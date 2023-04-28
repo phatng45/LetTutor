@@ -100,7 +100,7 @@ class _ChatGPTPageState extends State<ChatGPTPage> {
                       padding: const EdgeInsets.only(top: 15),
                       itemCount: _messages.length,
                       itemBuilder: (BuildContext context, int index) {
-                        if(index == 0)
+                        if (index == 0)
                           return _buildChatGPTIntroduction(context);
                         else {
                           final Message message = _messages[index - 1];
@@ -121,21 +121,21 @@ class _ChatGPTPageState extends State<ChatGPTPage> {
 
   Padding _buildChatGPTIntroduction(BuildContext context) {
     return Padding(
-              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-              child: Column(
-                children: [
-                  Text(
-                    'ChatGPT may produce inaccurate information about people, places, or facts.',
-                    style: FlutterFlowTheme.of(context).subtitle2.override(
-                        fontFamily: FlutterFlowTheme.of(context).subtitle2Family,
-                        color: Colors.grey.shade500,
-                        fontSize: 16),
-                    textAlign: TextAlign.center,
-                  ),
-                  Divider(indent: 20, endIndent: 20,color: Colors.black12)
-                ],
-              ),
-            );
+      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+      child: Column(
+        children: [
+          Text(
+            'ChatGPT may produce inaccurate information about people, places, or facts.',
+            style: FlutterFlowTheme.of(context).subtitle2.override(
+                fontFamily: FlutterFlowTheme.of(context).subtitle2Family,
+                color: Colors.grey.shade500,
+                fontSize: 16),
+            textAlign: TextAlign.center,
+          ),
+          Divider(indent: 20, endIndent: 20, color: Colors.black12)
+        ],
+      ),
+    );
   }
 
   // Future<void> _buildLanguageBottomSheet(BuildContext context) {
@@ -235,49 +235,49 @@ class _ChatGPTPageState extends State<ChatGPTPage> {
   _buildMessageComposer() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(15, 17, 15, 17),
-      child: Row(
-        children: [
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 4.0,
-                    color: Color(0x33000000),
-                  )
-                ],
-              ),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 4.0,
+              color: Color(0x33000000),
+            )
+          ],
+        ),
+        child: Row(
+          children: [
+            Expanded(
               child: TextFormField(
                 controller: _textEditingController,
                 decoration: InputDecoration(
-                  hintStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                      fontFamily: FlutterFlowTheme.of(context).subtitle2Family,
-                      color: Colors.grey.shade500,
-                      fontSize: 16),
-                  isDense: true,
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide.none),
-                  hintText: 'Send a message'.tr,
-                  fillColor: Colors.white,
-                  filled: true,
-                ),
+                    hintStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                        fontFamily:
+                            FlutterFlowTheme.of(context).subtitle2Family,
+                        color: Colors.grey.shade500,
+                        fontSize: 16),
+                    isDense: true,
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide.none),
+                    hintText: 'Send a message'.tr,
+                    fillColor: Colors.white,
+                    filled: true,
+                    suffixIcon: _isTextFieldNotEmpty
+                        ? IconButton(
+                            onPressed: () {
+                              _send(_textEditingController.text);
+                            },
+                            icon: const Icon(
+                              Icons.send_rounded,
+                              color: Colors.indigo,
+                              size: 25,
+                            ))
+                        : const SizedBox.shrink()),
               ),
             ),
-          ),
-          _isTextFieldNotEmpty
-              ? IconButton(
-                  onPressed: () {
-                    _send(_textEditingController.text);
-                  },
-                  icon: const Icon(
-                    Icons.send_rounded,
-                    color: Colors.indigo,
-                    size: 25,
-                  ))
-              : const SizedBox.shrink()
-        ],
+          ],
+        ),
       ),
     );
   }
