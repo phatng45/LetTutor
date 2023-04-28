@@ -90,6 +90,7 @@ class _ChatGPTPageState extends State<ChatGPTPage> {
                   Text('ChatGPT', style: FlutterFlowTheme.of(context).title1),
                 ],
               ),
+              // _buildChatGPTIntroduction(context),
               Expanded(
                 child: ClipRRect(
                   borderRadius: const BorderRadius.only(
@@ -99,10 +100,14 @@ class _ChatGPTPageState extends State<ChatGPTPage> {
                       padding: const EdgeInsets.only(top: 15),
                       itemCount: _messages.length,
                       itemBuilder: (BuildContext context, int index) {
-                        final Message message = _messages[index];
-                        return message.isUser()
-                            ? _buildUserMessage(_messages[index])
-                            : _buildSystemMessage(_messages[index]);
+                        if(index == 0)
+                          return _buildChatGPTIntroduction(context);
+                        else {
+                          final Message message = _messages[index - 1];
+                          return message.isUser()
+                              ? _buildUserMessage(message)
+                              : _buildSystemMessage(message);
+                        }
                       }),
                 ),
               ),
@@ -112,6 +117,25 @@ class _ChatGPTPageState extends State<ChatGPTPage> {
         ),
       ),
     );
+  }
+
+  Padding _buildChatGPTIntroduction(BuildContext context) {
+    return Padding(
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+              child: Column(
+                children: [
+                  Text(
+                    'ChatGPT may produce inaccurate information about people, places, or facts.',
+                    style: FlutterFlowTheme.of(context).subtitle2.override(
+                        fontFamily: FlutterFlowTheme.of(context).subtitle2Family,
+                        color: Colors.grey.shade500,
+                        fontSize: 16),
+                    textAlign: TextAlign.center,
+                  ),
+                  Divider(indent: 20, endIndent: 20,color: Colors.black12)
+                ],
+              ),
+            );
   }
 
   // Future<void> _buildLanguageBottomSheet(BuildContext context) {
@@ -209,56 +233,50 @@ class _ChatGPTPageState extends State<ChatGPTPage> {
   // }
 
   _buildMessageComposer() {
-    return Container(
-      color: _darkMode ? Colors.grey[900] : Colors.white,
-      child: Column(
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(15, 17, 15, 17),
+      child: Row(
         children: [
-          const Divider(
-            indent: 20,
-            endIndent: 20,
-            thickness: 1,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 2.0),
-            child: Column(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: TextFormField(
-                          controller: _textEditingController,
-                          decoration: InputDecoration(
-                            hintStyle: FlutterFlowTheme.of(context).subtitle2,
-                            isDense: true,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(50),
-                                borderSide: BorderSide.none),
-                            hintText: 'Start typing...'.tr,
-                            fillColor: Colors.grey.withAlpha(50),
-                            filled: true,
-                          ),
-                        ),
-                      ),
-                      _isTextFieldNotEmpty
-                          ? IconButton(
-                              onPressed: () {
-                                _send(_textEditingController.text);
-                              },
-                              icon: const Icon(
-                                Icons.send_rounded,
-                                color: Colors.indigo,
-                                size: 25,
-                              ))
-                          : const SizedBox.shrink()
-                    ],
-                  ),
-                ), // SizedBox(height: 50,),
-                SizedBox(height: 20)
-              ],
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 4.0,
+                    color: Color(0x33000000),
+                  )
+                ],
+              ),
+              child: TextFormField(
+                controller: _textEditingController,
+                decoration: InputDecoration(
+                  hintStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                      fontFamily: FlutterFlowTheme.of(context).subtitle2Family,
+                      color: Colors.grey.shade500,
+                      fontSize: 16),
+                  isDense: true,
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide.none),
+                  hintText: 'Send a message'.tr,
+                  fillColor: Colors.white,
+                  filled: true,
+                ),
+              ),
             ),
           ),
+          _isTextFieldNotEmpty
+              ? IconButton(
+                  onPressed: () {
+                    _send(_textEditingController.text);
+                  },
+                  icon: const Icon(
+                    Icons.send_rounded,
+                    color: Colors.indigo,
+                    size: 25,
+                  ))
+              : const SizedBox.shrink()
         ],
       ),
     );
@@ -366,22 +384,19 @@ class _ChatGPTPageState extends State<ChatGPTPage> {
   Container _buildSystemChatIcon() {
     return Container(
       margin: const EdgeInsets.fromLTRB(8, 8, 0, 0),
-      width: 30,
-      height: 30,
+      width: 40,
+      height: 40,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: _darkMode ? Colors.grey[800] : Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.3),
-              spreadRadius: 1,
-              blurRadius: 1,
-              offset: const Offset(0, 1),
-            ),
-          ]),
-      child: const Icon(
-        Icons.sentiment_satisfied,
-        color: Colors.orange,
+        borderRadius: BorderRadius.circular(20),
+        color: Colors.indigo,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Image.network(
+          "https://assets.stickpng.com/images/63c52af590250dd34bd6a9ab.png",
+          color: Colors.white,
+          colorBlendMode: BlendMode.srcIn,
+        ),
       ),
     );
   }
@@ -396,7 +411,7 @@ class _ChatGPTPageState extends State<ChatGPTPage> {
             margin: const EdgeInsets.fromLTRB(8, 11, 8, 0),
             padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
             decoration: BoxDecoration(
-              color: Colors.orangeAccent,
+              color: Colors.indigo,
               borderRadius: BorderRadius.circular(16),
             ),
             child: Column(
