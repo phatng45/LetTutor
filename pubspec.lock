@@ -57,6 +57,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.0"
+  avatar_glow:
+    dependency: "direct main"
+    description:
+      name: avatar_glow
+      sha256: "3627f6f97d1f10d3c1996ae108d3488eabaf68c0cf0c3eac7e7c746a3812881d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.2"
   badges:
     dependency: "direct main"
     description:
@@ -177,6 +185,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.1"
+  chat_gpt_sdk:
+    dependency: "direct main"
+    description:
+      name: chat_gpt_sdk
+      sha256: "64bc89a7ff086e2b814643003d37de617c777780239539b00da58810afa2337e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.2"
   checked_yaml:
     dependency: transitive
     description:
@@ -470,6 +486,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.3.0"
+  flutter_chatgpt_api:
+    dependency: "direct main"
+    description:
+      name: flutter_chatgpt_api
+      sha256: da502656b43b7e87d2d4e4e1203bc1a6164ca45647ccfe81cdea7063dda34b5b
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   flutter_country:
     dependency: "direct main"
     description:
@@ -1475,5 +1499,5 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
-  dart: ">=2.19.0 <3.0.0"
+  dart: ">=2.19.6 <3.0.0"
   flutter: ">=3.7.0-0"

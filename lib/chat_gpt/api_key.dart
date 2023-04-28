@@ -1,0 +1,2 @@
+const String OPEN_AI_API_KEY =
+    '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';
