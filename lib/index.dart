@@ -11,4 +11,3 @@ export 'package:let_tutor/history_page/history_page_widget.dart' show HistoryPag
 export 'package:let_tutor/courses_page/courses_page_widget.dart' show CoursesPageWidget;
 export 'package:let_tutor/course_details_page/course_details_page_widget.dart' show CourseDetailsPageWidget;
 export 'package:let_tutor/pdf_page/pdf_page_widget.dart' show PdfPageWidget;
-export 'package:let_tutor/meeting_page/meeting_page_widget.dart' show MeetingPageWidget;

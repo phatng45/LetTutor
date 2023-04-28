@@ -1,16 +1,18 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:jitsi_meet_wrapper/jitsi_meet_wrapper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'chat_gpt/chat_gpt_page.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
 import 'flutter_flow/nav/nav.dart';
-import 'chat_gpt/chat_gpt_page.dart';
 import 'index.dart';
 import 'models/user.dart';
 
@@ -34,6 +36,57 @@ class MyApp extends StatefulWidget {
 
   static void To(BuildContext context, Widget page) {
     Navigator.push(context, MaterialPageRoute(builder: (context) => page));
+  }
+
+  static void JoinMeeting(
+      String studentMeetingLink, BuildContext context) async {
+    // final base64Decoded = base64
+    //     .decode(base64.normalize());
+    // final urlObject = utf8.decode(base64Decoded);
+    // final jsonRes = json.decode(urlObject);
+    if (studentMeetingLink == '') {
+      Flushbar(
+        title: "Failed",
+        message: 'Could not join this meeting',
+        duration: Duration(seconds: 1, milliseconds: 500),
+        borderRadius: BorderRadius.circular(20),
+        margin: EdgeInsets.all(10),
+        flushbarStyle: FlushbarStyle.FLOATING,
+        backgroundColor: Colors.grey.shade200,
+        messageColor: Colors.indigo,
+        titleColor: Colors.indigo,
+      )..show(context);
+
+      return;
+    }
+
+    final String roomId = studentMeetingLink.split("token=")[1].split(".")[1];
+    final String tokenMeeting = studentMeetingLink.split("token=")[1];
+
+    var options = JitsiMeetingOptions(
+      roomNameOrUrl: roomId,
+      serverUrl: "https://meet.lettutor.com",
+      isAudioOnly: true,
+      isAudioMuted: true,
+      token: tokenMeeting,
+      isVideoMuted: true,
+    );
+
+    await JitsiMeetWrapper.joinMeeting(
+        options: options,
+        listener: JitsiMeetingListener(
+          onOpened: () => Flushbar(
+            title: "Success!",
+            message: "Welcome to this meeting!",
+            duration: Duration(seconds: 1, milliseconds: 500),
+            borderRadius: BorderRadius.circular(20),
+            margin: EdgeInsets.all(10),
+            flushbarStyle: FlushbarStyle.FLOATING,
+            backgroundColor: Colors.grey.shade200,
+            messageColor: Colors.indigo,
+            titleColor: Colors.indigo,
+          )..show(context),
+        ));
   }
 
   static late SharedPreferences prefs;
@@ -163,25 +216,8 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
       'HomePage': homePage,
       'SchedulePage': SchedulePageWidget(),
       'CoursesPage': CoursesPageWidget(),
-      // 'SearchPage': SearchPage(
-      //   onBackPressed: () => _tabController.animateTo(0),
-      //   onSearchInfoReceived: (value) {
-      //     print("from main "+value.toString());
-      //    setState(() {
-      //
-      //      homePage = HomePageWidget(
-      //        onSearchPressed: () => _tabController.animateTo(3),
-      //        user: widget.user,
-      //      );
-      //
-      //      _tabController.animateTo(0);
-      //    });
-      //   },
-      // ),
     };
-    final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
     return Scaffold(
-      //body: _currentPage ?? tabs[_currentPageName],
       body: TabBarView(
         controller: _tabController,
         physics: NeverScrollableScrollPhysics(),
@@ -244,16 +280,6 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
                       'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/book/fill1/48px.svg',
                   isSelected: _tabController.index == 2,
                   name: 'Courses'),
-              // BottomAppBarButton(
-              //     onPressed: () {
-              //       _tabController.animateTo(3);
-              //     },
-              //     unselectedIconUrl:
-              //         'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/menu/default/48px.svg',
-              //     selectedIconUrl:
-              //         'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/menu/default/48px.svg',
-              //     isSelected: _tabController.index == 3,
-              //     name: 'Menu'),
             ],
           ),
         ),

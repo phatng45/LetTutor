@@ -6,7 +6,6 @@ import 'package:let_tutor/index.dart';
 import '../api/api_service.dart';
 import '../components/class_schedule_status_widget.dart';
 import '../main.dart';
-import '../meeting_page/meeting_page_widget.dart';
 import '../models/tutor.dart';
 import '../models/tutor_schedule.dart';
 import 'schedule_page_model.dart';
@@ -324,7 +323,7 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
                     title: 'Join meeting',
                     icon: null,
                     onPressed: () {
-                      MyApp.To(context, MeetingPageWidget());
+                      MyApp.JoinMeeting(book.studentMeetingLink ?? '',context);
                     },
                   ),
                 ],
