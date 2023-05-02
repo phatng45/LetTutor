@@ -15,6 +15,7 @@ import '../components/flushbars.dart';
 import '../components/my_chip.dart';
 import '../components/tutor_specialties_widget.dart';
 import '../flutter_flow/flutter_flow_toggle_icon.dart';
+import '../main.dart';
 import '../review_dialog.dart';
 import '../schedule_page/schedule_page_widget.dart';
 import 'tutor_details_model.dart';
@@ -127,115 +128,7 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                 ),
                 child: Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 15, 10, 10),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(900.0),
-                                child: Image.network(
-                                  tutor?.avatar ??
-                                      tutor?.user?.avatar ??
-                                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU',
-                                  width: 70.0,
-                                  height: 70.0,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (context, error, stackTrace) {
-                                    return Image.network(
-                                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU',
-                                      width: 70.0,
-                                      height: 70.0,
-                                      fit: BoxFit.cover,
-                                    );
-                                  },
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 0.0, 0.0, 0.0),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      tutor?.name ?? tutor?.user?.name ?? 'N/A',
-                                      style:
-                                          FlutterFlowTheme.of(context).title3,
-                                    ),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 5.0, 0.0),
-                                          child: CountryFlags.flag(
-                                            (country.alpha2Code ?? 'vn')
-                                                .toLowerCase(),
-                                            height: 22,
-                                            width: 22,
-                                            // borderRadius: 8,
-                                          ),
-                                        ),
-                                        Text(
-                                          country.name ?? 'Vietnam',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1,
-                                        ),
-                                      ],
-                                    ),
-                                    RatingBarIndicator(
-                                      itemBuilder: (context, index) => Icon(
-                                        Icons.star_rounded,
-                                        color: Color(0xFFFFCA77),
-                                      ),
-                                      direction: Axis.horizontal,
-                                      rating: tutor?.rating ?? 0,
-                                      unratedColor: Color(0xFF9E9E9E),
-                                      itemCount: 5,
-                                      itemSize: 20.0,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                child: Align(
-                                  alignment: AlignmentDirectional(1.0, -1.0),
-                                  child: ToggleIcon(
-                                    onPressed: () {
-                                      setState(() {
-                                        if (tutor != null) {
-                                          tutor!.isFavorited =
-                                              !tutor!.isFavorited;
-                                        }
-                                      });
-                                    },
-                                    value: tutor?.isFavorited ?? false,
-                                    onIcon: Icon(
-                                      Icons.favorite_border,
-                                      color: Color(0xFFFF5686),
-                                      size: 25.0,
-                                    ),
-                                    offIcon: Icon(
-                                      Icons.favorite_rounded,
-                                      color: Color(0xFFFF5686),
-                                      size: 25.0,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
+                    _buildTutorWidget(context, tutor),
                     Text(
                       tutor?.bio ?? 'N/A',
                       textAlign: TextAlign.justify,
@@ -527,6 +420,86 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
         builder: (BuildContext context) => ReviewDialog(
               userId: widget.userId,
             ));
+  }
+
+  Widget _buildTutorWidget(BuildContext context, Tutor? tutor) {
+    var country = Countries.byCodeOrName(
+        tutor?.country ?? tutor?.user?.country ?? 'VN',
+        tutor?.country ?? tutor?.user?.country ?? 'Vietnam');
+
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 10),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(900.0),
+            child: Image.network(
+              tutor?.avatar ??
+                  tutor?.user?.avatar ??
+                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU',
+              width: 70.0,
+              height: 70.0,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                return Image.network(
+                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU',
+                  width: 70.0,
+                  height: 70.0,
+                  fit: BoxFit.cover,
+                );
+              },
+            ),
+          ),
+          Padding(
+            padding:
+                EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  tutor?.name ?? tutor?.user?.name ?? 'N/A',
+                  style: FlutterFlowTheme.of(context).title3,
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(
+                          0.0, 0.0, 5.0, 0.0),
+                      child: CountryFlags.flag(
+                        (country.alpha2Code ?? 'vn').toLowerCase(),
+                        height: 22,
+                        width: 22,
+                        // borderRadius: 8,
+                      ),
+                    ),
+                    Text(
+                      country.name ?? 'Vietnam',
+                      style: FlutterFlowTheme.of(context).bodyText1,
+                    ),
+                  ],
+                ),
+                RatingBarIndicator(
+                  itemBuilder: (context, index) => Icon(
+                    Icons.star_rounded,
+                    color: Color(0xFFFFCA77),
+                  ),
+                  direction: Axis.horizontal,
+                  rating: tutor?.rating ?? 0,
+                  unratedColor: Color(0xFF9E9E9E),
+                  itemCount: 5,
+                  itemSize: 20.0,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
