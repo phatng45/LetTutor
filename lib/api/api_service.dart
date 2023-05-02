@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 import '../main.dart';
 import '../models/course.dart';
+import '../models/major.dart';
 import '../models/searchInfo.dart';
 import '../models/tutor.dart';
 import '../models/tutor_schedule.dart';
@@ -294,6 +295,22 @@ class ApiService {
 
     if (response.statusCode == 200) {
       return response.data["total"];
+    } else {
+      return null;
+    }
+  }
+
+  getMajors() async {
+    final url = ApiConstants.baseUrl + ApiConstants.major;
+
+    final response = await Dio().get(url);
+
+    if (response.statusCode == 200) {
+      List<Major> majors = (response.data as List)
+          .map((schedule) => Major.fromJson(schedule))
+          .toList();
+
+      Major.Majors = {for (var major in majors) major.key!: major};
     } else {
       return null;
     }

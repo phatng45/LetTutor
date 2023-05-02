@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../models/major.dart';
 import 'my_chip.dart';
 
 export 'tutor_specialties_model.dart';
@@ -52,9 +53,9 @@ class TutorSpecialtiesWidget extends StatelessWidget {
     var parsedSpecialties = specialties.split(',').map((e) {
       if (mappedString.containsKey(e))
         return mappedString[e];
-      else
-        return e;
+      else if (Major.Majors![e] != null) return Major.Majors![e]!.englishName;
     }).toList();
+
     parsedSpecialties
         .forEach((element) => list.add(MyChip(data: element ?? '')));
 

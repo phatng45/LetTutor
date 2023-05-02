@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:let_tutor/main.dart';
-import 'package:let_tutor/models/searchInfo.dart';
 
 class ApiConstants {
   static String baseUrl = 'https://sandbox.api.lettutor.com/';
@@ -14,6 +13,8 @@ class ApiConstants {
   static String register = 'auth/register';
   static String login = 'auth/login';
   static String loginPhone = 'auth/phone-login';
+
+  static String major = 'major';
 
   static String booking = 'booking';
 
@@ -42,6 +43,5 @@ class ApiConstants {
   static String coursePagination(int perPage, int page) =>
       'course?page=' + page.toString() + '&size=' + perPage.toString();
 
-  static String tutorInfo(String userId) =>
-      'tutor/$userId';
+  static String tutorInfo(String userId) => 'tutor/$userId';
 }

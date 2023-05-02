@@ -6,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:jitsi_meet_wrapper/jitsi_meet_wrapper.dart';
+import 'package:let_tutor/api/api_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'chat_gpt/chat_gpt_page.dart';
@@ -21,6 +22,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences.setMockInitialValues({});
   await FlutterFlowTheme.initialize();
+  await (ApiService().getMajors());
+
   runApp(MyApp());
 }
 
