@@ -320,13 +320,13 @@ class BottomAppBarButton extends StatelessWidget {
             colorFilter: ColorFilter.mode(Colors.indigo, BlendMode.srcIn),
             width: 26,
           ),
-          Text(
+        isSelected ?  Text(
             name,
             textAlign: TextAlign.center,
             style: FlutterFlowTheme.of(context).title1.override(
                 fontFamily: FlutterFlowTheme.of(context).title1Family,
                 fontSize: 15),
-          ),
+          ) : SizedBox.shrink(),
         ]));
   }
 }

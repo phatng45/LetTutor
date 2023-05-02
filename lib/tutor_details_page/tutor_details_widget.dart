@@ -1,6 +1,7 @@
 import 'package:country_flags/country_flags.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:let_tutor/components/text_field_widget.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
@@ -14,8 +15,6 @@ import '../components/copied_country.dart';
 import '../components/flushbars.dart';
 import '../components/my_chip.dart';
 import '../components/tutor_specialties_widget.dart';
-import '../flutter_flow/flutter_flow_toggle_icon.dart';
-import '../main.dart';
 import '../review_dialog.dart';
 import '../schedule_page/schedule_page_widget.dart';
 import 'tutor_details_model.dart';
@@ -134,10 +133,10 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                       textAlign: TextAlign.justify,
                       style: FlutterFlowTheme.of(context).bodyText1,
                     ),
-                    ElevatedButton(
-                        onPressed: _showReviewsDialog, child: Text('review')),
+                    SizedBox(height: 10),
+                    _buildTutorInteraction(context, tutor),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.fromLTRB(8, 10, 8, 8),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
@@ -172,11 +171,7 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Divider(
-                      indent: 10,
-                      endIndent: 10,
-                      color: Colors.black12,
-                    ),
+                    SizedBox(height: 10),
                     Text(
                       'Languages',
                       style: FlutterFlowTheme.of(context).title3,
@@ -205,7 +200,10 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                     ),
                     SizedBox(
                       height: 300,
-                      child: Center(
+                      child:
+                      tutor == null || tutor?.video == null ? SizedBox.shrink() :
+
+                      Center(
                         child: FlutterFlowVideoPlayer(
                           path: tutor?.video ?? '',
                           videoType: VideoType.network,
@@ -263,23 +261,6 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                                 FlutterFlowTheme.of(context).title1Family,
                             fontSize: 30.0,
                           ),
-                    ),
-                    RatingBarIndicator(
-                      itemBuilder: (context, index) => Icon(
-                        Icons.star_rounded,
-                        color: Color(0xFFFFCA77),
-                      ),
-                      direction: Axis.horizontal,
-                      rating: 2.0,
-                      unratedColor: Color(0xFF9E9E9E),
-                      itemCount: 5,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                      child: TextFieldWidget(
-                        fieldName: 'Write a review',
-                        icon: Icon(Icons.email_outlined),
-                      ),
                     ),
                   ],
                 ),
@@ -453,8 +434,7 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
             ),
           ),
           Padding(
-            padding:
-                EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -468,8 +448,8 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(
-                          0.0, 0.0, 5.0, 0.0),
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
                       child: CountryFlags.flag(
                         (country.alpha2Code ?? 'vn').toLowerCase(),
                         height: 22,
@@ -500,6 +480,95 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
         ],
       ),
     );
+  }
+
+  _buildTutorInteraction(BuildContext context, Tutor? tutor) {
+    return IntrinsicHeight(
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          Expanded(
+            child: InteractionButton(
+                onPressed: _showReviewsDialog,
+                unselectedIconUrl:
+                    'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/favorite/default/48px.svg',
+                selectedIconUrl:
+                    'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/favorite/fill1/48px.svg',
+                isSelected: tutor?.isFavorited ?? false,
+                name: 'Favorite',
+            color: tutor?.isFavorited ?? false ? Colors.pinkAccent.withAlpha(200) : Colors.indigo),
+          ),
+          VerticalDivider(color: Colors.black12),
+          Expanded(
+            child: InteractionButton(
+                onPressed: _showReviewsDialog,
+                unselectedIconUrl:
+                    'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/star/default/48px.svg',
+                selectedIconUrl:
+                    'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/star/default/48px.svg',
+                isSelected: false,
+                name: 'Reviews'),
+          ),
+          VerticalDivider(color: Colors.black12),
+          Expanded(
+            child: InteractionButton(
+                onPressed: _showReviewsDialog,
+                unselectedIconUrl:
+                    'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/report/default/48px.svg',
+                selectedIconUrl:
+                    'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/report/default/48px.svg',
+                isSelected: false,
+                name: 'Report',
+                color: Colors.red.shade500),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class InteractionButton extends StatelessWidget {
+  const InteractionButton(
+      {Key? key,
+      required this.onPressed,
+      required this.unselectedIconUrl,
+      required this.selectedIconUrl,
+      required this.isSelected,
+      required this.name,
+      this.color})
+      : super(key: key);
+
+  final String unselectedIconUrl;
+  final String selectedIconUrl;
+  final bool isSelected;
+  final String name;
+  final VoidCallback onPressed;
+  final Color? color;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            shadowColor: Colors.transparent),
+        onPressed: onPressed,
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          SvgPicture.network(
+            isSelected ? selectedIconUrl : unselectedIconUrl,
+            colorFilter:
+                ColorFilter.mode(color ?? Colors.indigo, BlendMode.srcIn),
+            width: 26,
+          ),
+          Text(
+            name,
+            textAlign: TextAlign.center,
+            style: FlutterFlowTheme.of(context).title1.override(
+                fontFamily: FlutterFlowTheme.of(context).title1Family,
+                fontSize: 15,
+                color: color ?? Colors.indigo),
+          ),
+        ]));
   }
 }
 

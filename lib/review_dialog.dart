@@ -37,6 +37,9 @@ class _ReviewDialogState extends State<ReviewDialog> {
             borderRadius: BorderRadius.all(Radius.circular(15))),
         child: Container(
           width: double.maxFinite,
+          constraints: BoxConstraints(
+            maxHeight: MediaQuery.of(context).size.height * .7,
+          ),
           child: NotificationListener<ScrollNotification>(
             onNotification: (scrollNotification) {
               if (scrollNotification is ScrollEndNotification &&
@@ -46,7 +49,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
               return true;
             },
             child: Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.fromLTRB(15, 0, 15, 25),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,9 +75,6 @@ class _ReviewDialogState extends State<ReviewDialog> {
                                 color: Colors.grey),
                           ))
                     ],
-                  ),
-                  const SizedBox(
-                    height: 10,
                   ),
                   _feedbacks.length == 0
                       ? new Center(
