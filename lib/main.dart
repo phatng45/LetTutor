@@ -66,9 +66,9 @@ class MyApp extends StatefulWidget {
     final String subject =
         "${bookingInfo.scheduleDetailInfo?.scheduleInfo?.tutorInfo?.name}'s meeting";
 
-    print("roomNameOrUrl: " + roomNameOrUrl);
-    print("token: " + token);
-    print("subject: " + subject);
+    // print("roomNameOrUrl: " + roomNameOrUrl);
+    // print("token: " + token);
+    // print("subject: " + subject);
 
     var options = JitsiMeetingOptions(
       roomNameOrUrl: roomNameOrUrl,
@@ -93,6 +93,17 @@ class MyApp extends StatefulWidget {
             backgroundColor: Colors.grey.shade200,
             messageColor: Colors.indigo,
             titleColor: Colors.indigo,
+          )..show(context),
+          onConferenceTerminated: (url, error) => Flushbar(
+            title: "Failed.",
+            message: error.toString(),
+            duration: Duration(seconds: 1, milliseconds: 500),
+            borderRadius: BorderRadius.circular(20),
+            margin: EdgeInsets.all(10),
+            flushbarStyle: FlushbarStyle.FLOATING,
+            backgroundColor: Colors.grey.shade200,
+            messageColor: Colors.red,
+            titleColor: Colors.red,
           )..show(context),
         ));
 
