@@ -55,6 +55,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: 15),
           labelText: widget.fieldName,
+          labelStyle: FlutterFlowTheme.of(context).bodyText1,
           hintStyle: FlutterFlowTheme.of(context).bodyText2,
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(

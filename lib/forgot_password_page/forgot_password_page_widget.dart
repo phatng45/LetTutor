@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:let_tutor/components/class_schedule_status_widget.dart';
 import 'package:let_tutor/components/text_field_widget.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
 
+import '../flutter_flow/flutter_flow_widgets.dart';
 import 'forgot_password_page_model.dart';
 
 export 'forgot_password_page_model.dart';
@@ -153,23 +153,54 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
                             ],
                           ),
                           Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              NegativeButton(
-                                title: 'Back',
+                              TextButton(
                                 onPressed: () => Navigator.pop(context),
+                                child: Text('Cancel'),
+                                style: TextButton.styleFrom(
+                                  textStyle:
+                                      FlutterFlowTheme.of(context).bodyText1,
+                                  foregroundColor: Colors.red,
+                                ),
                               ),
                               Align(
                                 alignment: AlignmentDirectional(0.0, 0.0),
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 10.0, 0.0, 10.0),
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      print('buttonForgotPassword pressed ...');
-                                    },
-                                    child: Text('Send verification code'),
+                                  child: FFButtonWidget(
+                                    onPressed: () {},
+                                    text: 'Send Verification Code',
+                                    options: FFButtonOptions(
+                                      width: 220.0,
+                                      height: 40.0,
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 0.0),
+                                      iconPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 0.0, 0.0, 0.0),
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryColor,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .subtitle2
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .subtitle2Family,
+                                            color: Colors.white,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .subtitle2Family),
+                                          ),
+                                      borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
                                   ),
                                 ),
                               ),

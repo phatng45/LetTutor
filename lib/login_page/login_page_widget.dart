@@ -66,7 +66,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                         height: 100.0,
                         decoration: BoxDecoration(
                           color:
-                          FlutterFlowTheme.of(context).secondaryBackground,
+                              FlutterFlowTheme.of(context).secondaryBackground,
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         child: ClipRRect(
@@ -82,13 +82,13 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                       Text(
                         'LetTutor',
                         style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'Outfit',
-                          color: Color(0xFF2F65E3),
-                          fontSize: 40.0,
-                          fontWeight: FontWeight.bold,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).bodyText1Family),
-                        ),
+                              fontFamily: 'Outfit',
+                              color: Color(0xFF2F65E3),
+                              fontSize: 40.0,
+                              fontWeight: FontWeight.bold,
+                              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                  FlutterFlowTheme.of(context).bodyText1Family),
+                            ),
                       ),
                     ],
                   ),
@@ -99,7 +99,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                     width: MediaQuery.of(context).size.width * 0.9,
                     child: Padding(
                       padding:
-                      EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 15.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 15.0, 0.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -174,11 +174,11 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                       textStyle: FlutterFlowTheme.of(context)
                                           .subtitle2
                                           .override(
-                                        fontFamily:
-                                        FlutterFlowTheme.of(context)
-                                            .subtitle2Family,
-                                        fontStyle: FontStyle.italic,
-                                      ),
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .subtitle2Family,
+                                            fontStyle: FontStyle.italic,
+                                          ),
                                     ),
                                     child: Text('Forgot password?'),
                                   ),
@@ -186,48 +186,37 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                               ),
                             ],
                           ),
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Align(
-                                alignment: AlignmentDirectional(0.0, 0.0),
-                                child: FFButtonWidget(
-                                  onPressed: () {
-                                    // _login(_model.textFieldModel.textController.text, _model.passwordFieldModel.textController.text);
-                                    _login("student@lettutor.com", "123456");
-                                  },
-                                  text: 'Login',
-                                  options: FFButtonOptions(
-                                    width: 200.0,
-                                    height: 40.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryColor,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .subtitle2
-                                        .override(
-                                      fontFamily:
-                                      FlutterFlowTheme.of(context)
-                                          .subtitle2Family,
-                                      color: Colors.white,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                          FlutterFlowTheme.of(context)
-                                              .subtitle2Family),
-                                    ),
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
+                          FFButtonWidget(
+                            onPressed: () {
+                              // _login(_model.textFieldModel.textController.text, _model.passwordFieldModel.textController.text);
+                              _login("student@lettutor.com", "123456");
+                            },
+                            text: 'Login',
+                            options: FFButtonOptions(
+                              width: 180.0,
+                              height: 40.0,
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: FlutterFlowTheme.of(context).primaryColor,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .subtitle2
+                                  .override(
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .subtitle2Family,
+                                    color: Colors.white,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .subtitle2Family),
                                   ),
-                                ),
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 1.0,
                               ),
-                            ],
+                              borderRadius: BorderRadius.circular(15),
+                            ),
                           ),
                           BestDividerWidget(title: 'OR'),
                           Row(
@@ -236,14 +225,14 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                             children: [
                               FlutterFlowIconButton(
                                 borderColor:
-                                FlutterFlowTheme.of(context).secondaryText,
+                                    FlutterFlowTheme.of(context).secondaryText,
                                 borderRadius: 30.0,
                                 borderWidth: 1.0,
                                 buttonSize: 47.0,
                                 icon: Icon(
                                   Icons.mail_rounded,
                                   color:
-                                  FlutterFlowTheme.of(context).primaryColor,
+                                      FlutterFlowTheme.of(context).primaryColor,
                                   size: 25.0,
                                 ),
                                 onPressed: () {
@@ -272,14 +261,14 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                               ),
                               FlutterFlowIconButton(
                                 borderColor:
-                                FlutterFlowTheme.of(context).secondaryText,
+                                    FlutterFlowTheme.of(context).secondaryText,
                                 borderRadius: 30.0,
                                 borderWidth: 1.0,
                                 buttonSize: 47.0,
                                 icon: Icon(
                                   Icons.phone,
                                   color:
-                                  FlutterFlowTheme.of(context).primaryColor,
+                                      FlutterFlowTheme.of(context).primaryColor,
                                   size: 25.0,
                                 ),
                                 onPressed: () {
@@ -294,7 +283,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                             children: [
                               Text('Not a member yet?',
                                   style:
-                                  FlutterFlowTheme.of(context).bodyText1),
+                                      FlutterFlowTheme.of(context).bodyText1),
                               TextButton(
                                 onPressed: () {
                                   MyApp.To(context, SignUpPageWidget());
@@ -305,11 +294,11 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                   textStyle: FlutterFlowTheme.of(context)
                                       .subtitle2
                                       .override(
-                                    fontSize: 16,
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .subtitle2Family,
-                                    fontWeight: FontWeight.w700,
-                                  ),
+                                        fontSize: 16,
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .subtitle2Family,
+                                        fontWeight: FontWeight.w700,
+                                      ),
                                 ),
                                 child: Text('Register'),
                               ),

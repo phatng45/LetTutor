@@ -8,7 +8,6 @@ import 'package:let_tutor/flutter_flow/flutter_flow_icon_button.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_widgets.dart';
-import 'package:let_tutor/index.dart';
 import 'package:let_tutor/main.dart';
 
 import '../api/api_service.dart';
@@ -203,7 +202,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                                             .textController.text),
                                     text: 'Create Account',
                                     options: FFButtonOptions(
-                                      width: 200.0,
+                                      width: 180.0,
                                       height: 40.0,
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 0.0),
@@ -228,7 +227,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                                         color: Colors.transparent,
                                         width: 1.0,
                                       ),
-                                      borderRadius: BorderRadius.circular(8.0),
+                                      borderRadius: BorderRadius.circular(15),
                                     ),
                                   ),
                                 ),
@@ -309,9 +308,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                                 style: FlutterFlowTheme.of(context).bodyText1,
                               ),
                               TextButton(
-                                onPressed: () {
-                                  MyApp.To(context, LoginPageWidget());
-                                },
+                                onPressed: () => Navigator.pop(context),
                                 style: TextButton.styleFrom(
                                   foregroundColor: FlutterFlowTheme.of(context)
                                       .secondaryColor,

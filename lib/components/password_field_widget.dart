@@ -1,9 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+
 import 'password_field_model.dart';
+
 export 'password_field_model.dart';
 
 class PasswordFieldWidget extends StatefulWidget {
@@ -54,6 +54,7 @@ class _PasswordFieldWidgetState extends State<PasswordFieldWidget> {
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: 15),
           labelText: widget.fieldName,
+          labelStyle: FlutterFlowTheme.of(context).bodyText1,
           hintStyle: FlutterFlowTheme.of(context).bodyText2,
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
