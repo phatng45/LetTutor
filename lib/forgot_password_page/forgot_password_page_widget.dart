@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:let_tutor/api/api_service.dart';
 import 'package:let_tutor/components/text_field_widget.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
 import 'package:let_tutor/login_page/login_page_widget.dart';
+import 'package:let_tutor/main.dart';
+import 'package:let_tutor/sent_reset_link_page/sent_reset_link_page.dart';
 
+import '../components/flushbars.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import 'forgot_password_page_model.dart';
 
 export 'forgot_password_page_model.dart';
 
@@ -123,8 +126,9 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(
                             0.0, 10.0, 0.0, 10.0),
                         child: FFButtonWidget(
-                          onPressed: () {},
-                          text: 'Send Verification Code',
+                          onPressed: () => _sendResetLink(
+                              _model.textFieldModel.textController.text),
+                          text: 'Send Reset Link',
                           options: FFButtonOptions(
                             width: 220.0,
                             height: 40.0,
@@ -160,5 +164,16 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
         ),
       )),
     );
+  }
+
+  _sendResetLink(String email) async {
+    final message = await (ApiService().forgotPassword(email))!;
+
+    if (message == "Email send success!") {
+      MyApp.To(context, SentResetLinkPage(email: email));
+    } else {
+      Flushbars.negative(
+          context, "Could not send reset link", "Please check your email.");
+    }
   }
 }

@@ -1,4 +1,3 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -10,6 +9,7 @@ import 'package:let_tutor/api/api_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'chat_gpt/chat_gpt_page.dart';
+import 'components/flushbars.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
@@ -45,18 +45,7 @@ class MyApp extends StatefulWidget {
   static void JoinMeeting(
       BookingInfo? bookingInfo, BuildContext context) async {
     if (bookingInfo == null || bookingInfo.studentMeetingLink == '') {
-      Flushbar(
-        title: "Failed",
-        message: 'Could not join this meeting',
-        duration: Duration(seconds: 1, milliseconds: 500),
-        borderRadius: BorderRadius.circular(20),
-        margin: EdgeInsets.all(10),
-        flushbarStyle: FlushbarStyle.FLOATING,
-        backgroundColor: Colors.grey.shade200,
-        messageColor: Colors.indigo,
-        titleColor: Colors.indigo,
-      )..show(context);
-
+      Flushbars.negative(context, null, 'Could not join this meeting');
       return;
     }
 
@@ -83,29 +72,13 @@ class MyApp extends StatefulWidget {
     await JitsiMeetWrapper.joinMeeting(
         options: options,
         listener: JitsiMeetingListener(
-          onOpened: () => Flushbar(
-            title: "Success!",
-            message: "Welcome to this meeting!",
-            duration: Duration(seconds: 1, milliseconds: 500),
-            borderRadius: BorderRadius.circular(20),
-            margin: EdgeInsets.all(10),
-            flushbarStyle: FlushbarStyle.FLOATING,
-            backgroundColor: Colors.grey.shade200,
-            messageColor: Colors.indigo,
-            titleColor: Colors.indigo,
-          )..show(context),
-          onConferenceTerminated: (url, error) => Flushbar(
-            title: "Failed.",
-            message: error.toString(),
-            duration: Duration(seconds: 1, milliseconds: 500),
-            borderRadius: BorderRadius.circular(20),
-            margin: EdgeInsets.all(10),
-            flushbarStyle: FlushbarStyle.FLOATING,
-            backgroundColor: Colors.grey.shade200,
-            messageColor: Colors.red,
-            titleColor: Colors.red,
-          )..show(context),
-        ));
+            onOpened: () => Flushbars.positive(
+                  context,
+                  "Joined meeting",
+                  "Welcome to ${bookingInfo.scheduleDetailInfo?.scheduleInfo?.tutorInfo?.name}'s meeting!",
+                ),
+            onConferenceTerminated: (url, error) =>
+                Flushbars.negative(context, null, error.toString())));
 
     print("finished jitsi await");
   }

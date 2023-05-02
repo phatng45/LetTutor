@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:another_flushbar/flushbar.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
+import '../components/flushbars.dart';
 import '../main.dart';
 import '../models/course.dart';
 import '../models/major.dart';
@@ -74,6 +74,26 @@ class ApiService {
     return null;
   }
 
+  forgotPassword(String email) async {
+    final url = ApiConstants.baseUrl + ApiConstants.forgotPassword;
+    final data = {"email": email};
+
+    try {
+      final response = await Dio().post(
+        url,
+        data: data,
+      );
+
+      final message = response.data["message"];
+
+      return message;
+    } catch (e) {
+      if (e is DioError) return e.message;
+    }
+
+    return null;
+  }
+
   Future<User?> updateUserInfo(
       String name,
       String country,
@@ -100,33 +120,14 @@ class ApiService {
         options: ApiConstants.authorizationOptions,
       );
       User user = User.fromJsonFromRegister(response.data["user"]);
-      Flushbar(
-        title: "Updated!",
-        message: "User profile updated successfully",
-        duration: Duration(seconds: 1, milliseconds: 500),
-        borderRadius: BorderRadius.circular(20),
-        margin: EdgeInsets.all(10),
-        flushbarStyle: FlushbarStyle.FLOATING,
-        backgroundColor: Colors.grey.shade200,
-        messageColor: Colors.indigo,
-        titleColor: Colors.indigo,
-      )..show(context);
+      Flushbars.positive(
+          context, "Updated!", "User profile updated successfully");
+
       String accessToken = response.data["tokens"]["access"]["token"];
       MyApp.prefs.setString("ACCESS_TOKEN", accessToken);
       return user;
     } catch (e) {
-      if (e is DioError)
-        Flushbar(
-          title: "Failed",
-          message: e.message,
-          duration: Duration(seconds: 1, milliseconds: 500),
-          borderRadius: BorderRadius.circular(20),
-          margin: EdgeInsets.all(10),
-          flushbarStyle: FlushbarStyle.FLOATING,
-          backgroundColor: Colors.grey.shade200,
-          messageColor: Colors.indigo,
-          titleColor: Colors.indigo,
-        )..show(context);
+      if (e is DioError) Flushbars.negative(context, null, e.message);
     }
     return null;
   }

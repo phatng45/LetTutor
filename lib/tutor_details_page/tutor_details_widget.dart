@@ -1,4 +1,3 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:country_flags/country_flags.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -12,6 +11,7 @@ import 'package:let_tutor/models/tutor_schedule.dart';
 
 import '../api/api_service.dart';
 import '../components/copied_country.dart';
+import '../components/flushbars.dart';
 import '../components/my_chip.dart';
 import '../components/tutor_specialties_widget.dart';
 import '../flutter_flow/flutter_flow_toggle_icon.dart';
@@ -35,7 +35,8 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   late var country = Countries.byCodeOrName(
-      tutor?.country ?? tutor?.user?.country ?? 'VN',tutor?.country ?? tutor?.user?.country ?? 'Vietnam');
+      tutor?.country ?? tutor?.user?.country ?? 'VN',
+      tutor?.country ?? tutor?.user?.country ?? 'Vietnam');
 
   List<TutorSchedule>? schedules;
 
@@ -505,29 +506,10 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                   setState(() {
                     Navigator.pop(context);
                   });
-                  Flushbar(
-                    title: "Successfully!",
-                    message: 'Booked successfully! See you soon!',
-                    duration: Duration(seconds: 2, milliseconds: 500),
-                    borderRadius: BorderRadius.circular(20),
-                    margin: EdgeInsets.all(10),
-                    flushbarStyle: FlushbarStyle.FLOATING,
-                    backgroundColor: Colors.grey.shade200,
-                    messageColor: Colors.indigo,
-                    titleColor: Colors.indigo,
-                  )..show(context);
+                  Flushbars.positive(
+                      context, null, 'Booked successfully! See you soon!');
                 } else {
-                  Flushbar(
-                    title: "Book Failed.",
-                    message: 'Please try again later',
-                    duration: Duration(seconds: 2, milliseconds: 500),
-                    borderRadius: BorderRadius.circular(20),
-                    margin: EdgeInsets.all(10),
-                    flushbarStyle: FlushbarStyle.FLOATING,
-                    backgroundColor: Colors.red.shade100,
-                    messageColor: Colors.red.shade700,
-                    titleColor: Colors.red.shade700,
-                  )..show(context);
+                  Flushbars.negative(context, "Book Failed.", null);
                 }
               },
         child: Container(
