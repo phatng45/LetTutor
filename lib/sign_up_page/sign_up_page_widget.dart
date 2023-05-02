@@ -8,6 +8,7 @@ import 'package:let_tutor/flutter_flow/flutter_flow_icon_button.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_widgets.dart';
+import 'package:let_tutor/login_page/login_page_widget.dart';
 import 'package:let_tutor/main.dart';
 
 import '../api/api_service.dart';
@@ -47,294 +48,229 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
     return Scaffold(
       key: scaffoldKey,
       body: SafeArea(
+          child: LetTutorIconAndTitle(
         child: Container(
-          width: MediaQuery.of(context).size.width * 1.0,
-          height: MediaQuery.of(context).size.height * 1.0,
-          child: SingleChildScrollView(
+          width: MediaQuery.of(context).size.width * 0.9,
+          decoration: BoxDecoration(
+            color: FlutterFlowTheme.of(context).secondaryBackground,
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          child: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 15.0, 0.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Container(
-                        width: 100.0,
-                        height: 100.0,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20.0),
-                          child: Image.asset(
-                            'assets/images/logo.png',
-                            width: 100.0,
-                            height: 100.0,
-                            fit: BoxFit.cover,
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                      child: Text(
+                        'Hello, Friend!',
+                        style: FlutterFlowTheme.of(context).title1,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                        child: wrapWithModel(
+                          model: _model.textFieldModel,
+                          updateCallback: () => setState(() {}),
+                          child: TextFieldWidget(
+                            fieldName: 'Email',
+                            icon: Icon(
+                              Icons.mail_outline_rounded,
+                              color: Colors.grey.shade400,
+                            ),
                           ),
                         ),
                       ),
-                      Text(
-                        'LetTutor',
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Outfit',
-                              color: Color(0xFF2F65E3),
-                              fontSize: 40.0,
-                              fontWeight: FontWeight.bold,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context).bodyText1Family),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                        child: wrapWithModel(
+                          model: _model.passwordFieldModel1,
+                          updateCallback: () => setState(() {}),
+                          child: PasswordFieldWidget(
+                            fieldName: 'Password',
+                            icon: Icon(
+                              Icons.lock_outlined,
+                              color: Colors.grey.shade400,
                             ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                        child: wrapWithModel(
+                          model: _model.passwordFieldModel2,
+                          updateCallback: () => setState(() {}),
+                          child: PasswordFieldWidget(
+                            fieldName: 'Confirm password',
+                            icon: Icon(
+                              Icons.lock_outlined,
+                              color: Colors.grey.shade400,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Align(
+                        alignment: AlignmentDirectional(0.0, 0.0),
+                        child: FFButtonWidget(
+                          onPressed: () => _signup(
+                              _model.textFieldModel.textController.text,
+                              _model.passwordFieldModel1.textController.text),
+                          text: 'Create Account',
+                          options: FFButtonOptions(
+                            width: 180.0,
+                            height: 40.0,
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 0.0),
+                            iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 0.0),
+                            color: FlutterFlowTheme.of(context).primaryColor,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .subtitle2
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .subtitle2Family,
+                                  color: Colors.white,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .subtitle2Family),
+                                ),
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                        ),
                       ),
                     ],
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 0.9,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                      borderRadius: BorderRadius.circular(20.0),
+                wrapWithModel(
+                  model: _model.bestDividerModel,
+                  updateCallback: () => setState(() {}),
+                  child: BestDividerWidget(
+                    title: 'OR',
+                  ),
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    FlutterFlowIconButton(
+                      borderColor: FlutterFlowTheme.of(context).secondaryText,
+                      borderRadius: 30.0,
+                      borderWidth: 1.0,
+                      buttonSize: 47.0,
+                      icon: Icon(
+                        Icons.mail_rounded,
+                        color: FlutterFlowTheme.of(context).primaryColor,
+                        size: 25.0,
+                      ),
+                      onPressed: () {
+                        print('IconButton pressed ...');
+                      },
                     ),
-                    child: Padding(
+                    Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 15.0, 0.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 30.0, 0.0, 0.0),
-                                child: Text(
-                                  'Hello, Friend!',
-                                  style: FlutterFlowTheme.of(context).title1,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Expanded(
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 10.0, 0.0, 0.0),
-                                  child: wrapWithModel(
-                                    model: _model.textFieldModel,
-                                    updateCallback: () => setState(() {}),
-                                    child: TextFieldWidget(
-                                      fieldName: 'Email',
-                                      icon: Icon(
-                                        Icons.mail_outline_rounded,
-                                        color: Colors.grey.shade400,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Expanded(
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 5.0, 0.0, 0.0),
-                                  child: wrapWithModel(
-                                    model: _model.passwordFieldModel1,
-                                    updateCallback: () => setState(() {}),
-                                    child: PasswordFieldWidget(
-                                      fieldName: 'Password',
-                                      icon: Icon(
-                                        Icons.lock_outlined,
-                                        color: Colors.grey.shade400,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Expanded(
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 5.0, 0.0, 0.0),
-                                  child: wrapWithModel(
-                                    model: _model.passwordFieldModel2,
-                                    updateCallback: () => setState(() {}),
-                                    child: PasswordFieldWidget(
-                                      fieldName: 'Confirm password',
-                                      icon: Icon(
-                                        Icons.lock_outlined,
-                                        color: Colors.grey.shade400,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 10.0, 0.0, 0.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Align(
-                                  alignment: AlignmentDirectional(0.0, 0.0),
-                                  child: FFButtonWidget(
-                                    onPressed: () => _signup(
-                                        _model
-                                            .textFieldModel.textController.text,
-                                        _model.passwordFieldModel1
-                                            .textController.text),
-                                    text: 'Create Account',
-                                    options: FFButtonOptions(
-                                      width: 180.0,
-                                      height: 40.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 0.0, 0.0),
-                                      iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              0.0, 0.0, 0.0, 0.0),
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryColor,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .subtitle2
-                                          .override(
-                                            fontFamily:
-                                                FlutterFlowTheme.of(context)
-                                                    .subtitle2Family,
-                                            color: Colors.white,
-                                            useGoogleFonts: GoogleFonts.asMap()
-                                                .containsKey(
-                                                    FlutterFlowTheme.of(context)
-                                                        .subtitle2Family),
-                                          ),
-                                      borderSide: BorderSide(
-                                        color: Colors.transparent,
-                                        width: 1.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          wrapWithModel(
-                            model: _model.bestDividerModel,
-                            updateCallback: () => setState(() {}),
-                            child: BestDividerWidget(
-                              title: 'OR',
-                            ),
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              FlutterFlowIconButton(
-                                borderColor:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                borderRadius: 30.0,
-                                borderWidth: 1.0,
-                                buttonSize: 47.0,
-                                icon: Icon(
-                                  Icons.mail_rounded,
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                  size: 25.0,
-                                ),
-                                onPressed: () {
-                                  print('IconButton pressed ...');
-                                },
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 0.0, 10.0, 0.0),
-                                child: FlutterFlowIconButton(
-                                  borderColor: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  borderRadius: 30.0,
-                                  borderWidth: 1.0,
-                                  buttonSize: 47.0,
-                                  icon: FaIcon(
-                                    FontAwesomeIcons.facebookF,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryColor,
-                                    size: 25.0,
-                                  ),
-                                  onPressed: () {
-                                    print('IconButton pressed ...');
-                                  },
-                                ),
-                              ),
-                              FlutterFlowIconButton(
-                                borderColor:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                borderRadius: 30.0,
-                                borderWidth: 1.0,
-                                buttonSize: 47.0,
-                                icon: Icon(
-                                  Icons.phone,
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                  size: 25.0,
-                                ),
-                                onPressed: () {
-                                  print('IconButton pressed ...');
-                                },
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Already have your account?',
-                                style: FlutterFlowTheme.of(context).bodyText1,
-                              ),
-                              TextButton(
-                                onPressed: () => Navigator.pop(context),
-                                style: TextButton.styleFrom(
-                                  foregroundColor: FlutterFlowTheme.of(context)
-                                      .secondaryColor,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .subtitle2
-                                      .override(
-                                        fontSize: 16,
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .subtitle2Family,
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                ),
-                                child: Text('Login'),
-                              ),
-                            ],
-                          ),
-                        ],
+                          EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                      child: FlutterFlowIconButton(
+                        borderColor: FlutterFlowTheme.of(context).secondaryText,
+                        borderRadius: 30.0,
+                        borderWidth: 1.0,
+                        buttonSize: 47.0,
+                        icon: FaIcon(
+                          FontAwesomeIcons.facebookF,
+                          color: FlutterFlowTheme.of(context).primaryColor,
+                          size: 25.0,
+                        ),
+                        onPressed: () {
+                          print('IconButton pressed ...');
+                        },
                       ),
                     ),
-                  ),
+                    FlutterFlowIconButton(
+                      borderColor: FlutterFlowTheme.of(context).secondaryText,
+                      borderRadius: 30.0,
+                      borderWidth: 1.0,
+                      buttonSize: 47.0,
+                      icon: Icon(
+                        Icons.phone,
+                        color: FlutterFlowTheme.of(context).primaryColor,
+                        size: 25.0,
+                      ),
+                      onPressed: () {
+                        print('IconButton pressed ...');
+                      },
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Already have your account?',
+                      style: FlutterFlowTheme.of(context).bodyText1,
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      style: TextButton.styleFrom(
+                        foregroundColor:
+                            FlutterFlowTheme.of(context).secondaryColor,
+                        textStyle: FlutterFlowTheme.of(context)
+                            .subtitle2
+                            .override(
+                              fontSize: 16,
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).subtitle2Family,
+                              fontWeight: FontWeight.w700,
+                            ),
+                      ),
+                      child: Text('Login'),
+                    ),
+                  ],
                 ),
               ],
             ),
           ),
         ),
-      ),
+      )),
     );
   }
 
