@@ -26,7 +26,6 @@ class _HistoryPageWidgetState extends State<HistoryPageWidget> {
   @override
   void initState() {
     super.initState();
-    // _model = createModel(context, () => SchedulePageModel());
     _getScheduleData();
 
     _scrollController.addListener(() {

@@ -15,6 +15,7 @@ import '../components/flushbars.dart';
 import '../components/my_chip.dart';
 import '../components/tutor_specialties_widget.dart';
 import '../flutter_flow/flutter_flow_toggle_icon.dart';
+import '../review_dialog.dart';
 import '../schedule_page/schedule_page_widget.dart';
 import 'tutor_details_model.dart';
 
@@ -40,16 +41,12 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
 
   List<TutorSchedule>? schedules;
 
-  int FeedbackPage = 1;
-  static const int FeedbackPerPage = 10;
-
   @override
   void initState() {
     super.initState();
 
     _getTutorById(widget.userId);
     _getScheduleById(widget.userId);
-    _getFeedbacks(widget.userId);
     _model = createModel(context, () => TutorDetailsPageModel());
     _model.textController ??= TextEditingController();
   }
@@ -83,26 +80,6 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
         this.schedules = newSchedules;
       });
     }
-  }
-
-  List<Feedbacks> feedbacks = [];
-  bool isFeedbackLoading = true;
-
-  void _getFeedbacks(String userId) async {
-    if (mounted)
-      setState(() {
-        isFeedbackLoading = true;
-      });
-
-    var newFeedbacks = (await ApiService()
-        .feedbackPagination(userId, FeedbackPerPage, FeedbackPage));
-
-    if (newFeedbacks != null) if (mounted)
-      setState(() {
-        FeedbackPage += 1;
-        feedbacks.addAll(newFeedbacks);
-        isFeedbackLoading = false;
-      });
   }
 
   @override
@@ -264,6 +241,8 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                       textAlign: TextAlign.justify,
                       style: FlutterFlowTheme.of(context).bodyText1,
                     ),
+                    ElevatedButton(
+                        onPressed: _showReviewsDialog, child: Text('review')),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ElevatedButton(
@@ -417,16 +396,6 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                         icon: Icon(Icons.email_outlined),
                       ),
                     ),
-                    ListView.builder(
-                      clipBehavior: Clip.none,
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: feedbacks.length ?? 0,
-                      itemBuilder: (context, index) {
-                        final feedback = feedbacks[index];
-                        return Text(feedback.content ?? '');
-                      },
-                    )
                   ],
                 ),
               ),
@@ -558,6 +527,14 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
           foregroundColor: Colors.indigo,
           backgroundColor: isClassUnavailable ? Colors.grey[300] : Colors.white,
         ));
+  }
+
+  void _showReviewsDialog() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => ReviewDialog(
+              userId: widget.userId,
+            ));
   }
 }
 
