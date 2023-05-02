@@ -14,6 +14,7 @@ import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
 import 'flutter_flow/nav/nav.dart';
 import 'index.dart';
+import 'models/tutor_schedule.dart';
 import 'models/user.dart';
 
 void main() async {
@@ -39,12 +40,8 @@ class MyApp extends StatefulWidget {
   }
 
   static void JoinMeeting(
-      String studentMeetingLink, BuildContext context) async {
-    // final base64Decoded = base64
-    //     .decode(base64.normalize());
-    // final urlObject = utf8.decode(base64Decoded);
-    // final jsonRes = json.decode(urlObject);
-    if (studentMeetingLink == '') {
+      BookingInfo? bookingInfo, BuildContext context) async {
+    if (bookingInfo == null || bookingInfo.studentMeetingLink == '') {
       Flushbar(
         title: "Failed",
         message: 'Could not join this meeting',
@@ -60,15 +57,23 @@ class MyApp extends StatefulWidget {
       return;
     }
 
-    final String roomId = studentMeetingLink.split("token=")[1].split(".")[1];
-    final String tokenMeeting = studentMeetingLink.split("token=")[1];
+    final studentMeetingLink = bookingInfo.studentMeetingLink!;
+    final String roomNameOrUrl = bookingInfo.scheduleDetailId ?? '';
+    final String token = studentMeetingLink.split("?token=").last;
+    final String subject =
+        "${bookingInfo.scheduleDetailInfo?.scheduleInfo?.tutorInfo?.name}'s meeting";
+
+    print("roomNameOrUrl: " + roomNameOrUrl);
+    print("token: " + token);
+    print("subject: " + subject);
 
     var options = JitsiMeetingOptions(
-      roomNameOrUrl: roomId,
+      roomNameOrUrl: roomNameOrUrl,
       serverUrl: "https://meet.lettutor.com",
+      token: token,
+      subject: subject,
       isAudioOnly: true,
       isAudioMuted: true,
-      token: tokenMeeting,
       isVideoMuted: true,
     );
 
@@ -87,6 +92,8 @@ class MyApp extends StatefulWidget {
             titleColor: Colors.indigo,
           )..show(context),
         ));
+
+    print("finished jitsi await");
   }
 
   static late SharedPreferences prefs;

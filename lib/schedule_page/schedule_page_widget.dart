@@ -323,7 +323,7 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
                     title: 'Join meeting',
                     icon: null,
                     onPressed: () {
-                      MyApp.JoinMeeting(book.studentMeetingLink ?? '',context);
+                      MyApp.JoinMeeting(book,context);
                     },
                   ),
                 ],

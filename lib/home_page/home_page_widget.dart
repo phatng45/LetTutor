@@ -502,7 +502,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             width: 120,
                             child: FFButtonWidget(
                               onPressed: () {
-                                MyApp.JoinMeeting(_upcomingLesson?.studentMeetingLink ?? '',context);
+                                MyApp.JoinMeeting(_upcomingLesson,context);
                                 // MyApp.To(context, MeetingPageWidget());
                               },
                               text: 'Join now',
