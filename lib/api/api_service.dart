@@ -186,6 +186,23 @@ class ApiService {
     return null;
   }
 
+  Future<List<Feedbacks>?> feedbackPagination(String userId, int perPage, int page) async {
+    final url =
+        ApiConstants.baseUrl + ApiConstants.feedbackPagination(userId, perPage, page);
+    final response =
+    await Dio().get(url, options: ApiConstants.authorizationOptions);
+
+    if (response.statusCode == 200) {
+      List<Feedbacks> feedbacks = (response.data["data"]["rows"] as List)
+          .map((x) => Feedbacks.fromJson(x))
+          .toList();
+
+      return feedbacks;
+    }
+
+    return null;
+  }
+
   Future<Tutor?> tutorById(String userId) async {
     final url = ApiConstants.baseUrl + ApiConstants.tutorInfo(userId);
     final response =

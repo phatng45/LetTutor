@@ -56,7 +56,7 @@ class _HistoryPageWidgetState extends State<HistoryPageWidget> {
       isLoading = true;
     });
 
-    var nextPage = (await ApiService().getHistory(perPage, page))!;
+    var nextPage = (await ApiService().getHistory(page, perPage))!;
 
     if (mounted)
       setState(() {

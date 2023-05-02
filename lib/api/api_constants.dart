@@ -43,5 +43,8 @@ class ApiConstants {
   static String coursePagination(int perPage, int page) =>
       'course?page=' + page.toString() + '&size=' + perPage.toString();
 
+  static String feedbackPagination(String userId, int perPage, int page) =>
+      'feedback/v2/' + userId + '?page=' + page.toString() + '&perPage=' + perPage.toString();
+
   static String tutorInfo(String userId) => 'tutor/$userId';
 }

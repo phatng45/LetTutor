@@ -21,9 +21,9 @@ import 'tutor_details_model.dart';
 export 'tutor_details_model.dart';
 
 class TutorDetailsPageWidget extends StatefulWidget {
-  const TutorDetailsPageWidget(this.tutorId, {Key? key}) : super(key: key);
+  const TutorDetailsPageWidget(this.userId, {Key? key}) : super(key: key);
 
-  final String tutorId;
+  final String userId;
 
   @override
   _TutorDetailsPageWidgetState createState() => _TutorDetailsPageWidgetState();
@@ -40,14 +40,69 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
 
   List<TutorSchedule>? schedules;
 
+  int FeedbackPage = 1;
+  static const int FeedbackPerPage = 10;
+
   @override
   void initState() {
     super.initState();
 
-    _getTutorById(widget.tutorId);
-    _getScheduleById(widget.tutorId);
+    _getTutorById(widget.userId);
+    _getScheduleById(widget.userId);
+    _getFeedbacks(widget.userId);
     _model = createModel(context, () => TutorDetailsPageModel());
     _model.textController ??= TextEditingController();
+  }
+
+  void _getTutorById(String userId) async {
+    var tutor = (await ApiService().tutorById(userId));
+
+    if (tutor != null)
+      setState(() {
+        this.tutor = tutor;
+      });
+  }
+
+  void _getScheduleById(String userId) async {
+    var start = DateTime.now();
+    var end = start.add(Duration(days: 7));
+    var newSchedules =
+        (await ApiService().tutorScheduleById(userId, start, end));
+
+    if (newSchedules != null && mounted) {
+      newSchedules = newSchedules
+        ..sort((a, b) {
+          var timeA =
+              DateTime.fromMillisecondsSinceEpoch(a.startTimestamp ?? 0);
+          var timeB =
+              DateTime.fromMillisecondsSinceEpoch(b.startTimestamp ?? 0);
+          return timeA.compareTo(timeB);
+        });
+
+      setState(() {
+        this.schedules = newSchedules;
+      });
+    }
+  }
+
+  List<Feedbacks> feedbacks = [];
+  bool isFeedbackLoading = true;
+
+  void _getFeedbacks(String userId) async {
+    if (mounted)
+      setState(() {
+        isFeedbackLoading = true;
+      });
+
+    var newFeedbacks = (await ApiService()
+        .feedbackPagination(userId, FeedbackPerPage, FeedbackPage));
+
+    if (newFeedbacks != null) if (mounted)
+      setState(() {
+        FeedbackPage += 1;
+        feedbacks.addAll(newFeedbacks);
+        isFeedbackLoading = false;
+      });
   }
 
   @override
@@ -366,10 +421,10 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                       clipBehavior: Clip.none,
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: tutor?.feedbacks?.length ?? 0,
+                      itemCount: feedbacks.length ?? 0,
                       itemBuilder: (context, index) {
-                        final feedback = tutor?.feedbacks?[index] ?? null;
-                        return Text(feedback?.content ?? 'N/A');
+                        final feedback = feedbacks[index];
+                        return Text(feedback.content ?? '');
                       },
                     )
                   ],
@@ -380,37 +435,6 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
         ),
       ),
     );
-  }
-
-  void _getTutorById(String userId) async {
-    var tutor = (await ApiService().tutorById(userId));
-
-    if (tutor != null)
-      setState(() {
-        this.tutor = tutor;
-      });
-  }
-
-  void _getScheduleById(String userId) async {
-    var start = DateTime.now();
-    var end = start.add(Duration(days: 7));
-    var newSchedules =
-        (await ApiService().tutorScheduleById(userId, start, end));
-
-    if (newSchedules != null && mounted) {
-      newSchedules = newSchedules
-        ..sort((a, b) {
-          var timeA =
-              DateTime.fromMillisecondsSinceEpoch(a.startTimestamp ?? 0);
-          var timeB =
-              DateTime.fromMillisecondsSinceEpoch(b.startTimestamp ?? 0);
-          return timeA.compareTo(timeB);
-        });
-
-      setState(() {
-        this.schedules = newSchedules;
-      });
-    }
   }
 
   void _showBookBottomSheet() {
@@ -517,7 +541,8 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
           child: Text(
             date,
             textAlign: TextAlign.center,
-            style: const TextStyle(color: Colors.indigo),
+            style: TextStyle(
+                color: isClassUnavailable ? Colors.grey[500] : Colors.indigo),
           ),
         ),
         style: ElevatedButton.styleFrom(

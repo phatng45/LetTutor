@@ -272,118 +272,20 @@ class Feedbacks {
 }
 
 class FirstInfo {
-  String? level;
-  String? email;
-  String? google;
-  String? facebook;
-  Null? apple;
-  String? avatar;
   String? name;
-  String? country;
-  String? phone;
-  String? language;
-  String? birthday;
-  bool? requestPassword;
-  bool? isActivated;
-  bool? isPhoneActivated;
-  String? requireNote;
-  int? timezone;
-  Null? phoneAuth;
-  bool? isPhoneAuthActivated;
-  String? studySchedule;
-  bool? canSendMessage;
-  bool? isPublicRecord;
-  Null? caredByStaffId;
-  String? createdAt;
-  String? updatedAt;
-  Null? deletedAt;
-  Null? studentGroupId;
+  String? avatar;
 
-  FirstInfo(
-      {this.level,
-        this.email,
-        this.google,
-        this.facebook,
-        this.apple,
-        this.avatar,
-        this.name,
-        this.country,
-        this.phone,
-        this.language,
-        this.birthday,
-        this.requestPassword,
-        this.isActivated,
-        this.isPhoneActivated,
-        this.requireNote,
-        this.timezone,
-        this.phoneAuth,
-        this.isPhoneAuthActivated,
-        this.studySchedule,
-        this.canSendMessage,
-        this.isPublicRecord,
-        this.caredByStaffId,
-        this.createdAt,
-        this.updatedAt,
-        this.deletedAt,
-        this.studentGroupId});
+  FirstInfo({this.name, this.avatar});
 
   FirstInfo.fromJson(Map<String, dynamic> json) {
-    level = json['level'];
-    email = json['email'];
-    google = json['google'];
-    facebook = json['facebook'];
-    apple = json['apple'];
-    avatar = json['avatar'];
     name = json['name'];
-    country = json['country'];
-    phone = json['phone'];
-    language = json['language'];
-    birthday = json['birthday'];
-    requestPassword = json['requestPassword'];
-    isActivated = json['isActivated'];
-    isPhoneActivated = json['isPhoneActivated'];
-    requireNote = json['requireNote'];
-    timezone = json['timezone'];
-    phoneAuth = json['phoneAuth'];
-    isPhoneAuthActivated = json['isPhoneAuthActivated'];
-    studySchedule = json['studySchedule'];
-    canSendMessage = json['canSendMessage'];
-    isPublicRecord = json['isPublicRecord'];
-    caredByStaffId = json['caredByStaffId'];
-    createdAt = json['createdAt'];
-    updatedAt = json['updatedAt'];
-    deletedAt = json['deletedAt'];
-    studentGroupId = json['studentGroupId'];
+    avatar = json['avatar'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['level'] = this.level;
-    data['email'] = this.email;
-    data['google'] = this.google;
-    data['facebook'] = this.facebook;
-    data['apple'] = this.apple;
-    data['avatar'] = this.avatar;
     data['name'] = this.name;
-    data['country'] = this.country;
-    data['phone'] = this.phone;
-    data['language'] = this.language;
-    data['birthday'] = this.birthday;
-    data['requestPassword'] = this.requestPassword;
-    data['isActivated'] = this.isActivated;
-    data['isPhoneActivated'] = this.isPhoneActivated;
-    data['requireNote'] = this.requireNote;
-    data['timezone'] = this.timezone;
-    data['phoneAuth'] = this.phoneAuth;
-    data['isPhoneAuthActivated'] = this.isPhoneAuthActivated;
-    data['studySchedule'] = this.studySchedule;
-    data['canSendMessage'] = this.canSendMessage;
-    data['isPublicRecord'] = this.isPublicRecord;
-    data['caredByStaffId'] = this.caredByStaffId;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
-    data['deletedAt'] = this.deletedAt;
-    data['studentGroupId'] = this.studentGroupId;
+    data['avatar'] = this.avatar;
     return data;
   }
 }
