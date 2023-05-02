@@ -64,21 +64,21 @@ class _PasswordFieldWidgetState extends State<PasswordFieldWidget> {
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Color(0xFF757575),
+              color: Colors.grey.shade400,
               width: 1.0,
             ),
             borderRadius: BorderRadius.circular(12.0),
           ),
           errorBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Color(0xFF757575),
+              color: Colors.grey.shade400,
               width: 1.0,
             ),
             borderRadius: BorderRadius.circular(12.0),
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Color(0xFF757575),
+              color: Colors.grey.shade400,
               width: 1.0,
             ),
             borderRadius: BorderRadius.circular(12.0),
@@ -93,7 +93,7 @@ class _PasswordFieldWidgetState extends State<PasswordFieldWidget> {
               _model.passwordVisibility
                   ? Icons.visibility_outlined
                   : Icons.visibility_off_outlined,
-              color: Color(0xFF757575),
+              color: Colors.grey.shade400,
               size: 22.0,
             ),
           ),

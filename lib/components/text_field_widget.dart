@@ -65,21 +65,21 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Color(0xFF757575),
+              color: Colors.grey.shade400,
               width: 1.0,
             ),
             borderRadius: BorderRadius.circular(12.0),
           ),
           errorBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Color(0xFF757575),
+              color: Colors.grey.shade400,
               width: 1.0,
             ),
             borderRadius: BorderRadius.circular(12.0),
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Color(0xFF757575),
+              color: Colors.grey.shade400,
               width: 1.0,
             ),
             borderRadius: BorderRadius.circular(12.0),
