@@ -156,9 +156,14 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'Remove history?',
-                    style: TextStyle(fontSize: 22),
+                      style: FlutterFlowTheme.of(context)
+                          .title1
+                          .override(
+                          fontFamily: FlutterFlowTheme.of(context)
+                              .title2Family,
+                          fontSize: 22)
                   ),
                   const SizedBox(
                     height: 10,

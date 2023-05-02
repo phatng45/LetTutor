@@ -256,7 +256,12 @@ class _MultiSelectDialogState<T> extends State<MultiSelectDialog<T>> {
                     children: [
                       Text(
                         'Subjects',
-                        style: FlutterFlowTheme.of(context).title2,
+                        style: FlutterFlowTheme.of(context)
+                            .title1
+                            .override(
+                            fontFamily: FlutterFlowTheme.of(context)
+                                .title2Family,
+                            fontSize: 22),
                       ),
                       SizedBox(
                         height: 10,

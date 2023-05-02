@@ -279,14 +279,6 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Align(
-                    //   alignment: AlignmentDirectional(-1.0, 0.0),
-                    //   child:
-                    // ),
-
-                    // SizedBox(height: 50, width: double.maxFinite,child: PositiveButton(title: 'Book', onPressed: (){}, icon:  Icon(Icons.person_add_rounded, color: Colors.white) ))
-                    // ,
-
                     Divider(
                       indent: 10,
                       endIndent: 10,

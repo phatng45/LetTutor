@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 import 'api/api_service.dart';
 import 'models/tutor.dart';
 
 class ReviewDialog extends StatefulWidget {
   ReviewDialog({Key? key, required this.userId}) : super(key: key);
-  String userId;
+  final String userId;
 
   @override
   State<ReviewDialog> createState() => _ReviewDialogState();
@@ -21,6 +24,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
 
   @override
   void initState() {
+    super.initState();
     _getFeedbacks(widget.userId);
   }
 
@@ -32,7 +36,7 @@ class _ReviewDialogState extends State<ReviewDialog> {
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(15))),
         child: Container(
-          height: MediaQuery.of(context).size.height * .8,
+          width: double.maxFinite,
           child: NotificationListener<ScrollNotification>(
             onNotification: (scrollNotification) {
               if (scrollNotification is ScrollEndNotification &&
@@ -41,78 +45,64 @@ class _ReviewDialogState extends State<ReviewDialog> {
               }
               return true;
             },
-            child: SingleChildScrollView(
-              controller: _feedbacksScrollController,
-              physics: AlwaysScrollableScrollPhysics(),
-              child: Padding(
-                padding: const EdgeInsets.all(15),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Remove history?',
-                      style: TextStyle(fontSize: 22),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: _feedbacks.length + 1,
-                      itemBuilder: (context, index) {
-                        if (index == _feedbacks.length) {
-                          return _buildProgressIndicator();
-                        } else {
-                          final feedback = _feedbacks[index];
-                          return _buildFeedback(feedback);
-                        }
-                      },
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        SizedBox(
-                          width: 85,
-                          child: ElevatedButton(
-                            onPressed: () => Navigator.pop(context),
-                            style: ElevatedButton.styleFrom(
-                              shape: const RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(8))),
-                              elevation: 0,
-                            ),
-                            child: const Text("Cancel"),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        SizedBox(
-                          width: 85,
-                          child: OutlinedButton(
-                            onPressed: () {
-                              setState(() {});
-                              Navigator.pop(context);
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Others review',
+                        style: FlutterFlowTheme.of(context).title1.override(
+                            fontFamily:
+                                FlutterFlowTheme.of(context).title2Family,
+                            fontSize: 22),
+                      ),
+                      TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: Text(
+                            'Close',
+                            style: FlutterFlowTheme.of(context).title3.override(
+                                fontFamily:
+                                    FlutterFlowTheme.of(context).title3Family,
+                                color: Colors.grey),
+                          ))
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  _feedbacks.length == 0
+                      ? new Center(
+                          child: Text('This tutor has no review.',
+                              style: FlutterFlowTheme.of(context).subtitle2))
+                      : Expanded(
+                          child: ListView.separated(
+                            physics: AlwaysScrollableScrollPhysics(),
+                            controller: _feedbacksScrollController,
+                            shrinkWrap: true,
+                            itemCount: _feedbacks.length + 1,
+                            itemBuilder: (context, index) {
+                              if (index == _feedbacks.length) {
+                                return _buildProgressIndicator();
+                              } else {
+                                final feedback = _feedbacks[index];
+                                return _buildFeedback(feedback);
+                              }
                             },
-                            style: OutlinedButton.styleFrom(
-                              shape: const RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(8))),
-                              side: const BorderSide(color: Colors.redAccent),
-                              foregroundColor: Colors.redAccent,
-                            ),
-                            child: const Text("Remove"),
+                            separatorBuilder:
+                                (BuildContext context, int index) {
+                              return Divider(
+                                color: Colors.black12,
+                              );
+                            },
                           ),
                         ),
-                      ],
-                    ),
-                  ],
-                ),
+                ],
               ),
             ),
           ),
@@ -121,18 +111,80 @@ class _ReviewDialogState extends State<ReviewDialog> {
 
   Container _buildFeedback(Feedbacks feedback) {
     return Container(
-        color: Colors.grey.shade100,
-        margin: EdgeInsets.symmetric(vertical: 50),
-        child: Text(feedback.content ?? ''));
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          ClipRRect(
+              borderRadius: BorderRadius.circular(500),
+              child: Image.network(
+                feedback.firstInfo?.avatar ??
+                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU',
+                width: 30.0,
+                height: 30.0,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Image.network(
+                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&usqp=CAU',
+                    width: 30.0,
+                    height: 30.0,
+                    fit: BoxFit.cover,
+                  );
+                },
+              )),
+          SizedBox(width: 5),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(feedback.firstInfo?.name ?? 'N/A',
+                        style: FlutterFlowTheme.of(context).subtitle2.override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).subtitle2Family,
+                              fontSize: 13,
+                            )),
+                    Text(timeago.format(DateTime.parse(feedback.createdAt!)),
+                        style: FlutterFlowTheme.of(context).subtitle2.override(
+                            fontFamily:
+                                FlutterFlowTheme.of(context).subtitle2Family,
+                            fontSize: 12,
+                            fontStyle: FontStyle.italic))
+                  ],
+                ),
+                RatingBarIndicator(
+                  itemBuilder: (context, index) => Icon(
+                    Icons.star_rounded,
+                    color: Color(0xFFFFCA77),
+                  ),
+                  rating: (feedback.rating ?? 0) * 1.0,
+                  unratedColor: Color(0xFF9E9E9E),
+                  itemCount: 5,
+                  itemSize: 18,
+                ),
+                Text(
+                  feedback.content ?? '',
+                  style: FlutterFlowTheme.of(context).subtitle1.override(
+                      fontFamily: FlutterFlowTheme.of(context).subtitle2Family,
+                      fontSize: 14),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   Widget _buildProgressIndicator() {
-    return new Padding(
+    return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: new Center(
-        child: new Opacity(
-          opacity: 1,
-          child: new CircularProgressIndicator(
+      child: Center(
+        child: Opacity(
+          opacity: _isFeedbackLoading ? 1 : 0,
+          child: CircularProgressIndicator(
             color: Colors.indigo,
           ),
         ),
