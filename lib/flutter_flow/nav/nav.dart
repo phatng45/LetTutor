@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../../index.dart';
-import '../../main.dart';
 
 export 'package:go_router/go_router.dart';
 

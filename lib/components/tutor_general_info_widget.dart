@@ -19,7 +19,7 @@ class TutorGeneralInfoWidget extends StatefulWidget {
      final Tutor? tutor;
   final bool hasRating;
 
-  bool favorited = false;
+  final bool favorited = false;
 
   static const Icon favoriteIcon = Icon(
     Icons.favorite_rounded,

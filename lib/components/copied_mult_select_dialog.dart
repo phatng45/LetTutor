@@ -118,7 +118,6 @@ class MultiSelectDialog<T> extends StatefulWidget with MultiSelectActions<T> {
 
 class _MultiSelectDialogState<T> extends State<MultiSelectDialog<T>> {
   List<T> _selectedValues = [];
-  bool _showSearch = false;
   List<MultiSelectItem<T>> _items;
   List<MultiSelectItem<T>> _items2;
 

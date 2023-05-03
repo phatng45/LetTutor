@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
 import 'package:let_tutor/schedule_page/schedule_page_widget.dart';
 

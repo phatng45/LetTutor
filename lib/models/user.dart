@@ -1,4 +1,4 @@
-import 'package:let_tutor/models/course.dart';
+
 
 class User {
   String? id;

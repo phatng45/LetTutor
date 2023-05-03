@@ -568,5 +568,10 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
 
     var user = (await ApiService().updateUserInfo(name, country, phone,
         birthday, level, learnTopics, testPreparations, context));
+
+    if (mounted) if (user != null)
+      setState(() {
+        this.user = user;
+      });
   }
 }
