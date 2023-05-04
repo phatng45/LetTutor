@@ -92,7 +92,7 @@ class _ChatGPTPageState extends State<ChatGPTPage> {
                       topRight: Radius.circular(20)),
                   child: ListView.builder(
                       padding: const EdgeInsets.only(top: 15),
-                      itemCount: _messages.length,
+                      itemCount: _messages.length + 1,
                       itemBuilder: (BuildContext context, int index) {
                         if (index == 0)
                           return _buildChatGPTIntroduction(context);
