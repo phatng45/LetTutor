@@ -59,9 +59,6 @@ class ApiService {
 
       String accessToken = response.data["tokens"]["access"]["token"];
       MyApp.prefs.setString("ACCESS_TOKEN", accessToken);
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Account created successfully!'),
-      ));
 
       return user;
     } catch (e) {

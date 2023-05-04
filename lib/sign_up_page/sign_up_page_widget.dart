@@ -12,6 +12,7 @@ import 'package:let_tutor/login_page/login_page_widget.dart';
 import 'package:let_tutor/main.dart';
 
 import '../api/api_service.dart';
+import '../verify_page/verify_page.dart';
 import 'sign_up_page_model.dart';
 
 export 'sign_up_page_model.dart';
@@ -279,8 +280,21 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
     if (user != null) {
       MyApp.To(
           context,
-          NavBarPage(
-            user: user,
+          VerifyPage(
+            content: RichText(
+              text: TextSpan(
+                text: 'We just sent you a verify link over to ',
+                style: FlutterFlowTheme.of(context).subtitle2,
+                children: <TextSpan>[
+                  TextSpan(
+                      text: email,
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  TextSpan(
+                      text:
+                      '\nPlease login again once you have verified from there.'),
+                ],
+              ),
+            ),
           ));
     }
   }

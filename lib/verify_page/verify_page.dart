@@ -8,10 +8,10 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 
 export '../forgot_password_page/forgot_password_page_model.dart';
 
-class SentResetLinkPage extends StatelessWidget {
-  const SentResetLinkPage({Key? key, required this.email}) : super(key: key);
+class VerifyPage extends StatelessWidget {
+  const VerifyPage({Key? key, required this.content}) : super(key: key);
 
-  final String email;
+  final Widget content;
 
   @override
   Widget build(BuildContext context) {
@@ -53,16 +53,7 @@ class SentResetLinkPage extends StatelessWidget {
                               0.0, 5.0, 0.0, 0.0),
                           child:
 
-                          RichText(
-                            text: TextSpan(
-                              text:  'We just sent you a reset password link over to ',
-                              style:   FlutterFlowTheme.of(context).subtitle2,
-                              children:  <TextSpan>[
-                                TextSpan(text: email, style: TextStyle(fontWeight: FontWeight.bold)),
-                                TextSpan(text: '\nPlease login again once you have reset your password from there.'),
-                              ],
-                            ),
-                          ),
+                          content
                         ),
                       ),
                     ],

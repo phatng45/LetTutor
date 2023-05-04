@@ -6,7 +6,7 @@ import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
 import 'package:let_tutor/login_page/login_page_widget.dart';
 import 'package:let_tutor/main.dart';
-import 'package:let_tutor/sent_reset_link_page/sent_reset_link_page.dart';
+import 'package:let_tutor/verify_page/verify_page.dart';
 
 import '../components/flushbars.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -170,7 +170,24 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
     final message = await (ApiService().forgotPassword(email))!;
 
     if (message == "Email send success!") {
-      MyApp.To(context, SentResetLinkPage(email: email));
+      MyApp.To(
+          context,
+          VerifyPage(
+            content: RichText(
+              text: TextSpan(
+                text: 'We just sent you a reset password link over to ',
+                style: FlutterFlowTheme.of(context).subtitle2,
+                children: <TextSpan>[
+                  TextSpan(
+                      text: email,
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  TextSpan(
+                      text:
+                          '\nPlease login again once you have reset your password from there.'),
+                ],
+              ),
+            ),
+          ));
     } else {
       Flushbars.negative(
           context, "Could not send reset link", "Please check your email.");
