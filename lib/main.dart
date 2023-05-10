@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get/get.dart';
 import 'package:jitsi_meet_wrapper/jitsi_meet_wrapper.dart';
 import 'package:let_tutor/api/api_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'app_translation.dart';
 import 'chat_gpt/chat_gpt_page.dart';
 import 'components/flushbars.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
@@ -92,7 +93,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Locale? _locale;
   ThemeMode _themeMode = FlutterFlowTheme.themeMode;
 
   late AppStateNotifier _appStateNotifier;
@@ -105,14 +105,12 @@ class _MyAppState extends State<MyApp> {
     _router = createRouter(_appStateNotifier);
   }
 
-  void setLocale(String language) {
-    setState(() => _locale = createLocale(language));
-  }
-
   void setThemeMode(ThemeMode mode) => setState(() {
         _themeMode = mode;
         FlutterFlowTheme.saveThemeMode(mode);
       });
+
+  void setLocale(String locale) {}
 
   @override
   Widget build(BuildContext context) {
@@ -125,14 +123,15 @@ class _MyAppState extends State<MyApp> {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      locale: _locale,
-      supportedLocales: const [Locale('en', '')],
+      locale: Get.deviceLocale ?? const Locale('en', 'US'),
       theme: ThemeData(brightness: Brightness.light, useMaterial3: true),
       darkTheme: ThemeData(brightness: Brightness.dark, useMaterial3: true),
       themeMode: _themeMode,
       routeInformationParser: _router.routeInformationParser,
       routerDelegate: _router.routerDelegate,
       color: Colors.indigo,
+      translations: AppTranslation(),
+      fallbackLocale: const Locale('en', 'US'),
     );
   }
 }
@@ -320,13 +319,15 @@ class BottomAppBarButton extends StatelessWidget {
             colorFilter: ColorFilter.mode(Colors.indigo, BlendMode.srcIn),
             width: 26,
           ),
-        isSelected ?  Text(
-            name,
-            textAlign: TextAlign.center,
-            style: FlutterFlowTheme.of(context).title1.override(
-                fontFamily: FlutterFlowTheme.of(context).title1Family,
-                fontSize: 15),
-          ) : SizedBox.shrink(),
+          isSelected
+              ? Text(
+                  name,
+                  textAlign: TextAlign.center,
+                  style: FlutterFlowTheme.of(context).title1.override(
+                      fontFamily: FlutterFlowTheme.of(context).title1Family,
+                      fontSize: 15),
+                )
+              : SizedBox.shrink(),
         ]));
   }
 }
