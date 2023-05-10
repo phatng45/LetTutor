@@ -5,12 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../../index.dart';
-import '../../main.dart';
-import 'serialization_util.dart';
 
 export 'package:go_router/go_router.dart';
-
-export 'serialization_util.dart';
 
 const kTransitionInfoKey = '__transition_info__';
 
@@ -49,34 +45,34 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'loginPage',
               builder: (context, params) => LoginPageWidget(),
             ),
-            FFRoute(
-              name: 'SchedulePage',
-              path: 'schedulePage',
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'SchedulePage')
-                  : SchedulePageWidget(),
-            ),
-            FFRoute(
-              name: 'ProfilePage',
-              path: 'profilePage',
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'ProfilePage')
-                  : ProfilePageWidget(),
-            ),
-            FFRoute(
-              name: 'HomePage',
-              path: 'homePage',
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'HomePage')
-                  : HomePageWidget(),
-            ),
-            FFRoute(
-              name: 'TutorDetailedInfo',
-              path: 'tutorDetailedInfo',
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'TutorDetailedInfo')
-                  : TutorDetailsPageWidget(),
-            )
+            // FFRoute(
+            //   name: 'SchedulePage',
+            //   path: 'schedulePage',
+            //   builder: (context, params) => params.isEmpty
+            //       ? NavBarPage(initialPage: 'SchedulePage')
+            //       : SchedulePageWidget(),
+            // ),
+            // FFRoute(
+            //   name: 'ProfilePage',
+            //   path: 'profilePage',
+            //   builder: (context, params) => params.isEmpty
+            //       ? NavBarPage(initialPage: 'ProfilePage')
+            //       : ProfilePageWidget(),
+            // ),
+            // FFRoute(
+            //   name: 'HomePage',
+            //   path: 'homePage',
+            //   builder: (context, params) => params.isEmpty
+            //       ? NavBarPage(initialPage: 'HomePage')
+            //       : HomePageWidget(),
+            // ),
+            // FFRoute(
+            //   name: 'TutorDetailedInfo',
+            //   path: 'tutorDetailedInfo',
+            //   builder: (context, params) => params.isEmpty
+            //       ? NavBarPage(initialPage: 'TutorDetailedInfo')
+            //       : TutorDetailsPageWidget(),)
+
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),
       ],
@@ -133,27 +129,6 @@ class FFParameters {
           },
         ),
       ).onError((_, __) => [false]).then((v) => v.every((e) => e));
-
-  dynamic getParam<T>(
-    String paramName,
-    ParamType type, [
-    bool isList = false,
-    List<String>? collectionNamePath,
-  ]) {
-    if (futureParamValues.containsKey(paramName)) {
-      return futureParamValues[paramName];
-    }
-    if (!state.allParams.containsKey(paramName)) {
-      return null;
-    }
-    final param = state.allParams[paramName];
-    // Got parameter from `extras`, so just directly return it.
-    if (param is! String) {
-      return param;
-    }
-    // Return serialized value.
-    return deserializeParam<T>(param, type, isList, collectionNamePath);
-  }
 }
 
 class FFRoute {

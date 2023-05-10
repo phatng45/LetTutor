@@ -1,22 +1,34 @@
-import 'package:let_tutor/backend/backend.dart';
-import 'package:let_tutor/flutter_flow/flutter_flow_choice_chips.dart';
-import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
-import 'package:let_tutor/flutter_flow/flutter_flow_toggle_icon.dart';
-import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
-import 'package:let_tutor/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+import 'package:let_tutor/flutter_flow/flutter_flow_choice_chips.dart';
+import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
+import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
+import 'package:let_tutor/flutter_flow/flutter_flow_widgets.dart';
+
 import 'tutor_info_model.dart';
+
 export 'tutor_info_model.dart';
 
 class TutorInfoWidget extends StatefulWidget {
-  const TutorInfoWidget({
+   TutorInfoWidget({
     Key? key,
     this.chipLabels,
   }) : super(key: key);
 
+  bool favorited = false;
+
+  static const Icon favoriteIcon = Icon(
+    Icons.favorite_rounded,
+    color: Color(0xFFFF5686),
+    size: 25.0,
+  );
+
+  static const Icon unfavoriteIcon = Icon(
+    Icons.favorite_border,
+    color: Color(0xFF2767FF),
+    size: 25.0,
+  );
   final List<String>? chipLabels;
 
   @override
@@ -131,56 +143,13 @@ class _TutorInfoWidgetState extends State<TutorInfoWidget> {
                   Expanded(
                     child: Align(
                       alignment: AlignmentDirectional(1.0, -1.0),
-                      child: StreamBuilder<List<TutorsRecord>>(
-                        stream: queryTutorsRecord(
-                          singleRecord: true,
-                        ),
-                        builder: (context, snapshot) {
-                          // Customize what your widget looks like when it's loading.
-                          if (!snapshot.hasData) {
-                            return Center(
-                              child: SizedBox(
-                                width: 50.0,
-                                height: 50.0,
-                                child: CircularProgressIndicator(
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                ),
-                              ),
-                            );
-                          }
-                          List<TutorsRecord> toggleIconTutorsRecordList =
-                              snapshot.data!;
-                          // Return an empty Container when the item does not exist.
-                          if (snapshot.data!.isEmpty) {
-                            return Container();
-                          }
-                          final toggleIconTutorsRecord =
-                              toggleIconTutorsRecordList.isNotEmpty
-                                  ? toggleIconTutorsRecordList.first
-                                  : null;
-                          return ToggleIcon(
-                            onPressed: () async {
-                              final tutorsUpdateData = {
-                                'is_favorited':
-                                    !toggleIconTutorsRecord!.isFavorited!,
-                              };
-                              await toggleIconTutorsRecord!.reference
-                                  .update(tutorsUpdateData);
-                            },
-                            value: toggleIconTutorsRecord!.isFavorited!,
-                            onIcon: Icon(
-                              Icons.favorite_border,
-                              color: Color(0xFFFF5686),
-                              size: 22.0,
-                            ),
-                            offIcon: Icon(
-                              Icons.favorite_rounded,
-                              color: Color(0xFFFF5686),
-                              size: 22.0,
-                            ),
-                          );
-                        },
+                      child: IconButton(
+                        onPressed: () => setState(() {
+                          widget.favorited = !widget.favorited;
+                        }),
+                        icon: widget.favorited
+                            ? TutorInfoWidget.favoriteIcon
+                            : TutorInfoWidget.unfavoriteIcon,
                       ),
                     ),
                   ),
@@ -198,6 +167,8 @@ class _TutorInfoWidgetState extends State<TutorInfoWidget> {
                   verticalDirection: VerticalDirection.down,
                   clipBehavior: Clip.none,
                   children: [
+
+
                     FlutterFlowChoiceChips(
                       initiallySelected: widget.chipLabels,
                       options: widget.chipLabels!

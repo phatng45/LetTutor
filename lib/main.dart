@@ -1,20 +1,28 @@
+import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:jitsi_meet_wrapper/jitsi_meet_wrapper.dart';
+import 'package:let_tutor/api/api_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import 'backend/firebase/firebase_config.dart';
+import 'chat_gpt/chat_gpt_page.dart';
+import 'components/flushbars.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
 import 'flutter_flow/nav/nav.dart';
 import 'index.dart';
+import 'models/tutor_schedule.dart';
+import 'models/user.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initFirebase();
-
+  SharedPreferences.setMockInitialValues({});
   await FlutterFlowTheme.initialize();
+  await (ApiService().getMajors());
 
   runApp(MyApp());
 }
@@ -22,13 +30,64 @@ void main() async {
 class MyApp extends StatefulWidget {
   // This widget is the root of your application.
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<MyApp> createState() {
+    _getSharedPrefs().then((pref) => prefs = pref);
+    return _MyAppState();
+  }
 
   static _MyAppState of(BuildContext context) =>
       context.findAncestorStateOfType<_MyAppState>()!;
 
   static void To(BuildContext context, Widget page) {
     Navigator.push(context, MaterialPageRoute(builder: (context) => page));
+  }
+
+  static void JoinMeeting(
+      BookingInfo? bookingInfo, BuildContext context) async {
+    if (bookingInfo == null || bookingInfo.studentMeetingLink == '') {
+      Flushbars.negative(context, null, 'Could not join this meeting');
+      return;
+    }
+
+    final studentMeetingLink = bookingInfo.studentMeetingLink!;
+    final String roomNameOrUrl = bookingInfo.scheduleDetailId ?? '';
+    final String token = studentMeetingLink.split("?token=").last;
+    final String subject =
+        "${bookingInfo.scheduleDetailInfo?.scheduleInfo?.tutorInfo?.name}'s meeting";
+
+    // print("roomNameOrUrl: " + roomNameOrUrl);
+    // print("token: " + token);
+    // print("subject: " + subject);
+
+    var options = JitsiMeetingOptions(
+      roomNameOrUrl: roomNameOrUrl,
+      serverUrl: "https://meet.lettutor.com",
+      token: token,
+      subject: subject,
+      isAudioOnly: true,
+      isAudioMuted: true,
+      isVideoMuted: true,
+    );
+
+    await JitsiMeetWrapper.joinMeeting(
+        options: options,
+        listener: JitsiMeetingListener(
+            onOpened: () => Flushbars.positive(
+                  context,
+                  "Joined meeting",
+                  "Welcome to ${bookingInfo.scheduleDetailInfo?.scheduleInfo?.tutorInfo?.name}'s meeting!",
+                ),
+            onConferenceTerminated: (url, error) =>
+                Flushbars.negative(context, null, error.toString())));
+
+    print("finished jitsi await");
+  }
+
+  static late SharedPreferences prefs;
+  static late final String accessToken;
+
+  Future<SharedPreferences> _getSharedPrefs() async {
+    return SharedPreferences.getInstance();
   }
 }
 
@@ -57,7 +116,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
+    return GetMaterialApp.router(
+      debugShowCheckedModeBanner: false,
       title: 'LetTutor',
       localizationsDelegates: [
         FFLocalizationsDelegate(),
@@ -72,15 +132,18 @@ class _MyAppState extends State<MyApp> {
       themeMode: _themeMode,
       routeInformationParser: _router.routeInformationParser,
       routerDelegate: _router.routerDelegate,
+      color: Colors.indigo,
     );
   }
 }
 
 class NavBarPage extends StatefulWidget {
-  NavBarPage({Key? key, this.initialPage, this.page}) : super(key: key);
+  NavBarPage({Key? key, this.initialPage, this.page, required this.user})
+      : super(key: key);
 
   final String? initialPage;
   final Widget? page;
+  final User user;
 
   @override
   _NavBarPageState createState() => _NavBarPageState();
@@ -97,7 +160,10 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     _scrollController = ScrollController();
-    _tabController = TabController(length: 6, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
+    _tabController.addListener(() {
+      setState(() {});
+    });
     _scrollController.addListener(_listen);
     _currentPageName = 'CoursesPage'; // widget.initialPage ?? _currentPageName;
     _currentPage = widget.page;
@@ -137,27 +203,40 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    var homePage = HomePageWidget(
+      user: widget.user,
+    );
     final tabs = {
-      'HomePage': HomePageWidget(),
+      'HomePage': homePage,
       'SchedulePage': SchedulePageWidget(),
       'CoursesPage': CoursesPageWidget(),
-      'ProfilePage': ProfilePageWidget(),
-      'TutorDetailsPage': TutorDetailsPageWidget(),
-      'PdfPage': PdfPageWidget(),
-      'HistoryPage': HistoryPageWidget(),
-      'CourseDetailsPage': CourseDetailsPageWidget(),
     };
-    final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
     return Scaffold(
-      //body: _currentPage ?? tabs[_currentPageName],
       body: TabBarView(
-          controller: _tabController,
-          physics: NeverScrollableScrollPhysics(),
-          children: tabs.values.toList()),
+        controller: _tabController,
+        physics: NeverScrollableScrollPhysics(),
+        children: tabs.values.toList(),
+      ),
       extendBody: false,
+      floatingActionButton: badges.Badge(
+        position: badges.BadgePosition.topEnd(top: -3, end: -3),
+        badgeStyle: badges.BadgeStyle(padding: EdgeInsets.all(7)),
+        child: FloatingActionButton(
+          onPressed: showChatGPTBottomSheet,
+          backgroundColor: Colors.indigo,
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Image.network(
+              "https://assets.stickpng.com/images/63c52af590250dd34bd6a9ab.png",
+              color: Colors.white,
+              colorBlendMode: BlendMode.srcIn,
+            ),
+          ),
+        ),
+      ),
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
-        height: _isVisible ? 80.0 : 0,
+        height: _isVisible ? 72.0 : 0,
         surfaceTintColor: FlutterFlowTheme.of(context).primaryColor,
         color: FlutterFlowTheme.of(context).primaryColor,
         child: IconTheme(
@@ -165,119 +244,89 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Row(
-                children: [
-                  IconButton(
-                    icon: SvgPicture.network(
+              BottomAppBarButton(
+                  onPressed: () {
+                    _tabController.animateTo(0);
+                  },
+                  unselectedIconUrl:
                       'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/home/wght500/48px.svg',
-                      colorFilter:
-                          ColorFilter.mode(Colors.indigo, BlendMode.srcIn),
-                      width: 26,
-                    ),
-                    onPressed: () => _tabController.animateTo(0),
-                  ),
-                  IconButton(
-                    icon: SvgPicture.network(
-                      'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/schedule/wght500/48px.svg',
-                      colorFilter:
-                          ColorFilter.mode(Colors.indigo, BlendMode.srcIn),
-                      width: 26,
-                    ),
-                    onPressed: () => _tabController.animateTo(1),
-                  ),
-                  IconButton(
-                    icon: SvgPicture.network(
-                      'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/sticky_note_2/wght500/48px.svg',
-                      colorFilter:
-                          ColorFilter.mode(Colors.indigo, BlendMode.srcIn),
-                      width: 26,
-                    ),
-                    onPressed: () => _tabController.animateTo(2),
-                  ),
-                  IconButton(
-                    icon: SvgPicture.network(
-                      'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/person/wght500/48px.svg',
-                      colorFilter:
-                          ColorFilter.mode(Colors.indigo, BlendMode.srcIn),
-                      width: 26,
-                    ),
-                    onPressed: () => _tabController.animateTo(3),
-                  ),
-                ],
-              ),
-              PopupMenuButton(
-                icon: SvgPicture.network(
-                  'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/more_vert/wght500/48px.svg',
-                  colorFilter: ColorFilter.mode(Colors.indigo, BlendMode.srcIn),
-                  width: 26,
-                ),
-                constraints: BoxConstraints(
-                  minWidth: 150,
-                  maxWidth: 150,
-                ),
-                onSelected: (result) {
-                  switch (result) {
-                    case 0:
-                      MyApp.To(context, LoginPageWidget());
-                      break;
-                    case 1:
-                      break;
-                    case 2:
-                      break;
-                  }
-                },
-                itemBuilder: (BuildContext context) => <PopupMenuEntry>[
-                  PopupMenuItem(
-                    value: 0,
-                    child: Row(children: <Widget>[
-                      Icon(
-                        Icons.logout_outlined,
-                        color: Colors.red,
-                      ),
-                      SizedBox(width: 10),
-                      Text('Logout',
-                          style: FlutterFlowTheme.of(context)
-                              .bodyText1
-                              .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .bodyText1Family,
-                                  color: Colors.red))
-                    ]),
-                  ),
-                  PopupMenuItem(
-                    value: 1,
-                    child: Row(children: <Widget>[
-                      Icon(Icons.settings),
-                      SizedBox(width: 10),
-                      Text('Settings',
-                          style: FlutterFlowTheme.of(context)
-                              .bodyText1
-                              .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .bodyText1Family,
-                                  color: Colors.indigo))
-                    ]),
-                  ),
-                  PopupMenuItem(
-                    value: 2,
-                    child: Row(children: <Widget>[
-                      Icon(Icons.dark_mode_outlined),
-                      SizedBox(width: 10),
-                      Text('Dark mode',
-                          style: FlutterFlowTheme.of(context)
-                              .bodyText1
-                              .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .bodyText1Family,
-                                  color: Colors.indigo))
-                    ]),
-                  ),
-                ],
-              )
+                  selectedIconUrl:
+                      'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/home/fill1/48px.svg',
+                  isSelected: _tabController.index == 0,
+                  name: 'Home'),
+              BottomAppBarButton(
+                  onPressed: () {
+                    _tabController.animateTo(1);
+                  },
+                  unselectedIconUrl:
+                      'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/event/default/48px.svg',
+                  selectedIconUrl:
+                      'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/event/fill1/48px.svg',
+                  isSelected: _tabController.index == 1,
+                  name: 'Schedule'),
+              BottomAppBarButton(
+                  onPressed: () {
+                    _tabController.animateTo(2);
+                  },
+                  unselectedIconUrl:
+                      'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/book/default/48px.svg',
+                  selectedIconUrl:
+                      'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/book/fill1/48px.svg',
+                  isSelected: _tabController.index == 2,
+                  name: 'Courses'),
             ],
           ),
         ),
       ),
     );
+  }
+
+  void showChatGPTBottomSheet() {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      builder: (_) => ChatGPTPage(),
+    );
+  }
+}
+
+class BottomAppBarButton extends StatelessWidget {
+  const BottomAppBarButton(
+      {Key? key,
+      required this.onPressed,
+      required this.unselectedIconUrl,
+      required this.selectedIconUrl,
+      required this.isSelected,
+      required this.name})
+      : super(key: key);
+
+  final String unselectedIconUrl;
+  final String selectedIconUrl;
+  final bool isSelected;
+  final String name;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            shadowColor: Colors.transparent),
+        onPressed: onPressed,
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          SvgPicture.network(
+            isSelected ? selectedIconUrl : unselectedIconUrl,
+            colorFilter: ColorFilter.mode(Colors.indigo, BlendMode.srcIn),
+            width: 26,
+          ),
+        isSelected ?  Text(
+            name,
+            textAlign: TextAlign.center,
+            style: FlutterFlowTheme.of(context).title1.override(
+                fontFamily: FlutterFlowTheme.of(context).title1Family,
+                fontSize: 15),
+          ) : SizedBox.shrink(),
+        ]));
   }
 }

@@ -55,6 +55,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: 15),
           labelText: widget.fieldName,
+          labelStyle: FlutterFlowTheme.of(context).bodyText1,
           hintStyle: FlutterFlowTheme.of(context).bodyText2,
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
@@ -65,21 +66,21 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Color(0xFF757575),
+              color: Colors.grey.shade400,
               width: 1.0,
             ),
             borderRadius: BorderRadius.circular(12.0),
           ),
           errorBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Color(0xFF757575),
+              color: Colors.grey.shade400,
               width: 1.0,
             ),
             borderRadius: BorderRadius.circular(12.0),
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Color(0xFF757575),
+              color: Colors.grey.shade400,
               width: 1.0,
             ),
             borderRadius: BorderRadius.circular(12.0),

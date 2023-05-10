@@ -1,63 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:let_tutor/course_details_page/course_details_page_widget.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
-import 'package:let_tutor/index.dart';
-import 'package:let_tutor/main.dart';
-
-class ClassScheduleStatus extends StatelessWidget {
-  const ClassScheduleStatus({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClassTime(),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              NegativeButton(
-                title: 'Cancel',
-              ),
-              PositiveButton(
-                title: 'Go to meeting',
-                icon: Icon(Icons.people_rounded, size: 18),
-                onPressed: () {
-                  MyApp.To(context, MeetingPageWidget());
-                },
-              ),
-            ],
-          )
-        ],
-      ),
-    );
-  }
-}
 
 class PositiveButton extends StatelessWidget {
   const PositiveButton(
       {Key? key,
       required this.title,
-      required this.icon,
+      this.icon,
       required this.onPressed})
       : super(key: key);
 
   final String title;
-  final Icon icon;
+  final Icon? icon;
   final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-      icon: icon,
+    return icon == null ?
+    ElevatedButton(
+      style: OutlinedButton.styleFrom(
+          side: BorderSide(width: 1.0, color: Colors.black12),
+          textStyle: FlutterFlowTheme.of(context).bodyText1.override(
+              fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
+              fontSize: 15,
+              fontWeight: FontWeight.w500),
+          foregroundColor: Colors.white,
+          backgroundColor: Colors.indigo,
+          disabledBackgroundColor: Colors.black54,
+          disabledForegroundColor: Colors.white),
+      onPressed: onPressed,
+      child: Text(title),
+    ):
+
+      ElevatedButton.icon(
+      icon: icon!,
       style: OutlinedButton.styleFrom(
           side: BorderSide(width: 1.0, color: Colors.black12),
           textStyle: FlutterFlowTheme.of(context).bodyText1.override(
@@ -78,9 +53,11 @@ class NegativeButton extends StatelessWidget {
   const NegativeButton({
     Key? key,
     required this.title,
+    this.onPressed
   }) : super(key: key);
 
   final String title;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -90,8 +67,9 @@ class NegativeButton extends StatelessWidget {
             textStyle: FlutterFlowTheme.of(context).bodyText1,
             foregroundColor: Colors.red,
             disabledForegroundColor: Colors.white,
-            disabledBackgroundColor: Colors.black54),
-        onPressed: () {},
+            disabledBackgroundColor: Colors.black54
+        ),
+        onPressed: onPressed,
         child: Text(title));
   }
 }

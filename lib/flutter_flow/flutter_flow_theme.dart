@@ -57,6 +57,8 @@ abstract class FlutterFlowTheme {
   TextStyle get title2 => typography.title2;
   String get title3Family => typography.title3Family;
   TextStyle get title3 => typography.title3;
+  String get title4Family => typography.title4Family;
+  TextStyle get title4 => typography.title4;
   String get subtitle1Family => typography.subtitle1Family;
   TextStyle get subtitle1 => typography.subtitle1;
   String get subtitle2Family => typography.subtitle2Family;
@@ -92,7 +94,7 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color primaryBackground = const Color(0xFFCCD0F6);
   late Color secondaryBackground = const Color(0xFFFFFFFF);
   late Color primaryText = const Color(0xFF61646B);
-  late Color secondaryText = const Color(0xFFB7B8B9);
+  late Color secondaryText = Colors.grey.shade500;
 
   late Color primaryBtnText = Color(0xFFFFFFFF);
   late Color lineColor = Color(0xFFE0E3E7);
@@ -105,6 +107,8 @@ abstract class Typography {
   TextStyle get title2;
   String get title3Family;
   TextStyle get title3;
+  String get title4Family;
+  TextStyle get title4;
   String get subtitle1Family;
   TextStyle get subtitle1;
   String get subtitle2Family;
@@ -137,10 +141,17 @@ class MobileTypography extends Typography {
   String get title3Family => 'Outfit';
   TextStyle get title3 => GoogleFonts.getFont(
         'Outfit',
-        color: theme.primaryText,
-        fontWeight: FontWeight.normal,
+        color: Colors.indigo,
+        fontWeight: FontWeight.w500,
         fontSize: 20.0,
       );
+  String get title4Family => 'Outfit';
+  TextStyle get title4 => GoogleFonts.getFont(
+    'Outfit',
+    color: Colors.indigo,
+    fontWeight: FontWeight.w500,
+    fontSize: 17.0,
+  );
   String get subtitle1Family => 'Outfit';
   TextStyle get subtitle1 => GoogleFonts.getFont(
         'Outfit',
@@ -193,10 +204,17 @@ class TabletTypography extends Typography {
   String get title3Family => 'Outfit';
   TextStyle get title3 => GoogleFonts.getFont(
         'Outfit',
-        color: theme.primaryText,
+        color: Colors.indigo,
         fontWeight: FontWeight.normal,
         fontSize: 20.0,
       );
+  String get title4Family => 'Outfit';
+  TextStyle get title4 => GoogleFonts.getFont(
+    'Outfit',
+    color: Colors.indigo,
+    fontWeight: FontWeight.w500,
+    fontSize: 18.0,
+       );
   String get subtitle1Family => 'Outfit';
   TextStyle get subtitle1 => GoogleFonts.getFont(
         'Outfit',
@@ -250,9 +268,16 @@ class DesktopTypography extends Typography {
   TextStyle get title3 => GoogleFonts.getFont(
         'Outfit',
         color: theme.primaryText,
-        fontWeight: FontWeight.normal,
+        fontWeight: FontWeight.bold,
         fontSize: 20.0,
       );
+  String get title4Family => 'Outfit';
+  TextStyle get title4 => GoogleFonts.getFont(
+    'Outfit',
+    color: Colors.indigo,
+    fontWeight: FontWeight.w500,
+    fontSize: 18.0,
+  );
   String get subtitle1Family => 'Outfit';
   TextStyle get subtitle1 => GoogleFonts.getFont(
         'Outfit',
