@@ -622,13 +622,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 TabHeader(
                   title: 'Filter'.tr,
                   centerTitle: false,
-                  // start: IconButton(
-                  //     onPressed: () {},
-                  //     icon: Icon(
-                  //       Icons.chevron_left,
-                  //       size: 30,
-                  //       color: Colors.indigo,
-                  //     )),
                 ),
                 Divider(
                   indent: 20,

@@ -253,7 +253,7 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
                   selectedIconUrl:
                       'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/home/fill1/48px.svg',
                   isSelected: _tabController.index == 0,
-                  name: 'Home'),
+                  name: 'Home'.tr),
               BottomAppBarButton(
                   onPressed: () {
                     _tabController.animateTo(1);
@@ -263,7 +263,7 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
                   selectedIconUrl:
                       'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/event/fill1/48px.svg',
                   isSelected: _tabController.index == 1,
-                  name: 'Schedule'),
+                  name: 'Schedule'.tr),
               BottomAppBarButton(
                   onPressed: () {
                     _tabController.animateTo(2);
@@ -273,7 +273,7 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
                   selectedIconUrl:
                       'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/book/fill1/48px.svg',
                   isSelected: _tabController.index == 2,
-                  name: 'Courses'),
+                  name: 'Courses'.tr),
             ],
           ),
         ),

@@ -119,7 +119,7 @@ class _ChatGPTPageState extends State<ChatGPTPage> {
       child: Column(
         children: [
           Text(
-            'ChatGPT may produce inaccurate information about people, places, or facts.',
+            'ChatGPT may produce inaccurate information about people, places, or facts.'.tr,
             style: FlutterFlowTheme.of(context).subtitle2.override(
                 fontFamily: FlutterFlowTheme.of(context).subtitle2Family,
                 color: Colors.grey.shade500,
@@ -276,7 +276,6 @@ class _ChatGPTPageState extends State<ChatGPTPage> {
                 Text(
                   m.text,
                   style: const TextStyle(
-                      fontWeight: FontWeight.w600,
                       color: Colors.white,
                       fontSize: 16),
                 ),

@@ -23,6 +23,11 @@ class AppTranslation extends Translations {
     'Create Account': 'Đăng ký',
     'Already have your account?': 'Đã có tài khoản?',
 
+    // main page
+    'Home': 'Trang chủ',
+    'Schedule': 'Lịch học',
+    'Courses': 'Giáo trình',
+
     //home page
     'Filter': 'Bộ lọc',
     'Name': 'Tên',
@@ -51,5 +56,10 @@ class AppTranslation extends Translations {
     'English for Kids': 'Tiếng Anh cho trẻ em',
     'Business English': 'Tiếng Anh cho công việc',
     'Conversational English': 'Tiếng Anh cho giao tiếp',
+
+    // chatgpt page
+    'ChatGPT may produce inaccurate information about people, places, or facts.':
+        'ChatGPT có thể cung cấp thông tin không chính xác về người, địa điểm hoặc sự kiện.',
+    'Send a message': 'Gửi tin nhắn',
   };
 }
