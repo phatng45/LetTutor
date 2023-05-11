@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:let_tutor/components/best_divider_widget.dart';
 import 'package:let_tutor/components/password_field_widget.dart';
@@ -68,7 +69,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                       child: Text(
-                        'Hello, Friend!',
+                        'Hello, Friend!'.tr,
                         style: FlutterFlowTheme.of(context).title1,
                       ),
                     ),
@@ -85,7 +86,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                           model: _model.textFieldModel,
                           updateCallback: () => setState(() {}),
                           child: TextFieldWidget(
-                            fieldName: 'Email',
+                            fieldName: 'Email'.tr,
                             icon: Icon(
                               Icons.mail_outline_rounded,
                               color: Colors.grey.shade400,
@@ -107,7 +108,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                           model: _model.passwordFieldModel1,
                           updateCallback: () => setState(() {}),
                           child: PasswordFieldWidget(
-                            fieldName: 'Password',
+                            fieldName: 'Password'.tr,
                             icon: Icon(
                               Icons.lock_outlined,
                               color: Colors.grey.shade400,
@@ -129,7 +130,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                           model: _model.passwordFieldModel2,
                           updateCallback: () => setState(() {}),
                           child: PasswordFieldWidget(
-                            fieldName: 'Confirm password',
+                            fieldName: 'Confirm password'.tr,
                             icon: Icon(
                               Icons.lock_outlined,
                               color: Colors.grey.shade400,
@@ -152,7 +153,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                           onPressed: () => _signup(
                               _model.textFieldModel.textController.text,
                               _model.passwordFieldModel1.textController.text),
-                          text: 'Create Account',
+                          text: 'Create Account'.tr,
                           options: FFButtonOptions(
                             width: 180.0,
                             height: 40.0,
@@ -186,7 +187,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                   model: _model.bestDividerModel,
                   updateCallback: () => setState(() {}),
                   child: BestDividerWidget(
-                    title: 'OR',
+                    title: 'OR'.tr,
                   ),
                 ),
                 Row(
@@ -246,7 +247,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Already have your account?',
+                      'Already have your account?'.tr,
                       style: FlutterFlowTheme.of(context).bodyText1,
                     ),
                     TextButton(
@@ -263,7 +264,7 @@ class _SignUpPageWidgetState extends State<SignUpPageWidget> {
                               fontWeight: FontWeight.w700,
                             ),
                       ),
-                      child: Text('Login'),
+                      child: Text('Login'.tr),
                     ),
                   ],
                 ),

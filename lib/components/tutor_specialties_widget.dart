@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../models/major.dart';
 import 'my_chip.dart';
@@ -35,9 +36,9 @@ class TutorSpecialtiesWidget extends StatelessWidget {
   }
 
   static Map<String, String> mappedString = {
-    'english-for-kids': 'English for Kids',
-    'business-english': 'Business English',
-    'conversational-english': 'Conversational English',
+    'english-for-kids': 'English for Kids'.tr,
+    'business-english': 'Business English'.tr,
+    'conversational-english': 'Conversational English'.tr,
     'starters': 'STARTERS',
     'movers': 'MOVERS',
     'flyers': 'FLYERS',
