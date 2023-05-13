@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
 import 'package:let_tutor/index.dart';
@@ -90,7 +91,7 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
             child: Column(
               children: [
                 TabHeader(
-                  title: 'Schedule',
+                  title: 'Schedule'.tr,
                   end: IconButton(
                     icon: SizedBox(
                       width: 25,
@@ -122,7 +123,7 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
                                   padding: const EdgeInsets.all(8.0),
                                   child: new Center(
                                       child: Text(
-                                          'You haven\'t booked any class.',
+                                          'You haven\'t booked any class.'.tr,
                                           style: FlutterFlowTheme.of(context)
                                               .subtitle1)),
                                 ),
@@ -316,11 +317,11 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   NegativeButton(
-                    title: 'Cancel',
+                    title: 'Cancel'.tr,
                     onPressed: () {},
                   ),
                   PositiveButton(
-                    title: 'Join meeting',
+                    title: 'Join meeting'.tr,
                     icon: null,
                     onPressed: () {
                       MyApp.JoinMeeting(book,context);

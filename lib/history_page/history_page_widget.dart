@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
 
@@ -83,7 +84,7 @@ class _HistoryPageWidgetState extends State<HistoryPageWidget> {
             child: Column(
               children: [
                 TabHeader(
-                  title: 'History',
+                  title: 'History'.tr,
                   start: IconButton(
                       onPressed: () => Navigator.pop(context),
                       icon: Icon(
@@ -93,7 +94,7 @@ class _HistoryPageWidgetState extends State<HistoryPageWidget> {
                       )),
                 ),
                 Text(
-                  'The following is a list of lessons you have attended\nYou can review the details of the lessons you have attended',
+                  'The following is a list of lessons you have attended\nYou can review the details of the lessons you have attended'.tr,
                   style: FlutterFlowTheme.of(context).subtitle1.override(
                       fontFamily: FlutterFlowTheme.of(context).subtitle1Family,
                       fontSize: 14),

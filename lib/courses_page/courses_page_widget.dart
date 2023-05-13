@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:let_tutor/components/class_schedule_status_widget.dart';
 import 'package:let_tutor/course_details_page/course_details_page_widget.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
@@ -55,7 +56,7 @@ class _CoursesPageWidgetState extends State<CoursesPageWidget> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                TabHeader(title: 'Courses'),
+                TabHeader(title: 'Courses'.tr),
                 _listCourse.isEmpty
                     ? const Align(
                         alignment: Alignment.topCenter,
@@ -152,7 +153,7 @@ class _CoursesPageWidgetState extends State<CoursesPageWidget> {
                         Expanded(
                           flex: 2,
                           child: PositiveButton(
-                            title: 'Discover',
+                            title: 'Discover'.tr,
                             icon: Icon(
                               Icons.public,
                               size: 20,

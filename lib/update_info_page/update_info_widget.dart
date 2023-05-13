@@ -1,6 +1,7 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:get/get.dart';
 import 'package:let_tutor/api/api_service.dart';
 import 'package:let_tutor/components/class_schedule_status_widget.dart';
 import 'package:let_tutor/components/copied_multi_select_chip_display.dart';
@@ -56,7 +57,7 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
           child: Column(
             children: <Widget>[
               TabHeader(
-                title: 'Update Information',
+                title: 'Update Information'.tr,
                 centerTitle: true,
                 start: IconButton(
                     onPressed: () => Navigator.pop(context),
@@ -81,7 +82,7 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
                                   FlutterFlowTheme.of(context).title4Family,
                               color: Colors.red),
                         ),
-                        Text('Name',
+                        Text('Name'.tr,
                             style: FlutterFlowTheme.of(context).title4),
                       ],
                     ),
@@ -96,17 +97,17 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
                                   FlutterFlowTheme.of(context).title4Family,
                               color: Colors.red),
                         ),
-                        Text('Country',
+                        Text('Country'.tr,
                             style: FlutterFlowTheme.of(context).title4),
                       ],
                     ),
                     _countryField(context),
                     SizedBox(height: 6),
-                    Text('Email Address',
+                    Text('Email Address'.tr,
                         style: FlutterFlowTheme.of(context).title4),
                     _emailField(context),
                     SizedBox(height: 6),
-                    Text('Phone Number',
+                    Text('Phone Number'.tr,
                         style: FlutterFlowTheme.of(context).title4),
                     _phoneField(context),
                     SizedBox(height: 6),
@@ -133,7 +134,7 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
                         style: FlutterFlowTheme.of(context).title4),
                     _wantToLearnField(context),
                     SizedBox(height: 6),
-                    Text('Study Schedule',
+                    Text('Study Schedule'.tr,
                         style: FlutterFlowTheme.of(context).title4),
                     _scheduleField(context),
                     SizedBox(height: 6),
@@ -141,7 +142,7 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         PositiveButton(
-                            title: 'Save changes',
+                            title: 'Save changes'.tr,
                             onPressed: () {
                               _updateUserInfo();
                             }),
