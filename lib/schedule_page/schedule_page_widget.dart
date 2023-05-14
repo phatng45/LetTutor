@@ -100,7 +100,7 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
                       child: Image.network(
                         'https://cdn-icons-png.flaticon.com/512/9297/9297236.png',
                         colorBlendMode: BlendMode.srcIn,
-                        color: Colors.indigo,
+                        color: FlutterFlowTheme.of(context).primaryColor,
                       ),
                     ),
                     style: IconButton.styleFrom(padding: EdgeInsets.zero),
