@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 const kThemeModeKey = '__theme_mode__';
@@ -96,7 +95,6 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color secondaryBackground = const Color(0xFFFFFFFF);
   late Color primaryText = const Color(0xFF61646B);
   late Color secondaryText = const Color(0xFF61646B);
-  // late Color secondaryText = Colors.grey.shade500;
   late Color title = Colors.indigo;
   late Color primaryBtnText = Color(0xFFFFFFFF);
   late Color lineColor = Colors.grey.shade500;
@@ -311,32 +309,18 @@ class DesktopTypography extends Typography {
 }
 
 class DarkModeTheme extends FlutterFlowTheme {
-  // late Color primaryColor = const Color(0xFF4B39EF);
-  // late Color secondaryColor = const Color(0xFF39D2C0);
-  // late Color tertiaryColor = const Color(0xFFEE8B60);
-  // late Color alternate = const Color(0xFFFF5963);
   late Color primaryBackground = Colors.black;
   late Color secondaryBackground = Colors.grey.shade900;
-  // late Color primaryText = const Color(0xFFFFFFFF);
-  // late Color secondaryText = const Color(0xFF95A1AC);
-  //
-  // late Color primaryBtnText = Color(0xFFFFFFFF);
-  // late Color lineColor = Color(0xFF22282F);
   late Color title = Colors.white;
-
-
   late Color primaryColor = Colors.white;
   late Color secondaryColor = const Color(0xFFF594B7);
   late Color tertiaryColor = const Color(0xFFAD7FFB);
   late Color alternate = const Color(0xFFCCD0F6);
-  // late Color primaryBackground = const Color(0xFFCCD0F6);
-  // late Color secondaryBackground = const Color(0xFFFFFFFF);
   late Color primaryText = Colors.white;
   late Color secondaryText = Colors.grey.shade500;
 
   late Color primaryBtnText = Color(0xFFFFFFFF);
   late Color lineColor = Colors.white24;
-
 }
 
 extension TextStyleHelper on TextStyle {
