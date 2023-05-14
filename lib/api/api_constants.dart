@@ -16,7 +16,7 @@ class ApiConstants {
 
   static String major = 'major';
 
-  static String booking = 'booking';
+  static String bookingScheduleDetail = 'booking/schedule-detail';
 
   static String bookingListStudent = 'booking/list/student';
 

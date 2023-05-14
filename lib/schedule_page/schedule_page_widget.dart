@@ -46,6 +46,7 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
 
   void _getScheduleData() async {
     setState(() {
+      page = 1;
       isLoading = true;
     });
 
@@ -104,13 +105,9 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
                       ),
                     ),
                     style: IconButton.styleFrom(padding: EdgeInsets.zero),
-
-                    // style: IconButton.styleFrom(
-                    //   backgroundColor: Colors.white,
-                    //   padding: EdgeInsets.zero,
-                    // ),
-
-                    onPressed: () {MyApp.To(context, HistoryPageWidget());},
+                    onPressed: () {
+                      MyApp.To(context, HistoryPageWidget());
+                    },
                   ),
                 ),
                 Padding(
@@ -181,7 +178,8 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
           ],
           borderRadius: BorderRadius.circular(20.0),
           border: Border.all(
-            color: FlutterFlowTheme.of(context).secondaryBackground,// Color(0x98E4E4E4),
+            color: FlutterFlowTheme.of(context)
+                .secondaryBackground, // Color(0x98E4E4E4),
           ),
         ),
         child: Padding(
@@ -319,13 +317,13 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
                 children: <Widget>[
                   NegativeButton(
                     title: 'Cancel'.tr,
-                    onPressed: () {},
+                    onPressed: () => _cancelClass(book.id),
                   ),
                   PositiveButton(
                     title: 'Join meeting'.tr,
                     icon: null,
                     onPressed: () {
-                      MyApp.JoinMeeting(book,context);
+                      MyApp.JoinMeeting(book, context);
                     },
                   ),
                 ],
@@ -335,6 +333,14 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
         ),
       ),
     );
+  }
+
+  _cancelClass(String? scheduleDetailId) async {
+    var response = (await ApiService().cancelClass(scheduleDetailId))!;
+
+    if (response) {
+      _getScheduleData();
+    }
   }
 }
 
@@ -367,7 +373,7 @@ class TabHeader extends StatelessWidget {
                         style: FlutterFlowTheme.of(context).title1.override(
                               fontFamily:
                                   FlutterFlowTheme.of(context).title1Family,
-                              color:  FlutterFlowTheme.of(context).primaryColor,
+                              color: FlutterFlowTheme.of(context).primaryColor,
                               fontSize: 25,
                             )),
                   ],
