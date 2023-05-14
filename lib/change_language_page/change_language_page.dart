@@ -11,6 +11,7 @@ class ChangeLanguagePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -22,7 +23,7 @@ class ChangeLanguagePage extends StatelessWidget {
                     icon: Icon(
                       Icons.chevron_left,
                       size: 30,
-                      color: Colors.indigo,
+                      color: FlutterFlowTheme.of(context).primaryColor,
                     )),
               ),
               ListTile(

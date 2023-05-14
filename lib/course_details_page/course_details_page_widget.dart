@@ -58,7 +58,7 @@ class _CourseDetailsPageWidgetState extends State<CourseDetailsPageWidget> {
                       icon: Icon(
                         Icons.chevron_left,
                         size: 30,
-                        color: Colors.indigo,
+                        color: FlutterFlowTheme.of(context).primaryColor,
                       )),
                 ),
                 Padding(
@@ -102,7 +102,7 @@ class _CourseDetailsPageWidgetState extends State<CourseDetailsPageWidget> {
                                               FlutterFlowTheme.of(context)
                                                   .title1Family,
                                           // fontWeight: FontWeight.w500,
-                                          color: Colors.indigo)),
+                                          color: FlutterFlowTheme.of(context).primaryColor)),
                               Text(
                                 course.description ?? 'N/A',
                                 style: FlutterFlowTheme.of(context)

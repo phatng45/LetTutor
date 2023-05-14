@@ -23,6 +23,7 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -34,7 +35,7 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
                     icon: Icon(
                       Icons.chevron_left,
                       size: 30,
-                      color: Colors.indigo,
+                      color: FlutterFlowTheme.of(context).primaryColor,
                     )),
               ),
               Padding(
@@ -91,8 +92,10 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
                     SwitchListTile(
                       title: Text('Dark mode'.tr,
                           style: FlutterFlowTheme.of(context).subtitle1),
-                      value: true,
-                      onChanged: (bool value) {},
+                      value: Get.rootController.themeMode == ThemeMode.dark,
+                      onChanged: (bool value) {
+                        Get.changeThemeMode(value ? ThemeMode.dark : ThemeMode.light);
+                      },
                       secondary: Icon(Icons.dark_mode),
                     ),
                     ListTile(

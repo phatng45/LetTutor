@@ -104,7 +104,7 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                     icon: Icon(
                       Icons.chevron_left,
                       size: 30,
-                      color: Colors.indigo,
+                      color: FlutterFlowTheme.of(context).primaryColor,
                     )),
               ),
               Container(
@@ -121,7 +121,8 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                   ],
                   borderRadius: BorderRadius.circular(20.0),
                   border: Border.all(
-                    color: Color(0x98E4E4E4),
+                    color: FlutterFlowTheme.of(context)
+                        .secondaryBackground, // Color(0x98E4E4E4),
                   ),
                 ),
                 child: Column(
@@ -495,7 +496,7 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                     'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/favorite/fill1/48px.svg',
                 isSelected: tutor?.isFavorited ?? false,
                 name: 'Favorite',
-            color: tutor?.isFavorited ?? false ? Colors.pinkAccent.withAlpha(200) : Colors.indigo),
+            color: tutor?.isFavorited ?? false ? Colors.pinkAccent.withAlpha(200) : FlutterFlowTheme.of(context).primaryColor),
           ),
           VerticalDivider(color: Colors.black12),
           Expanded(
@@ -556,7 +557,7 @@ class InteractionButton extends StatelessWidget {
           SvgPicture.network(
             isSelected ? selectedIconUrl : unselectedIconUrl,
             colorFilter:
-                ColorFilter.mode(color ?? Colors.indigo, BlendMode.srcIn),
+                ColorFilter.mode(color ?? FlutterFlowTheme.of(context).primaryColor, BlendMode.srcIn),
             width: 26,
           ),
           Text(
@@ -565,7 +566,7 @@ class InteractionButton extends StatelessWidget {
             style: FlutterFlowTheme.of(context).title1.override(
                 fontFamily: FlutterFlowTheme.of(context).title1Family,
                 fontSize: 15,
-                color: color ?? Colors.indigo),
+                color: color ?? FlutterFlowTheme.of(context).primaryColor),
           ),
         ]));
   }

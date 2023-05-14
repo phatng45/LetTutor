@@ -62,7 +62,7 @@ class ClassReviewStatus extends StatelessWidget {
             "Tutor reviews",
             style: FlutterFlowTheme.of(context).title1.override(
                 fontFamily: FlutterFlowTheme.of(context).title1Family,
-                color: Colors.indigo),
+                color: FlutterFlowTheme.of(context).primaryColor),
           ),
           theme: ExpandableThemeData(
             tapHeaderToExpand: true,

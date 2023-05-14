@@ -211,6 +211,7 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
       'CoursesPage': CoursesPageWidget(),
     };
     return Scaffold(
+      backgroundColor:  FlutterFlowTheme.of(context).primaryBackground,
       body: TabBarView(
         controller: _tabController,
         physics: NeverScrollableScrollPhysics(),
@@ -316,7 +317,7 @@ class BottomAppBarButton extends StatelessWidget {
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           SvgPicture.network(
             isSelected ? selectedIconUrl : unselectedIconUrl,
-            colorFilter: ColorFilter.mode(Colors.indigo, BlendMode.srcIn),
+            colorFilter: ColorFilter.mode(FlutterFlowTheme.of(context).primaryColor, BlendMode.srcIn),
             width: 26,
           ),
           isSelected

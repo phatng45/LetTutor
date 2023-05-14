@@ -65,7 +65,7 @@ class _ChatGPTPageState extends State<ChatGPTPage> {
         decoration: BoxDecoration(
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-            color: _darkMode ? Colors.grey[900] : Colors.white),
+            color: FlutterFlowTheme.of(context).secondaryBackground),
         child: Padding(
           padding:
               EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
@@ -79,7 +79,7 @@ class _ChatGPTPageState extends State<ChatGPTPage> {
                       icon: Icon(
                         Icons.chevron_left,
                         size: 30,
-                        color: Colors.indigo,
+                        color: FlutterFlowTheme.of(context).primaryColor,
                       )),
                   Text('ChatGPT', style: FlutterFlowTheme.of(context).title1),
                 ],
@@ -161,7 +161,7 @@ class _ChatGPTPageState extends State<ChatGPTPage> {
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide.none),
                     hintText: 'Send a message'.tr,
-                    fillColor: Colors.white,
+                    fillColor: FlutterFlowTheme.of(context).primaryBackground,
                     filled: true,
                     suffixIcon: _isTextFieldNotEmpty
                         ? IconButton(

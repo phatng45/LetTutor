@@ -52,6 +52,7 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -64,7 +65,7 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
                     icon: Icon(
                       Icons.chevron_left,
                       size: 30,
-                      color: Colors.indigo,
+                      color: FlutterFlowTheme.of(context).primaryColor,
                     )),
               ),
               Padding(
@@ -168,7 +169,7 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(
-            color: Colors.grey.shade300,
+            color: FlutterFlowTheme.of(context).lineColor, // Color(0x98E4E4E4),
             width: 1.0,
           ),
         ),
@@ -182,7 +183,7 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(
-            color: Colors.grey.shade300,
+            color: FlutterFlowTheme.of(context).lineColor, // Color(0x98E4E4E4),
             width: 1.0,
           ),
         ),
@@ -196,7 +197,7 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
         disabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(
-            color: Colors.grey.shade300,
+            color: FlutterFlowTheme.of(context).lineColor, // Color(0x98E4E4E4),
             width: 1.0,
           ),
         ),
@@ -234,7 +235,8 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
           disabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(
-              color: Colors.grey.shade300,
+              color:
+                  FlutterFlowTheme.of(context).lineColor, // Color(0x98E4E4E4),
               width: 1.0,
             ),
           ),
@@ -253,21 +255,21 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(
-            color: Colors.grey.shade300,
+            color: FlutterFlowTheme.of(context).lineColor, // Color(0x98E4E4E4),
             width: 1.0,
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(
-            color: Colors.indigo,
+            color: FlutterFlowTheme.of(context).lineColor, // Color(0x98E4E4E4),
             width: 1.0,
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(
-            color: Colors.grey.shade300,
+            color: FlutterFlowTheme.of(context).lineColor, // Color(0x98E4E4E4),
             width: 1.0,
           ),
         ),
@@ -292,12 +294,14 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
           fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
           color: Colors.grey),
       decoration: InputDecoration(
-        fillColor: Colors.grey.shade200,
+        fillColor: Get.rootController.themeMode == ThemeMode.dark
+            ? Colors.grey.shade900
+            : Colors.grey.shade200,
         filled: true,
         disabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(
-            color: Colors.grey.shade300,
+            color: FlutterFlowTheme.of(context).lineColor, // Color(0x98E4E4E4),
             width: 1.0,
           ),
         ),
@@ -337,7 +341,8 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
           disabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(
-              color: Colors.grey.shade300,
+              color:
+                  FlutterFlowTheme.of(context).lineColor, // Color(0x98E4E4E4),
               width: 1.0,
             ),
           ),
@@ -356,35 +361,40 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(
-              color: Colors.grey.shade300,
+              color:
+                  FlutterFlowTheme.of(context).lineColor, // Color(0x98E4E4E4),
               width: 1.0,
             ),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(
-              color: Colors.indigo,
+              color:
+                  FlutterFlowTheme.of(context).lineColor, // Color(0x98E4E4E4),
               width: 1.0,
             ),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(
-              color: Colors.grey.shade300,
+              color:
+                  FlutterFlowTheme.of(context).lineColor, // Color(0x98E4E4E4),
               width: 1.0,
             ),
           ),
           errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(
-              color: Colors.red,
+              color:
+                  FlutterFlowTheme.of(context).lineColor, // Color(0x98E4E4E4),
               width: 1.0,
             ),
           ),
           disabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(
-              color: Colors.grey.shade300,
+              color:
+                  FlutterFlowTheme.of(context).lineColor, // Color(0x98E4E4E4),
               width: 1.0,
             ),
           ),
@@ -424,21 +434,21 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(
-            color: Colors.grey.shade300,
+            color: FlutterFlowTheme.of(context).lineColor, // Color(0x98E4E4E4),
             width: 1.0,
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(
-            color: Colors.indigo,
+            color: FlutterFlowTheme.of(context).lineColor, // Color(0x98E4E4E4),
             width: 1.0,
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(
-            color: Colors.grey.shade300,
+            color: FlutterFlowTheme.of(context).lineColor, // Color(0x98E4E4E4),
             width: 1.0,
           ),
         ),
@@ -503,7 +513,7 @@ class _UpdateInfoWidgetState extends State<UpdateInfoWidget> {
           color: FlutterFlowTheme.of(context).secondaryBackground,
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
-            color: Colors.grey.shade300,
+            color: FlutterFlowTheme.of(context).lineColor, // Color(0x98E4E4E4),
           ),
         ),
         child: MultiSelectDialogField(

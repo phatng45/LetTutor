@@ -84,6 +84,7 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         // title: 'Schedule',
         body: SafeArea(
           child: SingleChildScrollView(
@@ -180,7 +181,7 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
           ],
           borderRadius: BorderRadius.circular(20.0),
           border: Border.all(
-            color: Color(0x98E4E4E4),
+            color: FlutterFlowTheme.of(context).secondaryBackground,// Color(0x98E4E4E4),
           ),
         ),
         child: Padding(
@@ -366,7 +367,7 @@ class TabHeader extends StatelessWidget {
                         style: FlutterFlowTheme.of(context).title1.override(
                               fontFamily:
                                   FlutterFlowTheme.of(context).title1Family,
-                              color: Colors.indigo,
+                              color:  FlutterFlowTheme.of(context).primaryColor,
                               fontSize: 25,
                             )),
                   ],
@@ -381,7 +382,7 @@ class TabHeader extends StatelessWidget {
                 Text(title,
                     style: FlutterFlowTheme.of(context).title1.override(
                           fontFamily: FlutterFlowTheme.of(context).title1Family,
-                          color: Colors.indigo,
+                          color: FlutterFlowTheme.of(context).primaryColor,
                           fontSize: 25,
                         )),
                 end ?? SizedBox.shrink(),
