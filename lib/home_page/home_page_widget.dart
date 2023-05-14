@@ -454,7 +454,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
                         child: Text(
-                          'Upcoming Lesson',
+                          'Upcoming Lesson'.tr,
                           textAlign: TextAlign.center,
                           style: FlutterFlowTheme.of(context).bodyText1.override(
                                 fontFamily:
@@ -506,7 +506,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 MyApp.JoinMeeting(_upcomingLesson,context);
                                 // MyApp.To(context, MeetingPageWidget());
                               },
-                              text: 'Join now',
+                              text: 'Join now'.tr,
                               icon: Icon(
                                 Icons.people_rounded,
                                 size: 18.0,
