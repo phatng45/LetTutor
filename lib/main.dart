@@ -237,8 +237,7 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
         height: _isVisible ? 72.0 : 0,
-        surfaceTintColor: FlutterFlowTheme.of(context).primaryColor,
-        color: FlutterFlowTheme.of(context).primaryColor,
+        elevation: 100,
         child: IconTheme(
           data: IconThemeData(color: Colors.indigo),
           child: Row(
@@ -320,15 +319,15 @@ class BottomAppBarButton extends StatelessWidget {
             colorFilter: ColorFilter.mode(FlutterFlowTheme.of(context).primaryColor, BlendMode.srcIn),
             width: 26,
           ),
-          isSelected
-              ? Text(
+          // isSelected ?
+          Text(
                   name,
                   textAlign: TextAlign.center,
                   style: FlutterFlowTheme.of(context).title1.override(
                       fontFamily: FlutterFlowTheme.of(context).title1Family,
                       fontSize: 15),
-                )
-              : SizedBox.shrink(),
+                ),
+              // : SizedBox.shrink(),
         ]));
   }
 }
