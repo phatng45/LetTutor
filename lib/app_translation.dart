@@ -100,7 +100,7 @@ class AppTranslation extends Translations {
     'Become a Tutor': 'Trở thành gia sư',
     'Dark mode': 'Chế độ Tối',
     'Language': 'Ngôn ngữ',
-    'English': 'Tiếng Việt',
+    'English (US)': 'Tiếng Việt',
     'Change Password': 'Đổi mật khẩu',
     'Remove ChatGPT History': 'Xóa lịch sử ChatGPT',
     'Logout': 'Đăng xuất',

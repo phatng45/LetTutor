@@ -123,8 +123,7 @@ class _MyAppState extends State<MyApp> {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      locale:  const Locale('vi', 'VN'), //const Locale('en', 'US'),//
-      //Get.deviceLocale ?? const Locale('en', 'US'),
+      locale: Get.deviceLocale ?? const Locale('en', 'US'),
       theme: ThemeData(brightness: Brightness.light, useMaterial3: true),
       darkTheme: ThemeData(brightness: Brightness.dark, useMaterial3: true),
       themeMode: _themeMode,

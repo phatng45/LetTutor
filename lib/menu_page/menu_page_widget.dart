@@ -6,6 +6,7 @@ import 'package:let_tutor/schedule_page/schedule_page_widget.dart';
 import 'package:let_tutor/update_info_page/update_info_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../change_language_page/change_language_page.dart';
 import '../chat_gpt/message.dart';
 import '../main.dart';
 import '../models/user.dart';
@@ -95,11 +96,14 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
                       secondary: Icon(Icons.dark_mode),
                     ),
                     ListTile(
+                      onTap: () {
+                        MyApp.To(context, ChangeLanguagePage());
+                      },
                       title: Text('Language'.tr,
                           style: FlutterFlowTheme.of(context).subtitle1),
                       leading: Icon(Icons.language),
                       trailing: Icon(Icons.chevron_right),
-                      subtitle: Text('English'.tr,
+                      subtitle: Text('English (US)'.tr,
                           style: FlutterFlowTheme.of(context).subtitle2),
                     ),
                     Divider(),
