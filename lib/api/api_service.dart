@@ -349,4 +349,18 @@ class ApiService {
       return false;
     }
   }
+
+  Future<bool> favorite(String id) async {
+    final url = ApiConstants.baseUrl + ApiConstants.favorite;
+
+    final Map<String, dynamic> data = {"tutorId": id};
+    try {
+      final response = await Dio()
+          .post(url, options: ApiConstants.authorizationOptions, data: data);
+
+      return response.data["result"] == 1;
+    } catch (e) {
+      return false;
+    }
+  }
 }

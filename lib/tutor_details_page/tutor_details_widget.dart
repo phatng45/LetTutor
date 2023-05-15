@@ -200,20 +200,19 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                     ),
                     SizedBox(
                       height: 300,
-                      child:
-                      tutor == null || tutor?.video == null ? SizedBox.shrink() :
-
-                      Center(
-                        child: FlutterFlowVideoPlayer(
-                          path: tutor?.video ?? '',
-                          videoType: VideoType.network,
-                          autoPlay: false,
-                          looping: true,
-                          showControls: true,
-                          allowFullScreen: true,
-                          allowPlaybackSpeedMenu: false,
-                        ),
-                      ),
+                      child: tutor == null || tutor?.video == null
+                          ? SizedBox.shrink()
+                          : Center(
+                              child: FlutterFlowVideoPlayer(
+                                path: tutor?.video ?? '',
+                                videoType: VideoType.network,
+                                autoPlay: false,
+                                looping: true,
+                                showControls: true,
+                                allowFullScreen: true,
+                                allowPlaybackSpeedMenu: false,
+                              ),
+                            ),
                     ),
                     Divider(
                       indent: 10,
@@ -489,14 +488,19 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
         children: <Widget>[
           Expanded(
             child: InteractionButton(
-                onPressed: _showReviewsDialog,
+                onPressed: _favorite,
+                // setState(() {
+                //   tutor?.isFavorited = !(tutor.isFavorited);
+                // }),
                 unselectedIconUrl:
                     'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/favorite/default/48px.svg',
                 selectedIconUrl:
                     'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/favorite/fill1/48px.svg',
                 isSelected: tutor?.isFavorited ?? false,
                 name: 'Favorite',
-            color: tutor?.isFavorited ?? false ? Colors.pinkAccent.withAlpha(200) : FlutterFlowTheme.of(context).primaryColor),
+                color: tutor?.isFavorited ?? false
+                    ? Colors.pinkAccent.withAlpha(200)
+                    : FlutterFlowTheme.of(context).primaryColor),
           ),
           VerticalDivider(color: Colors.black12),
           Expanded(
@@ -524,6 +528,13 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
         ],
       ),
     );
+  }
+
+  void _favorite() async {
+    var response = (await ApiService().favorite(widget.userId));
+ setState(() {
+   tutor!.isFavorited = response == true;
+ });
   }
 }
 
@@ -556,8 +567,9 @@ class InteractionButton extends StatelessWidget {
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           SvgPicture.network(
             isSelected ? selectedIconUrl : unselectedIconUrl,
-            colorFilter:
-                ColorFilter.mode(color ?? FlutterFlowTheme.of(context).primaryColor, BlendMode.srcIn),
+            colorFilter: ColorFilter.mode(
+                color ?? FlutterFlowTheme.of(context).primaryColor,
+                BlendMode.srcIn),
             width: 26,
           ),
           Text(

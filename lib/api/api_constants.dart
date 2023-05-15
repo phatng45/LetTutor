@@ -47,4 +47,6 @@ class ApiConstants {
       'feedback/v2/' + userId + '?page=' + page.toString() + '&perPage=' + perPage.toString();
 
   static String tutorInfo(String userId) => 'tutor/$userId';
+
+  static String favorite = 'user/manageFavoriteTutor';
 }
