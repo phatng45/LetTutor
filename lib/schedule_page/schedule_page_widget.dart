@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:let_tutor/components/flushbars.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
 import 'package:let_tutor/index.dart';
@@ -315,10 +316,17 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  NegativeButton(
-                    title: 'Cancel'.tr,
-                    onPressed: () => _cancelClass(book.id),
-                  ),
+                  DateTime.fromMillisecondsSinceEpoch(book.scheduleDetailInfo
+                                      ?.startPeriodTimestamp ??
+                                  0)
+                              .difference(DateTime.now())
+                              .inHours <
+                          2
+                      ? SizedBox.shrink()
+                      : NegativeButton(
+                          title: 'Cancel'.tr,
+                          onPressed: () => _cancelClass(book.id),
+                        ),
                   PositiveButton(
                     title: 'Join meeting'.tr,
                     icon: null,
@@ -340,6 +348,8 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
 
     if (response) {
       _getScheduleData();
+      Flushbars.positive(
+          context, 'Cancelled', 'Class was cancelled successfully');
     }
   }
 }

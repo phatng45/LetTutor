@@ -337,19 +337,15 @@ class ApiService {
 
     final Map<String, dynamic> data = {
       "scheduleDetailId": id!,
-      "cancelInfo": {"cancelReasonId": 2, "note": "asdasf"}
+      "cancelInfo": {"cancelReasonId": 1, "note": "auto-generated note"}
     };
-    print(url);
-    print(data);
-    try {
-      final response = await Dio().delete(url,
-          options: ApiConstants.authorizationOptions,
-          data: data);
 
-      print(response);
+    try {
+      final response = await Dio()
+          .delete(url, options: ApiConstants.authorizationOptions, data: data);
+
       return response.statusCode == 200;
     } catch (e) {
-      print(e);
       return false;
     }
   }
