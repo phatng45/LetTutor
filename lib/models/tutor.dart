@@ -45,8 +45,10 @@ class Tutor {
   String? isNative;
   int? price;
   bool? isOnline;
-  bool isFavorited = false;
+  bool? isFavoriteTutor;
   User? user;
+
+  // bool? isFavoriteTutor;
 
   Tutor(
       {this.level,
@@ -145,8 +147,8 @@ class Tutor {
     isNative = json['isNative'];
     price = json['price'];
     isOnline = json['isOnline'];
+    isFavoriteTutor = json['isfavoritetutor'] == "1";
   }
-
 
   Tutor.fromJsonFromGetTutorById(Map<String, dynamic> json) {
     video = json['video'];
@@ -162,7 +164,7 @@ class Tutor {
     rating = json['rating'];
     isNative = json['isNative'];
     user = json['User'] != null ? new User.fromJsonFromGetTutorById(json['User']) : null;
-    isFavorited = json['isFavorite'];
+    isFavoriteTutor = json['isFavorite'] == true;
     rating = json['avgRating'] * 1.0;
   }
 

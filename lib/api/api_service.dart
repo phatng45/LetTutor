@@ -152,6 +152,7 @@ class ApiService {
             "perPage": perPage,
           };
 
+    print(data);
     final response = await Dio()
         .post(url, data: data, options: ApiConstants.authorizationOptions);
 
@@ -358,7 +359,7 @@ class ApiService {
       final response = await Dio()
           .post(url, options: ApiConstants.authorizationOptions, data: data);
 
-      return response.data["result"] == 1;
+      return response.data["result"] != 1;
     } catch (e) {
       return false;
     }

@@ -39,8 +39,8 @@ class MyApp extends StatefulWidget {
   static _MyAppState of(BuildContext context) =>
       context.findAncestorStateOfType<_MyAppState>()!;
 
-  static void To(BuildContext context, Widget page) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => page));
+  static To(BuildContext context, Widget page) {
+    return Navigator.push(context, MaterialPageRoute(builder: (context) => page));
   }
 
   static void JoinMeeting(

@@ -72,6 +72,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
   void _getData() async {
     setState(() {
+      page = 1;
       isLoading = true;
     });
 
@@ -242,8 +243,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
         tutor.country ?? 'VN', tutor.country ?? 'Vietnam');
 
     return GestureDetector(
-      onTap: () =>
-          MyApp.To(context, TutorDetailsPageWidget(tutor.userId ?? '')),
+      onTap: () => MyApp.To(context, TutorDetailsPageWidget(tutor.userId ?? ''))
+          .then((value) => {_getData()}),
       child: Padding(
         padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
         child: Container(
@@ -339,18 +340,22 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         alignment: AlignmentDirectional(1.0, -1.0),
                         child: ToggleIcon(
                           onPressed: () {
-                            setState(() {
-                              tutor.isFavorited = !tutor.isFavorited;
+                            setState(() async {
+                              var response = (await ApiService()
+                                  .favorite(tutor.userId ?? ""));
+                              setState(() {
+                                tutor.isFavoriteTutor = response == true;
+                              });
                             });
                           },
-                          value: tutor.isFavorited,
+                          value: tutor.isFavoriteTutor ?? false,
                           onIcon: Icon(
-                            Icons.favorite_border,
+                            Icons.favorite_rounded,
                             color: Color(0xFFFF5686),
                             size: 22.0,
                           ),
                           offIcon: Icon(
-                            Icons.favorite_rounded,
+                            Icons.favorite_border,
                             color: Color(0xFFFF5686),
                             size: 22.0,
                           ),
@@ -707,9 +712,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               selectedColor: Color(0xFFBCE8FF),
                               visualDensity:
                                   VisualDensity(horizontal: 0.0, vertical: -4),
-                              backgroundColor: Get.rootController.themeMode == ThemeMode.dark
-                                  ? Colors.grey.shade500
-                                  : Colors.grey.shade300,
+                              backgroundColor:
+                                  Get.rootController.themeMode == ThemeMode.dark
+                                      ? Colors.grey.shade500
+                                      : Colors.grey.shade300,
                               side: BorderSide(color: Colors.transparent),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(200),
@@ -769,9 +775,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               selectedColor: Color(0xFFBCE8FF),
                               visualDensity:
                                   VisualDensity(horizontal: 0, vertical: -4),
-                              backgroundColor: Get.rootController.themeMode == ThemeMode.dark
-                                  ? Colors.grey.shade500
-                                  : Colors.grey.shade300,
+                              backgroundColor:
+                                  Get.rootController.themeMode == ThemeMode.dark
+                                      ? Colors.grey.shade500
+                                      : Colors.grey.shade300,
                               side: BorderSide(color: Colors.transparent),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(200),

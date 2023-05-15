@@ -4,6 +4,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:let_tutor/components/copied_country.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 
+import '../api/api_service.dart';
 import '../flutter_flow/flutter_flow_toggle_icon.dart';
 import '../models/tutor.dart';
 
@@ -123,21 +124,21 @@ class _TutorGeneralInfoWidgetState extends State<TutorGeneralInfoWidget> {
                   alignment: AlignmentDirectional(1.0, -1.0),
                   child: ToggleIcon(
                     onPressed: () {
-                      setState(() {
-                        if(tutor != null){
-                          tutor!.isFavorited = !tutor!.isFavorited;
-                        }
-
+                      setState(()async {
+                        var response = (await ApiService().favorite(tutor?.userId ?? ""));
+                        setState(() {
+                          tutor?.isFavoriteTutor = response == true;
+                        });
                       });
                     },
-                    value: tutor?.isFavorited ?? false,
+                    value: tutor?.isFavoriteTutor ?? false,
                     onIcon: Icon(
-                      Icons.favorite_border,
+                      Icons.favorite_rounded,
                       color: Color(0xFFFF5686),
                       size: 25.0,
                     ),
                     offIcon: Icon(
-                      Icons.favorite_rounded,
+                      Icons.favorite_border,
                       color: Color(0xFFFF5686),
                       size: 25.0,
                     ),

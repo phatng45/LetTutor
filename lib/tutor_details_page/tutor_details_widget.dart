@@ -489,16 +489,13 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
           Expanded(
             child: InteractionButton(
                 onPressed: _favorite,
-                // setState(() {
-                //   tutor?.isFavorited = !(tutor.isFavorited);
-                // }),
                 unselectedIconUrl:
                     'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/favorite/default/48px.svg',
                 selectedIconUrl:
                     'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/favorite/fill1/48px.svg',
-                isSelected: tutor?.isFavorited ?? false,
+                isSelected: tutor?.isFavoriteTutor ?? false,
                 name: 'Favorite',
-                color: tutor?.isFavorited ?? false
+                color: tutor?.isFavoriteTutor ?? false
                     ? Colors.pinkAccent.withAlpha(200)
                     : FlutterFlowTheme.of(context).primaryColor),
           ),
@@ -532,9 +529,9 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
 
   void _favorite() async {
     var response = (await ApiService().favorite(widget.userId));
- setState(() {
-   tutor!.isFavorited = response == true;
- });
+    setState(() {
+      tutor!.isFavoriteTutor = response == true;
+    });
   }
 }
 
