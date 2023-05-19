@@ -6,11 +6,13 @@ class PositiveButton extends StatelessWidget {
       {Key? key,
       required this.title,
       this.icon,
+      this.color,
       required this.onPressed})
       : super(key: key);
 
   final String title;
   final Icon? icon;
+  final Color? color;
   final VoidCallback onPressed;
 
   @override
@@ -24,7 +26,7 @@ class PositiveButton extends StatelessWidget {
               fontSize: 15,
               fontWeight: FontWeight.w500),
           foregroundColor: Colors.white,
-          backgroundColor: Colors.indigo,
+          backgroundColor: color ?? Colors.indigo,
           disabledBackgroundColor: Colors.black54,
           disabledForegroundColor: Colors.white),
       onPressed: onPressed,
@@ -40,7 +42,7 @@ class PositiveButton extends StatelessWidget {
               fontSize: 15,
               fontWeight: FontWeight.w500),
           foregroundColor: Colors.white,
-          backgroundColor: Colors.indigo,
+          backgroundColor: color ?? Colors.indigo,
           disabledBackgroundColor: Colors.black54,
           disabledForegroundColor: Colors.white),
       onPressed: onPressed,

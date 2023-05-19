@@ -14,6 +14,7 @@ import '../components/copied_country.dart';
 import '../components/flushbars.dart';
 import '../components/my_chip.dart';
 import '../components/tutor_specialties_widget.dart';
+import '../report_dialog.dart';
 import '../review_dialog.dart';
 import '../schedule_page/schedule_page_widget.dart';
 import 'tutor_details_model.dart';
@@ -513,7 +514,7 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
           VerticalDivider(color: Colors.black12),
           Expanded(
             child: InteractionButton(
-                onPressed: _showReviewsDialog,
+                onPressed: _showReportDialog,
                 unselectedIconUrl:
                     'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/report/default/48px.svg',
                 selectedIconUrl:
@@ -532,6 +533,15 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
     setState(() {
       tutor!.isFavoriteTutor = response == true;
     });
+  }
+
+  void _showReportDialog() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => ReportDialog(
+          username: tutor?.name ?? '',
+          userId: widget.userId,
+        ));
   }
 }
 
