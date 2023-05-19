@@ -24,12 +24,6 @@
 @import firebase_core;
 #endif
 
-#if __has_include(<jitsi_meet_wrapper/JitsiMeetWrapperPlugin.h>)
-#import <jitsi_meet_wrapper/JitsiMeetWrapperPlugin.h>
-#else
-@import jitsi_meet_wrapper;
-#endif
-
 #if __has_include(<path_provider_foundation/PathProviderPlugin.h>)
 #import <path_provider_foundation/PathProviderPlugin.h>
 #else
@@ -78,7 +72,6 @@
   [FLTFirebaseFirestorePlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseFirestorePlugin"]];
   [FLTDeviceInfoPlusPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTDeviceInfoPlusPlugin"]];
   [FLTFirebaseCorePlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseCorePlugin"]];
-  [JitsiMeetWrapperPlugin registerWithRegistrar:[registry registrarForPlugin:@"JitsiMeetWrapperPlugin"]];
   [PathProviderPlugin registerWithRegistrar:[registry registrarForPlugin:@"PathProviderPlugin"]];
   [PdfxPlugin registerWithRegistrar:[registry registrarForPlugin:@"PdfxPlugin"]];
   [SharedPreferencesPlugin registerWithRegistrar:[registry registrarForPlugin:@"SharedPreferencesPlugin"]];

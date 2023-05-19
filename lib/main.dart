@@ -4,7 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:jitsi_meet_wrapper/jitsi_meet_wrapper.dart';
+// import 'package:jitsi_meet_wrapper/jitsi_meet_wrapper.dart';
 import 'package:let_tutor/api/api_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -21,7 +21,7 @@ import 'models/user.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences.setMockInitialValues({});
+
   await FlutterFlowTheme.initialize();
   await (ApiService().getMajors());
 
@@ -60,28 +60,28 @@ class MyApp extends StatefulWidget {
     // print("token: " + token);
     // print("subject: " + subject);
 
-    var options = JitsiMeetingOptions(
-      roomNameOrUrl: roomNameOrUrl,
-      serverUrl: "https://meet.lettutor.com",
-      token: token,
-      subject: subject,
-      isAudioOnly: true,
-      isAudioMuted: true,
-      isVideoMuted: true,
-    );
-
-    await JitsiMeetWrapper.joinMeeting(
-        options: options,
-        listener: JitsiMeetingListener(
-            onOpened: () => Flushbars.positive(
-                  context,
-                  "Joined meeting",
-                  "Welcome to ${bookingInfo.scheduleDetailInfo?.scheduleInfo?.tutorInfo?.name}'s meeting!",
-                ),
-            onConferenceTerminated: (url, error) =>
-                Flushbars.negative(context, null, error.toString())));
-
-    print("finished jitsi await");
+    // var options = JitsiMeetingOptions(
+    //   roomNameOrUrl: roomNameOrUrl,
+    //   serverUrl: "https://meet.lettutor.com",
+    //   token: token,
+    //   subject: subject,
+    //   isAudioOnly: true,
+    //   isAudioMuted: true,
+    //   isVideoMuted: true,
+    // );
+    //
+    // await JitsiMeetWrapper.joinMeeting(
+    //     options: options,
+    //     listener: JitsiMeetingListener(
+    //         onOpened: () => Flushbars.positive(
+    //               context,
+    //               "Joined meeting",
+    //               "Welcome to ${bookingInfo.scheduleDetailInfo?.scheduleInfo?.tutorInfo?.name}'s meeting!",
+    //             ),
+    //         onConferenceTerminated: (url, error) =>
+    //             Flushbars.negative(context, null, error.toString())));
+    //
+    // print("finished jitsi await");
   }
 
   static late SharedPreferences prefs;

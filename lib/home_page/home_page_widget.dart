@@ -492,7 +492,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 seconds: remainingTime.inSeconds,
                                 build: (context, double time) {
                                   return Text(
-                                    '(starts in'.tr +
+                                    '(starts in '.tr +
                                         '${_tohhmmss(time.round())})',
                                     textAlign: TextAlign.start,
                                     style: FlutterFlowTheme.of(context)

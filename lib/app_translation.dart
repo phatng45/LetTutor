@@ -60,7 +60,7 @@ class AppTranslation extends Translations {
     'Start scrolling down to explore more tutors!':
         'Cuộn xuống để bắt đầu khám phá!',
     'Upcoming Lesson': 'Buổi học tiếp theo',
-    '(starts in': '(bắt đầu trong',
+    '(starts in': '(bắt đầu trong ',
     'Join now': 'Tham gia',
     'Total lesson time:': 'Tổng thời gian học:',
     'hours': 'giờ',
