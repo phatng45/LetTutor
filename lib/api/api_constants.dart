@@ -22,6 +22,8 @@ class ApiConstants {
 
   static String totalHour = 'call/total';
 
+  static String report = 'report';
+
   static String verifyAccount(String token) =>
       'auth/verifyAccount?token=$token';
   static String loginGoogle = 'auth/google';

@@ -3,6 +3,9 @@ import 'package:get/get.dart';
 import 'package:let_tutor/components/class_schedule_status_widget.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 
+import 'api/api_service.dart';
+import 'components/flushbars.dart';
+
 class ReportDialog extends StatefulWidget {
   ReportDialog({Key? key, required this.userId, required this.username})
       : super(key: key);
@@ -16,7 +19,7 @@ class ReportDialog extends StatefulWidget {
 class _ReportDialogState extends State<ReportDialog> {
   bool isAnnoying = false;
   bool isPretending = false;
-  bool inappropriateContent = false;
+  bool isUsingInappropriateProfilePhoto = false;
 
   @override
   Widget build(BuildContext context) {
@@ -72,14 +75,14 @@ class _ReportDialogState extends State<ReportDialog> {
                   },
                 ),
                 CheckboxListTile(
-                  value: inappropriateContent,
+                  value: isUsingInappropriateProfilePhoto,
                   title: Text(
                     "Inappropriate profile photo".tr,
                     style: FlutterFlowTheme.of(context).bodyText1,
                   ),
                   onChanged: (bool? value) {
                     setState(() {
-                      inappropriateContent = value!;
+                      isUsingInappropriateProfilePhoto = value!;
                     });
                   },
                 ),
@@ -95,7 +98,7 @@ class _ReportDialogState extends State<ReportDialog> {
                     ),
                     PositiveButton(
                       title: 'Report',
-                      onPressed: () {},
+                      onPressed: _report,
                       color: Colors.red,
                     )
                   ],
@@ -104,5 +107,24 @@ class _ReportDialogState extends State<ReportDialog> {
             ),
           ),
         ));
+  }
+
+  void _report() async {
+    var response = (await ApiService().reportTutor(
+        widget.userId,
+        "isAnnoying: " +
+            isAnnoying.toString() +
+            "isPretending: " +
+            isPretending.toString() +
+            "isUsingInappropriateProfilePhoto: " +
+            isUsingInappropriateProfilePhoto.toString()))!;
+
+    if (response) {
+      Navigator.pop(context);
+      Flushbars.positive(
+          context, 'Reported', 'We will take action on this report.');
+    } else {
+      Flushbars.negative(context, 'Failed', 'Something went wrong.');
+    }
   }
 }

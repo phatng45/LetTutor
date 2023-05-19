@@ -364,4 +364,18 @@ class ApiService {
       return false;
     }
   }
+
+  Future<bool> reportTutor(String id, String content) async {
+    final url = ApiConstants.baseUrl + ApiConstants.report;
+
+    final Map<String, dynamic> data = {"tutorId": id, "content": content};
+    try {
+      final response = await Dio()
+          .post(url, options: ApiConstants.authorizationOptions, data: data);
+
+      return response.data["message"] == "Report successfully";
+    } catch (e) {
+      return false;
+    }
+  }
 }
