@@ -3,4 +3,4 @@
 
 [Milestones 2 Demo](https://youtu.be/7FOY2amAHvI)
 
-[Milestones 3 Demo](https://youtu.be/MFU8hycq4c0)
+[Milestones 3 Demo](https://youtu.be/Kq63cwXS3zc)
