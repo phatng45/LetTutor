@@ -14,6 +14,7 @@ import '../components/copied_country.dart';
 import '../components/flushbars.dart';
 import '../components/my_chip.dart';
 import '../components/tutor_specialties_widget.dart';
+import '../report_dialog.dart';
 import '../review_dialog.dart';
 import '../schedule_page/schedule_page_widget.dart';
 import 'tutor_details_model.dart';
@@ -104,7 +105,7 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                     icon: Icon(
                       Icons.chevron_left,
                       size: 30,
-                      color: Colors.indigo,
+                      color: FlutterFlowTheme.of(context).primaryColor,
                     )),
               ),
               Container(
@@ -121,7 +122,8 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                   ],
                   borderRadius: BorderRadius.circular(20.0),
                   border: Border.all(
-                    color: Color(0x98E4E4E4),
+                    color: FlutterFlowTheme.of(context)
+                        .secondaryBackground, // Color(0x98E4E4E4),
                   ),
                 ),
                 child: Column(
@@ -199,20 +201,19 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
                     ),
                     SizedBox(
                       height: 300,
-                      child:
-                      tutor == null || tutor?.video == null ? SizedBox.shrink() :
-
-                      Center(
-                        child: FlutterFlowVideoPlayer(
-                          path: tutor?.video ?? '',
-                          videoType: VideoType.network,
-                          autoPlay: false,
-                          looping: true,
-                          showControls: true,
-                          allowFullScreen: true,
-                          allowPlaybackSpeedMenu: false,
-                        ),
-                      ),
+                      child: tutor == null || tutor?.video == null
+                          ? SizedBox.shrink()
+                          : Center(
+                              child: FlutterFlowVideoPlayer(
+                                path: tutor?.video ?? '',
+                                videoType: VideoType.network,
+                                autoPlay: false,
+                                looping: true,
+                                showControls: true,
+                                allowFullScreen: true,
+                                allowPlaybackSpeedMenu: false,
+                              ),
+                            ),
                     ),
                     Divider(
                       indent: 10,
@@ -488,14 +489,16 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
         children: <Widget>[
           Expanded(
             child: InteractionButton(
-                onPressed: _showReviewsDialog,
+                onPressed: _favorite,
                 unselectedIconUrl:
                     'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/favorite/default/48px.svg',
                 selectedIconUrl:
                     'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/favorite/fill1/48px.svg',
-                isSelected: tutor?.isFavorited ?? false,
+                isSelected: tutor?.isFavoriteTutor ?? false,
                 name: 'Favorite',
-            color: tutor?.isFavorited ?? false ? Colors.pinkAccent.withAlpha(200) : Colors.indigo),
+                color: tutor?.isFavoriteTutor ?? false
+                    ? Colors.pinkAccent.withAlpha(200)
+                    : FlutterFlowTheme.of(context).primaryColor),
           ),
           VerticalDivider(color: Colors.black12),
           Expanded(
@@ -511,7 +514,7 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
           VerticalDivider(color: Colors.black12),
           Expanded(
             child: InteractionButton(
-                onPressed: _showReviewsDialog,
+                onPressed: _showReportDialog,
                 unselectedIconUrl:
                     'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsrounded/report/default/48px.svg',
                 selectedIconUrl:
@@ -523,6 +526,22 @@ class _TutorDetailsPageWidgetState extends State<TutorDetailsPageWidget> {
         ],
       ),
     );
+  }
+
+  void _favorite() async {
+    var response = (await ApiService().favorite(widget.userId));
+    setState(() {
+      tutor!.isFavoriteTutor = response == true;
+    });
+  }
+
+  void _showReportDialog() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => ReportDialog(
+          username: tutor?.name ?? '',
+          userId: widget.userId,
+        ));
   }
 }
 
@@ -555,8 +574,9 @@ class InteractionButton extends StatelessWidget {
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           SvgPicture.network(
             isSelected ? selectedIconUrl : unselectedIconUrl,
-            colorFilter:
-                ColorFilter.mode(color ?? Colors.indigo, BlendMode.srcIn),
+            colorFilter: ColorFilter.mode(
+                color ?? FlutterFlowTheme.of(context).primaryColor,
+                BlendMode.srcIn),
             width: 26,
           ),
           Text(
@@ -565,7 +585,7 @@ class InteractionButton extends StatelessWidget {
             style: FlutterFlowTheme.of(context).title1.override(
                 fontFamily: FlutterFlowTheme.of(context).title1Family,
                 fontSize: 15,
-                color: color ?? Colors.indigo),
+                color: color ?? FlutterFlowTheme.of(context).primaryColor),
           ),
         ]));
   }

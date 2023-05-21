@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/login_page/login_page_widget.dart';
@@ -65,7 +66,7 @@ class VerifyPage extends StatelessWidget {
                           0.0, 10.0, 0.0, 10.0),
                       child: FFButtonWidget(
                         onPressed: () => MyApp.To(context, LoginPageWidget()),
-                        text: 'Back to Login',
+                        text: 'Back to Login'.tr,
                         options: FFButtonOptions(
                           width: 180.0,
                           height: 40.0,

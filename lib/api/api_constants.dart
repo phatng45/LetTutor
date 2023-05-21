@@ -16,11 +16,13 @@ class ApiConstants {
 
   static String major = 'major';
 
-  static String booking = 'booking';
+  static String bookingScheduleDetail = 'booking/schedule-detail';
 
   static String bookingListStudent = 'booking/list/student';
 
   static String totalHour = 'call/total';
+
+  static String report = 'report';
 
   static String verifyAccount(String token) =>
       'auth/verifyAccount?token=$token';
@@ -47,4 +49,6 @@ class ApiConstants {
       'feedback/v2/' + userId + '?page=' + page.toString() + '&perPage=' + perPage.toString();
 
   static String tutorInfo(String userId) => 'tutor/$userId';
+
+  static String favorite = 'user/manageFavoriteTutor';
 }

@@ -65,7 +65,7 @@ class _ChatGPTPageState extends State<ChatGPTPage> {
         decoration: BoxDecoration(
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-            color: _darkMode ? Colors.grey[900] : Colors.white),
+            color: FlutterFlowTheme.of(context).secondaryBackground),
         child: Padding(
           padding:
               EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
@@ -79,7 +79,7 @@ class _ChatGPTPageState extends State<ChatGPTPage> {
                       icon: Icon(
                         Icons.chevron_left,
                         size: 30,
-                        color: Colors.indigo,
+                        color: FlutterFlowTheme.of(context).primaryColor,
                       )),
                   Text('ChatGPT', style: FlutterFlowTheme.of(context).title1),
                 ],
@@ -119,7 +119,7 @@ class _ChatGPTPageState extends State<ChatGPTPage> {
       child: Column(
         children: [
           Text(
-            'ChatGPT may produce inaccurate information about people, places, or facts.',
+            'ChatGPT may produce inaccurate information about people, places, or facts.'.tr,
             style: FlutterFlowTheme.of(context).subtitle2.override(
                 fontFamily: FlutterFlowTheme.of(context).subtitle2Family,
                 color: Colors.grey.shade500,
@@ -161,7 +161,7 @@ class _ChatGPTPageState extends State<ChatGPTPage> {
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide.none),
                     hintText: 'Send a message'.tr,
-                    fillColor: Colors.white,
+                    fillColor: FlutterFlowTheme.of(context).primaryBackground,
                     filled: true,
                     suffixIcon: _isTextFieldNotEmpty
                         ? IconButton(
@@ -276,7 +276,6 @@ class _ChatGPTPageState extends State<ChatGPTPage> {
                 Text(
                   m.text,
                   style: const TextStyle(
-                      fontWeight: FontWeight.w600,
                       color: Colors.white,
                       fontSize: 16),
                 ),

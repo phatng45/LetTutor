@@ -1,6 +1,7 @@
 import 'package:country_flags/country_flags.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:let_tutor/api/api_service.dart';
 import 'package:let_tutor/components/tutor_specialties_widget.dart';
@@ -71,6 +72,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
   void _getData() async {
     setState(() {
+      page = 1;
       isLoading = true;
     });
 
@@ -127,7 +129,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       endDrawerEnableOpenDragGesture: false,
       endDrawer: _buildEndDrawer(),
       key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: SingleChildScrollView(
           controller: _scrollController,
@@ -176,7 +178,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Tutors',
+                          'Tutors'.tr,
                           textAlign: TextAlign.start,
                           style: FlutterFlowTheme.of(context).title3,
                         ),
@@ -191,7 +193,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     FlutterFlowTheme.of(context).secondaryText,
                               ),
                               SizedBox(width: 5),
-                              Text('Filter',
+                              Text('Filter'.tr,
                                   style: FlutterFlowTheme.of(context).subtitle2)
                             ],
                           ),
@@ -207,7 +209,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     padding: const EdgeInsets.all(8.0),
                                     child: new Center(
                                         child: Text(
-                                            'There is no tutor matched this filter.',
+                                            'There is no tutor matched this filter.'
+                                                .tr,
                                             style: FlutterFlowTheme.of(context)
                                                 .subtitle1)),
                                   ),
@@ -240,8 +243,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
         tutor.country ?? 'VN', tutor.country ?? 'Vietnam');
 
     return GestureDetector(
-      onTap: () =>
-          MyApp.To(context, TutorDetailsPageWidget(tutor.userId ?? '')),
+      onTap: () => MyApp.To(context, TutorDetailsPageWidget(tutor.userId ?? ''))
+          .then((value) => {_getData()}),
       child: Padding(
         padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
         child: Container(
@@ -256,7 +259,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             ],
             borderRadius: BorderRadius.circular(20.0),
             border: Border.all(
-              color: Color(0x98E4E4E4),
+              color: FlutterFlowTheme.of(context)
+                  .secondaryBackground, // Color(0x98E4E4E4),
             ),
           ),
           child: Padding(
@@ -336,18 +340,22 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         alignment: AlignmentDirectional(1.0, -1.0),
                         child: ToggleIcon(
                           onPressed: () {
-                            setState(() {
-                              tutor.isFavorited = !tutor.isFavorited;
+                            setState(() async {
+                              var response = (await ApiService()
+                                  .favorite(tutor.userId ?? ""));
+                              setState(() {
+                                tutor.isFavoriteTutor = response == true;
+                              });
                             });
                           },
-                          value: tutor.isFavorited,
+                          value: tutor.isFavoriteTutor ?? false,
                           onIcon: Icon(
-                            Icons.favorite_border,
+                            Icons.favorite_rounded,
                             color: Color(0xFFFF5686),
                             size: 22.0,
                           ),
                           offIcon: Icon(
-                            Icons.favorite_rounded,
+                            Icons.favorite_border,
                             color: Color(0xFFFF5686),
                             size: 22.0,
                           ),
@@ -423,26 +431,25 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           height: 150,
           child: _upcomingLesson == null
               ? Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('Welcome To LetTutor',
-                style: FlutterFlowTheme.of(context).bodyText1.override(
-                  fontFamily:
-                  FlutterFlowTheme.of(context).bodyText1Family,
-                  color: Colors.white,
-                  fontSize: 25.0,
-                )),
-                Text('Start scrolling down to explore more tutors!',
-                    style: FlutterFlowTheme.of(context).bodyText1.override(
-                      fontFamily:
-                      FlutterFlowTheme.of(context).bodyText1Family,
-                      color: Colors.white,
-                      fontSize: 15.0,
-                    )),
-              ],
-            )
-          )
+                  child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Welcome To LetTutor'.tr,
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).bodyText1Family,
+                              color: Colors.white,
+                              fontSize: 25.0,
+                            )),
+                    Text('Start scrolling down to explore more tutors!'.tr,
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).bodyText1Family,
+                              color: Colors.white,
+                              fontSize: 15.0,
+                            )),
+                  ],
+                ))
               : Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(20.0, 5, 20.0, 10),
                   child: Column(
@@ -453,14 +460,15 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
                         child: Text(
-                          'Upcoming Lesson',
+                          'Upcoming Lesson'.tr,
                           textAlign: TextAlign.center,
-                          style: FlutterFlowTheme.of(context).bodyText1.override(
-                                fontFamily:
-                                    FlutterFlowTheme.of(context).bodyText1Family,
-                                color: Colors.white,
-                                fontSize: 25.0,
-                              ),
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .bodyText1Family,
+                                    color: Colors.white,
+                                    fontSize: 25.0,
+                                  ),
                         ),
                       ),
                       Row(
@@ -484,13 +492,15 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 seconds: remainingTime.inSeconds,
                                 build: (context, double time) {
                                   return Text(
-                                    '(starts in ${_tohhmmss(time.round())})',
+                                    '(starts in '.tr +
+                                        '${_tohhmmss(time.round())})',
                                     textAlign: TextAlign.start,
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: FlutterFlowTheme.of(context)
-                                              .bodyText1Family,
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyText1Family,
                                           color: Colors.yellowAccent,
                                         ),
                                   );
@@ -502,10 +512,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             width: 120,
                             child: FFButtonWidget(
                               onPressed: () {
-                                MyApp.JoinMeeting(_upcomingLesson,context);
+                                MyApp.JoinMeeting(_upcomingLesson, context);
                                 // MyApp.To(context, MeetingPageWidget());
                               },
-                              text: 'Join now',
+                              text: 'Join now'.tr,
                               icon: Icon(
                                 Icons.people_rounded,
                                 size: 18.0,
@@ -544,17 +554,20 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       Row(
                         children: [
                           Text(
-                            'Total lesson time: ${totalTime.inHours} hours ${totalTime.inMinutes % 60} minutes',
+                            'Total lesson time:'.tr +
+                                '${totalTime.inHours}' +
+                                'hours'.tr +
+                                '${totalTime.inMinutes % 60}' +
+                                'minutes'.tr,
                             textAlign: TextAlign.start,
-                            style: FlutterFlowTheme.of(context)
-                                .bodyText1
-                                .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .bodyText1Family,
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryBtnText,
-                                  fontSize: 15.0,
-                                ),
+                            style:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .bodyText1Family,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBtnText,
+                                      fontSize: 15.0,
+                                    ),
                           ),
                         ],
                       ),
@@ -590,15 +603,16 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   late String _specialty = 'All';
 
   final List<String> _nationalities = <String>[
-    'Foreign',
-    'Vietnamese',
-    'Native English'
+    'Foreign'.tr,
+    'Vietnamese'.tr,
+    'Native English'.tr
   ];
 
   final List<String> _specialties = <String>[
-    'All',
-    'English for kids',
-    'Conversational',
+    'All'.tr,
+    'English for kids'.tr,
+    'English for Business'.tr,
+    'Conversational'.tr,
     'STARTERS',
     'MOVERS',
     'FLYERS',
@@ -618,15 +632,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               children: <Widget>[
                 SizedBox(height: 20),
                 TabHeader(
-                  title: 'Filter',
+                  title: 'Filter'.tr,
                   centerTitle: false,
-                  // start: IconButton(
-                  //     onPressed: () {},
-                  //     icon: Icon(
-                  //       Icons.chevron_left,
-                  //       size: 30,
-                  //       color: Colors.indigo,
-                  //     )),
                 ),
                 Divider(
                   indent: 20,
@@ -640,12 +647,13 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.fromLTRB(20, 5, 0, 0),
-                        child: Text('Name',
+                        child: Text('Name'.tr,
                             textAlign: TextAlign.left,
                             style: FlutterFlowTheme.of(context).title1.override(
                                   fontFamily:
                                       FlutterFlowTheme.of(context).title1Family,
-                                  color: Colors.indigo,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryColor,
                                   fontSize: 20,
                                 )),
                       ),
@@ -655,7 +663,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         obscureText: false,
                         decoration: InputDecoration(
                           // isDense: true,
-                          hintText: 'Enter tutor name',
+                          hintText: 'Enter tutor name'.tr,
                           hintStyle: FlutterFlowTheme.of(context)
                               .bodyText2
                               .override(
@@ -664,7 +672,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   fontSize: 16),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0xFFdddddd),
+                              color: FlutterFlowTheme.of(context).lineColor,
                               width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(20.0),
@@ -685,12 +693,13 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(20, 10, 0, 0),
-                        child: Text('Nationality',
+                        child: Text('Nationality'.tr,
                             textAlign: TextAlign.left,
                             style: FlutterFlowTheme.of(context).title1.override(
                                   fontFamily:
                                       FlutterFlowTheme.of(context).title1Family,
-                                  color: Colors.indigo,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryColor,
                                   fontSize: 20,
                                 )),
                       ),
@@ -703,7 +712,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               selectedColor: Color(0xFFBCE8FF),
                               visualDensity:
                                   VisualDensity(horizontal: 0.0, vertical: -4),
-                              backgroundColor: Color(0xFFdddddd),
+                              backgroundColor:
+                                  Get.rootController.themeMode == ThemeMode.dark
+                                      ? Colors.grey.shade500
+                                      : Colors.grey.shade300,
                               side: BorderSide(color: Colors.transparent),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(200),
@@ -744,12 +756,13 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(20, 5, 0, 0),
-                        child: Text('Specialties',
+                        child: Text('Specialties'.tr,
                             textAlign: TextAlign.left,
                             style: FlutterFlowTheme.of(context).title1.override(
                                   fontFamily:
                                       FlutterFlowTheme.of(context).title1Family,
-                                  color: Colors.indigo,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryColor,
                                   fontSize: 20,
                                 )),
                       ),
@@ -762,12 +775,14 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               selectedColor: Color(0xFFBCE8FF),
                               visualDensity:
                                   VisualDensity(horizontal: 0, vertical: -4),
-                              backgroundColor: Color(0xFFdddddd),
+                              backgroundColor:
+                                  Get.rootController.themeMode == ThemeMode.dark
+                                      ? Colors.grey.shade500
+                                      : Colors.grey.shade300,
                               side: BorderSide(color: Colors.transparent),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(200),
                               ),
-                              // disabledColor: Colors.black12,
                               label: Text(specialty),
                               labelStyle: FlutterFlowTheme.of(context)
                                   .bodyText1
@@ -802,7 +817,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       Row(
                         children: [
                           NegativeButton(
-                            title: 'Reset',
+                            title: 'Reset'.tr,
                             onPressed: () => _resetSearch(),
                           ),
                           Spacer(),
@@ -810,12 +825,13 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             width: 130,
                             height: 40,
                             child: PositiveButton(
-                              title: 'Confirm',
+                              title: 'Search'.tr,
                               onPressed: () => _search(
                                   _specialty.toLowerCase().replaceAll(' ', '-'),
-                                  _nationalitiesFilters.contains('Vietnamese'),
                                   _nationalitiesFilters
-                                      .contains('Native English'),
+                                      .contains('Vietnamese'.tr),
+                                  _nationalitiesFilters
+                                      .contains('Native English'.tr),
                                   controller.text),
                               icon: Icon(Icons.search),
                             ),

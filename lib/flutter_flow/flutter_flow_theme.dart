@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 const kThemeModeKey = '__theme_mode__';
@@ -39,6 +38,7 @@ abstract class FlutterFlowTheme {
         : LightModeTheme();
   }
 
+  late Color title;
   late Color primaryColor;
   late Color secondaryColor;
   late Color tertiaryColor;
@@ -91,13 +91,13 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color secondaryColor = const Color(0xFFF594B7);
   late Color tertiaryColor = const Color(0xFFAD7FFB);
   late Color alternate = const Color(0xFFCCD0F6);
-  late Color primaryBackground = const Color(0xFFCCD0F6);
+  late Color primaryBackground = const Color(0xFFeeeeee);
   late Color secondaryBackground = const Color(0xFFFFFFFF);
   late Color primaryText = const Color(0xFF61646B);
-  late Color secondaryText = Colors.grey.shade500;
-
+  late Color secondaryText = const Color(0xFF61646B);
+  late Color title = Colors.indigo;
   late Color primaryBtnText = Color(0xFFFFFFFF);
-  late Color lineColor = Color(0xFFE0E3E7);
+  late Color lineColor = Colors.grey.shade500;
 }
 
 abstract class Typography {
@@ -127,28 +127,28 @@ class MobileTypography extends Typography {
   String get title1Family => 'Outfit';
   TextStyle get title1 => GoogleFonts.getFont(
     'Outfit',
-        color: Colors.indigo,
+        color: theme.title,
         fontWeight: FontWeight.w500,
         fontSize: 24.0,
       );
   String get title2Family => 'Outfit';
   TextStyle get title2 => GoogleFonts.getFont(
         'Outfit',
-        color: theme.primaryText,
+        color: theme.title,
         fontWeight: FontWeight.normal,
         fontSize: 22.0,
       );
   String get title3Family => 'Outfit';
   TextStyle get title3 => GoogleFonts.getFont(
         'Outfit',
-        color: Colors.indigo,
+        color: theme.title,
         fontWeight: FontWeight.w500,
         fontSize: 20.0,
       );
   String get title4Family => 'Outfit';
   TextStyle get title4 => GoogleFonts.getFont(
     'Outfit',
-    color: Colors.indigo,
+    color: theme.title,
     fontWeight: FontWeight.w500,
     fontSize: 17.0,
   );
@@ -169,7 +169,7 @@ class MobileTypography extends Typography {
   String get bodyText1Family => 'Outfit';
   TextStyle get bodyText1 => GoogleFonts.getFont(
         'Outfit',
-        color: theme.primaryText,
+        color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 16.0,
       );
@@ -190,28 +190,28 @@ class TabletTypography extends Typography {
   String get title1Family => 'Outfit';
   TextStyle get title1 => GoogleFonts.getFont(
         'Outfit',
-        color: Colors.indigo,
+        color: theme.title,
         fontWeight: FontWeight.normal,
         fontSize: 24.0,
       );
   String get title2Family => 'Outfit';
   TextStyle get title2 => GoogleFonts.getFont(
         'Outfit',
-        color: theme.secondaryText,
+        color: theme.title,
         fontWeight: FontWeight.normal,
         fontSize: 22.0,
       );
   String get title3Family => 'Outfit';
   TextStyle get title3 => GoogleFonts.getFont(
         'Outfit',
-        color: Colors.indigo,
+        color: theme.title,
         fontWeight: FontWeight.normal,
         fontSize: 20.0,
       );
   String get title4Family => 'Outfit';
   TextStyle get title4 => GoogleFonts.getFont(
     'Outfit',
-    color: Colors.indigo,
+    color: theme.title,
     fontWeight: FontWeight.w500,
     fontSize: 18.0,
        );
@@ -253,28 +253,28 @@ class DesktopTypography extends Typography {
   String get title1Family => 'Outfit';
   TextStyle get title1 => GoogleFonts.getFont(
         'Outfit',
-        color: theme.primaryText,
+        color: theme.title,
         fontWeight: FontWeight.normal,
         fontSize: 24.0,
       );
   String get title2Family => 'Outfit';
   TextStyle get title2 => GoogleFonts.getFont(
         'Outfit',
-        color: theme.secondaryText,
+        color: theme.title,
         fontWeight: FontWeight.normal,
         fontSize: 22.0,
       );
   String get title3Family => 'Outfit';
   TextStyle get title3 => GoogleFonts.getFont(
         'Outfit',
-        color: theme.primaryText,
+        color: theme.title,
         fontWeight: FontWeight.bold,
         fontSize: 20.0,
       );
   String get title4Family => 'Outfit';
   TextStyle get title4 => GoogleFonts.getFont(
     'Outfit',
-    color: Colors.indigo,
+    color: theme.title,
     fontWeight: FontWeight.w500,
     fontSize: 18.0,
   );
@@ -309,17 +309,18 @@ class DesktopTypography extends Typography {
 }
 
 class DarkModeTheme extends FlutterFlowTheme {
-  late Color primaryColor = const Color(0xFF4B39EF);
-  late Color secondaryColor = const Color(0xFF39D2C0);
-  late Color tertiaryColor = const Color(0xFFEE8B60);
-  late Color alternate = const Color(0xFFFF5963);
-  late Color primaryBackground = const Color(0xFF1A1F24);
-  late Color secondaryBackground = const Color(0xFF101213);
-  late Color primaryText = const Color(0xFFFFFFFF);
-  late Color secondaryText = const Color(0xFF95A1AC);
+  late Color primaryBackground = Colors.black;
+  late Color secondaryBackground = Colors.grey.shade900;
+  late Color title = Colors.white;
+  late Color primaryColor = Colors.white;
+  late Color secondaryColor = const Color(0xFFF594B7);
+  late Color tertiaryColor = const Color(0xFFAD7FFB);
+  late Color alternate = const Color(0xFFCCD0F6);
+  late Color primaryText = Colors.white;
+  late Color secondaryText = Colors.grey.shade500;
 
   late Color primaryBtnText = Color(0xFFFFFFFF);
-  late Color lineColor = Color(0xFF22282F);
+  late Color lineColor = Colors.white24;
 }
 
 extension TextStyleHelper on TextStyle {

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/index.dart';
 import 'package:let_tutor/schedule_page/schedule_page_widget.dart';
 import 'package:let_tutor/update_info_page/update_info_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../change_language_page/change_language_page.dart';
 import '../chat_gpt/message.dart';
 import '../main.dart';
 import '../models/user.dart';
@@ -21,6 +23,7 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -32,7 +35,7 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
                     icon: Icon(
                       Icons.chevron_left,
                       size: 30,
-                      color: Colors.indigo,
+                      color: FlutterFlowTheme.of(context).primaryColor,
                     )),
               ),
               Padding(
@@ -63,15 +66,15 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
                     Text(
                       (widget.user.name ?? 'Unnamed') +
                           (widget.user.roles?.contains('tutor') ?? false
-                              ? " (Tutor)"
-                              : " (Student)"),
+                              ? " (Tutor)".tr
+                              : " (Student)".tr),
                       style: FlutterFlowTheme.of(context).title1,
                     ),
                     SizedBox(
                       height: 20,
                     ),
                     ListTile(
-                      title: Text('Update Information',
+                      title: Text('Update Information'.tr,
                           style: FlutterFlowTheme.of(context).subtitle1),
                       leading: Icon(Icons.person),
                       trailing: Icon(Icons.chevron_right),
@@ -80,36 +83,41 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
                       },
                     ),
                     ListTile(
-                      title: Text('Become a Tutor',
+                      title: Text('Become a Tutor'.tr,
                           style: FlutterFlowTheme.of(context).subtitle1),
                       leading: Icon(Icons.school),
                       trailing: Icon(Icons.chevron_right),
                     ),
                     Divider(),
                     SwitchListTile(
-                      title: Text('Dark mode',
+                      title: Text('Dark mode'.tr,
                           style: FlutterFlowTheme.of(context).subtitle1),
-                      value: true,
-                      onChanged: (bool value) {},
+                      value: Get.rootController.themeMode == ThemeMode.dark,
+                      onChanged: (bool value) {
+                        Get.changeThemeMode(value ? ThemeMode.dark : ThemeMode.light);
+                      },
                       secondary: Icon(Icons.dark_mode),
                     ),
                     ListTile(
-                      title: Text('Language',
+                      onTap: () {
+                        MyApp.To(context, ChangeLanguagePage());
+                      },
+                      title: Text('Language'.tr,
                           style: FlutterFlowTheme.of(context).subtitle1),
                       leading: Icon(Icons.language),
                       trailing: Icon(Icons.chevron_right),
-                      subtitle: Text('English',
+                      subtitle: Text('English (US)'.tr,
                           style: FlutterFlowTheme.of(context).subtitle2),
                     ),
                     Divider(),
                     ListTile(
-                      title: Text('Change Password',
+                      title: Text('Change Password'.tr,
                           style: FlutterFlowTheme.of(context).subtitle1),
                       leading: Icon(Icons.lock),
                       trailing: Icon(Icons.chevron_right),
                     ),
                     ListTile(
-                      title: Text('Remove ChatGPT History',
+                      title: Text('Remove ChatGPT History'.tr,
                           style: FlutterFlowTheme.of(context).subtitle1),
                       leading: Icon(Icons.delete_rounded),
                       onTap: () => _buildConfirmRemoveHistoryDialog(context),
@@ -126,7 +134,7 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
                         child: SizedBox(
                             width: double.maxFinite,
                             height: 50,
-                            child: Center(child: Text('Logout'))))
+                            child: Center(child: Text('Logout'.tr))))
                   ],
                 ),
               ),
@@ -156,20 +164,16 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Remove history?',
-                      style: FlutterFlowTheme.of(context)
-                          .title1
-                          .override(
-                          fontFamily: FlutterFlowTheme.of(context)
-                              .title2Family,
-                          fontSize: 22)
-                  ),
+                  Text('Remove history?'.tr,
+                      style: FlutterFlowTheme.of(context).title1.override(
+                          fontFamily: FlutterFlowTheme.of(context).title2Family,
+                          fontSize: 22)),
                   const SizedBox(
                     height: 10,
                   ),
-                  const Text(
-                      'Are you sure you want to delete the conversation? You cannot undo this action.'),
+                  Text(
+                      'Are you sure you want to delete the conversation? You cannot undo this action.'
+                          .tr),
                   const SizedBox(
                     height: 10,
                   ),
@@ -186,7 +190,7 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
                                     BorderRadius.all(Radius.circular(8))),
                             elevation: 0,
                           ),
-                          child: const Text("Cancel"),
+                          child: Text("Cancel".tr),
                         ),
                       ),
                       const SizedBox(
@@ -207,7 +211,7 @@ class _MenuPageWidgetState extends State<MenuPageWidget> {
                             side: const BorderSide(color: Colors.redAccent),
                             foregroundColor: Colors.redAccent,
                           ),
-                          child: const Text("Remove"),
+                          child: Text("Remove".tr),
                         ),
                       ),
                     ],

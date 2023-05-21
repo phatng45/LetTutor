@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:let_tutor/api/api_service.dart';
 import 'package:let_tutor/components/text_field_widget.dart';
@@ -65,7 +66,7 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                       child: Text(
-                        'Forgot Password?',
+                        'Forgot Password?'.tr,
                         style: FlutterFlowTheme.of(context).title1,
                       ),
                     ),
@@ -79,7 +80,7 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
                         child: Text(
-                          'Provide your account\'s email for which you want to reset password.',
+                          'Provide your account\'s email for which you want to reset password.'.tr,
                           style: FlutterFlowTheme.of(context).subtitle2,
                         ),
                       ),
@@ -97,7 +98,7 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
                           model: _model.textFieldModel,
                           updateCallback: () => setState(() {}),
                           child: TextFieldWidget(
-                            fieldName: 'Email',
+                            fieldName: 'Email'.tr,
                             icon: Icon(
                               Icons.email_outlined,
                               color: Colors.black26,
@@ -114,7 +115,7 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
                   children: [
                     TextButton(
                       onPressed: () => Navigator.pop(context),
-                      child: Text('Cancel'),
+                      child: Text('Cancel'.tr),
                       style: TextButton.styleFrom(
                         textStyle: FlutterFlowTheme.of(context).bodyText1,
                         foregroundColor: Colors.red,
@@ -128,7 +129,7 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
                         child: FFButtonWidget(
                           onPressed: () => _sendResetLink(
                               _model.textFieldModel.textController.text),
-                          text: 'Send Reset Link',
+                          text: 'Send Reset Link'.tr,
                           options: FFButtonOptions(
                             width: 220.0,
                             height: 40.0,
@@ -175,7 +176,7 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
           VerifyPage(
             content: RichText(
               text: TextSpan(
-                text: 'We just sent you a reset password link over to ',
+                text: 'We just sent you a reset password link over to '.tr,
                 style: FlutterFlowTheme.of(context).subtitle2,
                 children: <TextSpan>[
                   TextSpan(
@@ -183,14 +184,14 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
                       style: TextStyle(fontWeight: FontWeight.bold)),
                   TextSpan(
                       text:
-                          '\nPlease login again once you have reset your password from there.'),
+                          '\nPlease login again once you have reset your password from there.'.tr),
                 ],
               ),
             ),
           ));
     } else {
       Flushbars.negative(
-          context, "Could not send reset link", "Please check your email.");
+          context, "Could not send reset link".tr, "Please check your email.".tr);
     }
   }
 }

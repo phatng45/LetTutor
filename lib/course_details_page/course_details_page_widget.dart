@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
 import 'package:let_tutor/index.dart';
@@ -57,7 +58,7 @@ class _CourseDetailsPageWidgetState extends State<CourseDetailsPageWidget> {
                       icon: Icon(
                         Icons.chevron_left,
                         size: 30,
-                        color: Colors.indigo,
+                        color: FlutterFlowTheme.of(context).primaryColor,
                       )),
                 ),
                 Padding(
@@ -101,7 +102,7 @@ class _CourseDetailsPageWidgetState extends State<CourseDetailsPageWidget> {
                                               FlutterFlowTheme.of(context)
                                                   .title1Family,
                                           // fontWeight: FontWeight.w500,
-                                          color: Colors.indigo)),
+                                          color: FlutterFlowTheme.of(context).primaryColor)),
                               Text(
                                 course.description ?? 'N/A',
                                 style: FlutterFlowTheme.of(context)
@@ -210,7 +211,7 @@ class _CourseDetailsPageWidgetState extends State<CourseDetailsPageWidget> {
                               width: 5,
                             ),
                             Text(
-                              'Why take this course',
+                              'Why take this course'.tr,
                               style: FlutterFlowTheme.of(context).title3,
                             ),
                           ],
@@ -231,7 +232,7 @@ class _CourseDetailsPageWidgetState extends State<CourseDetailsPageWidget> {
                               width: 5,
                             ),
                             Text(
-                              'What will you be able to do',
+                              'What will you be able to do'.tr,
                               style: FlutterFlowTheme.of(context).title3,
                             ),
                           ],
@@ -241,7 +242,7 @@ class _CourseDetailsPageWidgetState extends State<CourseDetailsPageWidget> {
                             style: FlutterFlowTheme.of(context).bodyText1),
                         Divider(
                             indent: 10, endIndent: 10, color: Colors.black12),
-                        Text('Topics',
+                        Text('Topics'.tr,
                             style: FlutterFlowTheme.of(context).title1.override(
                                   fontFamily:
                                       FlutterFlowTheme.of(context).title1Family,
@@ -258,19 +259,22 @@ class _CourseDetailsPageWidgetState extends State<CourseDetailsPageWidget> {
                               (index + 1).toString() +
                                   '. ' +
                                   (topic.name ?? 'N/A'),
-                              () => MyApp.To(context, PdfPageWidget(topic.nameFile!, topic.name ?? 'N/A')),
+                              () => MyApp.To(
+                                  context,
+                                  PdfPageWidget(
+                                      topic.nameFile!, topic.name ?? 'N/A')),
                             );
                           },
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
                             childAspectRatio: (2 / 1),
-                                crossAxisSpacing: 7,
-                                mainAxisSpacing: 5,
+                            crossAxisSpacing: 7,
+                            mainAxisSpacing: 5,
                           ),
                         ),
-                  SizedBox(height: 50)    ]),
-
+                        SizedBox(height: 50)
+                      ]),
                 )
               ],
             ),

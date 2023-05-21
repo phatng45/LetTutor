@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:jitsi_meet_wrapper/jitsi_meet_wrapper.dart';
+import 'package:get/get.dart';
+// import 'package:jitsi_meet_wrapper/jitsi_meet_wrapper.dart';
 import 'package:let_tutor/api/api_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'app_translation.dart';
 import 'chat_gpt/chat_gpt_page.dart';
 import 'components/flushbars.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
@@ -20,7 +21,7 @@ import 'models/user.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences.setMockInitialValues({});
+
   await FlutterFlowTheme.initialize();
   await (ApiService().getMajors());
 
@@ -38,8 +39,8 @@ class MyApp extends StatefulWidget {
   static _MyAppState of(BuildContext context) =>
       context.findAncestorStateOfType<_MyAppState>()!;
 
-  static void To(BuildContext context, Widget page) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => page));
+  static To(BuildContext context, Widget page) {
+    return Navigator.push(context, MaterialPageRoute(builder: (context) => page));
   }
 
   static void JoinMeeting(
@@ -59,28 +60,28 @@ class MyApp extends StatefulWidget {
     // print("token: " + token);
     // print("subject: " + subject);
 
-    var options = JitsiMeetingOptions(
-      roomNameOrUrl: roomNameOrUrl,
-      serverUrl: "https://meet.lettutor.com",
-      token: token,
-      subject: subject,
-      isAudioOnly: true,
-      isAudioMuted: true,
-      isVideoMuted: true,
-    );
-
-    await JitsiMeetWrapper.joinMeeting(
-        options: options,
-        listener: JitsiMeetingListener(
-            onOpened: () => Flushbars.positive(
-                  context,
-                  "Joined meeting",
-                  "Welcome to ${bookingInfo.scheduleDetailInfo?.scheduleInfo?.tutorInfo?.name}'s meeting!",
-                ),
-            onConferenceTerminated: (url, error) =>
-                Flushbars.negative(context, null, error.toString())));
-
-    print("finished jitsi await");
+    // var options = JitsiMeetingOptions(
+    //   roomNameOrUrl: roomNameOrUrl,
+    //   serverUrl: "https://meet.lettutor.com",
+    //   token: token,
+    //   subject: subject,
+    //   isAudioOnly: true,
+    //   isAudioMuted: true,
+    //   isVideoMuted: true,
+    // );
+    //
+    // await JitsiMeetWrapper.joinMeeting(
+    //     options: options,
+    //     listener: JitsiMeetingListener(
+    //         onOpened: () => Flushbars.positive(
+    //               context,
+    //               "Joined meeting",
+    //               "Welcome to ${bookingInfo.scheduleDetailInfo?.scheduleInfo?.tutorInfo?.name}'s meeting!",
+    //             ),
+    //         onConferenceTerminated: (url, error) =>
+    //             Flushbars.negative(context, null, error.toString())));
+    //
+    // print("finished jitsi await");
   }
 
   static late SharedPreferences prefs;
@@ -92,7 +93,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Locale? _locale;
   ThemeMode _themeMode = FlutterFlowTheme.themeMode;
 
   late AppStateNotifier _appStateNotifier;
@@ -105,14 +105,12 @@ class _MyAppState extends State<MyApp> {
     _router = createRouter(_appStateNotifier);
   }
 
-  void setLocale(String language) {
-    setState(() => _locale = createLocale(language));
-  }
-
   void setThemeMode(ThemeMode mode) => setState(() {
         _themeMode = mode;
         FlutterFlowTheme.saveThemeMode(mode);
       });
+
+  void setLocale(String locale) {}
 
   @override
   Widget build(BuildContext context) {
@@ -125,14 +123,15 @@ class _MyAppState extends State<MyApp> {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      locale: _locale,
-      supportedLocales: const [Locale('en', '')],
+      locale: Get.deviceLocale ?? const Locale('en', 'US'),
       theme: ThemeData(brightness: Brightness.light, useMaterial3: true),
       darkTheme: ThemeData(brightness: Brightness.dark, useMaterial3: true),
       themeMode: _themeMode,
       routeInformationParser: _router.routeInformationParser,
       routerDelegate: _router.routerDelegate,
       color: Colors.indigo,
+      translations: AppTranslation(),
+      fallbackLocale: const Locale('en', 'US'),
     );
   }
 }
@@ -212,6 +211,7 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
       'CoursesPage': CoursesPageWidget(),
     };
     return Scaffold(
+      backgroundColor:  FlutterFlowTheme.of(context).primaryBackground,
       body: TabBarView(
         controller: _tabController,
         physics: NeverScrollableScrollPhysics(),
@@ -237,8 +237,7 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
         height: _isVisible ? 72.0 : 0,
-        surfaceTintColor: FlutterFlowTheme.of(context).primaryColor,
-        color: FlutterFlowTheme.of(context).primaryColor,
+        elevation: 100,
         child: IconTheme(
           data: IconThemeData(color: Colors.indigo),
           child: Row(
@@ -253,7 +252,7 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
                   selectedIconUrl:
                       'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/home/fill1/48px.svg',
                   isSelected: _tabController.index == 0,
-                  name: 'Home'),
+                  name: 'Home'.tr),
               BottomAppBarButton(
                   onPressed: () {
                     _tabController.animateTo(1);
@@ -263,7 +262,7 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
                   selectedIconUrl:
                       'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/event/fill1/48px.svg',
                   isSelected: _tabController.index == 1,
-                  name: 'Schedule'),
+                  name: 'Schedule'.tr),
               BottomAppBarButton(
                   onPressed: () {
                     _tabController.animateTo(2);
@@ -273,7 +272,7 @@ class _NavBarPageState extends State<NavBarPage> with TickerProviderStateMixin {
                   selectedIconUrl:
                       'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/book/fill1/48px.svg',
                   isSelected: _tabController.index == 2,
-                  name: 'Courses'),
+                  name: 'Courses'.tr),
             ],
           ),
         ),
@@ -317,16 +316,18 @@ class BottomAppBarButton extends StatelessWidget {
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           SvgPicture.network(
             isSelected ? selectedIconUrl : unselectedIconUrl,
-            colorFilter: ColorFilter.mode(Colors.indigo, BlendMode.srcIn),
+            colorFilter: ColorFilter.mode(FlutterFlowTheme.of(context).primaryColor, BlendMode.srcIn),
             width: 26,
           ),
-        isSelected ?  Text(
-            name,
-            textAlign: TextAlign.center,
-            style: FlutterFlowTheme.of(context).title1.override(
-                fontFamily: FlutterFlowTheme.of(context).title1Family,
-                fontSize: 15),
-          ) : SizedBox.shrink(),
+          // isSelected ?
+          Text(
+                  name,
+                  textAlign: TextAlign.center,
+                  style: FlutterFlowTheme.of(context).title1.override(
+                      fontFamily: FlutterFlowTheme.of(context).title1Family,
+                      fontSize: 15),
+                ),
+              // : SizedBox.shrink(),
         ]));
   }
 }

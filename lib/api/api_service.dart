@@ -152,6 +152,7 @@ class ApiService {
             "perPage": perPage,
           };
 
+    print(data);
     final response = await Dio()
         .post(url, data: data, options: ApiConstants.authorizationOptions);
 
@@ -183,11 +184,12 @@ class ApiService {
     return null;
   }
 
-  Future<List<Feedbacks>?> feedbackPagination(String userId, int perPage, int page) async {
-    final url =
-        ApiConstants.baseUrl + ApiConstants.feedbackPagination(userId, perPage, page);
+  Future<List<Feedbacks>?> feedbackPagination(
+      String userId, int perPage, int page) async {
+    final url = ApiConstants.baseUrl +
+        ApiConstants.feedbackPagination(userId, perPage, page);
     final response =
-    await Dio().get(url, options: ApiConstants.authorizationOptions);
+        await Dio().get(url, options: ApiConstants.authorizationOptions);
 
     if (response.statusCode == 200) {
       List<Feedbacks> feedbacks = (response.data["data"]["rows"] as List)
@@ -236,7 +238,7 @@ class ApiService {
   }
 
   Future<bool> book(String? id) async {
-    final url = ApiConstants.baseUrl + ApiConstants.booking;
+    final url = ApiConstants.baseUrl + ApiConstants.bookingScheduleDetail;
     final Map<String, dynamic> data = {
       "scheduleDetailIds": [id!]
     };
@@ -266,11 +268,11 @@ class ApiService {
         .get(url, options: ApiConstants.authorizationOptions, queryParameters: {
       "page": page,
       "perPage": perPage,
-      "dateTimeGte": currentTime,
+      "dateTimeLte": currentTime,
       "orderBy": "meeting",
       "sortBy": "asc",
     });
-
+print(response.data);
     if (response.statusCode == 200) {
       List<BookingInfo> schedules = (response.data["data"]["rows"] as List)
           .map((schedule) => BookingInfo.fromJson(schedule))
@@ -328,6 +330,52 @@ class ApiService {
       Major.Majors = {for (var major in majors) major.key!: major};
     } else {
       return null;
+    }
+  }
+
+  cancelClass(String? id) async {
+    final url = ApiConstants.baseUrl + ApiConstants.bookingScheduleDetail;
+
+    final Map<String, dynamic> data = {
+      "scheduleDetailId": id!,
+      "cancelInfo": {"cancelReasonId": 1, "note": "auto-generated note"}
+    };
+
+    try {
+      final response = await Dio()
+          .delete(url, options: ApiConstants.authorizationOptions, data: data);
+
+      return response.statusCode == 200;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> favorite(String id) async {
+    final url = ApiConstants.baseUrl + ApiConstants.favorite;
+
+    final Map<String, dynamic> data = {"tutorId": id};
+    try {
+      final response = await Dio()
+          .post(url, options: ApiConstants.authorizationOptions, data: data);
+
+      return response.data["result"] != 1;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> reportTutor(String id, String content) async {
+    final url = ApiConstants.baseUrl + ApiConstants.report;
+
+    final Map<String, dynamic> data = {"tutorId": id, "content": content};
+    try {
+      final response = await Dio()
+          .post(url, options: ApiConstants.authorizationOptions, data: data);
+
+      return response.data["message"] == "Report successfully";
+    } catch (e) {
+      return false;
     }
   }
 }

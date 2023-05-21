@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:let_tutor/components/flushbars.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_theme.dart';
 import 'package:let_tutor/flutter_flow/flutter_flow_util.dart';
 import 'package:let_tutor/index.dart';
@@ -45,6 +47,7 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
 
   void _getScheduleData() async {
     setState(() {
+      page = 1;
       isLoading = true;
     });
 
@@ -83,6 +86,7 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         // title: 'Schedule',
         body: SafeArea(
           child: SingleChildScrollView(
@@ -90,7 +94,7 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
             child: Column(
               children: [
                 TabHeader(
-                  title: 'Schedule',
+                  title: 'Schedule'.tr,
                   end: IconButton(
                     icon: SizedBox(
                       width: 25,
@@ -98,17 +102,13 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
                       child: Image.network(
                         'https://cdn-icons-png.flaticon.com/512/9297/9297236.png',
                         colorBlendMode: BlendMode.srcIn,
-                        color: Colors.indigo,
+                        color: FlutterFlowTheme.of(context).primaryColor,
                       ),
                     ),
                     style: IconButton.styleFrom(padding: EdgeInsets.zero),
-
-                    // style: IconButton.styleFrom(
-                    //   backgroundColor: Colors.white,
-                    //   padding: EdgeInsets.zero,
-                    // ),
-
-                    onPressed: () {MyApp.To(context, HistoryPageWidget());},
+                    onPressed: () {
+                      MyApp.To(context, HistoryPageWidget());
+                    },
                   ),
                 ),
                 Padding(
@@ -122,7 +122,7 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
                                   padding: const EdgeInsets.all(8.0),
                                   child: new Center(
                                       child: Text(
-                                          'You haven\'t booked any class.',
+                                          'You haven\'t booked any class.'.tr,
                                           style: FlutterFlowTheme.of(context)
                                               .subtitle1)),
                                 ),
@@ -179,7 +179,8 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
           ],
           borderRadius: BorderRadius.circular(20.0),
           border: Border.all(
-            color: Color(0x98E4E4E4),
+            color: FlutterFlowTheme.of(context)
+                .secondaryBackground, // Color(0x98E4E4E4),
           ),
         ),
         child: Padding(
@@ -315,15 +316,22 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  NegativeButton(
-                    title: 'Cancel',
-                    onPressed: () {},
-                  ),
+                  DateTime.fromMillisecondsSinceEpoch(book.scheduleDetailInfo
+                                      ?.startPeriodTimestamp ??
+                                  0)
+                              .difference(DateTime.now())
+                              .inHours <
+                          2
+                      ? SizedBox.shrink()
+                      : NegativeButton(
+                          title: 'Cancel'.tr,
+                          onPressed: () => _cancelClass(book.id),
+                        ),
                   PositiveButton(
-                    title: 'Join meeting',
+                    title: 'Join meeting'.tr,
                     icon: null,
                     onPressed: () {
-                      MyApp.JoinMeeting(book,context);
+                      MyApp.JoinMeeting(book, context);
                     },
                   ),
                 ],
@@ -333,6 +341,16 @@ class _SchedulePageWidgetState extends State<SchedulePageWidget> {
         ),
       ),
     );
+  }
+
+  _cancelClass(String? scheduleDetailId) async {
+    var response = (await ApiService().cancelClass(scheduleDetailId))!;
+
+    if (response) {
+      _getScheduleData();
+      Flushbars.positive(
+          context, 'Cancelled', 'Class was cancelled successfully');
+    }
   }
 }
 
@@ -365,7 +383,7 @@ class TabHeader extends StatelessWidget {
                         style: FlutterFlowTheme.of(context).title1.override(
                               fontFamily:
                                   FlutterFlowTheme.of(context).title1Family,
-                              color: Colors.indigo,
+                              color: FlutterFlowTheme.of(context).primaryColor,
                               fontSize: 25,
                             )),
                   ],
@@ -380,7 +398,7 @@ class TabHeader extends StatelessWidget {
                 Text(title,
                     style: FlutterFlowTheme.of(context).title1.override(
                           fontFamily: FlutterFlowTheme.of(context).title1Family,
-                          color: Colors.indigo,
+                          color: FlutterFlowTheme.of(context).primaryColor,
                           fontSize: 25,
                         )),
                 end ?? SizedBox.shrink(),

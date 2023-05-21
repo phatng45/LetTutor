@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:let_tutor/api/api_service.dart';
 import 'package:let_tutor/components/best_divider_widget.dart';
@@ -63,7 +64,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                       child: Text(
-                        'Welcome Back!',
+                        'Welcome Back!'.tr,
                         style: FlutterFlowTheme.of(context).title1,
                       ),
                     ),
@@ -80,7 +81,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                           model: _model.textFieldModel,
                           updateCallback: () => setState(() {}),
                           child: TextFieldWidget(
-                            fieldName: 'Email',
+                            fieldName: 'Email'.tr,
                             icon: Icon(
                               Icons.email_outlined,
                               color: Colors.black26,
@@ -102,7 +103,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                           model: _model.passwordFieldModel,
                           updateCallback: () => setState(() {}),
                           child: PasswordFieldWidget(
-                            fieldName: 'Password',
+                            fieldName: 'Password'.tr,
                             icon: Icon(
                               Icons.lock_outline_rounded,
                               color: Colors.grey.shade400,
@@ -131,7 +132,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                       fontStyle: FontStyle.italic,
                                     ),
                           ),
-                          child: Text('Forgot password?'),
+                          child: Text('Forgot password?'.tr),
                         ),
                       ),
                     ),
@@ -139,10 +140,10 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                 ),
                 FFButtonWidget(
                   onPressed: () {
-                    // _login(_model.textFieldModel.textController.text, _model.passwordFieldModel.textController.text);
-                    _login("student@lettutor.com", "123456");
+                    _login(_model.textFieldModel.textController.text, _model.passwordFieldModel.textController.text);
+                    // _login("student@lettutor.com", "123456");
                   },
-                  text: 'Login',
+                  text: 'Login'.tr,
                   options: FFButtonOptions(
                     width: 180.0,
                     height: 40.0,
@@ -164,7 +165,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                     borderRadius: BorderRadius.circular(15),
                   ),
                 ),
-                BestDividerWidget(title: 'OR'),
+                BestDividerWidget(title: 'OR'.tr),
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -221,7 +222,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Not a member yet?',
+                    Text('Not a member yet?'.tr,
                         style: FlutterFlowTheme.of(context).bodyText1),
                     TextButton(
                       onPressed: () {
@@ -239,7 +240,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                               fontWeight: FontWeight.w700,
                             ),
                       ),
-                      child: Text('Register'),
+                      child: Text('Register'.tr),
                     ),
                   ],
                 ),
