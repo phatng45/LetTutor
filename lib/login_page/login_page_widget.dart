@@ -140,8 +140,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                 ),
                 FFButtonWidget(
                   onPressed: () {
-                    // _login(_model.textFieldModel.textController.text, _model.passwordFieldModel.textController.text);
-                    _login("student@lettutor.com", "123456");
+                    _login(_model.textFieldModel.textController.text, _model.passwordFieldModel.textController.text);
+                    // _login("student@lettutor.com", "123456");
                   },
                   text: 'Login'.tr,
                   options: FFButtonOptions(

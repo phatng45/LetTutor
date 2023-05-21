@@ -268,11 +268,11 @@ class ApiService {
         .get(url, options: ApiConstants.authorizationOptions, queryParameters: {
       "page": page,
       "perPage": perPage,
-      "dateTimeGte": currentTime,
+      "dateTimeLte": currentTime,
       "orderBy": "meeting",
       "sortBy": "asc",
     });
-
+print(response.data);
     if (response.statusCode == 200) {
       List<BookingInfo> schedules = (response.data["data"]["rows"] as List)
           .map((schedule) => BookingInfo.fromJson(schedule))
